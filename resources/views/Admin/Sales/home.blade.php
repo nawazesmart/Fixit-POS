@@ -7,7 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     @include('Admin.includes.css')
+
+
     <style>
+
         .box {
             height: 500px;
         }
@@ -29,6 +32,7 @@
         .mt-4 {
             margin-top: 4px;
 
+
         }
 
     </style>
@@ -46,21 +50,22 @@
     </div>
 @endif
 
-
-@if(\Illuminate\Support\Facades\Session::has('message'))
+@if (session('success'))
     <script>
-        Swal("Message", "{{\Illuminate\Support\Facades\Session::get('message')}}", 'success', {
-            position: 'center',
-            icon: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500
-        })
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        });
     </script>
 @endif
 
 
-<form action="{{ route('sale-store.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{route('sale-store.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <section class="page-content" style="padding: 5px 20px 1px;!important;">
@@ -72,7 +77,7 @@
                             <span class="input-group-addon"><i class="ace-icon fa fa-edit"></i></span>
                             <select class="form-control select2 rounded-0 select2-hidden-accessible" tabindex="-1"
                                     aria-hidden="true" name="customer" id="category-select">
-                                <option value="" type="text" selected="" data-select2-id="select2-data-11-aomr"> Select
+                                <option value="" type="text" selected="" data-select2-id="select2-data-11-aomr" > Select
                                     Customer
                                 </option>
                                 @foreach($customer as $custom)
@@ -80,6 +85,8 @@
                                 @endforeach
 
                             </select>
+
+
                             {{--                        <input type="text"  class="form-control" placeholder="Cash Customer" />--}}
                             <span class="input-group-addon"><i class="ace-icon glyphicon glyphicon-remove"></i></span>
                         </div>
@@ -116,6 +123,7 @@
 
 
                                 {{--                                @endforeach--}}
+
                             </select>
                             <span class="select2 select2-container select2-container--bootstrap-5" dir="ltr"
                                   data-select2-id="select2-data-10-68ob" style="width: 159.484px;"><span
@@ -176,12 +184,12 @@
                                 <div class="input-group input-group-sm"
                                      style="border: 0px ; border-bottom: floralwhite " !importan>
                                     <span class="input-group-addon"><i class="ace-icon fa fa-barcode"></i></span>
-                                    <form id="searchForm" action="{{ route('productsSearch') }}" method="GET">
+{{--                                    <form id="searchForm" action="{{ route('productsSearch') }}" method="GET">--}}
                                         <input type="text" class="form-control rounded-0 search-input" name="search"
                                                value=""
                                                id="searchInput" placeholder="Scan Your Barcode or SKU"
                                                autocomplete="off">
-                                    </form>
+{{--                                    </form>--}}
 
                                 </div>
                                 <div class="dropdown-content live-load-content">

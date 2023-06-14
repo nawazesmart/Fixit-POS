@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use  App\Models\BaseModel;
 
-class Member extends Model
+class Member extends BaseModel
 {
     use HasFactory;
     protected $table = 'cacus';

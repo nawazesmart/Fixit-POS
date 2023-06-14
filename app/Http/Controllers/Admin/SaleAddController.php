@@ -88,8 +88,7 @@ class SaleAddController extends Controller
                 'xitem' => $xitemArray[$index],
                 'xunitsel' => $xunitselArray[$index],
             ]);
-//        }
-//            toast('Category Created... :)','success');
+            session()->flash('success', 'Your Product sale successfully Done');
             return redirect()->back()->with('message');
         }
 

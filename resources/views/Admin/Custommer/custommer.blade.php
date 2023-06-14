@@ -8,6 +8,9 @@
 @endsection
 
 @section('body')
+
+
+
     <div class="main-content-inner">
         <div class="breadcrumbs ace-save-state" id="breadcrumbs">
             <ul class="breadcrumb">
@@ -79,17 +82,13 @@
                                 <th>Name</th>
                                 <th>Customer ID</th>
                                 <th class="hidden-480">Customer City</th>
-
                                 <th>
                                     <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
                                     Phone Number
                                 </th>
                                 <th class="hidden-480">Status</th>
-
-
                             </tr>
                             </thead>
-
                             <tbody>
                             @foreach($customers as $customer)
                                 <tr>
@@ -180,8 +179,6 @@
                         </table>
                     </div><!-- /.span -->
                 </div><!-- /.row -->
-
-
             </div>
         </div>
 
@@ -196,7 +193,6 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12">
@@ -285,83 +281,83 @@
 @endsection
 @section('js')
 
-    <script type="text/javascript">
+{{--    <script type="text/javascript">--}}
 
-        function toggleDetails(event, customerId) {
-            event.preventDefault();
-            var detailRow = document.getElementById('detail-row-' + customerId);
-            if (detailRow.style.display === 'none') {
-                detailRow.style.display = 'table-row';
-            } else {
-                detailRow.style.display = 'none';
-            }
-        }
-
-
-        const searchInput = document.getElementById('searchInput');
-        const table = document.getElementById('myTable');
-        const tableRows = table.getElementsByTagName('tr');
-
-        searchInput.addEventListener('keyup', function () {
-            const filter = searchInput.value.toLowerCase();
-
-            for (let i = 1; i < tableRows.length; i++) {
-                const row = tableRows[i];
-                const rowData = row.getElementsByTagName('td');
-                let found = false;
-
-                for (let j = 0; j < rowData.length; j++) {
-                    const cell = rowData[j];
-
-                    if (cell.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                        found = true;
-                        break;
-                    }
-                }
-
-                row.style.display = found ? '' : 'none';
-            }
-        });
+{{--        function toggleDetails(event, customerId) {--}}
+{{--            event.preventDefault();--}}
+{{--            var detailRow = document.getElementById('detail-row-' + customerId);--}}
+{{--            if (detailRow.style.display === 'none') {--}}
+{{--                detailRow.style.display = 'table-row';--}}
+{{--            } else {--}}
+{{--                detailRow.style.display = 'none';--}}
+{{--            }--}}
+{{--        }--}}
 
 
-        $("#bootbox-options").on(ace.click_event, function () {
-            bootbox.dialog({
-                message: "<span class='bigger-110'></span>",
-                buttons:
-                    {
-                        "success":
-                            {
-                                "label": "<i class='ace-icon fa fa-check'></i> Success!",
-                                "className": "btn-sm btn-success",
-                                "callback": function () {
-                                    //Example.show("great success");
-                                }
-                            },
-                        "danger":
-                            {
-                                "label": "Danger!",
-                                "className": "btn-sm btn-danger",
-                                "callback": function () {
-                                    //Example.show("uh oh, look out!");
-                                }
-                            },
-                        "click":
-                            {
-                                "label": "Click ME!",
-                                "className": "btn-sm btn-primary",
-                                "callback": function () {
-                                    //Example.show("Primary button");
-                                }
-                            },
-                        "button":
-                            {
-                                "label": "Just a button...",
-                                "className": "btn-sm"
-                            }
-                    }
-            });
-        });
+{{--        const searchInput = document.getElementById('searchInput');--}}
+{{--        const table = document.getElementById('myTable');--}}
+{{--        const tableRows = table.getElementsByTagName('tr');--}}
 
-    </script>
+{{--        searchInput.addEventListener('keyup', function () {--}}
+{{--            const filter = searchInput.value.toLowerCase();--}}
+
+{{--            for (let i = 1; i < tableRows.length; i++) {--}}
+{{--                const row = tableRows[i];--}}
+{{--                const rowData = row.getElementsByTagName('td');--}}
+{{--                let found = false;--}}
+
+{{--                for (let j = 0; j < rowData.length; j++) {--}}
+{{--                    const cell = rowData[j];--}}
+
+{{--                    if (cell.innerHTML.toLowerCase().indexOf(filter) > -1) {--}}
+{{--                        found = true;--}}
+{{--                        break;--}}
+{{--                    }--}}
+{{--                }--}}
+
+{{--                row.style.display = found ? '' : 'none';--}}
+{{--            }--}}
+{{--        });--}}
+
+
+{{--        $("#bootbox-options").on(ace.click_event, function () {--}}
+{{--            bootbox.dialog({--}}
+{{--                message: "<span class='bigger-110'></span>",--}}
+{{--                buttons:--}}
+{{--                    {--}}
+{{--                        "success":--}}
+{{--                            {--}}
+{{--                                "label": "<i class='ace-icon fa fa-check'></i> Success!",--}}
+{{--                                "className": "btn-sm btn-success",--}}
+{{--                                "callback": function () {--}}
+{{--                                    //Example.show("great success");--}}
+{{--                                }--}}
+{{--                            },--}}
+{{--                        "danger":--}}
+{{--                            {--}}
+{{--                                "label": "Danger!",--}}
+{{--                                "className": "btn-sm btn-danger",--}}
+{{--                                "callback": function () {--}}
+{{--                                    //Example.show("uh oh, look out!");--}}
+{{--                                }--}}
+{{--                            },--}}
+{{--                        "click":--}}
+{{--                            {--}}
+{{--                                "label": "Click ME!",--}}
+{{--                                "className": "btn-sm btn-primary",--}}
+{{--                                "callback": function () {--}}
+{{--                                    //Example.show("Primary button");--}}
+{{--                                }--}}
+{{--                            },--}}
+{{--                        "button":--}}
+{{--                            {--}}
+{{--                                "label": "Just a button...",--}}
+{{--                                "className": "btn-sm"--}}
+{{--                            }--}}
+{{--                    }--}}
+{{--            });--}}
+{{--        });--}}
+
+{{--    </script>--}}
 
 @endsection

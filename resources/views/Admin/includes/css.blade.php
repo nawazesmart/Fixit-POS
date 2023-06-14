@@ -15,8 +15,9 @@
 
 
 <link rel="stylesheet" href="{{asset('/')}}assets/css/ace-ie.min.css"/>
-<link rel="stylesheet" href="{{asset('/')}}include/css/bootstrap.min.css"/>
-<link rel="stylesheet" href="{{asset('/')}}include/css/bootstrap.css"/>
+{{--<link rel="stylesheet" href="{{asset('/')}}include/css/bootstrap.min.css"/>--}}
+{{--<link rel="stylesheet" href="{{asset('/')}}include/css/bootstrap.css"/>--}}
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css" rel="stylesheet">
 
 
 <script src="{{asset('/')}}assets/js/ace-extra.min.js"></script>
