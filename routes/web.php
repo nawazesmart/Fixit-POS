@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProductShowController;
 use App\Http\Controllers\Admin\SaleDetailsController;
 use App\Http\Controllers\Admin\SaleAddController;
 use App\Http\Controllers\Admin\SearsController;
+use App\Http\Controllers\Admin\InvoicePrintCOntroller;
 
 
 Route::get('/', [LoginControler::class, 'loginView'])->name('loginView');
@@ -42,7 +43,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
 
 //Product searc end
 
-
+//invoice control
+    Route::resource('invoices',InvoicePrintCOntroller::class);
+//invoice control end
 
 
 

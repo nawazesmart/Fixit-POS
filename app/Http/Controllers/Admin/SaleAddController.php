@@ -77,6 +77,8 @@ class SaleAddController extends Controller
                 'xwh'   => $request->input('xwh'),
             ]);
 
+
+
             // table = opodt
             ProductDetails::create([
                 'xordernum' => $saleOrder->xordernum,
@@ -88,8 +90,9 @@ class SaleAddController extends Controller
                 'xitem' => $xitemArray[$index],
                 'xunitsel' => $xunitselArray[$index],
             ]);
+//            dd('zid');
             session()->flash('success', 'Your Product sale successfully Done');
-            return redirect()->back()->with('message');
+            return redirect()->route('invoices.create');
         }
 
 //    public function store(StoreSaleRequest $request)
