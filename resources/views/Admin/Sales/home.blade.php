@@ -52,7 +52,7 @@
 
 @if (session('success'))
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -77,7 +77,7 @@
                             <span class="input-group-addon"><i class="ace-icon fa fa-edit"></i></span>
                             <select class="form-control select2 rounded-0 select2-hidden-accessible" tabindex="-1"
                                     aria-hidden="true" name="customer" id="category-select">
-                                <option value="" type="text" selected="" data-select2-id="select2-data-11-aomr" > Select
+                                <option value="" type="text" selected="" data-select2-id="select2-data-11-aomr"> Select
                                     Customer
                                 </option>
                                 @foreach($customer as $custom)
@@ -184,12 +184,12 @@
                                 <div class="input-group input-group-sm"
                                      style="border: 0px ; border-bottom: floralwhite " !importan>
                                     <span class="input-group-addon"><i class="ace-icon fa fa-barcode"></i></span>
-{{--                                    <form id="searchForm" action="{{ route('productsSearch') }}" method="GET">--}}
-                                        <input type="text" class="form-control rounded-0 search-input" name="search"
-                                               value=""
-                                               id="searchInput" placeholder="Scan Your Barcode or SKU"
-                                               autocomplete="off">
-{{--                                    </form>--}}
+                                    {{--                                    <form id="searchForm" action="{{ route('productsSearch') }}" method="GET">--}}
+                                    <input type="text" class="form-control rounded-0 search-input" name="search"
+                                           value=""
+                                           id="searchInput" placeholder="Scan Your Barcode or SKU"
+                                           autocomplete="off">
+                                    {{--                                    </form>--}}
 
                                 </div>
                                 <div class="dropdown-content live-load-content">
@@ -503,20 +503,28 @@
                         <div class="row">
                             <div class="col-md-2 ">
                                 <ul class="right-0 list-unstyled">
-                                    <li class="total-price">
+                                    <li class="total-price" id="resultSection">
+
+
                                         Subtotal:BDT 0 <i class="ace-icon fa "></i>
 
                                     </li>
                                     <li>
                                         Vat:0 <i class="ace-icon fa "></i></li>
-                                    <li>
-                                        Discount:0 <i class="ace-icon glyphicon glyphicon-tags"></i>
+                                    <li class="discounted-price">
+                                        Discount:<input type="number" id="extraDiscount" style="width: 50px"
+                                                        placeholder="%">
+                                        <i class="ace-icon glyphicon glyphicon-tags"></i>
                                     </li>
+                                    {{--                                    <li><input type="number" id="extraDiscount" placeholder="Discounted price">--}}
+                                    {{--                                        <div id="resultSection"></div>--}}
+                                    {{--                                    </li>--}}
                                 </ul>
                             </div>
                             <div class="col-md-2 ">
                                 <ul class="list-unstyled">
-                                    <li>Shipping:0 <i class="ace-icon fa fa-truck-fast"></i></li>
+                                    <li>Shipping:<input type="number" id="extraDiscount" style="width: 50px"> <i
+                                            class="ace-icon fa fa-truck-fast"></i></li>
                                     <li>Coupon:0 <i class="ace-icon fa fa-briefcase"></i></li>
                                     <li>Payable:0 <i class="ace-icon fa fa-credit-card"></i></li>
                                 </ul>
@@ -538,24 +546,29 @@
                             <div class="col-md-3 mt-1 right">
                                 <div class="row g-2">
                                     <div class="col-md-6">
-                                        <button type="submit"  class=" btn-info rounded-0 mb-2" id="" style="width: 100%">
+                                        <button type="submit" class=" btn-info rounded-0 mb-2" id=""
+                                                style="width: 100%">
                                             SALE
                                         </button>
 
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button"  class=" btn-primary rounded-0 mb-2" id="button2" style="width: 100%">PAYMENT</button>
+                                        <button type="button" class=" btn-primary rounded-0 mb-2" id="button2"
+                                                style="width: 100%">PAYMENT
+                                        </button>
 
                                     </div>
                                     <div class="col-md-6">
-                                        <button  type="button" class="btn-warning   rounded-0 mb-2 mt-3 " id="button3" style="width: 100%"
+                                        <button type="button" class="btn-warning   rounded-0 mb-2 mt-3 " id="button3"
+                                                style="width: 100%"
                                                 !importan>TRNSACT
                                         </button>
 
                                     </div>
                                     <div class="col-md-6">
 
-                                        <button type="button" class=" btn-danger  rounded-0 my-2 mt-3 " id="button4" style="width: 100%"
+                                        <button type="button" class=" btn-danger  rounded-0 my-2 mt-3 " id="button4"
+                                                style="width: 100%"
                                                 !importan>SAVE
                                         </button>
                                     </div>
@@ -584,25 +597,78 @@
         document.getElementById("product-list").appendChild(productDiv);
     }
 
+    // function updateSubtotal() {
+    //     // Get the price and discount values
+    //     var price = document.getElementById('total-price').value;
+    //     var discount = document.getElementById('discount').value;
+    //
+    //     // Create an XMLHttpRequest object
+    //     var xhr = new XMLHttpRequest();
+    //
+    //     // Configure the Ajax request
+    //     xhr.open('GET', 'update_subtotal.php?price=' + price + '&discount=' + discount, true);
+    //
+    //     // Define the callback function when the Ajax request completes
+    //     xhr.onload = function() {
+    //         if (xhr.status === 200) {
+    //             // Update the subtotal value
+    //             document.getElementById('subtotal').textContent = xhr.responseText;
+    //         }
+    //     };
+    //
+    //     // Send the Ajax request
+    //     xhr.send();
+    // }
+
 
     $(document).ready(function () {
 
-        $('#btn_sale').click(function() {
+
+        // discount
+        $('#extraDiscount').on('keyup', function () {
+            calculateDiscount();
+        });
+
+        function calculateDiscount() {
+            let subtotal = $('.all_sub_total').val();
+            var extraDiscount = parseFloat($('#extraDiscount').val());
+            var resultSection = $('#resultSection');
+
+            // Calculate the discounted price
+            var discountedPrice = subtotal - (extraDiscount * subtotal) / 100;
+
+            // Validate if the discounted price is a valid number
+            if (isNaN(discountedPrice) || discountedPrice < 0) {
+                resultSection.text(' Please enter numbers.');
+            } else {
+                resultSection.text('Total: BDT : ' + discountedPrice.toFixed(2));
+            }
+        }
+
+        // discount end
+
+        //Sgipping
+
+
+        //shipping end
+
+        // button config
+        $('#btn_sale').click(function () {
             // Perform action for Button 1
             alert('Button 1 clicked!');
         });
 
-        $('#button2').click(function() {
+        $('#button2').click(function () {
             // Perform action for Button 2
             alert('payment section under construction !');
         });
 
-        $('#button3').click(function() {
+        $('#button3').click(function () {
             // Perform action for Button 3
             alert('TRNSACT section under construction!');
         });
 
-        $('#button4').click(function() {
+        $('#button4').click(function () {
             // Perform action for Button 4
             alert('SAVE section under construction!');
         });
@@ -613,10 +679,12 @@
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
             });
         });
+        // button config end
+
+
 
 
         // This branch section
-
 
         $('#branch_select').on('change', function (e) {
             e.preventDefault();
@@ -638,7 +706,6 @@
                 }
             })
         });
-
         // This branch section end
 
 
@@ -767,7 +834,7 @@
 
             $(".total-price").text("Total: BDT " + total);
 
-            $(".total-price").append("<br><input type='hidden' name='subtotal'>");
+            $(".total-price").append(`<br><input type="hidden" name="subtotal" class="all_sub_total" value="${total}">`);
 
 
             var date = $('#current_date').val();
@@ -818,9 +885,9 @@
         // This cart section end
         // in cart system all work it
 
+
+
         // search optinon
-
-
         $('#searchInput').keyup(function () {
             var searchInput = $(this).val();
 

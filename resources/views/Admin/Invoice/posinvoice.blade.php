@@ -325,7 +325,7 @@
                         </td>
                         <td class="text-center">{{ $data['productDetails']->xcost ,2}}</td>
                         <td class="text-center">{{ $data['productDetails']->xunitsel ,2}}</td>
-                        <td class="text-center">{{ round(( 10/ ($data['productDetails']->xrate* 2 ))*100, 2) }}</td>
+                        <td class="text-center">{{ round(( 10/ ($data['productDetails']->xcost* 2 ))*100, 2) }}</td>
 {{--                        <td class="text-right">{{ $data['total']->total ,2}}</td>--}}
                     </tr>
                     @php
