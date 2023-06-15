@@ -538,25 +538,25 @@
                             <div class="col-md-3 mt-1 right">
                                 <div class="row g-2">
                                     <div class="col-md-6">
-                                        <button class=" btn-info rounded-0 mb-2" id="btn_sale" style="width: 100%">
-                                            Sale
+                                        <button type="submit"  class=" btn-info rounded-0 mb-2" id="" style="width: 100%">
+                                            SALE
                                         </button>
 
                                     </div>
                                     <div class="col-md-6">
-                                        <button class=" btn-primary rounded-0 mb-2" style="width: 100%">Btn One</button>
+                                        <button type="button"  class=" btn-primary rounded-0 mb-2" id="button2" style="width: 100%">PAYMENT</button>
 
                                     </div>
                                     <div class="col-md-6">
-                                        <button class="btn-warning   rounded-0 mb-2 mt-3 " style="width: 100%"
-                                                !importan>Btn One
+                                        <button  type="button" class="btn-warning   rounded-0 mb-2 mt-3 " id="button3" style="width: 100%"
+                                                !importan>TRNSACT
                                         </button>
 
                                     </div>
                                     <div class="col-md-6">
 
-                                        <button class=" btn-danger  rounded-0 my-2 mt-3 " style="width: 100%"
-                                                !importan>Btn One
+                                        <button type="button" class=" btn-danger  rounded-0 my-2 mt-3 " id="button4" style="width: 100%"
+                                                !importan>SAVE
                                         </button>
                                     </div>
                                 </div>
@@ -586,6 +586,26 @@
 
 
     $(document).ready(function () {
+
+        $('#btn_sale').click(function() {
+            // Perform action for Button 1
+            alert('Button 1 clicked!');
+        });
+
+        $('#button2').click(function() {
+            // Perform action for Button 2
+            alert('payment section under construction !');
+        });
+
+        $('#button3').click(function() {
+            // Perform action for Button 3
+            alert('TRNSACT section under construction!');
+        });
+
+        $('#button4').click(function() {
+            // Perform action for Button 4
+            alert('SAVE section under construction!');
+        });
 
         $("#searchInput").on("keyup", function () {
             var value = $(this).val().toLowerCase();

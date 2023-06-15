@@ -16,7 +16,7 @@ class InvoicePrintCOntroller extends Controller
 
     public function create()
     {
-        return view('Admin.Invoice.posinvoice');
+
     }
 
 
