@@ -313,7 +313,11 @@
                 </thead>
 
                 <tbody>
+
+
+
                 @php
+
                     $totalPrice = 0;
                 @endphp
                 @foreach ($previewData as $data)
@@ -324,13 +328,16 @@
 {{--                            {{ ($detail->description) }}--}}
                         </td>
                         <td class="text-center">{{ $data['productDetails']->xcost ,2}}</td>
-                        <td class="text-center">{{ $data['productDetails']->xunitsel ,2}}</td>
-                        <td class="text-center">{{ round(( 10/ ($data['productDetails']->xcost* 2 ))*100, 2) }}</td>
-{{--                        <td class="text-right">{{ $data['total']->total ,2}}</td>--}}
+                        <td class="text-center">4</td>
+                        <td class="text-center">{{ round(( 10/100* ($data['productDetails']->xcost* 4 )), 2) }}
+                            <h6>10%</h6>
+                        </td>
+                        <td class="text-right">{{ round($data['productDetails']->xcost * 4)-(10/100 * ($data['productDetails']->xcost * 4)) }}</td>
                     </tr>
                     @php
-                        $totalPrice += $data['productDetails']->xcost
+                        $totalPrice +=  round($data['productDetails']->xcost * 4)-(10/100 * ($data['productDetails']->xcost * 4))
                     @endphp
+
                 @endforeach
                 </tbody>
             </table>
@@ -343,26 +350,28 @@
                         <p>VAT:</p>
                     </div>
                     <div class="col-4">
+                        @php $price = $totalPrice; @endphp
 
-                        {{-- @php $price = number_format($sale->payable_amount - $sale->total_vat, 2, '.', ''); @endphp --}}
-                        <p></p>
-                        <p><span style="font-size: 7px">(৳)</span> </p>
+{{--                         @php $price = number_format($sale->payable_amount - $sale->total_vat, 2, '.', ''); @endphp --}}
+                        <p>{{ $price }}</p>
+                        <p><span style="font-size: 7px">(10%)</span>{{round((10 * $price)/100,2)}}
+                        </p>
                     </div>
                 </div>
                 ------------
                 <div class="row">
                     <div class="col-8">
                         <p></p><br>
-                        <p>Discount:</p>
+
                         <p>Delivery Change:</p>
                     </div>
                     <div class="col-4">
                         <p>
-
-
+{{round($price+((10 * $price)/100),2)}}
                         </p>
-                        <p><span style="font-size: 7px;">(-৳)</span> </p>
-                        <p><span style="font-size: 7px;">(+)</span></p>
+                        <p><span style="font-size: 7px;">(+)</span>70</p>
+
+
                     </div>
                 </div>
                 ------------
@@ -378,7 +387,8 @@
 
                         </p>
                         {{-- <p><span style="font-size: 7px">(+/-)</span> {{ number_format(round($price_after_discount), 2,'.','') }}</p> --}}
-                        <p><span style="font-size: 7px">(+/-)</span> </p>
+                        <p><span style="font-size: 7px">(+/-)</span>  {{round($price+((10 * $price)/100)+70 ,2)}}</p>
+                        <p><span style="font-size: 7px"></span>  {{round($price+((10 * $price)/100)+70 ,2)}}</p>
                     </div>
                 </div>
                 ------------
@@ -388,7 +398,7 @@
                     </div>
                     <div class="col-4">
                         {{-- <p>{{ number_format($sale->payable_amount + $sale->delivery_charge - $sale->discount , 2, '.', '') }}</p> --}}
-                        <p></p>
+                        <p>200</p>
                     </div>
                 </div>
                 ------------

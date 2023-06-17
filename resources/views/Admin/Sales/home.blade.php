@@ -670,7 +670,7 @@
 
         // vat
 
-        $('#vatRate').on('keyup', function () {
+        $('#vatR').on('keyup', function () {
             calculateVAT();
         });
 
@@ -694,9 +694,9 @@
 
         function calculateTotal() {
             var subtotal = parseFloat($('#all_total').val());
-            var vatRate = parseFloat($('#vatRate').val());
-            var shippingCost = parseFloat($('#shippingCost').val());
-            var extraDiscount = parseFloat($('#extraDiscount').val());
+            var vatRate = parseFloat($('#vatRate').val() || 0);
+            var shippingCost = parseFloat($('#shippingCost').val() || 0);
+            var extraDiscount = parseFloat($('#extraDiscount').val() || 0);
 
             var vatAmount = subtotal * (vatRate / 100);
             var shippingAmount = shippingCost;
@@ -706,7 +706,7 @@
             $('#vatAmount').text('VAT Amount: ' + vatAmount.toFixed(2));
             $('#shippingAmount').text('Shipping Amount: ' + shippingAmount.toFixed(2));
             $('#discountAmount').text('Discount Amount: ' + discountAmount.toFixed(2));
-            $('#totalAmount').text('Total Amount: ' + totalAmount.toFixed(2));
+            $('#totalAmount').text('Total : ' + totalAmount.toFixed(2));
         }
 
 
