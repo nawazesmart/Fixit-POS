@@ -503,27 +503,28 @@
                         <div class="row">
                             <div class="col-md-2 ">
                                 <ul class="right-0 list-unstyled">
-                                    <li class="total-price" id="resultSection">
+                                    <li class="total-price" id="totalAmount">
 
 
                                         Subtotal:BDT 0 <i class="ace-icon fa "></i>
 
                                     </li>
                                     <li>
-                                        Vat:0 <i class="ace-icon fa "></i></li>
+                                        Vat: <input type="number" id="vatRate" name="vat"
+                                                    style="width: 50px; height: 25px" placeholder="%"> <i
+                                            class="ace-icon fa "></i></li>
                                     <li class="discounted-price">
-                                        Discount:<input type="number" id="extraDiscount" style="width: 50px"
-                                                        placeholder="%">
+                                        Discount:<input type="number" name="discount" id="extraDiscount"
+                                                        style="width: 50px; height: 25px" placeholder="%">
                                         <i class="ace-icon glyphicon glyphicon-tags"></i>
                                     </li>
-                                    {{--                                    <li><input type="number" id="extraDiscount" placeholder="Discounted price">--}}
-                                    {{--                                        <div id="resultSection"></div>--}}
-                                    {{--                                    </li>--}}
+
                                 </ul>
                             </div>
                             <div class="col-md-2 ">
                                 <ul class="list-unstyled">
-                                    <li>Shipping:<input type="number" id="extraDiscount" style="width: 50px"> <i
+                                    <li>Shipping:<input type="number" name="shipping" id="shippingCost"
+                                                        style="width: 50px; height: 25px "> <i
                                             class="ace-icon fa fa-truck-fast"></i></li>
                                     <li>Coupon:0 <i class="ace-icon fa fa-briefcase"></i></li>
                                     <li>Payable:0 <i class="ace-icon fa fa-credit-card"></i></li>
@@ -541,6 +542,18 @@
                                     <li>Paid:0</li>
                                     <li>Due:0</li>
                                     <li>Change:0</li>
+{{--                                    <li><button id="btn" data-target="#exampleModal">Open Modal</button></li>--}}
+
+                                        <!-- The Modal -->
+                                        <div id="myModal" class="modal">
+
+                                            <!-- Modal content -->
+                                            <div class="modal-content">
+                                                <span class="close">&times;</span>
+                                                <p>Some text in the Modal..</p>
+                                            </div>
+
+                                        </div>
                                 </ul>
                             </div>
                             <div class="col-md-3 mt-1 right">
@@ -589,36 +602,39 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
+    vatRateInput.addEventListener("input", calculateTotal);
+    shippingCostInput.addEventListener("input", calculateTotal);
+    discountInput.addEventListener("input", calculateTotal);
+
+    function calculateTotal() {
+        let subtotal = $('.all_sub_total').val();
+        // var subtotal = parseFloat(subtotalInput.value);
+        var vatRate = parseFloat(vatRateInput.value);
+        var shippingCost = parseFloat(shippingCostInput.value);
+        var discount = parseFloat(discountInput.value);
+        var totalAmount = $('#totalAmount');
+
+        var vatAmount = subtotal * (vatRate / 100);
+        var shippingAmount = shippingCost;
+        var discountAmount = subtotal * (discount / 100);
+        var totalAmount = subtotal + vatAmount + shippingAmount - discountAmount;
+
+        vatAmountResult.textContent = "VAT Amount: " + vatAmount.toFixed(2);
+        shippingAmountResult.textContent = "Shipping Amount: " + shippingAmount.toFixed(2);
+        discountAmountResult.textContent = "Discount Amount: " + discountAmount.toFixed(2);
+        totalAmount.text("Total: " + totalAmount.toFixed(2));
+    }
+</script>
+<script>
+
 
     function addItem() {
         var productDiv = document.createElement("div");
         productDiv.textContent = "New Product"; // Example content, replace with your desired content
         document.getElementById("product-list").appendChild(productDiv);
     }
-
-    // function updateSubtotal() {
-    //     // Get the price and discount values
-    //     var price = document.getElementById('total-price').value;
-    //     var discount = document.getElementById('discount').value;
-    //
-    //     // Create an XMLHttpRequest object
-    //     var xhr = new XMLHttpRequest();
-    //
-    //     // Configure the Ajax request
-    //     xhr.open('GET', 'update_subtotal.php?price=' + price + '&discount=' + discount, true);
-    //
-    //     // Define the callback function when the Ajax request completes
-    //     xhr.onload = function() {
-    //         if (xhr.status === 200) {
-    //             // Update the subtotal value
-    //             document.getElementById('subtotal').textContent = xhr.responseText;
-    //         }
-    //     };
-    //
-    //     // Send the Ajax request
-    //     xhr.send();
-    // }
 
 
     $(document).ready(function () {
@@ -641,21 +657,67 @@
             if (isNaN(discountedPrice) || discountedPrice < 0) {
                 resultSection.text(' Please enter numbers.');
             } else {
-                resultSection.text('Total: BDT : ' + discountedPrice.toFixed(2));
+
+                resultSection.text('Total: BDT ' + discountedPrice.toFixed(2));
+                resultSection.append('<br><input type="hidden" name="discountprice" class="resultSection" value="' + discountedPrice.toFixed(2) + '">');
+
+                // resultSection.text('Total: BDT : ' + discountedPrice.toFixed(2));
+
             }
         }
 
         // discount end
 
-        //Sgipping
+        // vat
+
+        $('#vatRate').on('keyup', function () {
+            calculateVAT();
+        });
+
+        function calculateVAT() {
+            let subtotal = $('.resultSection').val();
+            var vatRate = parseFloat($('#vatRate').val());
+            var totalAmountResult = $('#allVatOrResult');
 
 
-        //shipping end
+            var vatAmount = subtotal * (vatRate / 100);
+            var totalAmount = subtotal + vatAmount;
+
+            vatAmountResult.textContent = "VAT Amount: " + vatAmount.toFixed(2);
+            totalAmountResult.textContent = "Total Amount: " + totalAmount.toFixed(2);
+        }
+
+        // vat end
+
+        //shippingCost vatRate extraDiscount
+        $('#vatRate, #shippingCost, #extraDiscount').on('keyup', calculateTotal);
+
+        function calculateTotal() {
+            var subtotal = parseFloat($('#all_total').val());
+            var vatRate = parseFloat($('#vatRate').val());
+            var shippingCost = parseFloat($('#shippingCost').val());
+            var extraDiscount = parseFloat($('#extraDiscount').val());
+
+            var vatAmount = subtotal * (vatRate / 100);
+            var shippingAmount = shippingCost;
+            var discountAmount = subtotal * (extraDiscount / 100);
+            var totalAmount = subtotal + vatAmount + shippingAmount - discountAmount;
+
+            $('#vatAmount').text('VAT Amount: ' + vatAmount.toFixed(2));
+            $('#shippingAmount').text('Shipping Amount: ' + shippingAmount.toFixed(2));
+            $('#discountAmount').text('Discount Amount: ' + discountAmount.toFixed(2));
+            $('#totalAmount').text('Total Amount: ' + totalAmount.toFixed(2));
+        }
+
+
+        //shippingCost vatRate extraDiscount end
 
         // button config
-        $('#btn_sale').click(function () {
+        $('#btn').click(function () {
             // Perform action for Button 1
-            alert('Button 1 clicked!');
+
+            var vatRate = $('#vatRate').val();
+            alert('VAT Rate: ' + vatRate);
         });
 
         $('#button2').click(function () {
@@ -680,8 +742,6 @@
             });
         });
         // button config end
-
-
 
 
         // This branch section
@@ -729,7 +789,7 @@
                             <div class="search-thumbnail">
                                 <div class="pl-3 thumbnail search-thumbnail">
                                     <div class="card gradient-1 product-item" style="background-color:#D4FAFC" id="product-item-${product.xitem}" data-product-id="${product.xitem}">
-                                    <h5 class="card-header name-product" style="padding: 5px; margin-top:0px" id="heading"data-milliseconds="">${product.xdesc.substr(1, 17)}..</h5>
+                                    <h5 class="card-header name-product" style="padding: 5px; margin-top:0px" id="heading"data-milliseconds="">${product.xdesc.substring(1, 17)}..</h5>
                                         <span><div class="sku" style="display:none">${product.xcitem}</div></span>
                                         <span><div class="xitem" style="display:none">${product.xitem}</div></span>
                                         <span><div class="unit" style="display:none">${product.xunitiss}</div></span>
@@ -834,7 +894,7 @@
 
             $(".total-price").text("Total: BDT " + total);
 
-            $(".total-price").append(`<br><input type="hidden" name="subtotal" class="all_sub_total" value="${total}">`);
+            $(".total-price").append(`<br><input type="hidden" name="subtotal"id="all_total" class="all_sub_total" value="${total}">`);
 
 
             var date = $('#current_date').val();
@@ -886,7 +946,6 @@
         // in cart system all work it
 
 
-
         // search optinon
         $('#searchInput').keyup(function () {
             var searchInput = $(this).val();
@@ -918,7 +977,7 @@
                 <div class="search-thumbnail">
                     <div class="pl-3 thumbnail search-thumbnail">
                         <div class="card gradient-1 product-item" style="background-color:#D4FAFC" id="product-item-${product.xitem}" data-product-id="${product.xitem}">
-                            <h5 class="card-header name-product" style="padding: 5px; margin-top:0px" id="heading" data-milliseconds="">${product.xdesc.substr(1, 17)}..</h5>
+                            <h5 class="card-header name-product" style="padding: 5px; margin-top:0px" id="heading" data-milliseconds="">${product.xdesc.slice(1, 17)}..</h5>
                             <span><div class="sku" style="display:none">${product.xcitem}</div></span>
                             <span><div class="xitem" style="display:none">${product.xitem}</div></span>
                             <span><div class="unit" style="display:none">${product.xunitiss}</div></span>
