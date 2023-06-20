@@ -22,11 +22,11 @@ class SaleAddController extends Controller
         //
     }
 
-//        return $request->all();
+
 
     public function store(StoreSaleRequest $request)
     {
-
+        return $request->all();
 
 
             $xwhArray = $request->input('xwh');

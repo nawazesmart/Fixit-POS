@@ -103,7 +103,7 @@
 
         #invoice {
             background: #ffffff;
-            width: 328.36px;
+            width: 368.36px;
             min-height: 100px;
             margin: 0 auto;
             margin-top: 10px;
