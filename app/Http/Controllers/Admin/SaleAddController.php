@@ -26,7 +26,7 @@ class SaleAddController extends Controller
 
     public function store(StoreSaleRequest $request)
     {
-        return $request->all();
+//        return $request->all();
 
 
             $xwhArray = $request->input('xwh');

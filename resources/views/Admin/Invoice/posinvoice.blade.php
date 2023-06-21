@@ -413,7 +413,9 @@
                         <p>Paid Amount: </p>
                     </div>
                     <div class="col-4">
-                        <p></p>
+                        <p>{{ number_format(round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdttax * $price)/100) ))}}</p>
+
+
                     </div>
                 </div>
             </div>
@@ -424,8 +426,8 @@
 
 
         <div class="footer">
-            <p style="margin-bottom: 10px">Paid Amount </p>
-            <p>The goods can be exchange within next 7 dyas ( Refund within 3 days ).</p>
+            <h5 style="margin-bottom: 10px">Paid </h5>
+            <p>The goods can be exchange within next 7 dyas   ( Refund within 3 days ).</p>
             {{-- <p>Thanks For Purchase with {{ optional(auth()->user()->businessProfile)->shop_name }}</p>
             <p>For any queries complaints or feedback.</p>
             <p>Please call {{ auth()->user()->mobile }}</p> --}}
