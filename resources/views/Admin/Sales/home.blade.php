@@ -521,18 +521,18 @@
                                     <li class="total-price" id="totalAmount">
 
 
-                                        Subtotal:BDT 0 <i class="ace-icon fa "></i>
+                                        Subtotal:BDT 0
 
                                     </li>
-                                    <input type="hidden" name="totalamount" class="total_amount_input">
+                                    <input type="hidden" name="xtotamt" class="total_amount_input">
                                     <li>
-                                        Vat: <input type="number" id="vatRate" name="vat"
-                                                    style="width: 50px; height: 25px" placeholder="%"> <i
-                                            class="ace-icon fa "></i></li>
+                                        Vat: <input type="number" id="vatRate" name="xdttax"
+                                                    style="width: 50px; height: 25px" placeholder="%">
+                                    </li>
                                     <li class="discounted-price">
-                                        Discount:<input type="number" name="discount" id="extraDiscount"
+                                        Discount:<input type="number" name="xdtdisc" id="extraDiscount"
                                                         style="width: 50px; height: 25px" placeholder="%">
-                                        <i class="ace-icon glyphicon glyphicon-tags"></i>
+
                                     </li>
 
                                 </ul>
@@ -540,35 +540,47 @@
                             <div class="col-md-2 ">
                                 <ul class="list-unstyled">
                                     <li>Shipping:<input type="number" name="shipping" id="shippingCost"
-                                                        style="width: 50px; height: 25px "> <i
-                                            class="ace-icon fa fa-truck-fast"></i></li>
+                                                        style="width: 50px; height: 25px ">
+                                       </li>
                                     <li>Methode:
-                                        <select name="mathode" id="">
+                                        <select name="xsltype" id="">
                                             <option value="cash">Cash</option>
                                             <option value="card">Card</option>
                                             <option value="both">Both</option>
                                         </select>
-                                        <i class="ace-icon fa fa-briefcase"></i></li>
+                                      </li>
                                     <li>Bank:
-                                        <select name="bnak" id="">
-                                            <option value="cash">Cash</option>
-                                            <option value="card">Card</option>
-                                            <option value="both">Both</option>
+                                        <select name="xsalescat" id="">
+                                            <option value="">select</option>
+                                            <option value="cbl">CBL</option>
+                                            <option value="dbbl">DBBL</option>
+                                            <option value="mtbl">MTBL</option>
+                                            <option value="pbl">PBL</option>
+                                            <option value="ucb">UCB</option>
                                         </select>
-                                        <i class="ace-icon fa fa-credit-card"></i></li>
+                                      </li>
                                 </ul>
+{{--                                <i class="ace-icon fa "></i>--}}
+{{--                                <i class="ace-icon fa "></i>--}}
+{{--                                <i class="ace-icon fa fa-briefcase"></i>--}}
+{{--                                <i class="ace-icon fa fa-credit-card"></i>--}}
+{{--                                <i class="ace-icon fa fa-truck-fast"> </i>--}}
+{{--                                <i class="ace-icon fa fa-folder"></i>--}}
+{{--                                <i class="ace-icon fa fa-bell-o"></i>--}}
+{{--                                <i class="ace-icon fa fa-gift">  </i>--}}
+{{--                                <i class="ace-icon glyphicon glyphicon-tags"></i>--}}
                             </div>
                             <div class="col-md-2">
                                 <ul class="list-unstyled">
                                     <li>Cash Amount:<input type="number" name="cash" id="cashAmount"
                                                            style="width: 50px; height: 25px ">
-                                        <i class="ace-icon fa fa-folder"></i></li>
-                                    <li>Card Amount:<input type="number" name="card" id="cardAmount"
+                                        </li>
+                                    <li>Card Amount:<input type="number" name="xdtcomm" id="cardAmount"
                                                            style="width: 50px; height: 25px ">
-                                        <i class="ace-icon fa fa-bell-o"></i></li>
-                                    <li>Last Number:<input type="number" name="card_n" id="shippingCost"
+                                       </li>
+                                    <li>Last Number:<input type="number" name="xdocnum" id="shippingCost"
                                                            style="width: 50px; height: 25px ">
-                                        <i class="ace-icon fa fa-gift"></i></li>
+                                      </li>
                                 </ul>
                             </div>
                             <div class="col-md-2">
@@ -986,8 +998,8 @@
                     <input type="hidden" name="sku[]" value="${currentItem.sku}">
                     <input type="hidden" name="xunitsel[]" value="${currentItem.unit}">
                     <input type="hidden" name="xrate[]" value="${currentItem.price}">
-                    <input type="hidden" name="quantity[]" value="${currentItem.quantity}">
-                    <input type="hidden" name="total[]" value="${currentItem.total}">
+                    <input type="hidden" name="xqtyord[]" value="${currentItem.quantity}">
+                    <input type="hidden" name="xlineamt[]" value="${currentItem.total}">
 
 
 

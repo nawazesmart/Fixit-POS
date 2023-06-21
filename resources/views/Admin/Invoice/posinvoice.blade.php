@@ -103,7 +103,7 @@
 
         #invoice {
             background: #ffffff;
-            width: 368.36px;
+            width: 348.36px;
             min-height: 100px;
             margin: 0 auto;
             margin-top: 10px;
@@ -289,10 +289,12 @@
                 </div>
             </div>
             <p style="margin-top: 10px;">Date: {{ \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A') }}</p>
-            <p>Customer: Arafat</p>
+            <p>Customer: Arafat Sorkar</p>
             {{-- <p>Phone: {{ optional($sale->customer)->mobile }}</p> --}}
             <p>Cashier:{{auth()->user()->name}} </p>
             <p>Sale By:{{auth()->user()->name}} </p>
+{{--            <p>Methode:{{ $previewData->saleOrder->xsltype }} </p>--}}
+
         </div>
 
 
@@ -307,7 +309,7 @@
                     <th class="text-left">Item</th>
                     <th>Price</th>
                     <th>Qty</th>
-                    <th>Disc(%)</th>
+{{--                    <th>VAT(%)</th>--}}
                     <th>Amount</th>
                 </tr>
                 </thead>
@@ -327,15 +329,15 @@
                             {{ $data['productDetails']->xdesc }} <br>
 {{--                            {{ ($detail->description) }}--}}
                         </td>
-                        <td class="text-center">{{ $data['productDetails']->xcost ,2}}</td>
-                        <td class="text-center">4</td>
-                        <td class="text-center">{{ round(( 10/100* ($data['productDetails']->xcost* 4 )), 2) }}
-                            <h6>10%</h6>
-                        </td>
-                        <td class="text-right">{{ round($data['productDetails']->xcost * 4)-(10/100 * ($data['productDetails']->xcost * 4)) }}</td>
+                        <td class="text-center">{{ number_format($data['productDetails']->xrate ,2)}}</td>
+                        <td class="text-center">{{ $data['productDetails']->xqtyord ,2}}</td>
+{{--                        <td class="text-center">{{ round(( $data['saleOrder']->xdttax /100* ($data['productDetails']->xrate* $data['productDetails']->xqtyord )), 2) }}--}}
+{{--                            <h6>{{ $data['saleOrder']->xdttax ,2}}%</h6>--}}
+{{--                        </td>--}}
+                        <td class="text-right">{{number_format( round($data['productDetails']->xrate * $data['productDetails']->xqtyord)) ,2}}</td>
                     </tr>
                     @php
-                        $totalPrice +=  round($data['productDetails']->xcost * 4)-(10/100 * ($data['productDetails']->xcost * 4))
+                        $totalPrice +=  round($data['productDetails']->xrate * $data['productDetails']->xqtyord)
                     @endphp
 
                 @endforeach
@@ -347,14 +349,18 @@
                 <div class="row">
                     <div class="col-8">
                         <p>Subtotal: </p>
-                        <p>VAT:</p>
+                        <p>VAT(%)</p>
+                        <p>Disc(%)</p>
                     </div>
                     <div class="col-4">
                         @php $price = $totalPrice; @endphp
 
 {{--                         @php $price = number_format($sale->payable_amount - $sale->total_vat, 2, '.', ''); @endphp --}}
                         <p>{{ $price }}</p>
-                        <p><span style="font-size: 7px">(10%)</span>{{round((10 * $price)/100,2)}}
+                        <p><span style="font-size: 7px">({{ $data['saleOrder']->xdttax ,2}}%)</span>{{round(( $data['saleOrder']->xdttax * $price)/100,2)}}
+                        </p>
+
+                        <p><span style="font-size: 7px">({{ $data['saleOrder']->xdtdisc ,2}}%)</span>{{round(( $data['saleOrder']->xdtdisc * $price)/100,2)}}
                         </p>
                     </div>
                 </div>
@@ -363,13 +369,13 @@
                     <div class="col-8">
                         <p></p><br>
 
-                        <p>Delivery Change:</p>
+                        <p>Delivery :</p>
                     </div>
                     <div class="col-4">
                         <p>
-{{round($price+((10 * $price)/100),2)}}
+                            {{ number_format(round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdttax * $price)/100) ))}}
                         </p>
-                        <p><span style="font-size: 7px;">(+)</span>70</p>
+                        <p><span style="font-size: 7px;">(+)</span>0</p>
 
 
                     </div>
@@ -387,8 +393,8 @@
 
                         </p>
                         {{-- <p><span style="font-size: 7px">(+/-)</span> {{ number_format(round($price_after_discount), 2,'.','') }}</p> --}}
-                        <p><span style="font-size: 7px">(+/-)</span>  {{round($price+((10 * $price)/100)+70 ,2)}}</p>
-                        <p><span style="font-size: 7px"></span>  {{round($price+((10 * $price)/100)+70 ,2)}}</p>
+                        <p><span style="font-size: 7px">(+/-)</span>  {{ number_format(round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdttax * $price)/100)+0 ))}}</p>
+                        <p><span style="font-size: 7px"></span>  {{ number_format(round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdttax * $price)/100)+0 ))}}</p>
                     </div>
                 </div>
                 ------------
@@ -398,7 +404,7 @@
                     </div>
                     <div class="col-4">
                         {{-- <p>{{ number_format($sale->payable_amount + $sale->delivery_charge - $sale->discount , 2, '.', '') }}</p> --}}
-                        <p>200</p>
+                        <p>{{ number_format(round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdttax * $price)/100) ))}}</p>
                     </div>
                 </div>
                 ------------

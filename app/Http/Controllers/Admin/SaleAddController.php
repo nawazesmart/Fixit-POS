@@ -37,6 +37,15 @@ class SaleAddController extends Controller
             $xitemArray = $request->input('xitem');
             $xunitselArray = $request->input('xunitsel');
             $xrateArray = $request->input('xrate');
+            $xdtwotaxArray = $request->input('xdttax');
+            $xsltypeArray = $request->input('xsltype');
+            $xsalescatArray = $request->input('xsalescat');
+            $xdtcommArray = $request->input('xdtcomm');
+            $xdocnumArray = $request->input('xdocnum');
+            $xdtdiscArray = $request->input('xdtdisc');
+            $xlineamtArray = $request->input('xlineamt');
+            $xqtyordArray = $request->input('xqtyord');
+            $xtotamtArray = $request->input('xtotamt');
 
 //            $quantityArray = $request->input('quantity');
 //            $totalArray = $request->input('total');
@@ -50,22 +59,31 @@ class SaleAddController extends Controller
                     'xemp' => auth()->user()->mail,
                     'xsp' => auth()->user()->name,
                     'xordernum' => 'CO--13' . rand(5, 99999),
-                    'xrow' => '' . rand(4, 9999),
+                    'xrow' => '' . rand(4, 9999)  ,
                     'xdate' => $xdateArray,
-                    'xwh' => $request->input('xwh'),
+                    'xwh' => $request->input('xwh')  ,
+                    'xdttax' => $request->input('xdttax')  ,
+                    'xsltype' => $request->input('xsltype') ,
+                    'xsalescat' => $request->input('xsalescat'),
+                    'xdtcomm' => $request->input('xdtcomm')  ,
+                    'xdocnum' => $request->input('xdocnum') ,
+                    'xdtdisc' => $request->input('xdtdisc')  ,
+                    'xtotamt' => $request->input('xtotamt')  ,
                 ]);
 
 
                 // table = opodt
                 $productDetails = ProductDetails::create([
                     'xordernum' => $saleOrder->xordernum,
-                    'zid' => $zid,
-                    'xrate' => $xrateArray[$index],
-                    'xrow' => '' . rand(5, 99999),
-                    'xdesc' => $xdescArray[$index],
-                    'xcost' => $xcostArray[$index],
-                    'xitem' => $xitemArray[$index],
-                    'xunitsel' => $xunitselArray[$index],
+                    'zid' => $zid  ?? '',
+                    'xrate' => $xrateArray[$index]  ?? '',
+                    'xrow' => '' . rand(5, 99999)  ?? '',
+                    'xdesc' => $xdescArray[$index]  ?? '',
+                    'xcost' => $xcostArray[$index]  ?? '',
+                    'xitem' => $xitemArray[$index]  ?? '',
+                    'xunitsel' => $xunitselArray[$index]  ?? '',
+                    'xlineamt' => $xlineamtArray[$index]  ?? '',
+                    'xqtyord' => $xqtyordArray[$index] ?? '',
                 ]);
 
                 $previewData[] = [
