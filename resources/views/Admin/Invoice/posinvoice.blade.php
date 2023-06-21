@@ -7,10 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
     <title></title>
-
-
 
 
     <style>
@@ -44,11 +43,13 @@
                 /* width: 58mm; */
                 width: 100%;
             }
+
             .invoice-price {
                 /* margin-right: -70px !important; */
             }
-            .invoice-no{
-                width: 300px!important;
+
+            .invoice-no {
+                width: 300px !important;
             }
 
         }
@@ -222,7 +223,8 @@
     </style>
 
     <script>
-        window.console = window.console || function(t) {};
+        window.console = window.console || function (t) {
+        };
     </script>
     <script>
         if (document.location.search.match(/type=embed/gi)) {
@@ -249,30 +251,29 @@
 
         </div>
 
+        @foreach ($previewData as $data)
+        <div class="company-info">
+            <p style="font-size: 16px"></p>
+            <p></p>
+            <p style="font-size: 11px">Branch ID:{{$data['productDetails']->zid}} </p>
+            <p style="font-size: 11px"></p>
+        </div>
+        {{--        @else--}}
+        {{--            <div class="company-info">--}}
+        {{--                <p style="font-size: 16px"></p>--}}
+        {{--                <p></p>--}}
+        {{--                <p style="font-size: 11px">Cell: </p>--}}
+        {{--                <p style="font-size: 11px"></p>--}}
+        {{--            </div>--}}
 
+        {{--        @endif--}}
 
-            <div class="company-info">
-                <p style="font-size: 16px"></p>
-                <p></p>
-                <p style="font-size: 11px">Cell: </p>
-                <p style="font-size: 11px"></p>
-            </div>
-{{--        @else--}}
-{{--            <div class="company-info">--}}
-{{--                <p style="font-size: 16px"></p>--}}
-{{--                <p></p>--}}
-{{--                <p style="font-size: 11px">Cell: </p>--}}
-{{--                <p style="font-size: 11px"></p>--}}
-{{--            </div>--}}
-
-{{--        @endif--}}
-
-{{--        @if (optional($sale->branch)->bin_no != null)--}}
-{{--            <div style="display: flex; justify-content: space-between;margin-top: 3px;font-size: 15px;">--}}
-{{--                <p>BIN: Dhaka</p>--}}
-{{--                <p>Mushak-2.3</p>--}}
-{{--            </div>--}}
-{{--        @endif--}}
+        {{--        @if (optional($sale->branch)->bin_no != null)--}}
+        {{--            <div style="display: flex; justify-content: space-between;margin-top: 3px;font-size: 15px;">--}}
+        {{--                <p>BIN: Dhaka</p>--}}
+        {{--                <p>Mushak-2.3</p>--}}
+        {{--            </div>--}}
+        {{--        @endif--}}
 
 
 
@@ -280,24 +281,23 @@
         {{-- <p class="receipt-heading"> Customer Receipt </p> --}}
 
 
-
-
         <div class="invoice-info">
             <div class="row">
                 <div class="col-12 invoice-no text-center">
-                    Invoice No: <br>
+
+                    Invoice No:{{$data['productDetails']->xordernum}} <br>
+                    @endforeach
                 </div>
             </div>
-            <p style="margin-top: 10px;">Date: {{ \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A') }}</p>
+            <p style="margin-top: 10px;">
+                Date: {{ \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A') }}</p>
             <p>Customer: Arafat Sorkar</p>
             {{-- <p>Phone: {{ optional($sale->customer)->mobile }}</p> --}}
             <p>Cashier:{{auth()->user()->name}} </p>
             <p>Sale By:{{auth()->user()->name}} </p>
-{{--            <p>Methode:{{ $previewData->saleOrder->xsltype }} </p>--}}
+            {{--            <p>Methode:{{ $previewData->saleOrder->xsltype }} </p>--}}
 
         </div>
-
-
 
 
         <div class="product-info">
@@ -309,13 +309,12 @@
                     <th class="text-left">Item</th>
                     <th>Price</th>
                     <th>Qty</th>
-{{--                    <th>VAT(%)</th>--}}
+                    {{--                    <th>VAT(%)</th>--}}
                     <th>Amount</th>
                 </tr>
                 </thead>
 
                 <tbody>
-
 
 
                 @php
@@ -327,13 +326,13 @@
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td>
                             {{ $data['productDetails']->xdesc }} <br>
-{{--                            {{ ($detail->description) }}--}}
+                            {{--                            {{ ($detail->description) }}--}}
                         </td>
                         <td class="text-center">{{ number_format($data['productDetails']->xrate ,2)}}</td>
                         <td class="text-center">{{ $data['productDetails']->xqtyord ,2}}</td>
-{{--                        <td class="text-center">{{ round(( $data['saleOrder']->xdttax /100* ($data['productDetails']->xrate* $data['productDetails']->xqtyord )), 2) }}--}}
-{{--                            <h6>{{ $data['saleOrder']->xdttax ,2}}%</h6>--}}
-{{--                        </td>--}}
+                        {{--                        <td class="text-center">{{ round(( $data['saleOrder']->xdttax /100* ($data['productDetails']->xrate* $data['productDetails']->xqtyord )), 2) }}--}}
+                        {{--                            <h6>{{ $data['saleOrder']->xdttax ,2}}%</h6>--}}
+                        {{--                        </td>--}}
                         <td class="text-right">{{number_format( round($data['productDetails']->xrate * $data['productDetails']->xqtyord)) ,2}}</td>
                     </tr>
                     @php
@@ -355,12 +354,14 @@
                     <div class="col-4">
                         @php $price = $totalPrice; @endphp
 
-{{--                         @php $price = number_format($sale->payable_amount - $sale->total_vat, 2, '.', ''); @endphp --}}
+                        {{--                         @php $price = number_format($sale->payable_amount - $sale->total_vat, 2, '.', ''); @endphp --}}
                         <p>{{ $price }}</p>
-                        <p><span style="font-size: 7px">({{ $data['saleOrder']->xdttax ,2}}%)</span>{{round(( $data['saleOrder']->xdttax * $price)/100,2)}}
+                        <p><span
+                                style="font-size: 7px">({{ $data['saleOrder']->xdttax ,2}}%)</span>{{round(( $data['saleOrder']->xdttax * $price)/100,2)}}
                         </p>
 
-                        <p><span style="font-size: 7px">({{ $data['saleOrder']->xdtdisc ,2}}%)</span>{{round(( $data['saleOrder']->xdtdisc * $price)/100,2)}}
+                        <p><span
+                                style="font-size: 7px">({{ $data['saleOrder']->xdtdisc ,2}}%)</span>{{round(( $data['saleOrder']->xdtdisc * $price)/100,2)}}
                         </p>
                     </div>
                 </div>
@@ -393,8 +394,12 @@
 
                         </p>
                         {{-- <p><span style="font-size: 7px">(+/-)</span> {{ number_format(round($price_after_discount), 2,'.','') }}</p> --}}
-                        <p><span style="font-size: 7px">(+/-)</span>  {{ number_format(round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdttax * $price)/100)+0 ))}}</p>
-                        <p><span style="font-size: 7px"></span>  {{ number_format(round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdttax * $price)/100)+0 ))}}</p>
+                        <p><span
+                                style="font-size: 7px">(+/-)</span> {{ number_format(round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdttax * $price)/100)+0 ))}}
+                        </p>
+                        <p><span
+                                style="font-size: 7px"></span> {{ number_format(round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdttax * $price)/100)+0 ))}}
+                        </p>
                     </div>
                 </div>
                 ------------
@@ -423,11 +428,9 @@
         </div>
 
 
-
-
         <div class="footer">
             <h5 style="margin-bottom: 10px">Paid </h5>
-            <p>The goods can be exchange within next 7 dyas   ( Refund within 3 days ).</p>
+            <p>The goods can be exchange within next 7 dyas ( Refund within 3 days ).</p>
             {{-- <p>Thanks For Purchase with {{ optional(auth()->user()->businessProfile)->shop_name }}</p>
             <p>For any queries complaints or feedback.</p>
             <p>Please call {{ auth()->user()->mobile }}</p> --}}

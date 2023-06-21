@@ -15,7 +15,7 @@
             <a href="{{route('dashboard')}}" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
-                   !!!!!
+                  FIX IT
                 </small>
             </a>
         </div>

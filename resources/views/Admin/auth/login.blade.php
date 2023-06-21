@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
-    <title>Login Page - Ace Admin</title>
-    <meta name="description" content="User login page" />
+    <title>Log in - FIX IT   </title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="{{asset('/')}}assets/css/bootstrap.min.css" />
@@ -38,7 +38,7 @@
                             <span class="red">POS</span>
                             <span class="white" id="id-text2">Application</span>
                         </h1>
-                        <h4 class="blue" id="id-company-text">&copy; Monowa Mart</h4>
+                        <h4 class="blue" id="id-company-text">&copy; Fix it</h4>
                     </div>
                     <div class="space-6"></div>
                     <div class="position-relative">
