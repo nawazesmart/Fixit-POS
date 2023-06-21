@@ -1078,6 +1078,7 @@
                 data: {search: searchInput},
                 dataType: "json",
                 success: function (response) {
+                    // console.log(response)
                     displaySearchResults(response);
                 },
                 error: function (xhr, textStatus, errorThrown) {

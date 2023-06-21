@@ -12,11 +12,12 @@ class SearsController extends Controller
     {
         $searchTerm = $request->input('search');
         $products = Product::where(function ($scan) use ($request){
-            $scan->where('xdesc','LIKE','%'.$request.'%');
-            $scan->orwhere('xitem','LIKE', '%'.$request.'%');
-            $scan->orwhere('xcitem','LIKE', '%'.$request.'%');
-            $scan->orwhere('xstdprice','LIKE', '%'.$request.'%');
+            $scan->where('xdesc','LIKE','%'.$request->search.'%');
+            $scan->orWhere('xitem','LIKE', '%'.$request->search.'%');
+            $scan->orWhere('xcitem','LIKE', '%'.$request->search.'%');
+            $scan->orWhere('xstdprice','LIKE', '%'.$request->search.'%');
         })
+            ->take(10)
             ->get();
 
         return response()->json($products);
