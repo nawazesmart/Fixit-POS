@@ -29,10 +29,10 @@ return new class extends Migration
             $table->string('xdiv')->nullable();
             $table->string('xsec')->nullable();
             $table->string('xprog')->nullable();
-            $table->string('xstatusord')->nullable();
+            $table->string('xstatusord')->nullable()->default('Confirmed');
             $table->float('xappamt')->nullable();
             $table->string('xappcode')->nullable();
-            $table->string('xcur')->default('BDT')->nullable();
+            $table->string('xcur')->nullable()->default('BDT');
             $table->float('xexch',18,10)->nullable();
             $table->float('xdisc',5,2)->nullable();
             $table->float('xdiscf',18,2)->nullable();
@@ -40,8 +40,8 @@ return new class extends Migration
             $table->string('zemail')->nullable();
             $table->string('xemail')->nullable();
             $table->float('xdtwotax',18,2)->nullable();
-            $table->float('xdtdisc',18,2)->nullable();
-            $table->float('xdttax',18,2)->nullable();
+            $table->float('xdtdisc',18,2)->nullable()->default('0.00%');
+            $table->float('xdttax',18,2)->nullable()->default('0.00%');
             $table->float('xval',18,2)->nullable();
             $table->float('xdiscamt',18,2)->nullable();
             $table->float('xtotamt',18,2)->nullable();

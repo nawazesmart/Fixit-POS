@@ -153,7 +153,7 @@
                                     @foreach($zidCode as $item)
                                         <option value="{{ $item->xwh }}" class="category"
                                                 onclick="branchName(this)">
-                                            {{ $item->xwh }}
+                                            {{ $item->xwh}}
                                         </option>
                                     @endforeach
                                 @endif
@@ -541,14 +541,14 @@
                                 <ul class="list-unstyled">
                                     <li>Shipping:<input type="number" name="shipping" id="shippingCost"
                                                         style="width: 50px; height: 25px ">
-                                       </li>
+                                    </li>
                                     <li>Methode:
                                         <select name="xsltype" id="">
                                             <option value="cash">Cash</option>
                                             <option value="card">Card</option>
                                             <option value="both">Both</option>
                                         </select>
-                                      </li>
+                                    </li>
                                     <li>Bank:
                                         <select name="xsalescat" id="">
                                             <option value="">select</option>
@@ -558,29 +558,29 @@
                                             <option value="pbl">PBL</option>
                                             <option value="ucb">UCB</option>
                                         </select>
-                                      </li>
+                                    </li>
                                 </ul>
-{{--                                <i class="ace-icon fa "></i>--}}
-{{--                                <i class="ace-icon fa "></i>--}}
-{{--                                <i class="ace-icon fa fa-briefcase"></i>--}}
-{{--                                <i class="ace-icon fa fa-credit-card"></i>--}}
-{{--                                <i class="ace-icon fa fa-truck-fast"> </i>--}}
-{{--                                <i class="ace-icon fa fa-folder"></i>--}}
-{{--                                <i class="ace-icon fa fa-bell-o"></i>--}}
-{{--                                <i class="ace-icon fa fa-gift">  </i>--}}
-{{--                                <i class="ace-icon glyphicon glyphicon-tags"></i>--}}
+                                {{--                                <i class="ace-icon fa "></i>--}}
+                                {{--                                <i class="ace-icon fa "></i>--}}
+                                {{--                                <i class="ace-icon fa fa-briefcase"></i>--}}
+                                {{--                                <i class="ace-icon fa fa-credit-card"></i>--}}
+                                {{--                                <i class="ace-icon fa fa-truck-fast"> </i>--}}
+                                {{--                                <i class="ace-icon fa fa-folder"></i>--}}
+                                {{--                                <i class="ace-icon fa fa-bell-o"></i>--}}
+                                {{--                                <i class="ace-icon fa fa-gift">  </i>--}}
+                                {{--                                <i class="ace-icon glyphicon glyphicon-tags"></i>--}}
                             </div>
                             <div class="col-md-2">
                                 <ul class="list-unstyled">
                                     <li>Cash Amount:<input type="number" name="cash" id="cashAmount"
                                                            style="width: 50px; height: 25px ">
-                                        </li>
+                                    </li>
                                     <li>Card Amount:<input type="number" name="xdtcomm" id="cardAmount"
                                                            style="width: 50px; height: 25px ">
-                                       </li>
+                                    </li>
                                     <li>Last Number:<input type="number" name="xdocnum" id="shippingCost"
                                                            style="width: 50px; height: 25px ">
-                                      </li>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-md-2">
@@ -913,7 +913,7 @@
                                     <h5 class="card-header " style="padding: 5px; margin-top:0px" id="heading"data-milliseconds="">${product.xdesc.substring(1, 17)}..</h5>
                                     <h5 class="card-header name-product" style="padding: 5px; margin-top:0px ;display:none" id="heading"data-milliseconds="">${product.xdesc}</h5>
                                         <span><div class="sku" style="display:none">${product.xcitem}</div></span>
-                                        <span><div class="xitem" style="display:none">${product.xitem}</div></span>
+                                        <span><div class="xitem">${product.xitem}</div></span>
                                         <span><div class="unit" style="display:none">${product.xunitiss}</div></span>
                                         <span><div class="zid" style="display:none">${product.zid}</div></span>
                                         <span><div class="xstdcost" style="display:none">${product.xstdcost}</div></span>
@@ -1100,9 +1100,10 @@
                 <div class="search-thumbnail">
                     <div class="pl-3 thumbnail search-thumbnail">
                         <div class="card gradient-1 product-item" style="background-color:#D4FAFC" id="product-item-${product.xitem}" data-product-id="${product.xitem}">
-                            <h5 class="card-header name-product" style="padding: 5px; margin-top:0px" id="heading" data-milliseconds="">${product.xdesc.slice(1, 17)}..</h5>
+                           <h5 class="card-header " style="padding: 5px; margin-top:0px" id="heading"data-milliseconds="">${product.xdesc.substring(1, 17)}..</h5>
+                                    <h5 class="card-header name-product" style="padding: 5px; margin-top:0px ;display:none" id="heading"data-milliseconds="">${product.xdesc}</h5>
                             <span><div class="sku" style="display:none">${product.xcitem}</div></span>
-                            <span><div class="xitem" style="display:none">${product.xitem}</div></span>
+                            <span><div class="xitem" >${product.xitem}</div></span>
                             <span><div class="unit" style="display:none">${product.xunitiss}</div></span>
                             <span><div class="zid" style="display:none">${product.zid}</div></span>
                             <span><div class="xstdcost" style="display:none">${product.xstdcost}</div></span>

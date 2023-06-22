@@ -24,26 +24,17 @@ class SalesController extends Controller
             ->groupBy('xdesc')
             ->where($zid)
             ->get();
-        if ($request->scan){
-            $products->where(function ($scan) use ($request){
-                $scan->where('xdesc','LIKE', $request->scan.'%');
-                $scan->orwhere('xitem','LIKE', $request->scan.'%');
-                $scan->orwhere('xcitem','LIKE', $request->scan.'%');
-                $scan->orwhere('xstdprice','LIKE', $request->scan.'%');
+        if ($request->scan) {
+            $products->where(function ($scan) use ($request) {
+                $scan->where('xdesc', 'LIKE', $request->scan . '%');
+                $scan->orwhere('xitem', 'LIKE', $request->scan . '%');
+                $scan->orwhere('xcitem', 'LIKE', $request->scan . '%');
+                $scan->orwhere('xstdprice', 'LIKE', $request->scan . '%');
             });
         }
 
 
-
-
-
 //        $products = $sql->paginate(10);
-
-
-
-
-
-
 
 
         $selectedCategory = $request->input('xgitem');
@@ -52,14 +43,14 @@ class SalesController extends Controller
         $zid = $request->input('zid');
         $zidCode = Product::select('xwh')
             ->groupBy('xwh')
-            ->where($zid)
+            ->where('zid','100001')
             ->get();
 
 
         $zid = $request->input('zid');
         $category = Product::select('xgitem')
             ->groupBy('xgitem')
-            ->where($zid)
+            ->where('zid','100001')
             ->get();
 
 //        return  $products;

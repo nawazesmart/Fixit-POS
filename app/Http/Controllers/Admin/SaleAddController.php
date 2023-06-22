@@ -23,159 +23,107 @@ class SaleAddController extends Controller
     }
 
 
-
     public function store(StoreSaleRequest $request)
     {
+        $maxOrderNumberValue = SaleOrder::latest('xordernum')->value('xordernum');
+        $newOrderNumber = (int)str_replace('CO--', '', $maxOrderNumberValue) + 1;
 //        return $request->all();
+//        $xordernum = SaleOrder::orderBy('xordernum' , 'DESC');
+////        $newOrderNumber = 'CO--' . ($lastOrder->xordernum + 1);
+//        $xordernum = SaleOrder::max('xordernum');
+//        $newOrderNumber =  ($xordernum + 1);
 
 
-            $xwhArray = $request->input('xwh');
-            $xdateArray = $request->input('xdate');
-            $zidArray = $request->input('zid');
-            $xcostArray = $request->input('xcost');
-            $xdescArray = $request->input('xdesc');
-            $xitemArray = $request->input('xitem');
-            $xunitselArray = $request->input('xunitsel');
-            $xrateArray = $request->input('xrate');
-            $xdtwotaxArray = $request->input('xdttax');
-            $xsltypeArray = $request->input('xsltype');
-            $xsalescatArray = $request->input('xsalescat');
-            $xdtcommArray = $request->input('xdtcomm');
-            $xdocnumArray = $request->input('xdocnum');
-            $xdtdiscArray = $request->input('xdtdisc');
-            $xlineamtArray = $request->input('xlineamt');
-            $xqtyordArray = $request->input('xqtyord');
-            $xtotamtArray = $request->input('xtotamt');
+        $xwhArray = $request->input('xwh');
+        $xdateArray = $request->input('xdate');
+        $zidArray = $request->input('zid');
+        $xcostArray = $request->input('xcost');
+        $xdescArray = $request->input('xdesc');
+        $xitemArray = $request->input('xitem');
+        $xunitselArray = $request->input('xunitsel');
+        $xrateArray = $request->input('xrate');
+        $xdtwotaxArray = $request->input('xdttax');
+        $xsltypeArray = $request->input('xsltype');
+        $xsalescatArray = $request->input('xsalescat');
+        $xdtcommArray = $request->input('xdtcomm');
+        $xdocnumArray = $request->input('xdocnum');
+        $xdtdiscArray = $request->input('xdtdisc');
+        $xlineamtArray = $request->input('xlineamt');
+        $xqtyordArray = $request->input('xqtyord');
+        $xtotamtArray = $request->input('xtotamt');
 
 //            $quantityArray = $request->input('quantity');
 //            $totalArray = $request->input('total');
 
 
         $previewData = [];
-            foreach ($zidArray as $index => $zid) {
+        foreach ($zidArray as $index => $zid) {
 
-                $saleOrder = SaleOrder::create([
-                    'zid' => $zid,
-                    'xemp' => auth()->user()->mail,
-                    'xsp' => auth()->user()->name,
-                    'xordernum' => 'CO--13' . rand(5, 99999),
-                    'xrow' => '' . rand(4, 9999)  ,
-                    'xdate' => $xdateArray,
-                    'xwh' => $request->input('xwh')  ,
-                    'xdttax' => $request->input('xdttax')  ,
-                    'xsltype' => $request->input('xsltype') ,
-                    'xsalescat' => $request->input('xsalescat'),
-                    'xdtcomm' => $request->input('xdtcomm')  ,
-                    'xdocnum' => $request->input('xdocnum') ,
-                    'xdtdisc' => $request->input('xdtdisc')  ,
-                    'xtotamt' => $request->input('xtotamt')  ,
-                ]);
+            $saleOrder = SaleOrder::create([
+                'zid' => $zid,
+                'xemp' => auth()->user()->email,
+                'zemail' => auth()->user()->email,
+                'xemail' => auth()->user()->email,
+                'xsp' => auth()->user()->name,
+//                    'xordernum' =>$newOrderNumber,
+                'xordernum' => 'CO--' . rand(4, 9999),
+                'xrow' => '' . rand(4, 9999),
+                'xdate' => $xdateArray,
+                'xdatecuspo' => $xdateArray,
+                'xwh' => $xwhArray,
+                'xdttax' => $request->input('xdttax'),
+                'xsltype' => $request->input('xsltype'),
+                'xsalescat' => $request->input('xsalescat'),
+                'xdtcomm' => $request->input('xdtcomm'),
+                'xdocnum' => $request->input('xdocnum'),
+                'xdtdisc' => $request->input('xdtdisc'),
+                'xtotamt' => $request->input('xtotamt'),
+                'xcur' => value('BDT'),
+                'xtrnord' => value('CO--'),
+                'xquoteby' => value('1-Selling Unit'),
+                'xyear' => date('y'),
+                'xper' => date('m'),
 
 
-                // table = opodt
-                $productDetails = ProductDetails::create([
-                    'xordernum' => $saleOrder->xordernum,
-                    'zid' => $zid  ?? '',
-                    'xrate' => $xrateArray[$index]  ?? '',
-                    'xrow' => '' . rand(5, 99999)  ?? '',
-                    'xdesc' => $xdescArray[$index]  ?? '',
-                    'xcost' => $xcostArray[$index]  ?? '',
-                    'xitem' => $xitemArray[$index]  ?? '',
-                    'xunitsel' => $xunitselArray[$index]  ?? '',
-                    'xlineamt' => $xlineamtArray[$index]  ?? '',
-                    'xqtyord' => $xqtyordArray[$index] ?? '',
-                ]);
+            ]);
 
-                $previewData[] = [
-                    'saleOrder' => $saleOrder,
-                    'productDetails' => $productDetails,
+
+            // table = opodt
+            $productDetails = ProductDetails::create([
+                'xordernum' => $saleOrder->xordernum,
+                'zid' => $zid ?? '',
+                'xrate' => $xrateArray[$index] ?? '',
+                'xrow' => '' . rand(5, 99999) ?? '',
+                'xdesc' => $xdescArray[$index] ?? '',
+                'xcost' => $xcostArray[$index] ?? '',
+                'xitem' => $xitemArray[$index] ?? '',
+                'xunitsel' => $xunitselArray[$index] ?? '',
+                'xlineamt' => $xlineamtArray[$index] ?? '',
+                'xqtyord' => $xqtyordArray[$index] ?? '',
+                'xqtyreq' => $xqtyordArray[$index] ?? '',
+                'xwh' => $xwhArray,
+                'xcur' => value('BDT'),
+                'xdttax' => $request->input('xdttax'),
+                'zemail' => auth()->user()->email,
+                'xemail' => auth()->user()->email,
+            ]);
+
+            $previewData[] = [
+                'saleOrder' => $saleOrder,
+                'productDetails' => $productDetails,
 //                    'qty' => $quantityArray[$index],
 //                    'total' => $totalArray[$index],
-                ];
+            ];
 
-            }
+        }
 
-            return view('Admin.Invoice.posinvoice', compact('previewData'));
-
-
-
+        return view('Admin.Invoice.posinvoice', compact('previewData', 'productDetails'));
 
 
     }
 
-//    public function store(StoreSaleRequest $request)
-//    {
-//
-//        $xwh = $request->input('xwh');
-//        $xdate = $request->input('xdate');
-//        $zid = $request->input('zid');
-//        $xcost = $request->input('xcost');
-//        $xdesc = $request->input('xdesc');
-//        $xitem = $request->input('xitem');
-//        $xunitsel = $request->input('xunitsel');
-//        $xrate = $request->input('xrate');
-////        dd($request->toArray());
-//
-//        SaleOrder::create([
-//
-//
-//
-//            'xemp' => auth()->user()->mail,
-//            'xsp' => auth()->user()->name,
-//            'xdate' => $xdate,
-//            'xwh' => $xwh,
-//            'zid' => $zid,
-////            'xmobile' => $request->member->xmobile,
-////            'xsalescat' => $request->input(''),
-////            'xtrnord' => $request->input(''),
-////            'xdocnum' => $request->input(''),
-////            'xdtcomm' => $request->input(''),
-//
-//
-////            xemp =>Salesmen email
-////            xsp =>Salesmen name
-////            xsltype => Cash or card type
-////            xdate=> date
-////            xmobile=> member table-> customer phone number
-////            xsalescat=> online  payment method
-////            xtrnord=>card issue system
-////            xdocnum => Card number or something like
-////            xdtcomm => card cost something like
-//
-//        ]);
-//
-//        ProductDetails::create([
-//            'zid' => $zid,
-//            'xrate' => $xrate,
-//            'xdesc' => $xdesc,
-//            'xcost' => $xcost,
-//            'xitem' => $xitem,
-//            'xunitsel' => $xunitsel,
-//        ]);
-//        return redirect()->back();
-//
-//    }
 
-    //    48        $saleOrder = new SaleOrder();           // table = opord
-//            $saleOrder->zid   = $zid;
-////            $saleOrder->xemp  = auth()->user()->mail;
-//            $saleOrder->xsp   = auth()->user()->name;
-//            $saleOrder->xdate = $xdateArray;
-//            $saleOrder->xwh   = $xwhArray;
-//            $saleOrder->xordernum   = 'CO--13'.rand(4,9999);
-//            $saleOrder->xrow  = 12345678;
-//            $saleOrder->save();
 
-//            SaleOrder::create([
-//                'zid' => $zid,
-//                'xemp' => auth()->user()->mail,
-//                'xsp' => auth()->user()->name,
-//                'xdate' => $xdateArray,
-//                'xordernum' =>  'CO--13'.rand(4,9999),
-//                'xrow' =>'CO--13'.rand(4,9999) ,
-//                'xwh' => $xwhArray,
-//
-//            ]);
 
     public function show($id)
     {

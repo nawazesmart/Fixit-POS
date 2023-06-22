@@ -68,7 +68,7 @@ return new class extends Migration
             $table->string('xemail')->nullable();
             $table->float('xdtwotax',18,4)->nullable();
             $table->float('xdtdisc',18,4)->nullable();
-            $table->float('xdttax',18,4)->nullable();
+            $table->float('xdttax',18,4)->nullable()->default('0.00%');
             $table->string('xbatch')->nullable();
             $table->float('xdtcomm',18,4)->nullable();
             $table->string('xtypeserial')->nullable();

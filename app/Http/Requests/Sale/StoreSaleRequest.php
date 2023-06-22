@@ -18,7 +18,7 @@ class StoreSaleRequest extends FormRequest
             'customer' => 'required',
             'xdate' => 'required',
             'invoice' => 'required',
-            'category' => 'required',
+            'xwh' => 'required',
             'zid' => 'required',
 
 

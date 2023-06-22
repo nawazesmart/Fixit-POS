@@ -251,11 +251,11 @@
 
         </div>
 
-        @foreach ($previewData as $data)
+
         <div class="company-info">
             <p style="font-size: 16px"></p>
             <p></p>
-            <p style="font-size: 11px">Branch ID:{{$data['productDetails']->zid}} </p>
+            <p style="font-size: 11px">Branch ID:{{$productDetails->zid}} </p>
             <p style="font-size: 11px"></p>
         </div>
         {{--        @else--}}
@@ -285,8 +285,8 @@
             <div class="row">
                 <div class="col-12 invoice-no text-center">
 
-                    Invoice No:{{$data['productDetails']->xordernum}} <br>
-                    @endforeach
+                    Invoice No:{{$productDetails->xordernum}}<br>
+
                 </div>
             </div>
             <p style="margin-top: 10px;">
