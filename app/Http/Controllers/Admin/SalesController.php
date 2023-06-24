@@ -38,8 +38,6 @@ class SalesController extends Controller
 
 
         $selectedCategory = $request->input('xgitem');
-//        $products = Product::paginate(10);
-//      $products = Smart::where('xgitem', $selectedCategory)->get();
         $zid = $request->input('zid');
         $zidCode = Product::select('xwh')
             ->groupBy('xwh')

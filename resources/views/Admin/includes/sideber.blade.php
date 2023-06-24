@@ -69,14 +69,14 @@
                 <b class="arrow"></b>
             </li>
 
-            <li class="">
-                <a href="{{route('sale-details.index')}}">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Sale Details
-                </a>
+{{--            <li class="">--}}
+{{--                <a href="{{route('sale-details.index')}}">--}}
+{{--                    <i class="menu-icon fa fa-caret-right"></i>--}}
+{{--                    Sale Details--}}
+{{--                </a>--}}
 
-                <b class="arrow"></b>
-            </li>
+{{--                <b class="arrow"></b>--}}
+{{--            </li>--}}
 
             <li class="">
                 <a href="{{route('sales.index')}}">

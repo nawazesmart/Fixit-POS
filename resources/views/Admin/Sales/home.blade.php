@@ -241,7 +241,7 @@
 
                             </div>
 
-                            <div class="col-md-6 ml-3 box mb-2  overflow-scroll" style=" ">
+                            <div class="col-md-6 ml-3 box mb-2  overflow-scroll" style="background-color: #F6F0F7 ">
 
 
                                 @foreach($products as $key => $product)
@@ -540,11 +540,11 @@
                             <div class="col-md-2 ">
                                 <ul class="list-unstyled">
                                     <li>Shipping:<input type="number" name="shipping" id="shippingCost"
-                                                        style="width: 50px; height: 25px ">
+                                                        style="width: 77px; height: 25px ">
                                     </li>
                                     <li>Methode:
                                         <select name="xsltype" id="">
-                                            <option value="cash">Cash</option>
+                                            <option value="cash">cash_</option>
                                             <option value="card">Card</option>
                                             <option value="both">Both</option>
                                         </select>
@@ -573,13 +573,13 @@
                             <div class="col-md-2">
                                 <ul class="list-unstyled">
                                     <li>Cash Amount:<input type="number" name="cash" id="cashAmount"
-                                                           style="width: 50px; height: 25px ">
+                                                           style="width: 80px; height: 25px ">
                                     </li>
                                     <li>Card Amount:<input type="number" name="xdtcomm" id="cardAmount"
-                                                           style="width: 50px; height: 25px ">
+                                                           style="width: 80px; height: 25px ">
                                     </li>
                                     <li>Last Number:<input type="number" name="xdocnum" id="shippingCost"
-                                                           style="width: 50px; height: 25px ">
+                                                           style="width: 80px; height: 25px ">
                                     </li>
                                 </ul>
                             </div>
@@ -647,30 +647,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    // vatRateInput.addEventListener("input", calculateTotal);
-    // shippingCostInput.addEventListener("input", calculateTotal);
-    // discountInput.addEventListener("input", calculateTotal);
-    //
-    // function calculateTotal() {
-    //     let subtotal = $('.all_sub_total').val();
-    //     // var subtotal = parseFloat(subtotalInput.value);
-    //     var vatRate = parseFloat(vatRateInput.value);
-    //     var shippingCost = parseFloat(shippingCostInput.value);
-    //     var discount = parseFloat(discountInput.value);
-    //     var totalAmount = $('#totalAmount');
-    //
-    //     var vatAmount = subtotal * (vatRate / 100);
-    //     var shippingAmount = shippingCost;
-    //     var discountAmount = subtotal * (discount / 100);
-    //     var totalAmount = subtotal + vatAmount + shippingAmount - discountAmount;
-    //
-    //     vatAmountResult.textContent = "VAT Amount: " + vatAmount.toFixed(2);
-    //     shippingAmountResult.textContent = "Shipping Amount: " + shippingAmount.toFixed(2);
-    //     discountAmountResult.textContent = "Discount Amount: " + discountAmount.toFixed(2);
-    //     totalAmount.text("Total: " + totalAmount.toFixed(2));
-    // }
-</script>
-<script>
 
 
     function addItem() {
@@ -692,19 +668,12 @@
             let subtotal = $('.all_sub_total').val();
             var extraDiscount = parseFloat($('#extraDiscount').val());
             var resultSection = $('#resultSection');
-
-            // Calculate the discounted price
             var discountedPrice = subtotal - (extraDiscount * subtotal) / 100;
-
-            // Validate if the discounted price is a valid number
             if (isNaN(discountedPrice) || discountedPrice < 0) {
                 resultSection.text(' Please enter numbers.');
             } else {
-
                 resultSection.text('Total: BDT ' + discountedPrice.toFixed(2));
                 resultSection.append('<br><input type="hidden" name="discountprice" class="resultSection" value="' + discountedPrice.toFixed(2) + '">');
-
-                // resultSection.text('Total: BDT : ' + discountedPrice.toFixed(2));
 
             }
         }
@@ -801,36 +770,6 @@
         }
 
         //amount sum end
-
-        //pay change due
-
-
-        // Function to calculate the difference and make AJAX request
-        //     function calculateDifference() {
-        //         var subtotal = parseInt($("#totalAmount").val());
-        //         var pay = parseInt($("#result").val());
-        //
-        //         function calculateDifference() {
-        //             var subtotal = parseInt($("#totalAmount").val());
-        //             var pay = parseInt($("#pay").val());
-        //
-        //             if (!isNaN(subtotal) && !isNaN(pay)) {
-        //                 var difference = subtotal - pay;
-        //                 var change = pay - subtotal;
-        //
-        //                 if (pay < subtotal) {
-        //                     $("#dueResult").text("Due: " + difference);
-        //                     $("#changeResult").text("");
-        //                 } else {
-        //                     $("#dueResult").text("");
-        //                     $("#changeResult").text("Change: " + change);
-        //                 }
-        //             }
-        //         }
-        //
-        //         // Event listener for input field changes
-        //         $("#subtotal, #result").on("input", calculateDifference);
-
 //pay change due end
 
         // button config
@@ -843,17 +782,22 @@
 
         $('#button2').click(function () {
             // Perform action for Button 2
-            alert('payment section under construction !');
+            Swal.fire('Payment Section already show in this page  ')
         });
 
         $('#button3').click(function () {
-            // Perform action for Button 3
-            alert('TRNSACT section under construction!');
+
         });
 
         $('#button4').click(function () {
             // Perform action for Button 4
-            alert('SAVE section under construction!');
+            Swal.fire({
+                title: 'Use the sale option !',
+                showDenyButton: true,
+                // showCancelButton: true,
+                // confirmButtonText: 'Save',
+                denyButtonText: `Don't save`,
+            })
         });
 
         $("#searchInput").on("keyup", function () {
@@ -909,11 +853,11 @@
                         <div class="col-xs-2 col-sm-2 col-md-4 overflow" style="color: #1f2937">
                             <div class="search-thumbnail">
                                 <div class="pl-3 thumbnail search-thumbnail">
-                                    <div class="card gradient-1 product-item" style="background-color:#D4FAFC" id="product-item-${product.xitem}" data-product-id="${product.xitem}">
+                                    <div class="card gradient-1 product-item" style="background-color:#D2D881" id="product-item-${product.xitem}" data-product-id="${product.xitem}">
                                     <h5 class="card-header " style="padding: 5px; margin-top:0px" id="heading"data-milliseconds="">${product.xdesc.substring(1, 17)}..</h5>
                                     <h5 class="card-header name-product" style="padding: 5px; margin-top:0px ;display:none" id="heading"data-milliseconds="">${product.xdesc}</h5>
                                         <span><div class="sku" style="display:none">${product.xcitem}</div></span>
-                                        <span><div class="xitem">${product.xitem}</div></span>
+                                        <span><div class="xitem" style="display:none">${product.xitem}</div></span>
                                         <span><div class="unit" style="display:none">${product.xunitiss}</div></span>
                                         <span><div class="zid" style="display:none">${product.zid}</div></span>
                                         <span><div class="xstdcost" style="display:none">${product.xstdcost}</div></span>
@@ -961,6 +905,10 @@
             var unit = productItem.find(".unit").text().trim();
             var price = parseInt(productItem.find(".price-product").text().trim());
             var quantity = parseInt(productItem.find(".quantity").text().trim());
+            if (quantity === 0) {
+                alert("Stock not available");
+                return; // Exit the function or do any other necessary handling
+            }
             var itemTotal = price * quantity;
             total += itemTotal;
 
@@ -1024,29 +972,6 @@
         });
 
 
-        // $(document).on("click", ".cart-row", function () {
-        //     var rowId = $(this).attr("id");
-        //     var key = rowId.replace("cart-item-", "");
-        //
-        //     if (cartItems.hasOwnProperty(key)) {
-        //         var currentItem = cartItems[key];
-        //         currentItem.quantity--; // Reduce the quantity by 1
-        //
-        //         if (currentItem.quantity === 0) {
-        //             total -= currentItem.total;
-        //             delete cartItems[key];
-        //             $(this).remove();
-        //         } else {
-        //             currentItem.total = currentItem.price * currentItem.quantity; // Update the total
-        //             $(this).find(".quantity").text(currentItem.quantity); // Update the quantity in the row
-        //             $(this).find(".total").text(currentItem.total); // Update the total price in the row
-        //         }
-        //
-        //         $(this).remove();
-        //         $(".total-price").text("Total: BDT " + total);
-        //     }
-        // })
-
 
         $(document).on("click", ".cart-row", function () {
             var rowId = $(this).attr("id");
@@ -1103,7 +1028,7 @@
                            <h5 class="card-header " style="padding: 5px; margin-top:0px" id="heading"data-milliseconds="">${product.xdesc.substring(1, 17)}..</h5>
                                     <h5 class="card-header name-product" style="padding: 5px; margin-top:0px ;display:none" id="heading"data-milliseconds="">${product.xdesc}</h5>
                             <span><div class="sku" style="display:none">${product.xcitem}</div></span>
-                            <span><div class="xitem" >${product.xitem}</div></span>
+                            <span><div class="xitem" style="display:none" >${product.xitem}</div></span>
                             <span><div class="unit" style="display:none">${product.xunitiss}</div></span>
                             <span><div class="zid" style="display:none">${product.zid}</div></span>
                             <span><div class="xstdcost" style="display:none">${product.xstdcost}</div></span>

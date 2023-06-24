@@ -163,8 +163,6 @@ class SaleAddController extends Controller
 //
 //    foreach ($zidArray as $index => $zid) {
 //
-//
-//
 //        ProductDetails::create([
 //            'zid' => $zid,
 //            'xemp' => auth()->user()->mail,
