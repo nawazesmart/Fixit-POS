@@ -12,11 +12,11 @@
     <style>
 
         .box {
-            height: 430px;
+            height: 450px;
         }
 
         .line {
-            height: 5px;
+            height: 3px;
             width: 100%;
             color: red;
         }
@@ -67,10 +67,9 @@
 
 <form action="{{route('sale-store.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
-
     <section class="page-content" style="padding: 5px 20px 1px;!important;">
         <div class="">
-            <div class="row clear1" style="height: 50px">
+            <div class="row clear1" style="height: 34px">
                 <div class="col-md-6 m-2 ">
                     <div class="col-md-5">
                         <div class="input-group input-group-sm">
@@ -83,9 +82,7 @@
                                 @foreach($customer as $custom)
                                     <option value="{{ $custom->xorg }}"><a href="">{{$custom->xorg}}</a></option>
                                 @endforeach
-
                             </select>
-
 
                             {{--                        <input type="text"  class="form-control" placeholder="Cash Customer" />--}}
                             <span class="input-group-addon"><i class="ace-icon glyphicon glyphicon-remove"></i></span>
@@ -123,7 +120,6 @@
 
 
                                 {{--                                @endforeach--}}
-
                             </select>
                             <span class="select2 select2-container select2-container--bootstrap-5" dir="ltr"
                                   data-select2-id="select2-data-10-68ob" style="width: 159.484px;"><span
@@ -181,23 +177,17 @@
                 <div class=" m-1">
                     <div class="ui ui-widget ui-widget-content">
                         <div class=" " style="width: 1507px">
-
-
                             <div class="col-md-5 ml-3 box mb-2 overflow-scroll">
-
                                 <div class="table-responsive mt-1 p-0">
                                     <div class="search-any-product d-flex">
                                         <div class="input-group input-group-sm"
                                              style="border: 0px ; border-bottom: floralwhite " !importan>
                                             <span class="input-group-addon"><i
                                                     class="ace-icon fa fa-barcode"></i></span>
-                                            {{--                                    <form id="searchForm" action="{{ route('productsSearch') }}" method="GET">--}}
                                             <input type="text" class="form-control rounded-0 search-input" name="search"
                                                    value=""
                                                    id="searchInput" placeholder="Scan Your Barcode or SKU"
                                                    autocomplete="off">
-                                            {{--                                    </form>--}}
-
                                         </div>
                                         <div class="dropdown-content live-load-content">
                                         </div>
@@ -236,26 +226,18 @@
 
                                     <div class="total-price">Total: BDT 0</div>
 
-
                                 </div>
-
                             </div>
 
+
                             <div class="col-md-6 ml-3 box mb-2  overflow-scroll" style="background-color: #F6F0F7 ">
-
-
                                 @foreach($products as $key => $product)
                                     <a href="javascript:void(0)" class="card-info">
 
                                         <span id="searchResults"></span>
+                                        <div id="product-list"></div>
 
-
-                                        <div id="product-list">
-
-
-                                        </div>
                                     </a>
-
                                 @endforeach
                                 <div>
                                     {{--                        @foreach($products->where('$product->zid') as $key => $product)--}}
@@ -876,8 +858,6 @@
                 `;
                         $('#product-list').append(productHtml);
                     });
-
-
                 }
             })
         });
@@ -1028,7 +1008,7 @@
                            <h5 class="card-header " style="padding: 5px; margin-top:0px" id="heading"data-milliseconds="">${product.xdesc.substring(1, 17)}..</h5>
                                     <h5 class="card-header name-product" style="padding: 5px; margin-top:0px ;display:none" id="heading"data-milliseconds="">${product.xdesc}</h5>
                             <span><div class="sku" style="display:none">${product.xcitem}</div></span>
-                            <span><div class="xitem" style="display:none" >${product.xitem}</div></span>
+                            <span><div class="xitem"  >${product.xitem}</div></span>
                             <span><div class="unit" style="display:none">${product.xunitiss}</div></span>
                             <span><div class="zid" style="display:none">${product.zid}</div></span>
                             <span><div class="xstdcost" style="display:none">${product.xstdcost}</div></span>

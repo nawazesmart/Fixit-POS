@@ -27,9 +27,9 @@ class SaleAddController extends Controller
     {
         $lastInput = SaleOrder::orderBy('xordernum', 'desc')->first();
         $lastNumber = ($lastInput) ? intval(substr($lastInput->xordernum, 4)) : 0;
-        $nextNumber = $lastNumber ;
-        $paddedNumber = str_pad($nextNumber, 9, '0', STR_PAD_LEFT) + 1;
-        $xordernum = 'CO--' . $paddedNumber;
+        $nextNumber = $lastNumber + 1 ;
+        $paddedNumber = str_pad($nextNumber, 7, '0', STR_PAD_LEFT) + 1;
+        $xordernum = 'CO--' . $nextNumber;
 
 
 
