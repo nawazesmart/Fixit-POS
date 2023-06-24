@@ -25,13 +25,12 @@ class SaleAddController extends Controller
 
     public function store(StoreSaleRequest $request)
     {
-        $maxOrderNumberValue = SaleOrder::latest('xordernum')->value('xordernum');
-        $newOrderNumber = (int)str_replace('CO--', '', $maxOrderNumberValue) + 1;
-//        return $request->all();
-//        $xordernum = SaleOrder::orderBy('xordernum' , 'DESC');
-////        $newOrderNumber = 'CO--' . ($lastOrder->xordernum + 1);
-//        $xordernum = SaleOrder::max('xordernum');
-//        $newOrderNumber =  ($xordernum + 1);
+        $lastInput = SaleOrder::orderBy('xordernum', 'desc')->first();
+        $lastNumber = ($lastInput) ? intval(substr($lastInput->xordernum, 4)) : 0;
+        $nextNumber = $lastNumber ;
+        $paddedNumber = str_pad($nextNumber, 9, '0', STR_PAD_LEFT) + 1;
+        $xordernum = 'CO--' . $paddedNumber;
+
 
 
         $xwhArray = $request->input('xwh');
@@ -66,7 +65,7 @@ class SaleAddController extends Controller
                 'xemail' => auth()->user()->email,
                 'xsp' => auth()->user()->name,
 //                    'xordernum' =>$newOrderNumber,
-                'xordernum' => 'CO--' . rand(4, 9999),
+                'xordernum' => $xordernum,
                 'xrow' => '' . rand(4, 9999),
                 'xdate' => $xdateArray,
                 'xdatecuspo' => $xdateArray,
