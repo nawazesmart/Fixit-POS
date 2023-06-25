@@ -27,11 +27,11 @@ class SaleAddController extends Controller
     {
         $lastInput = SaleOrder::orderBy('xordernum', 'desc')->first();
         $lastNumber = ($lastInput) ? intval(substr($lastInput->xordernum, 4)) : 0;
-        $nextNumber = $lastNumber + 1 ;
+        $nextNumber = $lastNumber  ;
         $paddedNumber = str_pad($nextNumber, 7, '0', STR_PAD_LEFT) + 1;
-        $xordernum = 'CO--' . $nextNumber;
+        $xordernum = 'CO--' . $paddedNumber;
 
-
+//        return $request->all();
 
         $xwhArray = $request->input('xwh');
         $xdateArray = $request->input('xdate');
@@ -50,6 +50,7 @@ class SaleAddController extends Controller
         $xlineamtArray = $request->input('xlineamt');
         $xqtyordArray = $request->input('xqtyord');
         $xtotamtArray = $request->input('xtotamt');
+        $xordernumArray = $request->input('xordernum');
 
 //            $quantityArray = $request->input('quantity');
 //            $totalArray = $request->input('total');
@@ -64,8 +65,8 @@ class SaleAddController extends Controller
                 'zemail' => auth()->user()->email,
                 'xemail' => auth()->user()->email,
                 'xsp' => auth()->user()->name,
-//                    'xordernum' =>$newOrderNumber,
-                'xordernum' => $xordernum,
+                    'xordernum' =>$xordernum,
+//                'xordernum' => $request->input('xordernum'),
                 'xrow' => '' . rand(4, 9999),
                 'xdate' => $xdateArray,
                 'xdatecuspo' => $xdateArray,
@@ -77,6 +78,8 @@ class SaleAddController extends Controller
                 'xdocnum' => $request->input('xdocnum'),
                 'xdtdisc' => $request->input('xdtdisc'),
                 'xtotamt' => $request->input('xtotamt'),
+                'xteam' => $request->input('xteam'),
+                'xmember' => $request->input('xmember'),
                 'xcur' => value('BDT'),
                 'xtrnord' => value('CO--'),
                 'xquoteby' => value('1-Selling Unit'),
@@ -116,7 +119,7 @@ class SaleAddController extends Controller
 
         }
 
-        return view('Admin.Invoice.posinvoice', compact('previewData', 'productDetails'));
+        return view('Admin.Invoice.posinvoice', compact('previewData', 'productDetails','saleOrder'));
 
 
     }

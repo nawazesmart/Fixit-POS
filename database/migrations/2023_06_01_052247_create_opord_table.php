@@ -52,8 +52,8 @@ return new class extends Migration
             $table->string('xtrnord')->nullable();
             $table->string('xdocnum')->nullable();
             $table->float('xdtcomm',18,2)->nullable();
-            $table->string('xteam')->nullable();
-            $table->string('xmember')->nullable();
+            $table->float('xteam',18,6)->nullable();
+            $table->float('xmember',18 , 6)->nullable();
             $table->string('xmanager')->nullable();
             $table->string('xinvrule')->nullable();
             $table->string('xquoteby')->nullable();

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Sale\StoreSaleRequest;
 use App\Models\Member;
 use App\Models\Product;
+use App\Models\SaleOrder;
 use App\Models\Smart;
 use App\Models\zbusiness;
 use Illuminate\Http\Request;
@@ -36,6 +37,12 @@ class SalesController extends Controller
 
 //        $products = $sql->paginate(10);
 
+        $lastInput = SaleOrder::orderBy('xordernum', 'desc')->first();
+//        $lastNumber = ($lastInput) ? intval(substr($lastInput->xordernum, 4)) : 0;
+//        $nextNumber = $lastNumber + 1 ;
+//        $paddedNumber = str_pad($nextNumber, 7, '0', STR_PAD_LEFT) + 1;
+//        $Number = 'CO--' . $nextNumber;
+
 
         $selectedCategory = $request->input('xgitem');
         $zid = $request->input('zid');
@@ -52,7 +59,7 @@ class SalesController extends Controller
             ->get();
 
 //        return  $products;
-        return view('Admin.Sales.home', compact('products', 'category', 'zidCode',), [
+        return view('Admin.Sales.home', compact('products', 'category', 'zidCode','lastInput'), [
 
             'customer' => Member::all(),
 

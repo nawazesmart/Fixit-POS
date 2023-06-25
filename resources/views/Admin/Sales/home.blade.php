@@ -12,7 +12,7 @@
     <style>
 
         .box {
-            height: 450px;
+            height: 470px;
         }
 
         .line {
@@ -34,6 +34,12 @@
 
 
         }
+
+         .box-shadu{
+
+             margin-top: 5px;
+
+         }
 
     </style>
 </head>
@@ -76,9 +82,9 @@
                             <span class="input-group-addon"><i class="ace-icon fa fa-edit"></i></span>
                             <select class="form-control select2 rounded-0 select2-hidden-accessible" tabindex="-1"
                                     aria-hidden="true" name="customer" id="category-select">
-                                <option value="" type="text" selected="" data-select2-id="select2-data-11-aomr"> Select
-                                    Customer
-                                </option>
+                                {{--                                <option value="" type="text" selected="" data-select2-id="select2-data-11-aomr"> Select--}}
+                                {{--                                    Customer--}}
+                                {{--                                </option>--}}
                                 @foreach($customer as $custom)
                                     <option value="{{ $custom->xorg }}"><a href="">{{$custom->xorg}}</a></option>
                                 @endforeach
@@ -92,7 +98,7 @@
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon"><i class="menu-icon fa fa-calendar"></i></span>
                             <input type="date" name="xdate" id="current_date" value="{{date('Y-m-d')}}"
-                                   class="form-control" placeholder=""/>
+                                   class="form-control " placeholder="" readonly/>
                         </div>
                     </div>
                     <div class="col-md-3 m-2">
@@ -108,26 +114,44 @@
                 <div class="col-md-6  margin-top-1">
                     <div class="col-md-6 m-2 ">
                         <div class="input-group input-group-sm">
-                            <span class="input-group-addon"><i
-                                    class="ace-icon glyphicon glyphicon-align-justify"></i></span>
-                            <select class="form-control select2 rounded-0 select2-hidden-accessible" name="category"
-                                    id="category_select" tabindex="-1" aria-hidden="true">
-                                <option value="" selected="" data-select2-id="select2-data-11-aomr">All Category
-                                </option>
-                                {{--                                @foreach($category as  $item)--}}
-                                {{--                                    <option value="{{ $item->xgitem }}" class="category"--}}
-                                {{--                                            onclick="categoryProducts(this)">{{$item->xgitem}}</option>--}}
+                            <span class="input-group-addon">
+                               {{$lastInput->xordernum}}</span>
+                            <input type="hidden" class="" name="coNumber" id="" value="{{$lastInput->xordernum}}">
+                            <span class="input-group-addon"><i class="ace-icon glyphicon glyphicon-play"></i></span>
+
+                            <div class=" input-group input-group-sm">
+
+                                @php
+                                    $nextNumber = ($lastInput) ? intval(substr($lastInput->xordernum, 4)) : 0;
+                                    $paddedNumber = str_pad($nextNumber, 7, '0', STR_PAD_LEFT) + 1;
+                                    $xordernum = 'CO--' . $paddedNumber;
+                                @endphp
+                                <span class="input-group-addon">
+                               {{$xordernum}}</span>
+                                <input type="hidden" class="" name="xordernum" id="" value="{{$xordernum}}">
+                                <span class="input-group-addon"></span>
+                                {{--                                 xordernum: <span id="ordernum"></span>--}}
+                            </div>
+
+                            {{--                            <select class="form-control select2 rounded-0 select2-hidden-accessible" name="category"--}}
+                            {{--                                    id="category_select" tabindex="-1" aria-hidden="true">--}}
+                            {{--                                <option value="" selected="" data-select2-id="select2-data-11-aomr">All Category--}}
+                            {{--                                </option>--}}
+                            {{--                                @foreach($category as  $item)--}}
+                            {{--                                    <option value="{{ $item->xgitem }}" class="category"--}}
+                            {{--                                            onclick="categoryProducts(this)">{{$item->xgitem}}</option>--}}
 
 
-                                {{--                                @endforeach--}}
-                            </select>
+                            {{--                                @endforeach--}}
+                            {{--                            </select>--}}
                             <span class="select2 select2-container select2-container--bootstrap-5" dir="ltr"
-                                  data-select2-id="select2-data-10-68ob" style="width: 159.484px;"><span
-                                    class="selection"><span class="select2-selection select2-selection--single"
-                                                            role="combobox" aria-haspopup="true" aria-expanded="false"
-                                                            tabindex="0" aria-disabled="false"
-                                                            aria-labelledby="select2-category_id-container"
-                                                            aria-controls="select2-category_id-container"><span
+                                  data-select2-id="select2-data-10-68ob" style="width: 159.484px;">
+                                <span class="selection">
+                                    <span class="select2-selection select2-selection--single"
+                                          role="combobox" aria-haspopup="true" aria-expanded="false"
+                                          tabindex="0" aria-disabled="false"
+                                          aria-labelledby="select2-category_id-container"
+                                          aria-controls="select2-category_id-container"><span
                                             class="select2-selection__rendered" id="select2-category_id-container"
                                             role="textbox" aria-readonly="true" title="All Category"></span><span
                                             class="select2-selection__arrow" role="presentation"><b
@@ -142,17 +166,18 @@
 
                             <select class="form-control select2 rounded-0 select2-hidden-accessible" name="xwh"
                                     id="branch_select" tabindex="-1" aria-hidden="true">
-                                <option value="" selected="" data-select2-id="select2-data-11-aomr">Select Branch
+                                <option value="Fixit Gulshan" selected="" data-select2-id="select2-data-11-aomr">Fixit
+                                    Gulshan
                                 </option>
 
-                                @if(is_array($zidCode) || is_object($zidCode))
-                                    @foreach($zidCode as $item)
-                                        <option value="{{ $item->xwh }}" class="category"
-                                                onclick="branchName(this)">
-                                            {{ $item->xwh}}
-                                        </option>
-                                    @endforeach
-                                @endif
+                                {{--                                @if(is_array($zidCode) || is_object($zidCode))--}}
+                                {{--                                    @foreach($zidCode as $item)--}}
+                                {{--                                        <option value="{{ $item->xwh }}" class="category"--}}
+                                {{--                                                onclick="branchName(this)">--}}
+                                {{--                                            {{ $item->xwh}}--}}
+                                {{--                                        </option>--}}
+                                {{--                                    @endforeach--}}
+                                {{--                                @endif--}}
                             </select>
 
                             <span class="input-group-addon"><i class="ace-icon glyphicon glyphicon-th"></i></span>
@@ -238,46 +263,75 @@
                                         <div id="product-list"></div>
 
                                     </a>
+
+
+
                                 @endforeach
-                                <div>
+
+                                    <div class="col-sm-4">
+                                        <div class="box-shadu">
+                                            <div class="card gradient-1" style="background-color: #d3eaf1; border: none; border-radius: 10px;">
+                                                <h5 class="card-header" style="padding: 5px; margin-top: 0px; background-color: #1f2937; color: #fff; border-radius: 10px 10px 0 0;">Products Sold</h5>
+                                                <div class="card-body p-2">
+                                                    <div class="d-inline-block">
+                                                        <h2 class="text-white" style="padding: 5px; color: #1f2937;">45 BDT</h2>
+                                                        <p><span class="pull-right label label-grey" style="background-color: #1f2937; color: #fff;">Tokyo</span></p>
+                                                    </div>
+                                                    <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                                    <div>
                                     {{--                        @foreach($products->where('$product->zid') as $key => $product)--}}
                                     {{--                                                    @foreach($products as $key => $product)--}}
                                     {{--                                                        <a href="javascript:void(0)" class="card-info">--}}
-                                    {{--                                                            <div id="product-list">--}}
+{{--                                                                                                <div id="product-list">--}}
 
-                                    {{--                                                                <div class="col-xs-2 col-sm-2 col-md-4 overflow" style="color: #1f2937">--}}
-                                    {{--                                                                    <div class="search-thumbnail">--}}
-                                    {{--                                                                        <div class="pl-3 thumbnail search-thumbnail">--}}
-                                    {{--                                                                            <div class="card gradient-1 product-item" id="product-item-{{$key}}"--}}
-                                    {{--                                                                                 data-product-id="{{$key}}">--}}
-                                    {{--                                                                                <h5 class="card-header name-product"--}}
-                                    {{--                                                                                    style="padding: 5px; margin-top:0px"--}}
-                                    {{--                                                                                    id="heading"> {{$product->xdesc }}</h5>--}}
-                                    {{--                                                                                <h5 class="card-header name-product"--}}
-                                    {{--                                                                                    style="padding: 5px; margin-top:0px"--}}
-                                    {{--                                                                                    id="heading"> {{ Illuminate\Support\Str::limit($product->xdesc, $limit = 20, $end = '') }}</h5>--}}
-                                    {{--                                                                                <span><div class="sku"--}}
-                                    {{--                                                                                           style="display:none">{{$product->xcitem}}</div></span>--}}
-                                    {{--                                                                                <span><div class="unit"--}}
-                                    {{--                                                                                           style="display:none">{{$product->xunitiss}}</div></span>--}}
-                                    {{--                                                                                <span><div class="zid"--}}
-                                    {{--                                                                                           style="display:none">{{$product->zid}}</div></span>--}}
-                                    {{--                                                                                <div class="card-body p-2">--}}
-                                    {{--                                                                                    <div class="d-inline-block">--}}
-                                    {{--                                                                                        <h2 class="text-white price-product"--}}
-                                    {{--                                                                                            style="padding: 5px">{{$product->xstdcost}}</h2>--}}
-                                    {{--                                                                                        <p><span--}}
-                                    {{--                                                                                                class="pull-right label label-grey quantity">1</span>--}}
-                                    {{--                                                                                        </p>--}}
-                                    {{--                                                                                    </div>--}}
-                                    {{--                                                                                    <span class="float-right display-5 opacity-5"><i--}}
-                                    {{--                                                                                            class="fa fa-shopping-cart"></i></span>--}}
-                                    {{--                                                                                </div>--}}
-                                    {{--                                                                            </div>--}}
-                                    {{--                                                                        </div>--}}
-                                    {{--                                                                    </div>--}}
-                                    {{--                                                                </div>--}}
-                                    {{--                                                            </div>--}}
+{{--                                                                                                    <div class="col-xs-2 col-sm-2 col-md-4 overflow" style="color: #1f2937">--}}
+{{--                                                                                                        <div class="search-thumbnail">--}}
+{{--                                                                                                            <div class="pl-3 thumbnail search-thumbnail">--}}
+{{--                                                                                                                <div class="card gradient-1 product-item" id="product-item-{{$key}}"--}}
+{{--                                                                                                                     data-product-id="{{$key}}">--}}
+{{--                                                                                                                    <h5 class="card-header name-product"--}}
+{{--                                                                                                                        style="padding: 5px; margin-top:0px"--}}
+{{--                                                                                                                        id="heading"> {{$product->xdesc }}</h5>--}}
+{{--                                                                                                                    <h5 class="card-header name-product"--}}
+{{--                                                                                                                        style="padding: 5px; margin-top:0px"--}}
+{{--                                                                                                                        id="heading"> {{ Illuminate\Support\Str::limit($product->xdesc, $limit = 20, $end = '') }}</h5>--}}
+{{--                                                                                                                    <span><div class="sku"--}}
+{{--                                                                                                                               style="display:none">{{$product->xcitem}}</div></span>--}}
+{{--                                                                                                                    <span><div class="unit"--}}
+{{--                                                                                                                               style="display:none">{{$product->xunitiss}}</div></span>--}}
+{{--                                                                                                                    <span><div class="zid"--}}
+{{--                                                                                                                               style="display:none">{{$product->zid}}</div></span>--}}
+{{--                                                                                                                    <div class="card-body p-2">--}}
+{{--                                                                                                                        <div class="d-inline-block">--}}
+{{--                                                                                                                            <h2 class="text-white price-product"--}}
+{{--                                                                                                                                style="padding: 5px">{{$product->xstdcost}}</h2>--}}
+{{--                                                                                                                            <p><span--}}
+{{--                                                                                                                                    class="pull-right label label-grey quantity">1</span>--}}
+{{--                                                                                                                            </p>--}}
+{{--                                                                                                                        </div>--}}
+{{--                                                                                                                        <span class="float-right display-5 opacity-5"><i--}}
+{{--                                                                                                                                class="fa fa-shopping-cart"></i></span>--}}
+{{--                                                                                                                    </div>--}}
+{{--                                                                                                                </div>--}}
+{{--                                                                                                            </div>--}}
+{{--                                                                                                        </div>--}}
+{{--                                                                                                    </div>--}}
+{{--                                                                                                </div>--}}
                                     {{--                                                        </a>--}}
 
                                     {{--                                                    @endforeach--}}
@@ -460,25 +514,25 @@
                                     {{--                                </div>--}}
                                     {{--                            </div>--}}
                                     {{--                        </div>--}}
-                                    {{--                        <div class="col-xs-2 col-sm-2 col-md-4 overflow "--}}
-                                    {{--                             style="color: #1f2937 ; width: 230px; padding: 3px" !importent>--}}
-                                    {{--                            <div class=" search-thumbnail" style="padding:0px">--}}
-                                    {{--                                <div class="pl-3 thumbnail search-thumbnail">--}}
-                                    {{--                                    <div class="card gradient-1 " style="background-color:#d3eaf1">--}}
-                                    {{--                                        <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products--}}
-                                    {{--                                            Sold</h5>--}}
-                                    {{--                                        <div class="card-body p-2">--}}
-                                    {{--                                            <div class="d-inline-block">--}}
-                                    {{--                                                <h2 class="text-white" style="padding: 5px">45 BDT</h2>--}}
-                                    {{--                                                <p><span class="pull-right label label-grey ">Tokyo</span></p>--}}
-                                    {{--                                            </div>--}}
-                                    {{--                                            <span class="float-right display-5 opacity-5"><i--}}
-                                    {{--                                                    class="fa fa-shopping-cart"></i></span>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
-                                    {{--                                </div>--}}
-                                    {{--                            </div>--}}
-                                    {{--                        </div>--}}
+{{--                                                            <div class="col-xs-2 col-sm-2 col-md-4 overflow "--}}
+{{--                                                                 style="color: #1f2937 ; width: 230px; padding: 3px" !importent>--}}
+{{--                                                                <div class=" search-thumbnail" style="padding:0px">--}}
+{{--                                                                    <div class="pl-3 thumbnail search-thumbnail">--}}
+{{--                                                                        <div class="card gradient-1 " style="background-color:#d3eaf1">--}}
+{{--                                                                            <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products--}}
+{{--                                                                                Sold</h5>--}}
+{{--                                                                            <div class="card-body p-2">--}}
+{{--                                                                                <div class="d-inline-block">--}}
+{{--                                                                                    <h2 class="text-white" style="padding: 5px">45 BDT</h2>--}}
+{{--                                                                                    <p><span class="pull-right label label-grey ">Tokyo</span></p>--}}
+{{--                                                                                </div>--}}
+{{--                                                                                <span class="float-right display-5 opacity-5"><i--}}
+{{--                                                                                        class="fa fa-shopping-cart"></i></span>--}}
+{{--                                                                            </div>--}}
+{{--                                                                        </div>--}}
+{{--                                                                    </div>--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
                                 </div>
                                 {{--                        This code are not used--}}
                             </div>
@@ -525,14 +579,14 @@
                                                         style="width: 77px; height: 25px ">
                                     </li>
                                     <li>Methode:
-                                        <select name="xsltype" id="">
+                                        <select name="xsltype" id="" style="height: 25px">
                                             <option value="cash">cash_</option>
                                             <option value="card">Card</option>
                                             <option value="both">Both</option>
                                         </select>
                                     </li>
                                     <li>Bank:
-                                        <select name="xsalescat" id="">
+                                        <select name="xsalescat" id="" style="height: 25px">
                                             <option value="">select</option>
                                             <option value="cbl">CBL</option>
                                             <option value="dbbl">DBBL</option>
@@ -554,13 +608,13 @@
                             </div>
                             <div class="col-md-2">
                                 <ul class="list-unstyled">
-                                    <li>Cash Amount:<input type="number" name="cash" id="cashAmount"
+                                    <li>Cash Amount:<input type="number" name="xmember" id="cashAmount"
                                                            style="width: 80px; height: 25px ">
                                     </li>
                                     <li>Card Amount:<input type="number" name="xdtcomm" id="cardAmount"
                                                            style="width: 80px; height: 25px ">
                                     </li>
-                                    <li>Last Number:<input type="number" name="xdocnum" id="shippingCost"
+                                    <li>Last Number:<input type="number" name="xdocnum" id=""
                                                            style="width: 80px; height: 25px ">
                                     </li>
                                 </ul>
@@ -570,13 +624,13 @@
 
 
                                     <li id="result">Pay:0</li>
-                                    <input type="hidden" name="pay" class="pay_amount_input">
+                                    <input type="hidden" name="xteam" class="pay_amount_input" id="result">
 
                                     <li id="dueResult">Due: <span class="due_amount">0</span></li>
-                                    <input type="hidden" name="due" class="due_amount">
+                                    <input type="hidden" name="due" class="due_amount" id="dueResult">
 
                                     <li id="changeResult">Change: <span class="change_amount">0</span></li>
-                                    <input type="hidden" name="change" class="change_amount">
+                                    <input type="hidden" name="change" class="change_amount" id="changeResult">
 
 
                                 </ul>
@@ -627,6 +681,27 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var input = $('.C').val();
+        var xordernum = parseInt(input.substring(8));
+        var incrementedXordernum = xordernum + 1;
+        var updatedXordernum = 'CO--' + padNumber(incrementedXordernum, 7);
+        $('.o').val(updatedXordernum);
+        $('#o').text(updatedXordernum);
+    });
+
+    function padNumber(number, length) {
+        var str = number.toString();
+        while (str.length < length) {
+            str = '0' + str;
+        }
+        return str;
+    }
+
+
+</script>
 
 <script>
 
@@ -690,6 +765,7 @@
 
             var subtotal = parseFloat($('#all_total').val());
             var vatRate = parseFloat($('#vatRate').val() || 0);
+            // var vatRate = 5;
             var shippingCost = parseFloat($('#shippingCost').val() || 0);
             var extraDiscount = parseFloat($('#extraDiscount').val() || 0);
 
@@ -736,11 +812,11 @@
             let payAmount = Number($('.pay_amount_input').val());
             console.log({totalAmount, payAmount})
             if (totalAmount > payAmount) {
-                $('.due_amount').text(totalAmount - payAmount).toFixed(2);
+                $('.due_amount').text((totalAmount - payAmount).toFixed(2));
                 $('.change_amount').text(0.00);
-                $(".due_amount").val((totalAmount - payAmount).toFixed(2));
+                $("due_amount").val((totalAmount - payAmount).toFixed(2));
             } else if (totalAmount < payAmount) {
-                $('.change_amount').text(payAmount - totalAmount).toFixed(2);
+                $('.change_amount').text((payAmount - totalAmount).toFixed(2));
                 $('.due_amount').text(0.00);
                 $('change_amount').val((payAmount - totalAmount).toFixed(2));
 
@@ -832,7 +908,7 @@
                     result.$product.forEach(function (product, key) {
                         var productHtml = `
                      <div >
-                        <div class="col-xs-2 col-sm-2 col-md-4 overflow" style="color: #1f2937">
+                        <div class="col-xs-2 col-sm-2 col-md-4 overflow box-shadu" style="color: #1f2937">
                             <div class="search-thumbnail">
                                 <div class="pl-3 thumbnail search-thumbnail">
                                     <div class="card gradient-1 product-item" style="background-color:#D2D881" id="product-item-${product.xitem}" data-product-id="${product.xitem}">
@@ -881,7 +957,7 @@
             var xitem = productItem.find(".xitem").text().trim();
 
             var item = productItem.find(".name-product").text().trim();
-            var sku = productItem.find(".sku").text().trim();
+            var sku = productItem.find(".xitem").text().trim();
             var unit = productItem.find(".unit").text().trim();
             var price = parseInt(productItem.find(".price-product").text().trim());
             var quantity = parseInt(productItem.find(".quantity").text().trim());
@@ -898,7 +974,7 @@
                 xstdcost: xstdcost,
                 item: item,
                 xitem: xitem,
-                sku: sku,
+                sku: xitem,
                 unit: unit,
                 price: price,
                 quantity: quantity,
@@ -923,7 +999,7 @@
                     <input type="hidden" name="xitem[]" value="${currentItem.xitem}">
                     <input type="hidden" name="xcost[]" value="${currentItem.xstdcost}">
                     <input type="hidden" name="xdesc[]" value="${currentItem.item}">
-                    <input type="hidden" name="sku[]" value="${currentItem.sku}">
+                    <input type="hidden" name="sku[]" value="${currentItem.xitem}">
                     <input type="hidden" name="xunitsel[]" value="${currentItem.unit}">
                     <input type="hidden" name="xrate[]" value="${currentItem.price}">
                     <input type="hidden" name="xqtyord[]" value="${currentItem.quantity}">
@@ -932,7 +1008,7 @@
 
 
                     <td>${currentItem.item}</td>
-                    <td>${currentItem.sku}</td>
+                    <td>${currentItem.xitem}</td>
                     <td>${currentItem.unit}</td>
                     <td>${currentItem.price}</td>
                     <td class="quantity">${currentItem.quantity}</td>
@@ -950,7 +1026,6 @@
             var date = $('#current_date').val();
             console.log(productId);
         });
-
 
 
         $(document).on("click", ".cart-row", function () {
@@ -999,22 +1074,27 @@
             if (results.length === 0) {
                 searchResults.append('<li>No results found.</li>');
             } else {
+
+
+
+
+
                 $.each(results, function (index, product) {
                     var listItem = `
-            <div class="col-xs-2 col-sm-2 col-md-4 overflow" style="color: #1f2937">
+            <div class="col-sm-4  box-shadu" >
                 <div class="search-thumbnail">
-                    <div class="pl-3 thumbnail search-thumbnail">
-                        <div class="card gradient-1 product-item" style="background-color:#D4FAFC" id="product-item-${product.xitem}" data-product-id="${product.xitem}">
-                           <h5 class="card-header " style="padding: 5px; margin-top:0px" id="heading"data-milliseconds="">${product.xdesc.substring(1, 17)}..</h5>
+                    <div>
+                        <div class="card gradient-1 product-item" style="background-color: #d3eaf1; border: none; border-radius: 10px;" id="product-item-${product.xitem}" data-product-id="${product.xitem}">
+                           <h5 class="card-header " style="padding: 5px; margin-top: 0px; background-color: #1f2937; color: #fff; border-radius: 10px 10px 0 0;" id="heading"data-milliseconds="">${product.xdesc.substring(1, 17)}..</h5>
                                     <h5 class="card-header name-product" style="padding: 5px; margin-top:0px ;display:none" id="heading"data-milliseconds="">${product.xdesc}</h5>
                             <span><div class="sku" style="display:none">${product.xcitem}</div></span>
-                            <span><div class="xitem"  >${product.xitem}</div></span>
+                            <span><h6 class="pull-right xitem"  >${product.xitem}</h6></span>
                             <span><div class="unit" style="display:none">${product.xunitiss}</div></span>
                             <span><div class="zid" style="display:none">${product.zid}</div></span>
                             <span><div class="xstdcost" style="display:none">${product.xstdcost}</div></span>
                             <div class="card-body p-2">
                                 <div class="d-inline-block">
-                                    <h2 class="text-white price-product" style="padding: 5px">${product.xstdprice}</h2>
+                                    <h2 class="text-white price-product" style="padding: 5px; color: #1f2937;">${product.xstdprice}</h2>
                                     <p><span class="pull-right label label-grey quantity">1</span></p>
                                 </div>
                                 <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>

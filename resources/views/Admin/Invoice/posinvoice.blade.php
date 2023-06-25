@@ -247,55 +247,29 @@
 <section id="invoice">
     <div class="container">
         <div class="company-logo">
-
-
         </div>
-
-
         <div class="company-info">
-            <p style="font-size: 16px"></p>
-            <p></p>
+            <p style="font-size: 16px"><b><u>FIXIT GULSHAN</u></b></p>
+            <p>101,Gulshan Avenue RM Center,Dhaka</p>
+            <p>Hotline:-8801755648290</p>
+            <p>VAT REG No:000424596-0101</p>
             <p style="font-size: 11px">Branch ID:{{$productDetails->zid}} </p>
             <p style="font-size: 11px"></p>
         </div>
-        {{--        @else--}}
-        {{--            <div class="company-info">--}}
-        {{--                <p style="font-size: 16px"></p>--}}
-        {{--                <p></p>--}}
-        {{--                <p style="font-size: 11px">Cell: </p>--}}
-        {{--                <p style="font-size: 11px"></p>--}}
-        {{--            </div>--}}
-
-        {{--        @endif--}}
-
-        {{--        @if (optional($sale->branch)->bin_no != null)--}}
-        {{--            <div style="display: flex; justify-content: space-between;margin-top: 3px;font-size: 15px;">--}}
-        {{--                <p>BIN: Dhaka</p>--}}
-        {{--                <p>Mushak-2.3</p>--}}
-        {{--            </div>--}}
-        {{--        @endif--}}
-
-
-
-
-        {{-- <p class="receipt-heading"> Customer Receipt </p> --}}
-
 
         <div class="invoice-info">
             <div class="row">
                 <div class="col-12 invoice-no text-center">
 
-                    Invoice No:{{$productDetails->xordernum}}<br>
+                    Order No:{{$productDetails->xordernum}}<br>
 
                 </div>
             </div>
             <p style="margin-top: 10px;">
                 Date: {{ \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A') }}</p>
             <p>Customer: Arafat Sorkar</p>
-            {{-- <p>Phone: {{ optional($sale->customer)->mobile }}</p> --}}
             <p>Cashier:{{auth()->user()->name}} </p>
             <p>Sale By:{{auth()->user()->name}} </p>
-            {{--            <p>Methode:{{ $previewData->saleOrder->xsltype }} </p>--}}
 
         </div>
 
@@ -309,7 +283,6 @@
                     <th class="text-left">Item</th>
                     <th>Price</th>
                     <th>Qty</th>
-                    {{--                    <th>VAT(%)</th>--}}
                     <th>Amount</th>
                 </tr>
                 </thead>
@@ -326,14 +299,10 @@
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td>
                             {{ $data['productDetails']->xdesc }} <br>
-                            {{--                            {{ ($detail->description) }}--}}
                         </td>
-                        <td class="text-center">{{ number_format($data['productDetails']->xrate ,2)}}</td>
+                        <td class="text-center">{{ $data['productDetails']->xrate ,2}}</td>
                         <td class="text-center">{{ $data['productDetails']->xqtyord ,2}}</td>
-                        {{--                        <td class="text-center">{{ round(( $data['saleOrder']->xdttax /100* ($data['productDetails']->xrate* $data['productDetails']->xqtyord )), 2) }}--}}
-                        {{--                            <h6>{{ $data['saleOrder']->xdttax ,2}}%</h6>--}}
-                        {{--                        </td>--}}
-                        <td class="text-right">{{number_format( round($data['productDetails']->xrate * $data['productDetails']->xqtyord)) ,2}}</td>
+                        <td class="text-right">{{round($data['productDetails']->xrate * $data['productDetails']->xqtyord),2}}</td>
                     </tr>
                     @php
                         $totalPrice +=  round($data['productDetails']->xrate * $data['productDetails']->xqtyord)
@@ -353,8 +322,6 @@
                     </div>
                     <div class="col-4">
                         @php $price = $totalPrice; @endphp
-
-                        {{--                         @php $price = number_format($sale->payable_amount - $sale->total_vat, 2, '.', ''); @endphp --}}
                         <p>{{ $price }}</p>
                         <p><span
                                 style="font-size: 7px">({{ $data['saleOrder']->xdttax ,2}}%)</span>{{round(( $data['saleOrder']->xdttax * $price)/100,2)}}
@@ -368,74 +335,94 @@
                 ------------
                 <div class="row">
                     <div class="col-8">
-                        <p></p><br>
+                        <p>Total Payable:</p><br>
 
-                        <p>Delivery :</p>
+                        <p>Pay:(৳)</p>
                     </div>
                     <div class="col-4">
+                        @php
+                            $all =  round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdtdisc * $price)/100),2 )
+
+                        @endphp
                         <p>
-                            {{ number_format(round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdttax * $price)/100) ))}}
+                            {{$all}}
                         </p>
-                        <p><span style="font-size: 7px;">(+)</span>0</p>
+                        <br>
+                        @php
+                            $pay = $saleOrder->xteam
+                        @endphp
+                        <p><span style="font-size: 7px;">(+)</span>{{$pay}}</p>
 
 
                     </div>
                 </div>
                 ------------
                 <div class="row">
-                    <div class="col-8">
-                        <p></p><br>
-                        <p>Rounding:</p>
-                    </div>
-                    <div class="col-4">
-                        <p>
-                            {{-- @php $price_after_discount = round($price_after_vat + $sale->delivery_charge - $sale->discount , 2); @endphp --}}
-                            {{-- {{ $price_after_discount }} --}}
 
-                        </p>
-                        {{-- <p><span style="font-size: 7px">(+/-)</span> {{ number_format(round($price_after_discount), 2,'.','') }}</p> --}}
-                        <p><span
-                                style="font-size: 7px">(+/-)</span> {{ number_format(round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdttax * $price)/100)+0 ))}}
-                        </p>
-                        <p><span
-                                style="font-size: 7px"></span> {{ number_format(round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdttax * $price)/100)+0 ))}}
-                        </p>
+
+                    @if(floatval($pay) > floatval($all))
+                        <div class="row">
+                            <div class="col-8">
+                                <p> Change: </p><br>
+                            </div>
+                            <div class="col-4">
+                                <p><span style="font-size: 7px">(+/-)</span> {{floatval($pay) - floatval($all)}}</p><br>
+                            </div>
+                        </div>
+                    @else
+                        <div class="row">
+                            <div class="col-8">
+                                <p> Due: </p><br>
+                            </div>
+                            <div class="col-4">
+                                <p><span style="font-size: 7px"></span>{{floatval($all) - floatval($pay)}}</p>
+                            </div>
+                        </div>
+                    @endif
+
+
+                </div>
+                ------------------------------------------
+                <div class="container">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6" style="text-align-last: center">Cash:{{$saleOrder->xmember}}</div>
+                            <div class="col-6" style="text-align-last: center">Card:{{$saleOrder->xdtcomm}}</div>
+                        </div>
                     </div>
                 </div>
-                ------------
-                <div class="row">
-                    <div class="col-8">
-                        <p>Total Payable:</p>
-                    </div>
-                    <div class="col-4">
-                        {{-- <p>{{ number_format($sale->payable_amount + $sale->delivery_charge - $sale->discount , 2, '.', '') }}</p> --}}
-                        <p>{{ number_format(round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdttax * $price)/100) ))}}</p>
-                    </div>
-                </div>
-                ------------
-                <div class="row">
-                    <div class="col-8">
-                        <p>Paid Amount: </p>
-                    </div>
-                    <div class="col-4">
-                        <p>{{ number_format(round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdttax * $price)/100) ))}}</p>
 
+                <hr>
+                <br>
+                <br>
+                <div class="container">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6" style="text-align-last: center">
+                                <p>{{auth()->user()->email}}</p>
 
+                                -----------
+                                <p> Signature</p>
+                            </div>
+                            <div class="col-6" style="text-align-last: center">
+                                <p>{{auth()->user()->name}}</p>
+                                -----------
+                                <p> Service</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
-
-        <div class="footer">
-            <h5 style="margin-bottom: 10px">Paid </h5>
-            <p>The goods can be exchange within next 7 dyas ( Refund within 3 days ).</p>
-            {{-- <p>Thanks For Purchase with {{ optional(auth()->user()->businessProfile)->shop_name }}</p>
-            <p>For any queries complaints or feedback.</p>
-            <p>Please call {{ auth()->user()->mobile }}</p> --}}
-            <small><strong style="margin-top: 10px">Software Developed By: Smart Software Ltd</strong></small>
-        </div>
+    </div>
+    <div class="footer">
+        <h5 style="margin-bottom: 10px">Paid </h5>
+        <p>The goods can be exchange within next 7 dyas .</p>
+        <p>Thanks For Purchase with Fix IT</p>
+        <p>For any queries complaints or feedback.</p>
+        <p>Please inform {{ auth()->user()->email }}</p>
+        <small><strong style="margin-top: 10px">Software Developed By: Smart Software Ltd</strong></small>
+    </div>
     </div>
 </section>
 
