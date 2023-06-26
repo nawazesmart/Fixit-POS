@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Quantity;
 use Illuminate\Http\Request;
 
 class SearsController extends Controller
@@ -11,12 +12,34 @@ class SearsController extends Controller
     public function search(Request $request)
 
     {
-        $zid ='100001';
+        //        $zid = '100001';
+        //        $products = Product::where(function ($scan) use ($request, $zid) {
+        //            $scan->where('zid', $zid);
+        //            $scan->where('xitem', 'LIKE', '%' . $request->search . '%');
+        //        })->quantity()
+        //            ->take(10)
+        //            ->get();
+
+
+
+        $zid = '100001';
         $products = Product::where(function ($scan) use ($request, $zid) {
             $scan->where('zid', $zid);
             $scan->where('xitem', 'LIKE', '%' . $request->search . '%');
-        })  ->take(10)
+        })->with(['quantity' => function ($query) use ($request, $zid) {
+            $query->where('xitem', 'LIKE', '%' . $request->search . '%')
+                ->where('zid', $zid);
+        }])
+            ->take(10)
             ->get();
+
+        foreach ($products as $item) {
+            $total = 0;
+            foreach ($item->quantity as $quantity) {
+                $total += $quantity->xqty * $quantity->xsign;
+            }
+            $item->quantity_total = $total;
+        }
 
         return response()->json($products);
 

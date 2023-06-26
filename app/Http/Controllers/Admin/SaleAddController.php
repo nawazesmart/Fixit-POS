@@ -25,11 +25,11 @@ class SaleAddController extends Controller
 
     public function store(StoreSaleRequest $request)
     {
-        $lastInput = SaleOrder::orderBy('xordernum', 'desc')->first();
-        $lastNumber = ($lastInput) ? intval(substr($lastInput->xordernum, 4)) : 0;
-        $nextNumber = $lastNumber  ;
-        $paddedNumber = str_pad($nextNumber, 7, '0', STR_PAD_LEFT) + 1;
-        $xordernum = 'CO--' . $paddedNumber;
+//        $lastInput = SaleOrder::orderBy('xordernum', 'desc')->first();
+//        $lastNumber = ($lastInput) ? intval(substr($lastInput->xordernum, 4)) : 0;
+//        $nextNumber = $lastNumber  ;
+//        $paddedNumber = str_pad($nextNumber, 7, '0', STR_PAD_LEFT) + 1;
+//        $xordernum = 'CO--' . $paddedNumber;
 
 //        return $request->all();
 
@@ -150,49 +150,4 @@ class SaleAddController extends Controller
         //
     }
 }
-
-
-//public function store(StoreSaleRequest $request)
-//{
-////        return $request->all();
-//    $xwhArray = $request->input('xwh');
-//    $xdateArray = $request->input('xdate');
-//    $zidArray = $request->input('zid');
-//    $xcostArray = $request->input('xcost');
-//    $xdescArray = $request->input('xdesc');
-//    $xitemArray = $request->input('xitem');
-//    $xunitselArray = $request->input('xunitsel');
-//    $xrateArray = $request->input('xrate');
-//
-//    foreach ($zidArray as $index => $zid) {
-//
-//        ProductDetails::create([
-//            'zid' => $zid,
-//            'xemp' => auth()->user()->mail,
-//            'xsp' => auth()->user()->name,
-//            'xdate' => $xdateArray,
-//            'xordernum' =>  'CO--13'.rand(4,9999),
-//            'xrow' =>'CO--13'.rand(4,9999) ,
-//            'xwh' => $xwhArray,
-//
-//        ]);
-//
-//
-//        $saleOrder = SaleOrder::create([
-//            'zid'   => $zid,
-//            'xemp'  => auth()->user()->mail,
-//            'xsp'   => auth()->user()->name,
-//            'xordernum' => 'CO--13'.rand(4,9999),
-//            'xrow' =>'CO--13'.rand(4,9999) ,
-//            'xdate' => $xdateArray,
-//            'xwh'   => $request->input('xwh'),
-//        ]);
-//
-//
-//
-//        return redirect()->back();
-//    }
-//
-//
-//}
 

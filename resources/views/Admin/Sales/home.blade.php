@@ -35,11 +35,11 @@
 
         }
 
-         .box-shadu{
+        .box-shadu {
 
-             margin-top: 5px;
+            margin-top: 5px;
 
-         }
+        }
 
     </style>
 </head>
@@ -256,6 +256,7 @@
 
 
                             <div class="col-md-6 ml-3 box mb-2  overflow-scroll" style="background-color: #F6F0F7 ">
+
                                 @foreach($products as $key => $product)
                                     <a href="javascript:void(0)" class="card-info">
 
@@ -266,72 +267,85 @@
 
 
 
+
+                                    {{--                                    <table class="table  table-bordered table-hover">--}}
+
+                                    {{--                                        <tr>--}}
+                                    {{--                                            <td>{{ Illuminate\Support\Str::limit($product->xdesc, $limit = 20, $end = '') }}</td>--}}
+                                    {{--                                            <td>{{$product->xdesc}}</td>--}}
+                                    {{--                                            <td>{{$product->zid}}</td>--}}
+                                    {{--                                            <td>{{$product->xdesc}}</td>--}}
+
+                                    {{--                                        </tr>--}}
+                                    {{--                                    </table>--}}
+
+
+
+
+
+
                                 @endforeach
 
-                                    <div class="col-sm-4">
-                                        <div class="box-shadu">
-                                            <div class="card gradient-1" style="background-color: #d3eaf1; border: none; border-radius: 10px;">
-                                                <h5 class="card-header" style="padding: 5px; margin-top: 0px; background-color: #1f2937; color: #fff; border-radius: 10px 10px 0 0;">Products Sold</h5>
-                                                <div class="card-body p-2">
-                                                    <div class="d-inline-block">
-                                                        <h2 class="text-white" style="padding: 5px; color: #1f2937;">45 BDT</h2>
-                                                        <p><span class="pull-right label label-grey" style="background-color: #1f2937; color: #fff;">Tokyo</span></p>
-                                                    </div>
-                                                    <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
 
 
 
 
+                                {{--                                    <div class="col-sm-4">--}}
+                                {{--                                        <div class="box-shadu">--}}
+                                {{--                                            <div class="card gradient-1" style="background-color: #d3eaf1; border: none; border-radius: 10px;">--}}
+                                {{--                                                <h5 class="card-header" style="padding: 5px; margin-top: 0px; background-color: #1f2937; color: #fff; border-radius: 10px 10px 0 0;">Products Sold</h5>--}}
+                                {{--                                                <div class="card-body p-2">--}}
+                                {{--                                                    <div class="d-inline-block">--}}
+                                {{--                                                        <h2 class="text-white" style="padding: 5px; color: #1f2937;">45 BDT</h2>--}}
+                                {{--                                                        <p><span class="pull-right label label-grey" style="background-color: #1f2937; color: #fff;">Tokyo</span></p>--}}
+                                {{--                                                    </div>--}}
+                                {{--                                                    <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>--}}
+                                {{--                                                </div>--}}
+                                {{--                                            </div>--}}
+                                {{--                                        </div>--}}
+                                {{--                                    </div>--}}
 
 
-
-
-
-
-                                    <div>
+                                <div>
                                     {{--                        @foreach($products->where('$product->zid') as $key => $product)--}}
                                     {{--                                                    @foreach($products as $key => $product)--}}
                                     {{--                                                        <a href="javascript:void(0)" class="card-info">--}}
-{{--                                                                                                <div id="product-list">--}}
+                                    {{--                                                                                                <div id="product-list">--}}
 
-{{--                                                                                                    <div class="col-xs-2 col-sm-2 col-md-4 overflow" style="color: #1f2937">--}}
-{{--                                                                                                        <div class="search-thumbnail">--}}
-{{--                                                                                                            <div class="pl-3 thumbnail search-thumbnail">--}}
-{{--                                                                                                                <div class="card gradient-1 product-item" id="product-item-{{$key}}"--}}
-{{--                                                                                                                     data-product-id="{{$key}}">--}}
-{{--                                                                                                                    <h5 class="card-header name-product"--}}
-{{--                                                                                                                        style="padding: 5px; margin-top:0px"--}}
-{{--                                                                                                                        id="heading"> {{$product->xdesc }}</h5>--}}
-{{--                                                                                                                    <h5 class="card-header name-product"--}}
-{{--                                                                                                                        style="padding: 5px; margin-top:0px"--}}
-{{--                                                                                                                        id="heading"> {{ Illuminate\Support\Str::limit($product->xdesc, $limit = 20, $end = '') }}</h5>--}}
-{{--                                                                                                                    <span><div class="sku"--}}
-{{--                                                                                                                               style="display:none">{{$product->xcitem}}</div></span>--}}
-{{--                                                                                                                    <span><div class="unit"--}}
-{{--                                                                                                                               style="display:none">{{$product->xunitiss}}</div></span>--}}
-{{--                                                                                                                    <span><div class="zid"--}}
-{{--                                                                                                                               style="display:none">{{$product->zid}}</div></span>--}}
-{{--                                                                                                                    <div class="card-body p-2">--}}
-{{--                                                                                                                        <div class="d-inline-block">--}}
-{{--                                                                                                                            <h2 class="text-white price-product"--}}
-{{--                                                                                                                                style="padding: 5px">{{$product->xstdcost}}</h2>--}}
-{{--                                                                                                                            <p><span--}}
-{{--                                                                                                                                    class="pull-right label label-grey quantity">1</span>--}}
-{{--                                                                                                                            </p>--}}
-{{--                                                                                                                        </div>--}}
-{{--                                                                                                                        <span class="float-right display-5 opacity-5"><i--}}
-{{--                                                                                                                                class="fa fa-shopping-cart"></i></span>--}}
-{{--                                                                                                                    </div>--}}
-{{--                                                                                                                </div>--}}
-{{--                                                                                                            </div>--}}
-{{--                                                                                                        </div>--}}
-{{--                                                                                                    </div>--}}
-{{--                                                                                                </div>--}}
+                                    {{--                                                                                                    <div class="col-xs-2 col-sm-2 col-md-4 overflow" style="color: #1f2937">--}}
+                                    {{--                                                                                                        <div class="search-thumbnail">--}}
+                                    {{--                                                                                                            <div class="pl-3 thumbnail search-thumbnail">--}}
+                                    {{--                                                                                                                <div class="card gradient-1 product-item" id="product-item-{{$key}}"--}}
+                                    {{--                                                                                                                     data-product-id="{{$key}}">--}}
+                                    {{--                                                                                                                    <h5 class="card-header name-product"--}}
+                                    {{--                                                                                                                        style="padding: 5px; margin-top:0px"--}}
+                                    {{--                                                                                                                        id="heading"> {{$product->xdesc }}</h5>--}}
+                                    {{--                                                                                                                    <h5 class="card-header name-product"--}}
+                                    {{--                                                                                                                        style="padding: 5px; margin-top:0px"--}}
+                                    {{--                                                                                                                        id="heading"> {{ Illuminate\Support\Str::limit($product->xdesc, $limit = 20, $end = '') }}</h5>--}}
+                                    {{--                                                                                                                    <span><div class="sku"--}}
+                                    {{--                                                                                                                               style="display:none">{{$product->xcitem}}</div></span>--}}
+                                    {{--                                                                                                                    <span><div class="unit"--}}
+                                    {{--                                                                                                                               style="display:none">{{$product->xunitiss}}</div></span>--}}
+                                    {{--                                                                                                                    <span><div class="zid"--}}
+                                    {{--                                                                                                                               style="display:none">{{$product->zid}}</div></span>--}}
+                                    {{--                                                                                                                    <div class="card-body p-2">--}}
+                                    {{--                                                                                                                        <div class="d-inline-block">--}}
+                                    {{--                                                                                                                            <h2 class="text-white price-product"--}}
+                                    {{--                                                                                                                                style="padding: 5px">{{$product->xstdcost}}</h2>--}}
+                                    {{--                                                                                                                            <p><span--}}
+                                    {{--                                                                                                                                    class="pull-right label label-grey quantity">1</span>--}}
+                                    {{--                                                                                                                            </p>--}}
+                                    {{--                                                                                                                        </div>--}}
+                                    {{--                                                                                                                        <span class="float-right display-5 opacity-5"><i--}}
+                                    {{--                                                                                                                                class="fa fa-shopping-cart"></i></span>--}}
+                                    {{--                                                                                                                    </div>--}}
+                                    {{--                                                                                                                </div>--}}
+                                    {{--                                                                                                            </div>--}}
+                                    {{--                                                                                                        </div>--}}
+                                    {{--                                                                                                    </div>--}}
+                                    {{--                                                                                                </div>--}}
                                     {{--                                                        </a>--}}
 
                                     {{--                                                    @endforeach--}}
@@ -514,25 +528,25 @@
                                     {{--                                </div>--}}
                                     {{--                            </div>--}}
                                     {{--                        </div>--}}
-{{--                                                            <div class="col-xs-2 col-sm-2 col-md-4 overflow "--}}
-{{--                                                                 style="color: #1f2937 ; width: 230px; padding: 3px" !importent>--}}
-{{--                                                                <div class=" search-thumbnail" style="padding:0px">--}}
-{{--                                                                    <div class="pl-3 thumbnail search-thumbnail">--}}
-{{--                                                                        <div class="card gradient-1 " style="background-color:#d3eaf1">--}}
-{{--                                                                            <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products--}}
-{{--                                                                                Sold</h5>--}}
-{{--                                                                            <div class="card-body p-2">--}}
-{{--                                                                                <div class="d-inline-block">--}}
-{{--                                                                                    <h2 class="text-white" style="padding: 5px">45 BDT</h2>--}}
-{{--                                                                                    <p><span class="pull-right label label-grey ">Tokyo</span></p>--}}
-{{--                                                                                </div>--}}
-{{--                                                                                <span class="float-right display-5 opacity-5"><i--}}
-{{--                                                                                        class="fa fa-shopping-cart"></i></span>--}}
-{{--                                                                            </div>--}}
-{{--                                                                        </div>--}}
-{{--                                                                    </div>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
+                                    {{--                                                            <div class="col-xs-2 col-sm-2 col-md-4 overflow "--}}
+                                    {{--                                                                 style="color: #1f2937 ; width: 230px; padding: 3px" !importent>--}}
+                                    {{--                                                                <div class=" search-thumbnail" style="padding:0px">--}}
+                                    {{--                                                                    <div class="pl-3 thumbnail search-thumbnail">--}}
+                                    {{--                                                                        <div class="card gradient-1 " style="background-color:#d3eaf1">--}}
+                                    {{--                                                                            <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products--}}
+                                    {{--                                                                                Sold</h5>--}}
+                                    {{--                                                                            <div class="card-body p-2">--}}
+                                    {{--                                                                                <div class="d-inline-block">--}}
+                                    {{--                                                                                    <h2 class="text-white" style="padding: 5px">45 BDT</h2>--}}
+                                    {{--                                                                                    <p><span class="pull-right label label-grey ">Tokyo</span></p>--}}
+                                    {{--                                                                                </div>--}}
+                                    {{--                                                                                <span class="float-right display-5 opacity-5"><i--}}
+                                    {{--                                                                                        class="fa fa-shopping-cart"></i></span>--}}
+                                    {{--                                                                            </div>--}}
+                                    {{--                                                                        </div>--}}
+                                    {{--                                                                    </div>--}}
+                                    {{--                                                                </div>--}}
+                                    {{--                                                            </div>--}}
                                 </div>
                                 {{--                        This code are not used--}}
                             </div>
@@ -922,7 +936,7 @@
                                         <div class="card-body p-2">
                                             <div class="d-inline-block">
                                                 <h2 class="text-white price-product" style="padding: 5px">${product.xstdprice}</h2>
-                                                <p><span class="pull-right label label-grey quantity">1</span></p>
+                                                <p><span class="pull-right label label-grey quantity" >1</span></p>
                                             </div>
                                             <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
                                         </div>
@@ -960,10 +974,18 @@
             var sku = productItem.find(".xitem").text().trim();
             var unit = productItem.find(".unit").text().trim();
             var price = parseInt(productItem.find(".price-product").text().trim());
+
+            var qty = parseInt(productItem.find(".qty").text().trim());
             var quantity = parseInt(productItem.find(".quantity").text().trim());
-            if (quantity === 0) {
-                alert("Stock not available");
-                return; // Exit the function or do any other necessary handling
+            if (qty < quantity) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Stock not available!',
+
+                })
+                // alert("Stock not available");
+                // return;
             }
             var itemTotal = price * quantity;
             total += itemTotal;
@@ -1076,9 +1098,6 @@
             } else {
 
 
-
-
-
                 $.each(results, function (index, product) {
                     var listItem = `
             <div class="col-sm-4  box-shadu" >
@@ -1095,7 +1114,8 @@
                             <div class="card-body p-2">
                                 <div class="d-inline-block">
                                     <h2 class="text-white price-product" style="padding: 5px; color: #1f2937;">${product.xstdprice}</h2>
-                                    <p><span class="pull-right label label-grey quantity">1</span></p>
+                                    <p><span class="pull-right label label-grey quantity"style="display:none">1</span></p>
+                                    <p><span class="pull-right label label-grey qty">${product.quantity_total}</span></p>
                                 </div>
                                 <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
                             </div>
