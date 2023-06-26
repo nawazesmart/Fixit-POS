@@ -375,7 +375,7 @@
                                 <p> Due: </p><br>
                             </div>
                             <div class="col-4">
-                                <p><span style="font-size: 7px">(+/-)</span>{{floatval($all) - floatval($pay)}}</p>
+                                <p><span style="font-size: 7px"></span>{{floatval($all) - floatval($pay)}}</p>
                             </div>
                         </div>
                     @endif

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\SaleOrder;
 use Illuminate\Http\Request;
 
 class SaleDetailsController extends Controller
@@ -10,7 +12,10 @@ class SaleDetailsController extends Controller
 
     public function index()
     {
-        return view('Admin.Sales.sale-details');
+        return view('Admin.Sales.sale-details',[
+            'products' => SaleOrder::latest()->take(50)->get(),
+
+        ]);
     }
 
 
@@ -27,7 +32,7 @@ class SaleDetailsController extends Controller
 
     public function show($id)
     {
-        //
+
     }
 
     public function edit($id)
@@ -41,9 +46,11 @@ class SaleDetailsController extends Controller
         //
     }
 
-
+ protected $del;
     public function destroy($id)
     {
-        //
+        $this->del= SaleOrder::fine($id);
+        $this->del->delet();
+        return redirect()->back();
     }
 }

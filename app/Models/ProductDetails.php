@@ -24,5 +24,8 @@ class ProductDetails extends BaseModel
     {
         return $this->hasMany(SaleOrder::class);
     }
-
+    public  function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

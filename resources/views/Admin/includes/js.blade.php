@@ -61,6 +61,17 @@
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
             });
         });
+
+        $('#button4').click(function () {
+            // Perform action for Button 4
+            Swal.fire({
+                title: 'Use the sale option !',
+                showDenyButton: true,
+                // showCancelButton: true,
+                // confirmButtonText: 'Save',
+                denyButtonText: `Don't save`,
+            })
+        });
     });
 </script>
 

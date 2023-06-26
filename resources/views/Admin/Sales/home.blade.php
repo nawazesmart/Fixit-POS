@@ -125,6 +125,8 @@
                                     $nextNumber = ($lastInput) ? intval(substr($lastInput->xordernum, 4)) : 0;
                                     $paddedNumber = str_pad($nextNumber, 7, '0', STR_PAD_LEFT) + 1;
                                     $xordernum = 'CO--' . $paddedNumber;
+
+
                                 @endphp
                                 <span class="input-group-addon">
                                {{$xordernum}}</span>

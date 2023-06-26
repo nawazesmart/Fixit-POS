@@ -28,6 +28,10 @@ class SaleOrder extends BaseModel
     {
         return $this->belongsTo(Product::class);
     }
+    public  function Details()
+    {
+        return $this->belongsTo(ProductDetails::class);
+    }
 
 
 }
