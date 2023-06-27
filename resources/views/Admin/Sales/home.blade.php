@@ -979,16 +979,7 @@
 
             var qty = parseInt(productItem.find(".qty").text().trim());
             var quantity = parseInt(productItem.find(".quantity").text().trim());
-            if (qty < quantity) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Stock not available!',
 
-                })
-                // alert("Stock not available");
-                // return;
-            }
             var itemTotal = price * quantity;
             total += itemTotal;
 
@@ -1006,6 +997,18 @@
             };
 
             if (cartItems[key]) {
+                cartQTy = cartItems[key].quantity;
+                console.log({qty, cartQTy})
+                if (qty <= cartQTy) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Stock not available!',
+
+                    })
+                    // alert("Stock not available");
+                    return;
+                }
                 cartItems[key].quantity += quantity;
                 cartItems[key].total += itemTotal;
             } else {

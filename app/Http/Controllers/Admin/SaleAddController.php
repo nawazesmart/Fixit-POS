@@ -101,7 +101,7 @@ class SaleAddController extends Controller
                 'xitem' => $xitemArray[$index] ?? '',
                 'xunitsel' => $xunitselArray[$index] ?? '',
                 'xlineamt' => $xlineamtArray[$index] ?? '',
-                'xqtyord' => $xqtyordArray[$index] ?? '',
+//                'xqtyord' => $xqtyordArray[$index] ?? '',
                 'xqtyreq' => $xqtyordArray[$index] ?? '',
                 'xwh' => $xwhArray,
                 'xcur' => value('BDT'),
