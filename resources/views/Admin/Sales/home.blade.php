@@ -46,15 +46,15 @@
 <body>
 @include('Admin.includes.nav')
 
-@if ($errors->any())
-    <div class="">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+{{--@if ($errors->any())--}}
+{{--    <div class="">--}}
+{{--        <ul>--}}
+{{--            @foreach ($errors->all() as $error)--}}
+{{--                <li>{{ $error }}</li>--}}
+{{--            @endforeach--}}
+{{--        </ul>--}}
+{{--    </div>--}}
+{{--@endif--}}
 
 @if (session('success'))
     <script>

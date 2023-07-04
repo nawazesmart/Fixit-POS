@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sale\StoreSaleRequest;
+
+use App\Models\Product;
 use App\Models\ProductDetails;
+use App\Models\Quantity;
 use App\Models\SaleOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SaleAddController extends Controller
 {
@@ -25,6 +29,11 @@ class SaleAddController extends Controller
 
     public function store(StoreSaleRequest $request)
     {
+
+
+        $this->validate($request,[
+            'xdttax' => 'required',
+        ]);
 //        $lastInput = SaleOrder::orderBy('xordernum', 'desc')->first();
 //        $lastNumber = ($lastInput) ? intval(substr($lastInput->xordernum, 4)) : 0;
 //        $nextNumber = $lastNumber  ;
@@ -66,6 +75,7 @@ class SaleAddController extends Controller
                 'xemail' => auth()->user()->email,
                 'xsp' => auth()->user()->name,
 //                    'xordernum' =>$xordernum,
+//                    'xordernum' =>'co--' . rand(4, 9999),
                 'xordernum' => $request->input('xordernum'),
                 'xrow' => '' . rand(4, 9999),
                 'xdate' => $xdateArray,
@@ -101,8 +111,8 @@ class SaleAddController extends Controller
                 'xitem' => $xitemArray[$index] ?? '',
                 'xunitsel' => $xunitselArray[$index] ?? '',
                 'xlineamt' => $xlineamtArray[$index] ?? '',
-//                'xqtyord' => $xqtyordArray[$index] ?? '',
-                'xqtyreq' => $xqtyordArray[$index] ?? '',
+                'xqtyord' => $xqtyordArray[$index] ?? '',
+//                'xqtyreq' => $xqtyordArray[$index] ?? '',
                 'xwh' => $xwhArray,
                 'xcur' => value('BDT'),
                 'xdttax' => $request->input('xdttax'),
@@ -119,7 +129,13 @@ class SaleAddController extends Controller
 
         }
 
+//        $zid = '100001';
+//        $qty= Quantity::where('zid', $zid)->where('xitem','02-006')->where('xdate', '2017-06-10')->update([
+//            'xqty' => DB::raw('xqty -'. 1),
+//        ]);
+
         return view('Admin.Invoice.posinvoice', compact('previewData', 'productDetails','saleOrder'));
+
 
 
     }
@@ -141,7 +157,34 @@ class SaleAddController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+
+        $zid = '100001';
+        $xqtyordArray = $request->input('xqtyord');
+
+        $products = Product::where($request,'zid', $zid)
+            ->with(['quantity' => function ($query) use ($zid) {
+                $query->where('zid', $zid);
+            }])
+            ->take(10)
+            ->get();
+
+        for ($index = 0; $index < count($products); $index++) {
+            $item = $products[$index];
+            $total = 0;
+            foreach ($item->quantity as $quantity) {
+                $total += $quantity->xqty * $quantity->xsign;
+            }
+
+            $soldQuantity = $xqtyordArray[$index] ?? 0;
+            $total -= $soldQuantity;
+
+            $item->quantity_total = $total;
+            dd($total.$soldQuantity);
+        }
+
+
+
+
     }
 
 

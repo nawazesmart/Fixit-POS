@@ -366,7 +366,7 @@
                                 <p> Change: </p><br>
                             </div>
                             <div class="col-4">
-                                <p><span style="font-size: 7px">(+/-)</span> {{floatval($pay) - floatval($all)}}</p><br>
+                                <p><span style="font-size: 7px">(+/-)</span> {{ round(floatval($pay) - floatval($all),2)}}</p><br>
                             </div>
                         </div>
                     @else
@@ -375,7 +375,7 @@
                                 <p> Due: </p><br>
                             </div>
                             <div class="col-4">
-                                <p><span style="font-size: 7px">(+/-)</span>{{floatval($all) - floatval($pay)}}</p>
+                                <p><span style="font-size: 7px">(+/-)</span>{{ round(floatval($all) - floatval($pay),2)}}</p>
                             </div>
                         </div>
                     @endif
