@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\SearsController;
 use App\Http\Controllers\Admin\InvoicePrintCOntroller;
 
 
-Route::get('/', [LoginControler::class, 'loginView'])->name('loginView');
+//Route::get('/', [LoginControler::class, 'loginView'])->name('loginView');
 
 //Route::group(['middleware' => config('fortify.middleware', ['web'])], function () {
 //    $enableViews = config('fortify.views', true);
@@ -33,9 +33,9 @@ Route::get('/', [LoginControler::class, 'loginView'])->name('loginView');
 
 
 
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])->group(function () {
+//Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])->group(function () {
 
-    Route::get('/dashboard', [DashboardControler::class, 'dashboard'])->name('dashboard');
+    Route::get('/', [DashboardControler::class, 'dashboard'])->name('dashboard');
 
 //sale control
     Route::resource('sales', SalesController::class);
@@ -64,7 +64,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
 //invoice control end
 
 
-
-});
+//
+//});
 
 

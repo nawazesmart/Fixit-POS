@@ -29,7 +29,7 @@
                         <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
                         <span class="user-info">
 									<small>Welcome,</small>
-									{{auth()->user()->name}}
+{{--									{{auth()->user()->name}}--}}
 								</span>
 
                         <i class="ace-icon fa fa-caret-down"></i>
@@ -53,12 +53,12 @@
                         <li class="divider"></li>
 
 
-                        <li>
-                            <a class=" " onclick="event.preventDefault(); document.getElementById('logoutForm').submit()" href="#"><i class="icon-key"></i><i class="ace-icon fa fa-power-off"> Logout</i></a>
-                            <form action="{{ route('logout') }}" method="POST" id="logoutForm">
-                                @csrf
-                            </form>
-                        </li>
+{{--                        <li>--}}
+{{--                            <a class=" " onclick="event.preventDefault(); document.getElementById('logoutForm').submit()" href="#"><i class="icon-key"></i><i class="ace-icon fa fa-power-off"> Logout</i></a>--}}
+{{--                            <form action="{{ route('logout') }}" method="POST" id="logoutForm">--}}
+{{--                                @csrf--}}
+{{--                            </form>--}}
+{{--                        </li>--}}
 
 
 
