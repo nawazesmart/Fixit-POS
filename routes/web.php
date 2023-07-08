@@ -16,6 +16,22 @@ use App\Http\Controllers\Admin\InvoicePrintCOntroller;
 
 Route::get('/', [LoginControler::class, 'loginView'])->name('loginView');
 
+//Route::group(['middleware' => config('fortify.middleware', ['web'])], function () {
+//    $enableViews = config('fortify.views', true);
+//// Registration...
+//    if (Features::enabled(Features::registration())) {
+//        if ($enableViews) {
+//            Route::get(RoutePath::for('register', '/register'), [RegisteredUserController::class, 'create'])
+//                ->middleware(['guest:' . config('fortify.guard')])
+//                ->name('register');
+//        }
+//
+//        Route::post(RoutePath::for('register', '/register'), [RegisteredUserController::class, 'store'])
+//            ->middleware(['guest:' . config('fortify.guard')]);
+//    }
+//});
+
+
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])->group(function () {
 
