@@ -75,7 +75,7 @@ class SaleAddController extends Controller
                 'xemail' => auth()->user()->email,
                 'xsp' => auth()->user()->name,
 //                    'xordernum' =>$xordernum,
-//                    'xordernum' =>'co--' . rand(4, 9999),
+//                    'xordernum' =>'co--' . rand(7, 9999999),
                 'xordernum' => $request->input('xordernum'),
                 'xrow' => '' . rand(4, 9999),
                 'xdate' => $xdateArray,
@@ -164,9 +164,8 @@ class SaleAddController extends Controller
         $products = Product::where($request,'zid', $zid)
             ->with(['quantity' => function ($query) use ($zid) {
                 $query->where('zid', $zid);
-            }])
-            ->take(10)
-            ->get();
+            }]);
+
 
         for ($index = 0; $index < count($products); $index++) {
             $item = $products[$index];

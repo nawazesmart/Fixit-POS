@@ -56,13 +56,13 @@
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right" for="email" value="{{ __('Email') }}" >
-															<input type="email" name="xemail" id=""  class="form-control"  :value="old('email')" required autofocus autocomplete="Email" />
+															<input type="email" name="email" id="email"  class="form-control"  :value="old('email')" required autofocus autocomplete="Email" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
                                             </label>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right"  for="password" value="{{ __('Password') }}" >
-															<input type="password" name="xpassword" id="password" accept="password"  class="form-control" required autocomplete="current-password" />
+															<input type="password" name="password" id="password" accept="password"  class="form-control" required autocomplete="current-password" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
                                             </label>

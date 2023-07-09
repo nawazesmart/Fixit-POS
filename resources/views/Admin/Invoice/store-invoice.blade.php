@@ -267,7 +267,7 @@
             </div>
             <p style="margin-top: 10px;">
                 Date: {{ \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A') }}</p>
-            <p>Customer: Arafat Sorkar</p>
+{{--            <p>Customer: Arafat Sorkar</p>--}}
             <p>Cashier:{{auth()->user()->name}} </p>
             <p>Sale By:{{auth()->user()->name}} </p>
 
