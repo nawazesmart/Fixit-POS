@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
 
           ],
           [
-              'name' => 'admin',
-              'email'=> 'adminfixit@admin.com',
-              'password'=> Hash::make('123456789')
+              'name' => 'Fix It',
+              'email'=> 'fixit@info.com',
+              'password'=> Hash::make('Fix.123456789')
           ]
       );
         return response('successfully.');

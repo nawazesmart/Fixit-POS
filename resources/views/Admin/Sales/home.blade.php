@@ -268,46 +268,7 @@
                                     </a>
 
 
-
-
-                                    {{--                                    <table class="table  table-bordered table-hover">--}}
-
-                                    {{--                                        <tr>--}}
-                                    {{--                                            <td>{{ Illuminate\Support\Str::limit($product->xdesc, $limit = 20, $end = '') }}</td>--}}
-                                    {{--                                            <td>{{$product->xdesc}}</td>--}}
-                                    {{--                                            <td>{{$product->zid}}</td>--}}
-                                    {{--                                            <td>{{$product->xdesc}}</td>--}}
-
-                                    {{--                                        </tr>--}}
-                                    {{--                                    </table>--}}
-
-
-
-
-
-
                                 @endforeach
-
-
-
-
-
-
-                                {{--                                    <div class="col-sm-4">--}}
-                                {{--                                        <div class="box-shadu">--}}
-                                {{--                                            <div class="card gradient-1" style="background-color: #d3eaf1; border: none; border-radius: 10px;">--}}
-                                {{--                                                <h5 class="card-header" style="padding: 5px; margin-top: 0px; background-color: #1f2937; color: #fff; border-radius: 10px 10px 0 0;">Products Sold</h5>--}}
-                                {{--                                                <div class="card-body p-2">--}}
-                                {{--                                                    <div class="d-inline-block">--}}
-                                {{--                                                        <h2 class="text-white" style="padding: 5px; color: #1f2937;">45 BDT</h2>--}}
-                                {{--                                                        <p><span class="pull-right label label-grey" style="background-color: #1f2937; color: #fff;">Tokyo</span></p>--}}
-                                {{--                                                    </div>--}}
-                                {{--                                                    <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>--}}
-                                {{--                                                </div>--}}
-                                {{--                                            </div>--}}
-                                {{--                                        </div>--}}
-                                {{--                                    </div>--}}
-
 
                                 <div>
                                     {{--                        @foreach($products->where('$product->zid') as $key => $product)--}}
@@ -993,13 +954,14 @@
                 unit: unit,
                 price: price,
                 quantity: quantity,
-                total: itemTotal
+                total: itemTotal,
+                qty : qty
             };
 
             if (cartItems[key]) {
                 cartQTy = cartItems[key].quantity;
                 console.log({qty, cartQTy})
-                if (qty <= cartQTy) {
+                if (qty <= cartQTy ) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
@@ -1031,6 +993,7 @@
                     <input type="hidden" name="xrate[]" value="${currentItem.price}">
                     <input type="hidden" name="xqtyord[]" value="${currentItem.quantity}">
                     <input type="hidden" name="xlineamt[]" value="${currentItem.total}">
+                    <input type="hidden" name="qty[]" value="${currentItem.qty}">
 
 
 

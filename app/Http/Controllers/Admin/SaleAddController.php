@@ -60,9 +60,8 @@ class SaleAddController extends Controller
         $xqtyordArray = $request->input('xqtyord');
         $xtotamtArray = $request->input('xtotamt');
         $xordernumArray = $request->input('xordernum');
+        $qtyArray = $request->input('qty');
 
-//            $quantityArray = $request->input('quantity');
-//            $totalArray = $request->input('total');
 
 
         $previewData = [];
@@ -127,12 +126,74 @@ class SaleAddController extends Controller
 //                    'total' => $totalArray[$index],
             ];
 
+
+
+            $total = [];
+            foreach ($qtyArray as $index => $value) {
+                $qty = (float) $value;
+                $xqtyord = (float) $xqtyordArray[$index];
+                $total[] = $qty - $xqtyord;
+            }
+
+            foreach ($xitemArray as $index => $xitem) {
+                try {
+                    $updateResult = DB::table('imtrn')
+                        ->where('zid', 100001)
+                        ->where('xitem', $xitem)
+                        ->update(['xqty' => $total[$index]]);
+
+                    if (!$updateResult) {
+
+                    }
+                } catch (Exception $e) {
+
+                    echo $e->getMessage();
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+
+//
+//            $result = DB::table('imtrn')
+//                ->where('zid', 100001)
+//                ->where('xitem', $xitemArray[$index])
+//                ->select(DB::raw('xqty  as total'))
+//                ->first();
+//
+//            $total = (int) $result->total;
+////            $total =  (int)  $qtyArray;
+//            $xqtyord = (float) $xqtyordArray[$index];
+//            $total -= $xqtyord;
+//
+//            DB::table('imtrn')
+//                ->where('zid', 100001)
+//                ->where('xitem', $xitemArray[$index])
+//                ->update(['xqty' => $total]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
-//        $zid = '100001';
-//        $qty= Quantity::where('zid', $zid)->where('xitem','02-006')->where('xdate', '2017-06-10')->update([
-//            'xqty' => DB::raw('xqty -'. 1),
-//        ]);
+
 
         return view('Admin.Invoice.posinvoice', compact('previewData', 'productDetails','saleOrder'));
 
