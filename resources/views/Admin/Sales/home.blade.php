@@ -540,7 +540,7 @@
                                     <input type="hidden" name="xtotamt" class="total_amount_input">
                                     <li>
                                         Vat: <input type="number" id="vatRate" name="xdttax"
-                                                    style="width: 50px; height: 25px" placeholder="%">
+                                                    style="width: 50px; height: 25px" placeholder="%"  required>
                                     </li>
                                     <li class="discounted-price">
                                         Discount:<input type="number" name="xdtdisc" id="extraDiscount"
@@ -552,9 +552,12 @@
                             </div>
                             <div class="col-md-2 ">
                                 <ul class="list-unstyled">
-                                    <li>Shipping:<input type="number" name="shipping" id="shippingCost"
+                                    <li>Shipping:<input type="number" name="shippi" id="shippingCo"
                                                         style="width: 77px; height: 25px ">
                                     </li>
+{{--                                    <li>Shipping:<input type="number" name="shipping" id="shippingCost"--}}
+{{--                                                        style="width: 77px; height: 25px ">--}}
+{{--                                    </li>--}}
                                     <li>Methode:
                                         <select name="xsltype" id="" style="height: 25px">
                                             <option value="cash">cash_</option>
@@ -616,7 +619,7 @@
                                 <div class="row g-2">
                                     <div class="col-md-6">
                                         <button type="submit" class=" btn-info rounded-0 mb-2" id=""
-                                                style="width: 100%">
+                                                style="width: 100%" target="_blank">
                                             SALE
                                         </button>
 

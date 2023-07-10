@@ -74,8 +74,8 @@ class SaleAddController extends Controller
                 'xemail' => auth()->user()->email,
                 'xsp' => auth()->user()->name,
 //                    'xordernum' =>$xordernum,
-//                    'xordernum' =>'co--' . rand(7, 9999999),
-                'xordernum' => $request->input('xordernum'),
+                    'xordernum' =>'co--' . rand(7, 9999999),
+//                'xordernum' => $request->input('xordernum'),
                 'xrow' => '' . rand(4, 9999),
                 'xdate' => $xdateArray,
                 'xdatecuspo' => $xdateArray,
@@ -135,11 +135,13 @@ class SaleAddController extends Controller
                 $total[] = $qty - $xqtyord;
             }
 
+//            return $total[$index];
+
             foreach ($xitemArray as $index => $xitem) {
                 try {
                     $updateResult = DB::table('imtrn')
                         ->where('zid', 100001)
-                        ->where('xitem', $xitem)
+                        ->where('xitem', $xitem[$index])
                         ->update(['xqty' => $total[$index]]);
 
                     if (!$updateResult) {
@@ -156,7 +158,28 @@ class SaleAddController extends Controller
 
 
 
-
+//            $total = [];
+//            foreach ($qtyArray as $index => $value) {
+//                $qty = (float) $value;
+//                $xqtyord = (float) $xqtyordArray[$index];
+//                $total[] = $qty - $xqtyord;
+//            }
+//
+//            foreach ($xitemArray as $index => $xitem) {
+//                try {
+//                    $updateResult = DB::table('imtrn')
+//                        ->where('zid', 100001)
+//                        ->where('xitem', $xitem)
+//                        ->update(['xqty' => $total[$index]]);
+//
+//                    if (!$updateResult) {
+//
+//                    }
+//                } catch (Exception $e) {
+//
+//                    echo $e->getMessage();
+//                }
+//            }
 
 
 
