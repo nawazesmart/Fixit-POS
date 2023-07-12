@@ -34,7 +34,7 @@
                                         <td>{{$product->xsp}}</td>
                                         <td>
 
-                                            <a href="{{'sale-details.show', $product->id}}" class="btn btn-warning btn-sm">
+                                            <a href="{{'sale-details.show', $product->xordernum}}" class="btn btn-warning btn-sm">
 
                                                 <button class="btn btn-xs btn-warning">
                                                     <i class="ace-icon fa fa-flag bigger-20"></i>

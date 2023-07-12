@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\ProductDetails;
 use App\Models\Quantity;
 use App\Models\SaleOrder;
+use Dotenv\Parser\Value;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -31,14 +32,14 @@ class SaleAddController extends Controller
     {
 
 
-        $this->validate($request,[
-            'xdttax' => 'required',
-        ]);
-//        $lastInput = SaleOrder::orderBy('xordernum', 'desc')->first();
-//        $lastNumber = ($lastInput) ? intval(substr($lastInput->xordernum, 4)) : 0;
-//        $nextNumber = $lastNumber  ;
-//        $paddedNumber = str_pad($nextNumber, 7, '0', STR_PAD_LEFT) + 1;
-//        $xordernum = 'CO--' . $paddedNumber;
+//        $this->validate($request, [
+//            'xdttax' => 'required',
+//        ]);
+        $lastInput = Quantity::orderBy('ximtrnnum', 'desc')->first();
+        $lastNumber = ($lastInput) ? intval(substr($lastInput->ximtrnnum, 4)) : 0;
+        $nextNumber = $lastNumber  ;
+        $paddedNumber = str_pad($nextNumber, 7, '0', STR_PAD_LEFT) + 1;
+        $xordernumrequest = 'IS--' . $paddedNumber;
 
 //        return $request->all();
 
@@ -62,7 +63,7 @@ class SaleAddController extends Controller
         $xordernumArray = $request->input('xordernum');
         $qtyArray = $request->input('qty');
 
-
+//dd($zidArray);
 
         $previewData = [];
         foreach ($zidArray as $index => $zid) {
@@ -119,111 +120,43 @@ class SaleAddController extends Controller
                 'xemail' => auth()->user()->email,
             ]);
 
+
+            $pro=  Quantity::create([
+                'zid' => $zid,
+//                'ximtrnnum' =>'SI--' . rand(7, 9999999),
+                'ximtrnnum' => $xordernumrequest,
+                'xitem' => $xitemArray[$index] ?? '',
+                'xitemrow' => $request->input('xsltype'),
+                'xwh' => $xwhArray[$index] ?? '',
+                'xdate' => date('Y-m-d', strtotime($xdateArray[$index])),
+                'xyear' => date('y'),
+                'xper' => date('m'),
+                'xqty' => $xqtyordArray[$index] ?? '',
+                'xval' => 1,
+                'xvalpost' => 1,
+                'xdoctyp' => value('IS--'),
+                'xdocnum' => $saleOrder->xordernum,
+                'xdateexp' => date('Y-m-d'),
+                'xdaterec' => date('Y-m-d'),
+                'xaction' => value('Issue'),
+                'xsign' => value('-1'),
+                'xtime' => \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A'),
+                'zemail' => auth()->user()->email,
+                'xstdprice' => $xrateArray[$index] ?? '',
+            ]);
+
             $previewData[] = [
                 'saleOrder' => $saleOrder,
                 'productDetails' => $productDetails,
-//                    'qty' => $quantityArray[$index],
-//                    'total' => $totalArray[$index],
+
             ];
-
-
-
-            $total = [];
-            foreach ($qtyArray as $index => $value) {
-                $qty = (float) $value;
-                $xqtyord = (float) $xqtyordArray[$index];
-                $total[] = $qty - $xqtyord;
-            }
-
-//            return $total[$index];
-
-            foreach ($xitemArray as $index => $xitem) {
-                try {
-                    $updateResult = DB::table('imtrn')
-                        ->where('zid', 100001)
-                        ->where('xitem', $xitem[$index])
-                        ->update(['xqty' => $total[$index]]);
-
-                    if (!$updateResult) {
-
-                    }
-                } catch (Exception $e) {
-
-                    echo $e->getMessage();
-                }
-            }
-
-
-
-
-
-
-//            $total = [];
-//            foreach ($qtyArray as $index => $value) {
-//                $qty = (float) $value;
-//                $xqtyord = (float) $xqtyordArray[$index];
-//                $total[] = $qty - $xqtyord;
-//            }
-//
-//            foreach ($xitemArray as $index => $xitem) {
-//                try {
-//                    $updateResult = DB::table('imtrn')
-//                        ->where('zid', 100001)
-//                        ->where('xitem', $xitem)
-//                        ->update(['xqty' => $total[$index]]);
-//
-//                    if (!$updateResult) {
-//
-//                    }
-//                } catch (Exception $e) {
-//
-//                    echo $e->getMessage();
-//                }
-//            }
-
-
-
-
-//
-//            $result = DB::table('imtrn')
-//                ->where('zid', 100001)
-//                ->where('xitem', $xitemArray[$index])
-//                ->select(DB::raw('xqty  as total'))
-//                ->first();
-//
-//            $total = (int) $result->total;
-////            $total =  (int)  $qtyArray;
-//            $xqtyord = (float) $xqtyordArray[$index];
-//            $total -= $xqtyord;
-//
-//            DB::table('imtrn')
-//                ->where('zid', 100001)
-//                ->where('xitem', $xitemArray[$index])
-//                ->update(['xqty' => $total]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
 
-
-
-        return view('Admin.Invoice.posinvoice', compact('previewData', 'productDetails','saleOrder'));
-
+//        dd($pro);
+        return view('Admin.Invoice.posinvoice', compact('previewData', 'productDetails', 'saleOrder'));
 
 
     }
-
 
 
 
@@ -245,7 +178,7 @@ class SaleAddController extends Controller
         $zid = '100001';
         $xqtyordArray = $request->input('xqtyord');
 
-        $products = Product::where($request,'zid', $zid)
+        $products = Product::where($request, 'zid', $zid)
             ->with(['quantity' => function ($query) use ($zid) {
                 $query->where('zid', $zid);
             }]);
@@ -262,10 +195,8 @@ class SaleAddController extends Controller
             $total -= $soldQuantity;
 
             $item->quantity_total = $total;
-            dd($total.$soldQuantity);
+            dd($total . $soldQuantity);
         }
-
-
 
 
     }

@@ -253,7 +253,7 @@
             <p>101,Gulshan Avenue RM Center,Dhaka</p>
             <p>Hotline:-8801755648290</p>
             <p>VAT REG No:000424596-0101</p>
-            <p style="font-size: 11px">Branch ID:{{$productDetails->zid}} </p>
+            <p style="font-size: 11px">Branch ID:{{$details->zid}} </p>
             <p style="font-size: 11px"></p>
         </div>
 
@@ -261,7 +261,7 @@
             <div class="row">
                 <div class="col-12 invoice-no text-center">
 
-                    Order No:{{$productDetails->xordernum}}<br>
+                    Order No:{{$details->xordernum}}<br>
 
                 </div>
             </div>
@@ -290,25 +290,25 @@
                 <tbody>
 
 
-                @php
+{{--                @php--}}
 
-                    $totalPrice = 0;
-                @endphp
-                @foreach ($previewData as $data)
-                    <tr>
-                        <td class="text-center">{{ $loop->iteration }}</td>
-                        <td>
-                            {{ $data['productDetails']->xdesc }} <br>
-                        </td>
-                        <td class="text-center">{{ $data['productDetails']->xrate ,2}}</td>
-                        <td class="text-center">{{ $data['productDetails']->xqtyord ,2}}</td>
-                        <td class="text-right">{{round($data['productDetails']->xrate * $data['productDetails']->xqtyord),2}}</td>
-                    </tr>
-                    @php
-                        $totalPrice +=  round($data['productDetails']->xrate * $data['productDetails']->xqtyord)
-                    @endphp
+{{--                    $totalPrice = 0;--}}
+{{--                @endphp--}}
+{{--                @foreach ($previewData as $data)--}}
+{{--                    <tr>--}}
+{{--                        <td class="text-center">{{ $loop->iteration }}</td>--}}
+{{--                        <td>--}}
+{{--                            {{ $data['productDetails']->xdesc }} <br>--}}
+{{--                        </td>--}}
+{{--                        <td class="text-center">{{ $data['productDetails']->xrate ,2}}</td>--}}
+{{--                        <td class="text-center">{{ $data['productDetails']->xqtyord ,2}}</td>--}}
+{{--                        <td class="text-right">{{round($data['productDetails']->xrate * $data['productDetails']->xqtyord),2}}</td>--}}
+{{--                    </tr>--}}
+{{--                    @php--}}
+{{--                        $totalPrice +=  round($data['productDetails']->xrate * $data['productDetails']->xqtyord)--}}
+{{--                    @endphp--}}
 
-                @endforeach
+{{--                @endforeach--}}
                 </tbody>
             </table>
 
@@ -324,11 +324,11 @@
                         @php $price = $totalPrice; @endphp
                         <p>{{ $price }}</p>
                         <p><span
-                                style="font-size: 7px">({{ $data['saleOrder']->xdttax ,2}}%)</span>{{round(( $data['saleOrder']->xdttax * $price)/100,2)}}
+                                style="font-size: 7px">({{ $sale->xdttax ,2}}%)</span>{{round(( $sale->xdttax * $price)/100,2)}}
                         </p>
 
                         <p><span
-                                style="font-size: 7px">({{ $data['saleOrder']->xdtdisc ,2}}%)</span>{{round(( $data['saleOrder']->xdtdisc * $price)/100,2)}}
+                                style="font-size: 7px">({{ $sale->xdtdisc ,2}}%)</span>{{round(( $sale->xdtdisc * $price)/100,2)}}
                         </p>
                     </div>
                 </div>
@@ -341,7 +341,7 @@
                     </div>
                     <div class="col-4">
                         @php
-                            $all =  round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdtdisc * $price)/100),2 )
+                            $all =  round($price+(($sale->xdttax  * $price)/100)+0 - (($sale->xdtdisc * $price)/100),2 )
 
                         @endphp
                         <p>
@@ -349,7 +349,7 @@
                         </p>
                         <br>
                         @php
-                            $pay = $saleOrder->xteam
+                            $pay = $sale->xteam
                         @endphp
                         <p><span style="font-size: 7px;">(+)</span>{{$pay}}</p>
 
@@ -386,8 +386,8 @@
                 <div class="container">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-6" style="text-align-last: center">Cash:{{$saleOrder->xmember}}</div>
-                            <div class="col-6" style="text-align-last: center">Card:{{$saleOrder->xdtcomm}}</div>
+                            <div class="col-6" style="text-align-last: center">Cash:{{$sale->xmember}}</div>
+                            <div class="col-6" style="text-align-last: center">Card:{{$sale->xdtcomm}}</div>
                         </div>
                     </div>
                 </div>

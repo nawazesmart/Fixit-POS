@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductDetails;
 use App\Models\SaleOrder;
 use Illuminate\Http\Request;
 
@@ -32,6 +33,10 @@ class SaleDetailsController extends Controller
 
     public function show($id)
     {
+        $sale = SaleOrder::findOrFail($id);
+        $details = ProductDetails::findOrFail($id);
+        return view('Admin.Invoice.store-invoice' , compact('sale','details'));
+
 
     }
 

@@ -10,6 +10,8 @@ class Quantity extends BaseModel
     use HasFactory;
     protected $table = 'imtrn';
     protected $guarded=['id'];
+    protected $primaryKey = 'zid';
+
 
 
 

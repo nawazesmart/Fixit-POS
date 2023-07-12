@@ -540,7 +540,7 @@
                                     <input type="hidden" name="xtotamt" class="total_amount_input">
                                     <li>
                                         Vat: <input type="number" id="vatRate" name="xdttax"
-                                                    style="width: 50px; height: 25px" placeholder="%"  required>
+                                                    style="width: 50px; height: 25px" placeholder="%"  value="5" >
                                     </li>
                                     <li class="discounted-price">
                                         Discount:<input type="number" name="xdtdisc" id="extraDiscount"
@@ -586,12 +586,12 @@
                                 {{--                                <i class="ace-icon fa fa-gift">  </i>--}}
                                 {{--                                <i class="ace-icon glyphicon glyphicon-tags"></i>--}}
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 ">
                                 <ul class="list-unstyled">
-                                    <li>Cash Amount:<input type="number" name="xmember" id="cashAmount"
+                                    <li >Cash Amount:<input type="number" name="xmember" id="cashAmount"
                                                            style="width: 80px; height: 25px ">
                                     </li>
-                                    <li>Card Amount:<input type="number" name="xdtcomm" id="cardAmount"
+                                    <li >Card Amount:<input type="number" name="xdtcomm" id="cardAmount"
                                                            style="width: 80px; height: 25px ">
                                     </li>
                                     <li>Last Number:<input type="number" name="xdocnum" id=""
@@ -603,7 +603,7 @@
                                 <ul class="text-decoration-none list-unstyled">
 
 
-                                    <li id="result">Pay:0</li>
+                                    <li id="result" >Pay:0</li>
                                     <input type="hidden" name="xteam" class="pay_amount_input" id="result">
 
                                     <li id="dueResult">Due: <span class="due_amount">0</span></li>
@@ -744,12 +744,18 @@
         function calculateTotal() {
 
             var subtotal = parseFloat($('#all_total').val());
-            var vatRate = parseFloat($('#vatRate').val() || 0);
+            var vatRate = parseFloat($('#vatRate').val() || 5);
             // var vatRate = 5;
+            // var vatRate = $('#vatRate').val();
+            // if (!vatRate) {
+            //     vatRate = 5;
+            // } else {
+            //     vatRate = parseFloat(vatRate);
+            // }
             var shippingCost = parseFloat($('#shippingCost').val() || 0);
             var extraDiscount = parseFloat($('#extraDiscount').val() || 0);
 
-            var vatAmount = subtotal * (vatRate / 100);
+            var vatAmount = subtotal * ( vatRate / 100);
             var shippingAmount = shippingCost;
             var discountAmount = subtotal * (extraDiscount / 100);
             var totalAmount = subtotal + vatAmount + shippingAmount - discountAmount;
@@ -780,6 +786,7 @@
             $(".pay_amount_input").val(sum);
 
 
+            // console.log('ok')
             calculatePayAmount()
         }
 
@@ -901,7 +908,7 @@
                                         <span><div class="xstdcost" style="display:none">${product.xstdcost}</div></span>
                                         <div class="card-body p-2">
                                             <div class="d-inline-block">
-                                                <h2 class="text-white price-product" style="padding: 5px">${product.xstdprice}</h2>
+                                                <h2 class= style="padding: 5px">${product.xstdprice}</h2>
                                                 <p><span class="pull-right label label-grey quantity" >1</span></p>
                                             </div>
                                             <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
@@ -964,7 +971,7 @@
             if (cartItems[key]) {
                 cartQTy = cartItems[key].quantity;
                 console.log({qty, cartQTy})
-                if (qty <= cartQTy ) {
+                if (qty <= cartQTy) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
@@ -1018,6 +1025,7 @@
 
             var date = $('#current_date').val();
             console.log(productId);
+            calculateTotal();
         });
 
 
@@ -1101,6 +1109,10 @@
         }
 
 
+
+
+
+
     });
 
     // search optinon end
@@ -1127,6 +1139,32 @@
     });
 
 
+
+
+
+</script>
+<script>
+    const cashAmountInput = document.getElementById('cashA');
+    const cardAmountInput = document.getElementById('CardA');
+
+    cashAmountInput.addEventListener('input', toggleCardAmountRequired);
+    cardAmountInput.addEventListener('input', toggleCashAmountRequired);
+
+    function toggleCardAmountRequired() {
+        if (cashAmountInput.value.trim() !== '') {
+            cardAmountInput.removeAttribute('required');
+        } else {
+            cardAmountInput.setAttribute('required', 'required');
+        }
+    }
+
+    function toggleCashAmountRequired() {
+        if (cardAmountInput.value.trim() !== '') {
+            cashAmountInput.removeAttribute('required');
+        } else {
+            cashAmountInput.setAttribute('required', 'required');
+        }
+    }
 </script>
 
 {{--main rnd--}}

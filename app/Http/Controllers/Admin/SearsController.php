@@ -12,13 +12,7 @@ class SearsController extends Controller
     public function search(Request $request)
 
     {
-        //        $zid = '100001';
-        //        $products = Product::where(function ($scan) use ($request, $zid) {
-        //            $scan->where('zid', $zid);
-        //            $scan->where('xitem', 'LIKE', '%' . $request->search . '%');
-        //        })->quantity()
-        //            ->take(10)
-        //            ->get();
+
 
 
 
