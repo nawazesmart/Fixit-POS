@@ -123,8 +123,8 @@ class SaleAddController extends Controller
 
             $pro=  Quantity::create([
                 'zid' => $zid,
-//                'ximtrnnum' =>'SI--' . rand(7, 9999999),
-                'ximtrnnum' => $xordernumrequest,
+                'ximtrnnum' =>'SI--' . rand(7, 9999999),
+//                'ximtrnnum' => $xordernumrequest,
                 'xitem' => $xitemArray[$index] ?? '',
                 'xitemrow' => $request->input('xsltype'),
                 'xwh' => $xwhArray[$index] ?? '',
