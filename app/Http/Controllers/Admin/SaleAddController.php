@@ -31,17 +31,14 @@ class SaleAddController extends Controller
     public function store(StoreSaleRequest $request)
     {
 
+//        return request()->all();
 
-//        $this->validate($request, [
-//            'xdttax' => 'required',
-//        ]);
-        $lastInput = Quantity::orderBy('ximtrnnum', 'desc')->first();
-        $lastNumber = ($lastInput) ? intval(substr($lastInput->ximtrnnum, 4)) : 0;
-        $nextNumber = $lastNumber  ;
-        $paddedNumber = str_pad($nextNumber, 7, '0', STR_PAD_LEFT) + 1;
-        $xordernumrequest = 'IS--' . $paddedNumber;
+        $xordernumrequest = Quantity::selectRaw('MAX(CAST(REGEXP_REPLACE(ximtrnnum, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
+            ->first()
+            ->max_number;
 
-//        return $request->all();
+        $xorderNumber = ++$xordernumrequest;
+
 
         $xwhArray = $request->input('xwh');
         $xdateArray = $request->input('xdate');
@@ -61,81 +58,75 @@ class SaleAddController extends Controller
         $xqtyordArray = $request->input('xqtyord');
         $xtotamtArray = $request->input('xtotamt');
         $xordernumArray = $request->input('xordernum');
+        $xmemberArray = $request->input('xmember');
+        $xteamArray = $request->input('xteam');
         $qtyArray = $request->input('qty');
-
+//        $xrowarry = value('' . rand(4, 9999));
+//        $xrowarry = $request->input('xrow');
 //dd($zidArray);
+//dd($zidArray,$xordernumArray,$xdateArray,$xwhArray,$xdtwotaxArray,$xsltypeArray,$xsalescatArray,$xdtcommArray,$xdocnumArray);
 
+        $saleOrder = SaleOrder::create([
+            'zid' => $zidArray[0],
+            'xemp' => auth()->user()->email,
+            'zemail' => auth()->user()->email,
+            'xemail' => auth()->user()->email,
+            'xsp' => auth()->user()->name,
+            'xordernum' => $xordernumArray,
+//                'xrow' => '' . rand(4, 9999),
+            'xdate' => $xdateArray,
+            'xdatecuspo' => $xdateArray,
+            'xwh' => $xwhArray,
+            'xdttax' => $xdtwotaxArray,
+            'xsltype' => $xsltypeArray,
+            'xsalescat' => $xsalescatArray,
+            'xdtcomm' => $xdtcommArray,
+            'xdocnum' => $xdocnumArray,
+            'xteam' => $xteamArray,
+            'xmember' => $xmemberArray,
+            'xcur' => value('BDT'),
+            'xtrnord' => value('CO--'),
+            'xquoteby' => value('1-Selling Unit'),
+            'xyear' => date('y'),
+            'xper' => date('m'),
+        ]);
+//            dd($saleOrder);
         $previewData = [];
-        foreach ($zidArray as $index => $zid) {
-
-            $saleOrder = SaleOrder::create([
-                'zid' => $zid,
-                'xemp' => auth()->user()->email,
-                'zemail' => auth()->user()->email,
-                'xemail' => auth()->user()->email,
-                'xsp' => auth()->user()->name,
-//                    'xordernum' =>$xordernum,
-                    'xordernum' =>'co--' . rand(7, 9999999),
-//                'xordernum' => $request->input('xordernum'),
-                'xrow' => '' . rand(4, 9999),
-                'xdate' => $xdateArray,
-                'xdatecuspo' => $xdateArray,
-                'xwh' => $xwhArray,
-                'xdttax' => $request->input('xdttax'),
-                'xsltype' => $request->input('xsltype'),
-                'xsalescat' => $request->input('xsalescat'),
-                'xdtcomm' => $request->input('xdtcomm'),
-                'xdocnum' => $request->input('xdocnum'),
-                'xdtdisc' => $request->input('xdtdisc'),
-                'xtotamt' => $request->input('xtotamt'),
-                'xteam' => $request->input('xteam'),
-                'xmember' => $request->input('xmember'),
-                'xcur' => value('BDT'),
-                'xtrnord' => value('CO--'),
-                'xquoteby' => value('1-Selling Unit'),
-                'xyear' => date('y'),
-                'xper' => date('m'),
-
-
-            ]);
-
-
+        foreach ($xitemArray as $index => $xitem) {
             // table = opodt
             $productDetails = ProductDetails::create([
-                'xordernum' => $saleOrder->xordernum,
-                'zid' => $zid ?? '',
+                'xordernum' => $request->input('xordernum') ?? '',
+                'zid' => $zidArray[$index] ?? '',
                 'xrate' => $xrateArray[$index] ?? '',
-                'xrow' => '' . rand(5, 99999) ?? '',
+                'xrow' => '' . rand(4, 9999) ?? '',
                 'xdesc' => $xdescArray[$index] ?? '',
                 'xcost' => $xcostArray[$index] ?? '',
-                'xitem' => $xitemArray[$index] ?? '',
+                'xitem' => $xitem ?? '',
                 'xunitsel' => $xunitselArray[$index] ?? '',
                 'xlineamt' => $xlineamtArray[$index] ?? '',
                 'xqtyord' => $xqtyordArray[$index] ?? '',
-//                'xqtyreq' => $xqtyordArray[$index] ?? '',
-                'xwh' => $xwhArray,
+                'xwh' => $xwhArray[$index] ?? '',
                 'xcur' => value('BDT'),
                 'xdttax' => $request->input('xdttax'),
                 'zemail' => auth()->user()->email,
                 'xemail' => auth()->user()->email,
             ]);
-
-
-            $pro=  Quantity::create([
-                'zid' => $zid,
-                'ximtrnnum' =>'SI--' . rand(7, 9999999),
-//                'ximtrnnum' => $xordernumrequest,
-                'xitem' => $xitemArray[$index] ?? '',
+            Quantity::create([
+                'zid' => $zidArray[$index] ?? '',
+                'ximtrnnum' => 'SI--' . rand(4, 9999) ?? '',
+//                'ximtrnnum' => 'SI--'. ($xorderNumber+1)  ?? '',
+                'xitem' => $xitem,
                 'xitemrow' => $request->input('xsltype'),
                 'xwh' => $xwhArray[$index] ?? '',
                 'xdate' => date('Y-m-d', strtotime($xdateArray[$index])),
                 'xyear' => date('y'),
                 'xper' => date('m'),
                 'xqty' => $xqtyordArray[$index] ?? '',
+                'xdocrow' => '' . rand(4, 9999) ?? '',
                 'xval' => 1,
                 'xvalpost' => 1,
                 'xdoctyp' => value('IS--'),
-                'xdocnum' => $saleOrder->xordernum,
+                'xdocnum' => $request->input('xordernum') ?? '',
                 'xdateexp' => date('Y-m-d'),
                 'xdaterec' => date('Y-m-d'),
                 'xaction' => value('Issue'),
@@ -144,20 +135,15 @@ class SaleAddController extends Controller
                 'zemail' => auth()->user()->email,
                 'xstdprice' => $xrateArray[$index] ?? '',
             ]);
-
             $previewData[] = [
                 'saleOrder' => $saleOrder,
                 'productDetails' => $productDetails,
-
             ];
         }
-
-//        dd($pro);
         return view('Admin.Invoice.posinvoice', compact('previewData', 'productDetails', 'saleOrder'));
 
 
     }
-
 
 
     public function show($id)

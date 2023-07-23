@@ -15,11 +15,11 @@ class StoreSaleRequest extends FormRequest
     public function rules()
     {
         return [
-            'customer' => 'required',
-            'xdate' => 'required',
-            'invoice' => 'required',
-            'xwh' => 'required',
-            'zid' => 'required',
+//            'customer' => 'required',
+//            'xdate' => 'required',
+//            'invoice' => 'required',
+//            'xwh' => 'required',
+//            'zid' => 'required',
 
 
         ];

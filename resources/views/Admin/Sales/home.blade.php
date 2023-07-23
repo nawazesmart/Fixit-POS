@@ -115,16 +115,15 @@
                     <div class="col-md-6 m-2 ">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon">
-                               {{$lastInput->xordernum}}</span>
-                            <input type="hidden" class="" name="coNumber" id="" value="{{$lastInput->xordernum}}">
+                               CO--{{$lastInput}}</span>
+                            <input type="hidden" class="" name="coNumber" id="" value="{{$lastInput}}">
                             <span class="input-group-addon"><i class="ace-icon glyphicon glyphicon-play"></i></span>
 
                             <div class=" input-group input-group-sm">
 
                                 @php
-                                    $nextNumber = ($lastInput) ? intval(substr($lastInput->xordernum, 4)) : 0;
-                                    $paddedNumber = str_pad($nextNumber, 7, '0', STR_PAD_LEFT) + 1;
-                                    $xordernum = 'CO--' . $paddedNumber;
+
+                                    $xordernum = 'CO--' . ($lastInput+1);
 
 
                                 @endphp
@@ -594,7 +593,8 @@
                                     <li >Card Amount:<input type="number" name="xdtcomm" id="cardAmount"
                                                            style="width: 80px; height: 25px ">
                                     </li>
-                                    <li>Last Number:<input type="number" name="xdocnum" id=""
+                                    <li>Last Number:<input type="number" name="xdocnum" id=""  style="width: 80px; height: 25px ">
+                                    <li>Last Number:<input type="hidden"  name="xrow" id="" value="{{rand(4, 9999)}}"
                                                            style="width: 80px; height: 25px ">
                                     </li>
                                 </ul>
@@ -971,6 +971,25 @@
             if (cartItems[key]) {
                 cartQTy = cartItems[key].quantity;
                 console.log({qty, cartQTy})
+
+                if (qty === 1) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Stock not available!',
+
+                    })
+                    return;
+                }
+                if (cartQTy === 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Stock not available!',
+
+                    })
+                    return;
+                }
                 if (qty <= cartQTy) {
                     Swal.fire({
                         icon: 'error',
@@ -1004,6 +1023,7 @@
                     <input type="hidden" name="xqtyord[]" value="${currentItem.quantity}">
                     <input type="hidden" name="xlineamt[]" value="${currentItem.total}">
                     <input type="hidden" name="qty[]" value="${currentItem.qty}">
+
 
 
 

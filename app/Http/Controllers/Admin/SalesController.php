@@ -34,15 +34,10 @@ class SalesController extends Controller
             });
         }
 
-
-//        $products = $sql->paginate(10);
-
-        $lastInput = SaleOrder::orderBy('xordernum', 'desc')->first();
-//        $lastNumber = ($lastInput) ? intval(substr($lastInput->xordernum, 4)) : 0;
-//        $nextNumber = $lastNumber + 1 ;
-//        $paddedNumber = str_pad($nextNumber, 7, '0', STR_PAD_LEFT) + 1;
-//        $Number = 'CO--' . $nextNumber;
-
+//        $lastInput = SaleOrder::orderBy('xordernum', 'desc')->first();
+        $lastInput = SaleOrder::selectRaw('MAX(CAST(CASE WHEN REGEXP_REPLACE(xordernum, \'[^\d]*\', \'\', \'g\') = \'\' THEN NULL ELSE REGEXP_REPLACE(xordernum, \'[^\d]*\', \'\', \'g\') END AS INTEGER)) as max_number')
+            ->first()
+            ->max_number;
 
         $selectedCategory = $request->input('xgitem');
         $zid = $request->input('zid');
