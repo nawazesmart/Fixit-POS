@@ -2,7 +2,7 @@
 @section('title', 'Sale-details')
 
 @section('body')
-
+{{--    <input type="text" id="searchInput" placeholder="Search...">--}}
     <section class="py-3">
         <div class="container">
             <div class="row">
@@ -16,7 +16,7 @@
                             <div class="clearfix">
                                 <div class="pull-right tableTools-container"></div>
                             </div>
-                            <table class="table  table-bordered table-hover">
+                            <table class="table  table-bordered table-hover" id="list">
                                 <thead>
                                 <tr>
                                     <td>Co ID</td>
@@ -34,7 +34,7 @@
                                         <td>{{$product->xsp}}</td>
                                         <td>
 
-                                            <a href="{{'sale-details.show', $product->xordernum}}" class="btn btn-warning btn-sm">
+                                            <a href="{{route('sale-details.show', $product->xordernum)}}" class="btn btn-warning btn-sm">
 
                                                 <button class="btn btn-xs btn-warning">
                                                     <i class="ace-icon fa fa-flag bigger-20"></i>
@@ -76,6 +76,26 @@
             </div>
         </div>
     </section>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const list = document.getElementById('list').getElementsByTagName('li');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+
+            for (let i = 0; i < list.length; i++) {
+                const listItemText = list[i].textContent.toLowerCase();
+                const listItem = list[i];
+
+                if (listItemText.includes(searchTerm)) {
+                    listItem.style.display = 'block';
+                } else {
+                    listItem.style.display = 'none';
+                }
+            }
+        });
+    </script>
 
 
 @endsection

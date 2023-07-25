@@ -238,7 +238,7 @@
 
 <div class="no-print">
     <a href="javascript:void(0)" onclick="window.print()" class="btn btn-print"> Print</a>
-    <a href="{{ route('sales.index') }}" class="btn btn-back">Back</a>
+    <a href="{{ route('sale-details.index') }}" class="btn btn-back">Back</a>
     <a onclick="window.close();"
        style=" background-color: red; border: none;color: white; padding: 6px 12px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;cursor: pointer; border-radius: 5px;">Close</a>
 </div>
@@ -253,7 +253,8 @@
             <p>101,Gulshan Avenue RM Center,Dhaka</p>
             <p>Hotline:-8801755648290</p>
             <p>VAT REG No:000424596-0101</p>
-            <p style="font-size: 11px">Branch ID:{{$details->zid}} </p>
+            <p style="font-size: 11px">Branch ID:10001</p>
+            <p style="font-size: 11px">Branch ID:{{$sale->zid}} </p>
             <p style="font-size: 11px"></p>
         </div>
 
@@ -261,15 +262,16 @@
             <div class="row">
                 <div class="col-12 invoice-no text-center">
 
-                    Order No:{{$details->xordernum}}<br>
+                    Order No:{{$sale->xordernum}}<br>
+                    Order No:23211133<br>
 
                 </div>
             </div>
             <p style="margin-top: 10px;">
                 Date: {{ \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A') }}</p>
 {{--            <p>Customer: Arafat Sorkar</p>--}}
-            <p>Cashier:{{auth()->user()->name}} </p>
-            <p>Sale By:{{auth()->user()->name}} </p>
+            <p>Cashier:{{$sale->xsp}} </p>
+            <p>Sale By:{{$sale->xsp}} </p>
 
         </div>
 
@@ -290,25 +292,25 @@
                 <tbody>
 
 
-{{--                @php--}}
+                @php
 
-{{--                    $totalPrice = 0;--}}
-{{--                @endphp--}}
-{{--                @foreach ($previewData as $data)--}}
-{{--                    <tr>--}}
-{{--                        <td class="text-center">{{ $loop->iteration }}</td>--}}
-{{--                        <td>--}}
-{{--                            {{ $data['productDetails']->xdesc }} <br>--}}
-{{--                        </td>--}}
-{{--                        <td class="text-center">{{ $data['productDetails']->xrate ,2}}</td>--}}
-{{--                        <td class="text-center">{{ $data['productDetails']->xqtyord ,2}}</td>--}}
-{{--                        <td class="text-right">{{round($data['productDetails']->xrate * $data['productDetails']->xqtyord),2}}</td>--}}
-{{--                    </tr>--}}
-{{--                    @php--}}
-{{--                        $totalPrice +=  round($data['productDetails']->xrate * $data['productDetails']->xqtyord)--}}
-{{--                    @endphp--}}
+                    $totalPrice = 0;
+                @endphp
+                @foreach ($details as $data)
+                    <tr>
+                        <td class="text-center">{{ $loop->iteration }}</td>
+                        <td>
+                            {{ $data->xdesc }} <br>
+                        </td>
+                        <td class="text-center">{{ $data->xrate ,2}}</td>
+                        <td class="text-center">{{ $data->xqtyord ,2}}</td>
+                        <td class="text-right">{{round($data->xrate * $data->xqtyord),2}}</td>
+                    </tr>
+                    @php
+                        $totalPrice +=  round($data->xrate * $data->xqtyord)
+                    @endphp
 
-{{--                @endforeach--}}
+                @endforeach
                 </tbody>
             </table>
 
@@ -399,13 +401,13 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6" style="text-align-last: center">
-                                <p>{{auth()->user()->email}}</p>
+                                <p>{{$sale->zemail}}</p>
 
                                 -----------
                                 <p> Signature</p>
                             </div>
                             <div class="col-6" style="text-align-last: center">
-                                <p>{{auth()->user()->name}}</p>
+                                <p>{{$sale->xsp}}</p>
                                 -----------
                                 <p> Service</p>
                             </div>
@@ -420,7 +422,7 @@
         <p>The goods can be exchange within next 7 dyas .</p>
         <p>Thanks For Purchase with Fix IT</p>
         <p>For any queries complaints or feedback.</p>
-        <p>Please inform {{ auth()->user()->email }}</p>
+        <p>Please inform {{ $sale->zemail }}</p>
         <small><strong style="margin-top: 10px">Software Developed By: Smart Software Ltd</strong></small>
     </div>
     </div>

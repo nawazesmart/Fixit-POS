@@ -14,7 +14,7 @@ class SaleDetailsController extends Controller
     public function index()
     {
         return view('Admin.Sales.sale-details',[
-            'products' => SaleOrder::latest()->take(50)->get(),
+            'products' => SaleOrder::latest()->take(150)->get(),
 
         ]);
     }
@@ -31,10 +31,11 @@ class SaleDetailsController extends Controller
 
     }
 
-    public function show($id)
+    public function show($xordernum)
     {
-        $sale = SaleOrder::findOrFail($id);
-        $details = ProductDetails::findOrFail($id);
+        $sale = SaleOrder::where('xordernum', $xordernum)->first();
+        $details = ProductDetails::where('xordernum', $xordernum)->get();
+//        dd($sale,$details);
         return view('Admin.Invoice.store-invoice' , compact('sale','details'));
 
 

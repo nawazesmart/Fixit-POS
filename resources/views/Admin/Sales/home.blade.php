@@ -69,6 +69,18 @@
         });
     </script>
 @endif
+@if(session()->has('message'))
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong style="border-bottom: 1px solid darkred">Successful!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <ul>
+            <li style="list-style: none; padding: 5px">{{ session()->get('message') }}</li>
+        </ul>
+    </div>
+@endif
 
 
 <form action="{{route('sale-store.store')}}" method="POST" enctype="multipart/form-data">
@@ -594,9 +606,9 @@
                                                            style="width: 80px; height: 25px ">
                                     </li>
                                     <li>Last Number:<input type="number" name="xdocnum" id=""  style="width: 80px; height: 25px ">
-                                    <li>Last Number:<input type="hidden"  name="xrow" id="" value="{{rand(4, 9999)}}"
+                                   <input type="hidden"  name="xrow" id="" value="{{rand(4, 9999)}}"
                                                            style="width: 80px; height: 25px ">
-                                    </li>
+
                                 </ul>
                             </div>
                             <div class="col-md-2">
@@ -604,7 +616,7 @@
 
 
                                     <li id="result" >Pay:0</li>
-                                    <input type="hidden" name="xteam" class="pay_amount_input" id="result">
+                                    <input type="hidden" name="xteam" class="pay_amount_input" required id="result">
 
                                     <li id="dueResult">Due: <span class="due_amount">0</span></li>
                                     <input type="hidden" name="due" class="due_amount" id="dueResult">
@@ -618,10 +630,11 @@
                             <div class="col-md-3 mt-2 right">
                                 <div class="row g-2">
                                     <div class="col-md-6">
-                                        <button type="submit" class=" btn-info rounded-0 mb-2" id=""
-                                                style="width: 100%" target="_blank">
+                                        <button type="submit" class=" btn-info rounded-0 mb-2" id="paymentButton" 
+                                                style="width: 100%">
                                             SALE
                                         </button>
+{{--                                        <button id="paymentButton" onclick="handlePayment()" disabled>Pay Now</button>--}}
 
                                     </div>
                                     <div class="col-md-6">
@@ -656,7 +669,7 @@
 
 @include('Admin.includes.js')
 
-
+{{--@include();--}}
 {{--cart-ooption-right-to-right syster j qurey start--}}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -681,9 +694,13 @@
     }
 
 
+
+
 </script>
 
 <script>
+
+
 
 
     function addItem() {
@@ -851,6 +868,19 @@
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
             });
         });
+
+
+
+        const openNewTabButton = document.getElementById('openNewTabButton');
+
+        openNewTabButton.addEventListener('click', function() {
+            const url = 'https://example.com'; // Replace this with the URL you want to open in the new tab
+            window.open(url, '_blank');
+        });
+
+
+
+
         // button config end
 
 

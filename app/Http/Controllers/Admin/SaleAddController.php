@@ -38,8 +38,6 @@ class SaleAddController extends Controller
             ->max_number;
 
         $xorderNumber = ++$xordernumrequest;
-
-
         $xwhArray = $request->input('xwh');
         $xdateArray = $request->input('xdate');
         $zidArray = $request->input('zid');
@@ -81,6 +79,7 @@ class SaleAddController extends Controller
             'xsltype' => $xsltypeArray,
             'xsalescat' => $xsalescatArray,
             'xdtcomm' => $xdtcommArray,
+            'xtotamt' => $xtotamtArray,
             'xdocnum' => $xdocnumArray,
             'xteam' => $xteamArray,
             'xmember' => $xmemberArray,

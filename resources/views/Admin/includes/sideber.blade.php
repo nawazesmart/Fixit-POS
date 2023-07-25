@@ -1,21 +1,21 @@
 <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-    <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-        <button class="btn btn-success">
-            <i class="ace-icon fa fa-signal"></i>
-        </button>
+{{--    <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">--}}
+{{--        <button class="btn btn-success">--}}
+{{--            <i class="ace-icon fa fa-signal"></i>--}}
+{{--        </button>--}}
 
-        <button class="btn btn-info">
-            <i class="ace-icon fa fa-pencil"></i>
-        </button>
+{{--        <button class="btn btn-info">--}}
+{{--            <i class="ace-icon fa fa-pencil"></i>--}}
+{{--        </button>--}}
 
-        <button class="btn btn-warning">
-            <i class="ace-icon fa fa-users"></i>
-        </button>
+{{--        <button class="btn btn-warning">--}}
+{{--            <i class="ace-icon fa fa-users"></i>--}}
+{{--        </button>--}}
 
-        <button class="btn btn-danger">
-            <i class="ace-icon fa fa-cogs"></i>
-        </button>
-    </div>
+{{--        <button class="btn btn-danger">--}}
+{{--            <i class="ace-icon fa fa-cogs"></i>--}}
+{{--        </button>--}}
+{{--    </div>--}}
 
     <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
         <span class="btn btn-success"></span>
@@ -51,14 +51,14 @@
         <b class="arrow"></b>
 
         <ul class="submenu">
-            <li class="">
-                <a href="{{route('products.index')}}">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Products
-                </a>
+{{--            <li class="">--}}
+{{--                <a href="{{route('products.index')}}">--}}
+{{--                    <i class="menu-icon fa fa-caret-right"></i>--}}
+{{--                    Products--}}
+{{--                </a>--}}
 
-                <b class="arrow"></b>
-            </li>
+{{--                <b class="arrow"></b>--}}
+{{--            </li>--}}
 
             <li class="">
                 <a href="{{route('customers.index')}}">
