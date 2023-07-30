@@ -253,7 +253,7 @@
             <p>101,Gulshan Avenue RM Center,Dhaka</p>
             <p>Hotline:-8801755648290</p>
             <p>VAT REG No:000424596-0101</p>
-            <p style="font-size: 11px">Branch ID:10001</p>
+{{--            <p style="font-size: 11px">Branch ID:10001</p>--}}
             <p style="font-size: 11px">Branch ID:{{$sale->zid}} </p>
             <p style="font-size: 11px"></p>
         </div>
@@ -263,7 +263,7 @@
                 <div class="col-12 invoice-no text-center">
 
                     Order No:{{$sale->xordernum}}<br>
-                    Order No:23211133<br>
+{{--                    Order No:23211133<br>--}}
 
                 </div>
             </div>

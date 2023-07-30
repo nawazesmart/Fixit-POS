@@ -37,6 +37,8 @@ class SaleAddController extends Controller
             ->first()
             ->max_number;
 
+
+
         $xorderNumber = ++$xordernumrequest;
         $xwhArray = $request->input('xwh');
         $xdateArray = $request->input('xdate');
@@ -59,10 +61,10 @@ class SaleAddController extends Controller
         $xmemberArray = $request->input('xmember');
         $xteamArray = $request->input('xteam');
         $qtyArray = $request->input('qty');
-//        $xrowarry = value('' . rand(4, 9999));
-//        $xrowarry = $request->input('xrow');
-//dd($zidArray);
-//dd($zidArray,$xordernumArray,$xdateArray,$xwhArray,$xdtwotaxArray,$xsltypeArray,$xsalescatArray,$xdtcommArray,$xdocnumArray);
+
+        $currentRow = 1;
+
+
 
         $saleOrder = SaleOrder::create([
             'zid' => $zidArray[0],
@@ -76,6 +78,7 @@ class SaleAddController extends Controller
             'xdatecuspo' => $xdateArray,
             'xwh' => $xwhArray,
             'xdttax' => $xdtwotaxArray,
+//            'xdttax' =>  $xtotamtArray * $xdtwotaxArray / 100,
             'xsltype' => $xsltypeArray,
             'xsalescat' => $xsalescatArray,
             'xdtcomm' => $xdtcommArray,
@@ -93,35 +96,50 @@ class SaleAddController extends Controller
         $previewData = [];
         foreach ($xitemArray as $index => $xitem) {
             // table = opodt
+
+//            if (
+//                isset($xlineamtArray[$index]) &&
+//                isset($xdtwotaxArray[$index]) &&
+//                is_numeric($xlineamtArray[$index]) &&
+//                is_numeric($xdtwotaxArray[$index])
+//            ) {
             $productDetails = ProductDetails::create([
                 'xordernum' => $request->input('xordernum') ?? '',
                 'zid' => $zidArray[$index] ?? '',
                 'xrate' => $xrateArray[$index] ?? '',
-                'xrow' => '' . rand(4, 9999) ?? '',
+//                'xrow' => '' . rand(4, 9999) ?? '',
+                'xrow' => $currentRow++,
                 'xdesc' => $xdescArray[$index] ?? '',
                 'xcost' => $xcostArray[$index] ?? '',
                 'xitem' => $xitem ?? '',
                 'xunitsel' => $xunitselArray[$index] ?? '',
                 'xlineamt' => $xlineamtArray[$index] ?? '',
+                'xdtwotax' => $xlineamtArray[$index] ?? '',
                 'xqtyord' => $xqtyordArray[$index] ?? '',
-                'xwh' => $xwhArray[$index] ?? '',
+                'xqtyreq' => $xqtyordArray[$index] ?? '',
+                'xwh' => $request->input('xwh') ?? '',
                 'xcur' => value('BDT'),
-                'xdttax' => $request->input('xdttax'),
+                'xtrnim' => value('IS--'),
+//                'xdttax' => $request->input('xdttax') ,
+                'xdttax' => $xlineamtArray[$index] * $xdtwotaxArray /100 ,
                 'zemail' => auth()->user()->email,
                 'xemail' => auth()->user()->email,
+                'ximtrnnum'=> 'IS--'. $xorderNumber++  ?? '',
             ]);
+
+
             Quantity::create([
                 'zid' => $zidArray[$index] ?? '',
-                'ximtrnnum' => 'SI--' . rand(4, 9999) ?? '',
-//                'ximtrnnum' => 'SI--'. ($xorderNumber+1)  ?? '',
+//                'ximtrnnum' => 'IS--' . rand(4, 9999) ?? '',
+                'ximtrnnum' => $productDetails->ximtrnnum ?? '',
                 'xitem' => $xitem,
                 'xitemrow' => $request->input('xsltype'),
-                'xwh' => $xwhArray[$index] ?? '',
+                'xwh' => $request->input('xwh') ?? ''  ,
                 'xdate' => date('Y-m-d', strtotime($xdateArray[$index])),
                 'xyear' => date('y'),
                 'xper' => date('m'),
                 'xqty' => $xqtyordArray[$index] ?? '',
-                'xdocrow' => '' . rand(4, 9999) ?? '',
+                'xdocrow' =>$currentRow++ ?? '',
                 'xval' => 1,
                 'xvalpost' => 1,
                 'xdoctyp' => value('IS--'),

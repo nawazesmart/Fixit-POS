@@ -2,6 +2,7 @@
 
 @section('title','admin-dashboard')
 @section('css')
+    @parent
     <style>
         th.dash-head {
             background-color: #ECF0F1;

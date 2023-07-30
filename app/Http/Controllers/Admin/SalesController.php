@@ -38,7 +38,7 @@ class SalesController extends Controller
         $lastInput = SaleOrder::selectRaw('MAX(CAST(CASE WHEN REGEXP_REPLACE(xordernum, \'[^\d]*\', \'\', \'g\') = \'\' THEN NULL ELSE REGEXP_REPLACE(xordernum, \'[^\d]*\', \'\', \'g\') END AS INTEGER)) as max_number')
             ->first()
             ->max_number;
-
+//dd($lastInput);
         $selectedCategory = $request->input('xgitem');
         $zid = $request->input('zid');
         $zidCode = Product::select('xwh')

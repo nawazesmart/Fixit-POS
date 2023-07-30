@@ -250,7 +250,7 @@
 <div class="no-print">
     <a href="javascript:void(0)" onclick="window.print()" class="btn btn-print"> Print</a>
     <a href="{{ route('sales.index') }}" class="btn btn-back">Back</a>
-    <a onclick="window.close();"
+    <a href="{{ route('sales.index') }}"
        style=" background-color: red; border: none;color: white; padding: 6px 12px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;cursor: pointer; border-radius: 5px;">Close</a>
 </div>
 <?php //$dokan_user = \App\Models\User::query()->where('id', dokanId())->first() ?>

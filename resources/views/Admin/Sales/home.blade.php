@@ -281,248 +281,7 @@
 
                                 @endforeach
 
-                                <div>
-                                    {{--                        @foreach($products->where('$product->zid') as $key => $product)--}}
-                                    {{--                                                    @foreach($products as $key => $product)--}}
-                                    {{--                                                        <a href="javascript:void(0)" class="card-info">--}}
-                                    {{--                                                                                                <div id="product-list">--}}
 
-                                    {{--                                                                                                    <div class="col-xs-2 col-sm-2 col-md-4 overflow" style="color: #1f2937">--}}
-                                    {{--                                                                                                        <div class="search-thumbnail">--}}
-                                    {{--                                                                                                            <div class="pl-3 thumbnail search-thumbnail">--}}
-                                    {{--                                                                                                                <div class="card gradient-1 product-item" id="product-item-{{$key}}"--}}
-                                    {{--                                                                                                                     data-product-id="{{$key}}">--}}
-                                    {{--                                                                                                                    <h5 class="card-header name-product"--}}
-                                    {{--                                                                                                                        style="padding: 5px; margin-top:0px"--}}
-                                    {{--                                                                                                                        id="heading"> {{$product->xdesc }}</h5>--}}
-                                    {{--                                                                                                                    <h5 class="card-header name-product"--}}
-                                    {{--                                                                                                                        style="padding: 5px; margin-top:0px"--}}
-                                    {{--                                                                                                                        id="heading"> {{ Illuminate\Support\Str::limit($product->xdesc, $limit = 20, $end = '') }}</h5>--}}
-                                    {{--                                                                                                                    <span><div class="sku"--}}
-                                    {{--                                                                                                                               style="display:none">{{$product->xcitem}}</div></span>--}}
-                                    {{--                                                                                                                    <span><div class="unit"--}}
-                                    {{--                                                                                                                               style="display:none">{{$product->xunitiss}}</div></span>--}}
-                                    {{--                                                                                                                    <span><div class="zid"--}}
-                                    {{--                                                                                                                               style="display:none">{{$product->zid}}</div></span>--}}
-                                    {{--                                                                                                                    <div class="card-body p-2">--}}
-                                    {{--                                                                                                                        <div class="d-inline-block">--}}
-                                    {{--                                                                                                                            <h2 class="text-white price-product"--}}
-                                    {{--                                                                                                                                style="padding: 5px">{{$product->xstdcost}}</h2>--}}
-                                    {{--                                                                                                                            <p><span--}}
-                                    {{--                                                                                                                                    class="pull-right label label-grey quantity">1</span>--}}
-                                    {{--                                                                                                                            </p>--}}
-                                    {{--                                                                                                                        </div>--}}
-                                    {{--                                                                                                                        <span class="float-right display-5 opacity-5"><i--}}
-                                    {{--                                                                                                                                class="fa fa-shopping-cart"></i></span>--}}
-                                    {{--                                                                                                                    </div>--}}
-                                    {{--                                                                                                                </div>--}}
-                                    {{--                                                                                                            </div>--}}
-                                    {{--                                                                                                        </div>--}}
-                                    {{--                                                                                                    </div>--}}
-                                    {{--                                                                                                </div>--}}
-                                    {{--                                                        </a>--}}
-
-                                    {{--                                                    @endforeach--}}
-                                </div>
-
-                                {{--                        This code are not use--}}
-                                <div>
-                                    {{--                                                    @foreach($products as $key => $product)--}}
-                                    {{--                                                        <div id="product-list">--}}
-                                    {{--                                                                                        <div class="col-xs-2 col-sm-2 col-md-4 overflow" style="color: #1f2937">--}}
-                                    {{--                                                                                            <div class="search-thumbnail">--}}
-                                    {{--                                                                                                <div class="pl-3 thumbnail search-thumbnail">--}}
-                                    {{--                                                                                                    <div class="card gradient-1 product-item" id="product-item-{{$key}}"--}}
-                                    {{--                                                                                                         data-product-id="{{$key}}">--}}
-                                    {{--                                                                                                        <h5 class="card-header name-product" style="padding: 5px; margin-top:0px" id="heading"> {{$product->xdesc }}</h5>--}}
-                                    {{--                                                                                                        <h5 class="card-header name-product"--}}
-                                    {{--                                                                                                            style="padding: 5px; margin-top:0px"--}}
-                                    {{--                                                                                                            id="heading"> {{ Illuminate\Support\Str::limit($product->xdesc, $limit = 20, $end = '') }}</h5>--}}
-                                    {{--                                                                                                        <span><div class="sku"--}}
-                                    {{--                                                                                                                   style="display:none">{{$product->xcitem}}</div></span>--}}
-                                    {{--                                                                                                        <span><div class="unit"--}}
-                                    {{--                                                                                                                   style="display:none">{{$product->xunitiss}}</div></span>--}}
-                                    {{--                                                                                                        <span><div class="zid"--}}
-                                    {{--                                                                                                                   style="display:none">{{$product->zid}}</div></span>--}}
-                                    {{--                                                                                                        <div class="card-body p-2">--}}
-                                    {{--                                                                                                            <div class="d-inline-block">--}}
-                                    {{--                                                                                                                <h2 class="text-white price-product"--}}
-                                    {{--                                                                                                                    style="padding: 5px">{{$product->xstdcost}}</h2>--}}
-                                    {{--                                                                                                                <p><span class="pull-right label label-grey quantity">1</span>--}}
-                                    {{--                                                                                                                </p>--}}
-                                    {{--                                                                                                            </div>--}}
-                                    {{--                                                                                                            <span class="float-right display-5 opacity-5"><i--}}
-                                    {{--                                                                                                                    class="fa fa-shopping-cart"></i></span>--}}
-                                    {{--                                                                                                        </div>--}}
-                                    {{--                                                                                                    </div>--}}
-                                    {{--                                                                                                </div>--}}
-                                    {{--                                                                                            </div>--}}
-                                    {{--                                                                                        </div>--}}
-                                    {{--                                                        </div>--}}
-                                    {{--                                                    @endforeach--}}
-
-
-
-                                    {{--                        <div class="col-xs-2 col-sm-2 col-md-4 overflow add-to-cart  "--}}
-                                    {{--                             style="color: #1f2937 ; width: 230px; padding: 3px" !importent>--}}
-                                    {{--                            <div class=" search-thumbnail" style="padding:0px">--}}
-                                    {{--                                <div class="pl-3 thumbnail search-thumbnail">--}}
-                                    {{--                                    <div class="card gradient-1 " style="background-color:#d3eaf1">--}}
-                                    {{--                                        <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products--}}
-                                    {{--                                            Sold</h5>--}}
-                                    {{--                                        <div class="card-body p-2">--}}
-                                    {{--                                            <div class="d-inline-block">--}}
-                                    {{--                                                <h2 class="text-white" style="padding: 5px">45 </h2>--}}
-                                    {{--                                                <p><span class="pull-right label label-grey ">Tokyo</span></p>--}}
-                                    {{--                                            </div>--}}
-                                    {{--                                            <span class="float-right display-5 opacity-5"><i--}}
-                                    {{--                                                    class="fa fa-shopping-cart"></i></span>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
-                                    {{--                                </div>--}}
-                                    {{--                            </div>--}}
-                                    {{--                        </div>--}}
-                                    {{--                        <div class="col-xs-2 col-sm-2 col-md-4 overflow add-to-cart  "--}}
-                                    {{--                             style="color: #1f2937 ; width: 230px; padding: 3px" !importent>--}}
-                                    {{--                            <div class=" search-thumbnail" style="padding:0px">--}}
-                                    {{--                                <div class="pl-3 thumbnail search-thumbnail">--}}
-                                    {{--                                    <div class="card gradient-1 " style="background-color:#d3eaf1">--}}
-                                    {{--                                        <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products--}}
-                                    {{--                                            Sold</h5>--}}
-                                    {{--                                        <div class="card-body p-2">--}}
-                                    {{--                                            <div class="d-inline-block">--}}
-                                    {{--                                                <h2 class="text-white" style="padding: 5px">45 BDT</h2>--}}
-                                    {{--                                                <p><span class="pull-right label label-grey ">Tokyo</span></p>--}}
-                                    {{--                                            </div>--}}
-                                    {{--                                            <span class="float-right display-5 opacity-5"><i--}}
-                                    {{--                                                    class="fa fa-shopping-cart"></i></span>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
-                                    {{--                                </div>--}}
-                                    {{--                            </div>--}}
-                                    {{--                        </div>--}}
-                                    {{--                        <div class="col-xs-2 col-sm-2 col-md-4 overflow add-to-cart  "--}}
-                                    {{--                             style="color: #1f2937 ; width: 230px; padding: 3px" !importent>--}}
-                                    {{--                            <div class=" search-thumbnail" style="padding:0px">--}}
-                                    {{--                                <div class="pl-3 thumbnail search-thumbnail">--}}
-                                    {{--                                    <div class="card gradient-1 " style="background-color:#d3eaf1">--}}
-                                    {{--                                        <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products--}}
-                                    {{--                                            Sold</h5>--}}
-                                    {{--                                        <div class="card-body p-2">--}}
-                                    {{--                                            --}}{{--                                                <h3 class="card-title text-white" style="padding: 5px">Products Sold</h3>--}}
-                                    {{--                                            <div class="d-inline-block">--}}
-                                    {{--                                                <h2 class="text-white" style="padding: 5px">45 BDT</h2>--}}
-                                    {{--                                                <p><span class="pull-right label label-grey ">Tokyo</span></p>--}}
-                                    {{--                                                --}}{{--                                                <p class="text-white mb-0">Jan - March 2019</p>--}}
-                                    {{--                                            </div>--}}
-                                    {{--                                            <span class="float-right display-5 opacity-5"><i--}}
-                                    {{--                                                    class="fa fa-shopping-cart"></i></span>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
-                                    {{--                                </div>--}}
-                                    {{--                            </div>--}}
-                                    {{--                        </div>--}}
-                                    {{--                        <div class="col-xs-2 col-sm-2 col-md-4 overflow add-to-cart  "--}}
-                                    {{--                             style="color: #1f2937 ; width: 230px; padding: 3px" !importent>--}}
-                                    {{--                            <div class=" search-thumbnail" style="padding:0px">--}}
-                                    {{--                                <div class="pl-3 thumbnail search-thumbnail">--}}
-                                    {{--                                    <div class="card gradient-1 " style="background-color:#d3eaf1">--}}
-                                    {{--                                        <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products--}}
-                                    {{--                                            Sold</h5>--}}
-                                    {{--                                        <div class="card-body p-2">--}}
-                                    {{--                                            --}}{{--                                                <h3 class="card-title text-white" style="padding: 5px">Products Sold</h3>--}}
-                                    {{--                                            <div class="d-inline-block">--}}
-                                    {{--                                                <h2 class="text-white" style="padding: 5px">45 BDT</h2>--}}
-                                    {{--                                                <p><span class="pull-right label label-grey ">Tokyo</span></p>--}}
-                                    {{--                                                --}}{{--                                                <p class="text-white mb-0">Jan - March 2019</p>--}}
-                                    {{--                                            </div>--}}
-                                    {{--                                            <span class="float-right display-5 opacity-5"><i--}}
-                                    {{--                                                    class="fa fa-shopping-cart"></i></span>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
-                                    {{--                                </div>--}}
-                                    {{--                            </div>--}}
-                                    {{--                        </div>--}}
-                                    {{--                        <div class="col-xs-2 col-sm-2 col-md-4 overflow add-to-cart  "--}}
-                                    {{--                             style="color: #1f2937 ; width: 230px; padding: 3px" !importent>--}}
-                                    {{--                            <div class=" search-thumbnail" style="padding:0px">--}}
-                                    {{--                                <div class="pl-3 thumbnail search-thumbnail">--}}
-                                    {{--                                    <div class="card gradient-1 " style="background-color:#d3eaf1">--}}
-                                    {{--                                        <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products--}}
-                                    {{--                                            Sold</h5>--}}
-                                    {{--                                        <div class="card-body p-2">--}}
-                                    {{--                                            --}}{{--                                                <h3 class="card-title text-white" style="padding: 5px">Products Sold</h3>--}}
-                                    {{--                                            <div class="d-inline-block">--}}
-                                    {{--                                                <h2 class="text-white" style="padding: 5px">45 BDT</h2>--}}
-                                    {{--                                                <p><span class="pull-right label label-grey ">Tokyo</span></p>--}}
-                                    {{--                                                --}}{{--                                                <p class="text-white mb-0">Jan - March 2019</p>--}}
-                                    {{--                                            </div>--}}
-                                    {{--                                            <span class="float-right display-5 opacity-5"><i--}}
-                                    {{--                                                    class="fa fa-shopping-cart"></i></span>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
-                                    {{--                                </div>--}}
-                                    {{--                            </div>--}}
-                                    {{--                        </div>--}}
-                                    {{--                                                    <div class="col-xs-2 col-sm-2 col-md-4 overflow "--}}
-                                    {{--                                                         style="color: #1f2937 ; width: 230px; padding: 3px" !importent>--}}
-                                    {{--                                                        <div class=" search-thumbnail" style="padding:0px">--}}
-                                    {{--                                                            <div class="pl-3 thumbnail search-thumbnail">--}}
-                                    {{--                                                                <div class="card gradient-1 " style="background-color:#d3eaf1">--}}
-                                    {{--                                                                    <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products--}}
-                                    {{--                                                                        Sold</h5>--}}
-                                    {{--                                                                    <div class="card-body p-2">--}}
-                                    {{--                                                                        <div class="d-inline-block">--}}
-                                    {{--                                                                            <h2 class="text-white" style="padding: 5px">45 BDT</h2>--}}
-                                    {{--                                                                            <p><span class="pull-right label label-grey ">Tokyo</span></p>--}}
-                                    {{--                                                                        </div>--}}
-                                    {{--                                                                        <span class="float-right display-5 opacity-5"><i--}}
-                                    {{--                                                                                class="fa fa-shopping-cart"></i></span>--}}
-                                    {{--                                                                    </div>--}}
-                                    {{--                                                                </div>--}}
-                                    {{--                                                            </div>--}}
-                                    {{--                                                        </div>--}}
-                                    {{--                                                    </div>--}}
-                                    {{--                        <div class="col-xs-2 col-sm-2 col-md-4 overflow "--}}
-                                    {{--                             style="color: #1f2937 ; width: 230px; padding: 3px" !importent>--}}
-                                    {{--                            <div class=" search-thumbnail" style="padding:0px">--}}
-                                    {{--                                <div class="pl-3 thumbnail search-thumbnail">--}}
-                                    {{--                                    <div class="card gradient-1 " style="background-color:#d3eaf1">--}}
-                                    {{--                                        <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products--}}
-                                    {{--                                            Sold</h5>--}}
-                                    {{--                                        <div class="card-body p-2">--}}
-                                    {{--                                            <div class="d-inline-block">--}}
-                                    {{--                                                <h2 class="text-white" style="padding: 5px">45 BDT</h2>--}}
-                                    {{--                                                <p><span class="pull-right label label-grey ">Tokyo</span></p>--}}
-                                    {{--                                            </div>--}}
-                                    {{--                                            <span class="float-right display-5 opacity-5"><i--}}
-                                    {{--                                                    class="fa fa-shopping-cart"></i></span>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
-                                    {{--                                </div>--}}
-                                    {{--                            </div>--}}
-                                    {{--                        </div>--}}
-                                    {{--                                                            <div class="col-xs-2 col-sm-2 col-md-4 overflow "--}}
-                                    {{--                                                                 style="color: #1f2937 ; width: 230px; padding: 3px" !importent>--}}
-                                    {{--                                                                <div class=" search-thumbnail" style="padding:0px">--}}
-                                    {{--                                                                    <div class="pl-3 thumbnail search-thumbnail">--}}
-                                    {{--                                                                        <div class="card gradient-1 " style="background-color:#d3eaf1">--}}
-                                    {{--                                                                            <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products--}}
-                                    {{--                                                                                Sold</h5>--}}
-                                    {{--                                                                            <div class="card-body p-2">--}}
-                                    {{--                                                                                <div class="d-inline-block">--}}
-                                    {{--                                                                                    <h2 class="text-white" style="padding: 5px">45 BDT</h2>--}}
-                                    {{--                                                                                    <p><span class="pull-right label label-grey ">Tokyo</span></p>--}}
-                                    {{--                                                                                </div>--}}
-                                    {{--                                                                                <span class="float-right display-5 opacity-5"><i--}}
-                                    {{--                                                                                        class="fa fa-shopping-cart"></i></span>--}}
-                                    {{--                                                                            </div>--}}
-                                    {{--                                                                        </div>--}}
-                                    {{--                                                                    </div>--}}
-                                    {{--                                                                </div>--}}
-                                    {{--                                                            </div>--}}
-                                </div>
-                                {{--                        This code are not used--}}
                             </div>
 
 
@@ -599,15 +358,15 @@
                             </div>
                             <div class="col-md-2 ">
                                 <ul class="list-unstyled">
-                                    <li >Cash Amount:<input type="number" name="xmember" id="cashAmount"
+                                    <li >CashAmount:<input type="number" name="xmember" id="cashAmount"
                                                            style="width: 80px; height: 25px ">
                                     </li>
-                                    <li >Card Amount:<input type="number" name="xdtcomm" id="cardAmount"
+                                    <li >CardAmount:<input type="number" name="xdtcomm" id="cardAmount"
                                                            style="width: 80px; height: 25px ">
                                     </li>
                                     <li>Last Number:<input type="number" name="xdocnum" id=""  style="width: 80px; height: 25px ">
                                    <input type="hidden"  name="xrow" id="" value="{{rand(4, 9999)}}"
-                                                           style="width: 80px; height: 25px ">
+                                          style="width: 80px; height: 25px "> </li>
 
                                 </ul>
                             </div>
@@ -630,7 +389,7 @@
                             <div class="col-md-3 mt-2 right">
                                 <div class="row g-2">
                                     <div class="col-md-6">
-                                        <button type="submit" class=" btn-info rounded-0 mb-2" id="paymentButton" 
+                                        <button type="submit" class=" btn-info rounded-0 mb-2" id="paymentButton"
                                                 style="width: 100%">
                                             SALE
                                         </button>
@@ -669,34 +428,33 @@
 
 @include('Admin.includes.js')
 
-{{--@include();--}}
-{{--cart-ooption-right-to-right syster j qurey start--}}
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        var input = $('.C').val();
-        var xordernum = parseInt(input.substring(8));
-        var incrementedXordernum = xordernum + 1;
-        var updatedXordernum = 'CO--' + padNumber(incrementedXordernum, 7);
-        $('.o').val(updatedXordernum);
-        $('#o').text(updatedXordernum);
-    });
+{{--<script>--}}
+{{--    $(document).ready(function () {--}}
+{{--        var input = $('.C').val();--}}
+{{--        var xordernum = parseInt(input.substring(8));--}}
+{{--        var incrementedXordernum = xordernum + 1;--}}
+{{--        var updatedXordernum = 'CO--' + padNumber(incrementedXordernum, 7);--}}
+{{--        $('.o').val(updatedXordernum);--}}
+{{--        $('#o').text(updatedXordernum);--}}
+{{--    });--}}
 
-    function padNumber(number, length) {
-        var str = number.toString();
-        while (str.length < length) {
-            str = '0' + str;
-        }
-        return str;
-    }
-
-
+{{--    function padNumber(number, length) {--}}
+{{--        var str = number.toString();--}}
+{{--        while (str.length < length) {--}}
+{{--            str = '0' + str;--}}
+{{--        }--}}
+{{--        return str;--}}
+{{--    }--}}
 
 
-</script>
+
+
+{{--</script>--}}
 
 <script>
 
@@ -871,12 +629,12 @@
 
 
 
-        const openNewTabButton = document.getElementById('openNewTabButton');
-
-        openNewTabButton.addEventListener('click', function() {
-            const url = 'https://example.com'; // Replace this with the URL you want to open in the new tab
-            window.open(url, '_blank');
-        });
+        // const openNewTabButton = document.getElementById('openNewTabButton');
+        //
+        // openNewTabButton.addEventListener('click', function() {
+        //     const url = 'https://example.com'; // Replace this with the URL you want to open in the new tab
+        //     window.open(url, '_blank');
+        // });
 
 
 
@@ -1193,29 +951,29 @@
 
 
 </script>
-<script>
-    const cashAmountInput = document.getElementById('cashA');
-    const cardAmountInput = document.getElementById('CardA');
+{{--<script>--}}
+{{--    const cashAmountInput = document.getElementById('cashA');--}}
+{{--    const cardAmountInput = document.getElementById('CardA');--}}
 
-    cashAmountInput.addEventListener('input', toggleCardAmountRequired);
-    cardAmountInput.addEventListener('input', toggleCashAmountRequired);
+{{--    cashAmountInput.addEventListener('input', toggleCardAmountRequired);--}}
+{{--    cardAmountInput.addEventListener('input', toggleCashAmountRequired);--}}
 
-    function toggleCardAmountRequired() {
-        if (cashAmountInput.value.trim() !== '') {
-            cardAmountInput.removeAttribute('required');
-        } else {
-            cardAmountInput.setAttribute('required', 'required');
-        }
-    }
+{{--    function toggleCardAmountRequired() {--}}
+{{--        if (cashAmountInput.value.trim() !== '') {--}}
+{{--            cardAmountInput.removeAttribute('required');--}}
+{{--        } else {--}}
+{{--            cardAmountInput.setAttribute('required', 'required');--}}
+{{--        }--}}
+{{--    }--}}
 
-    function toggleCashAmountRequired() {
-        if (cardAmountInput.value.trim() !== '') {
-            cashAmountInput.removeAttribute('required');
-        } else {
-            cashAmountInput.setAttribute('required', 'required');
-        }
-    }
-</script>
+{{--    function toggleCashAmountRequired() {--}}
+{{--        if (cardAmountInput.value.trim() !== '') {--}}
+{{--            cashAmountInput.removeAttribute('required');--}}
+{{--        } else {--}}
+{{--            cashAmountInput.setAttribute('required', 'required');--}}
+{{--        }--}}
+{{--    }--}}
+{{--</script>--}}
 
 {{--main rnd--}}
 
