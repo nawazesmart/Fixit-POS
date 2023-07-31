@@ -330,6 +330,7 @@
                         <p>Subtotal: </p>
                         <p>VAT(%)</p>
                         <p>Disc(%)</p>
+                        <p>Fixed Discount </p>
                     </div>
                     <div class="col-4">
                         @php $price = $totalPrice; @endphp
@@ -339,7 +340,11 @@
                         </p>
 
                         <p><span
-                                style="font-size: 7px">({{ $data['saleOrder']->xdtdisc ,2}}%)</span>{{round(( $data['saleOrder']->xdtdisc * $price)/100,2)}}
+                                style="font-size: 7px">({{ $data['saleOrder']->xdisc ,2}}%)</span>{{round(( $data['saleOrder']->xdisc * $price)/100,2)}}
+                        </p>
+
+                        <p><span
+                                style="font-size: 7px"></span>{{ $data['saleOrder']->xdiscf ,2}}
                         </p>
                     </div>
                 </div>
@@ -352,7 +357,7 @@
                     </div>
                     <div class="col-4">
                         @php
-                            $all =  round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - (($data['saleOrder']->xdtdisc * $price)/100),2 )
+                            $all =  round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - $data['saleOrder']->xdiscf - (($data['saleOrder']->xdisc * $price)/100),2 )
 
                         @endphp
                         <p>
@@ -404,6 +409,7 @@
                 </div>
 
                 <hr>
+                Items sold can be exchanged within 7 days, with this receipt
                 <br>
                 <br>
                 <div class="container">

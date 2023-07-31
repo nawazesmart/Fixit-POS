@@ -322,7 +322,7 @@
                             </div>
                             <div class="col-md-2 ">
                                 <ul class="list-unstyled">
-                                    <li>Shipping:<input type="number" name="shippi" id="shippingCo"
+                                    <li>Discount:<input type="number" name="xdiscamt" id="shippingCost"
                                                         style="width: 77px; height: 25px ">
                                     </li>
 {{--                                    <li>Shipping:<input type="number" name="shipping" id="shippingCost"--}}
@@ -472,23 +472,23 @@
 
 
         // discount
-        $('#extraDiscount').on('keyup', function () {
-            calculateDiscount();
-        });
-
-        function calculateDiscount() {
-            let subtotal = $('.all_sub_total').val();
-            var extraDiscount = parseFloat($('#extraDiscount').val());
-            var resultSection = $('#resultSection');
-            var discountedPrice = subtotal - (extraDiscount * subtotal) / 100;
-            if (isNaN(discountedPrice) || discountedPrice < 0) {
-                resultSection.text(' Please enter numbers.');
-            } else {
-                resultSection.text('Total: BDT ' + discountedPrice.toFixed(2));
-                resultSection.append('<br><input type="hidden" name="discountprice" class="resultSection" value="' + discountedPrice.toFixed(2) + '">');
-
-            }
-        }
+        // $('#extraDiscount').on('keyup', function () {
+        //     calculateDiscount();
+        // });
+        //
+        // function calculateDiscount() {
+        //     let subtotal = $('.all_sub_total').val();
+        //     var extraDiscount = parseFloat($('#extraDiscount').val());
+        //     var resultSection = $('#resultSection');
+        //     var discountedPrice = subtotal - (extraDiscount * subtotal) / 100;
+        //     if (isNaN(discountedPrice) || discountedPrice < 0) {
+        //         resultSection.text(' Please enter numbers.');
+        //     } else {
+        //         resultSection.text('Total: BDT ' + discountedPrice.toFixed(2));
+        //         resultSection.append('<br><input type="hidden" name="discountprice" class="resultSection" value="' + discountedPrice.toFixed(2) + '">');
+        //
+        //     }
+        // }
 
         // discount end
 
@@ -533,7 +533,7 @@
             var vatAmount = subtotal * ( vatRate / 100);
             var shippingAmount = shippingCost;
             var discountAmount = subtotal * (extraDiscount / 100);
-            var totalAmount = subtotal + vatAmount + shippingAmount - discountAmount;
+            var totalAmount = subtotal + vatAmount - shippingAmount - discountAmount;
 
             $('#vatAmount').text('VAT Amount: ' + vatAmount.toFixed(2));
             $('#shippingAmount').text('Shipping Amount: ' + shippingAmount.toFixed(2));
@@ -756,6 +756,16 @@
                 qty : qty
             };
 
+            if (qty < 1){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Stock not available!',
+
+                })
+                return;
+            }
+
             if (cartItems[key]) {
                 cartQTy = cartItems[key].quantity;
                 console.log({qty, cartQTy})
@@ -902,7 +912,7 @@
                                 <div class="d-inline-block">
                                     <h2 class="text-white price-product" style="padding: 5px; color: #1f2937;">${product.xstdprice}</h2>
                                     <p><span class="pull-right label label-grey quantity"style="display:none">1</span></p>
-                                    <p><span class="pull-right label label-grey qty">${product.quantity_total}</span></p>
+                                    <p><span class="pull-right label label-grey qty" >${product.quantity_total}</span></p>
                                 </div>
                                 <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
                             </div>

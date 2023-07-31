@@ -239,8 +239,8 @@
 <div class="no-print">
     <a href="javascript:void(0)" onclick="window.print()" class="btn btn-print"> Print</a>
     <a href="{{ route('sale-details.index') }}" class="btn btn-back">Back</a>
-    <a onclick="window.close();"
-       style=" background-color: red; border: none;color: white; padding: 6px 12px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;cursor: pointer; border-radius: 5px;">Close</a>
+{{--    <a {{ route('sale-details.index') }}"--}}
+{{--       style=" background-color: red; border: none;color: white; padding: 6px 12px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;cursor: pointer; border-radius: 5px;">Close</a>--}}
 </div>
 <?php //$dokan_user = \App\Models\User::query()->where('id', dokanId())->first() ?>
 
@@ -321,6 +321,7 @@
                         <p>Subtotal: </p>
                         <p>VAT(%)</p>
                         <p>Disc(%)</p>
+                        <p>Fixed Discount </p>
                     </div>
                     <div class="col-4">
                         @php $price = $totalPrice; @endphp
@@ -330,7 +331,11 @@
                         </p>
 
                         <p><span
-                                style="font-size: 7px">({{ $sale->xdtdisc ,2}}%)</span>{{round(( $sale->xdtdisc * $price)/100,2)}}
+                                style="font-size: 7px">({{ $sale->xdisc ,2}}%)</span>{{round(( $sale->xdisc * $price)/100,2)}}
+                        </p>
+
+                        <p><span
+                                style="font-size: 7px"></span>{{ $sale->xdiscf ,2}}
                         </p>
                     </div>
                 </div>
@@ -343,7 +348,7 @@
                     </div>
                     <div class="col-4">
                         @php
-                            $all =  round($price+(($sale->xdttax  * $price)/100)+0 - (($sale->xdtdisc * $price)/100),2 )
+                            $all =  round($price+(($sale->xdttax  * $price)/100)+0 -$sale->xdiscf - (($sale->xdisc * $price)/100),2 )
 
                         @endphp
                         <p>
@@ -384,17 +389,30 @@
 
 
                 </div>
+                @php
+                    $test = round($price+(($sale->xdttax  * $price)/100)+0 -$sale->xdiscf - (($sale->xdisc * $price)/100),2 );
+
+                    $f = new \NumberFormatter( locale_get_default(), \NumberFormatter::SPELLOUT );
+
+                    $word = $f->format($test);
+                @endphp
+                <p class="col-6" style="text-align-last: center">Total Payable:{{$word}} </p>
+                <br>
                 ------------------------------------------
                 <div class="container">
                     <div class="col-12">
                         <div class="row">
+
                             <div class="col-6" style="text-align-last: center">Cash:{{$sale->xmember}}</div>
                             <div class="col-6" style="text-align-last: center">Card:{{$sale->xdtcomm}}</div>
+{{--                            <div class="col-6" style="text-align-last: center">Card:{{$word}}</div>--}}
+{{--                            <div class="col-6" style="text-align-last: center">Card:{{ ucwords(optional($sale->xdtcomm)) }}</div>--}}
                         </div>
                     </div>
                 </div>
 
                 <hr>
+                <p style="font-size: 11px " >The goods can be exchange within next 7 dyas .</p>
                 <br>
                 <br>
                 <div class="container">
@@ -419,7 +437,7 @@
     </div>
     <div class="footer">
         <h5 style="margin-bottom: 10px">Paid </h5>
-        <p>The goods can be exchange within next 7 dyas .</p>
+{{--        <p>The goods can be exchange within next 7 dyas .</p>--}}
         <p>Thanks For Purchase with Fix IT</p>
         <p>For any queries complaints or feedback.</p>
         <p>Please inform {{ $sale->zemail }}</p>

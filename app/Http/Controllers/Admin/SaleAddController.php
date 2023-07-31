@@ -60,6 +60,7 @@ class SaleAddController extends Controller
         $xordernumArray = $request->input('xordernum');
         $xmemberArray = $request->input('xmember');
         $xteamArray = $request->input('xteam');
+        $xdiscamtArray = $request->input('xdiscamt');
         $qtyArray = $request->input('qty');
 
         $currentRow = 1;
@@ -78,6 +79,8 @@ class SaleAddController extends Controller
             'xdatecuspo' => $xdateArray,
             'xwh' => $xwhArray,
             'xdttax' => $xdtwotaxArray,
+            'xdisc' => $xdtdiscArray,
+            'xdiscf' => $xdiscamtArray,
 //            'xdttax' =>  $xtotamtArray * $xdtwotaxArray / 100,
             'xsltype' => $xsltypeArray,
             'xsalescat' => $xsalescatArray,
@@ -136,7 +139,7 @@ class SaleAddController extends Controller
                 'xitemrow' => $request->input('xsltype'),
                 'xwh' => $request->input('xwh') ?? ''  ,
                 'xdate' => date('Y-m-d', strtotime($xdateArray[$index])),
-                'xyear' => date('y'),
+                'xyear' => date('Y'),
                 'xper' => date('m'),
                 'xqty' => $xqtyordArray[$index] ?? '',
                 'xdocrow' =>$currentRow++ ?? '',
@@ -157,6 +160,7 @@ class SaleAddController extends Controller
                 'productDetails' => $productDetails,
             ];
         }
+
         return view('Admin.Invoice.posinvoice', compact('previewData', 'productDetails', 'saleOrder'));
 
 
