@@ -334,7 +334,7 @@
 {{--                                    <li>Shipping:<input type="number" name="shipping" id="shippingCost"--}}
 {{--                                                        style="width: 77px; height: 25px ">--}}
 {{--                                    </li>--}}
-                                    <li>Methode:
+                                    <li>Method:
                                         <select name="xsltype" id="" style="height: 25px">
                                             <option value="Cash Sale">cash_</option>
                                             <option value="Card Sale">Card</option>
