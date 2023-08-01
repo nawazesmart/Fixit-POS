@@ -62,6 +62,7 @@ class SaleAddController extends Controller
         $xteamArray = $request->input('xteam');
         $xdiscamtArray = $request->input('xdiscamt');
         $qtyArray = $request->input('qty');
+        $subtotalArray = $request->input('subtotal');
 
         $currentRow = 1;
 
@@ -78,10 +79,10 @@ class SaleAddController extends Controller
             'xdate' => $xdateArray,
             'xdatecuspo' => $xdateArray,
             'xwh' => $xwhArray,
-            'xdttax' => $xdtwotaxArray,
+            'xstr01' => $xdtwotaxArray,
             'xdisc' => $xdtdiscArray,
             'xdiscf' => $xdiscamtArray,
-//            'xdttax' =>  $xtotamtArray * $xdtwotaxArray / 100,
+            'xdttax' =>  $subtotalArray * $xdtwotaxArray / 100,
             'xsltype' => $xsltypeArray,
             'xsalescat' => $xsalescatArray,
             'xdtcomm' => $xdtcommArray,
@@ -89,11 +90,18 @@ class SaleAddController extends Controller
             'xdocnum' => $xdocnumArray,
             'xteam' => $xteamArray,
             'xmember' => $xmemberArray,
+            'xdtdisc' => $subtotalArray* $xdtdiscArray / 100,
             'xcur' => value('BDT'),
             'xtrnord' => value('CO--'),
             'xquoteby' => value('1-Selling Unit'),
-            'xyear' => date('y'),
+            'xyear' => date('Y'),
             'xper' => date('m'),
+            'xcus' => value('CUS-000001'),
+            'xstatusord' => value('Confirmed'),
+            'xappamt' => value('0.00'),
+            'xexch' => value('1.0000000000'),
+            'xcounterno' => value('CT04'),
+            'xdatecon' => \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A'),
         ]);
 //            dd($saleOrder);
         $previewData = [];

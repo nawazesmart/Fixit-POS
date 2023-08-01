@@ -263,6 +263,12 @@
                                     </table>
 
                                     <div class="total-price">Total: BDT 0</div>
+                                    <div  id="totalAmount">
+
+
+                                        All included Amount :BDT 0
+
+                                    </div>
 
                                 </div>
                             </div>
@@ -310,11 +316,11 @@
                                     <input type="hidden" name="xtotamt" class="total_amount_input">
                                     <li>
                                         Vat: <input type="number" id="vatRate" name="xdttax"
-                                                    style="width: 50px; height: 25px" placeholder="%"  value="5" >
+                                                    style="width: 50px; height: 25px" placeholder="%"  value="5"   step="any" >
                                     </li>
                                     <li class="discounted-price">
                                         Discount:<input type="number" name="xdtdisc" id="extraDiscount"
-                                                        style="width: 50px; height: 25px" placeholder="%">
+                                                        style="width: 50px; height: 25px" placeholder="%"  step="any">
 
                                     </li>
 
@@ -323,26 +329,26 @@
                             <div class="col-md-2 ">
                                 <ul class="list-unstyled">
                                     <li>Discount:<input type="number" name="xdiscamt" id="shippingCost"
-                                                        style="width: 77px; height: 25px ">
+                                                        style="width: 77px; height: 25px " step="any" >
                                     </li>
 {{--                                    <li>Shipping:<input type="number" name="shipping" id="shippingCost"--}}
 {{--                                                        style="width: 77px; height: 25px ">--}}
 {{--                                    </li>--}}
                                     <li>Methode:
                                         <select name="xsltype" id="" style="height: 25px">
-                                            <option value="cash">cash_</option>
-                                            <option value="card">Card</option>
-                                            <option value="both">Both</option>
+                                            <option value="Cash Sale">cash_</option>
+                                            <option value="Card Sale">Card</option>
+                                            <option value="Both Sale">Both</option>
                                         </select>
                                     </li>
                                     <li>Bank:
                                         <select name="xsalescat" id="" style="height: 25px">
                                             <option value="">select</option>
-                                            <option value="cbl">CBL</option>
-                                            <option value="dbbl">DBBL</option>
-                                            <option value="mtbl">MTBL</option>
-                                            <option value="pbl">PBL</option>
-                                            <option value="ucb">UCB</option>
+                                            <option value="CBL">CBL</option>
+                                            <option value="DBBL">DBBL</option>
+                                            <option value="MTBL">MTBL</option>
+                                            <option value="PBL">PBL</option>
+                                            <option value="UCB">UCB</option>
                                         </select>
                                     </li>
                                 </ul>
@@ -359,12 +365,12 @@
                             <div class="col-md-2 ">
                                 <ul class="list-unstyled">
                                     <li >CashAmount:<input type="number" name="xmember" id="cashAmount"
-                                                           style="width: 80px; height: 25px ">
+                                                           style="width: 80px; height: 25px "   step="any">
                                     </li>
                                     <li >CardAmount:<input type="number" name="xdtcomm" id="cardAmount"
-                                                           style="width: 80px; height: 25px ">
+                                                           style="width: 80px; height: 25px "  step="any">
                                     </li>
-                                    <li>Last Number:<input type="number" name="xdocnum" id=""  style="width: 80px; height: 25px ">
+                                    <li>Last Number:<input type="number" name="xdocnum" id=""  style="width: 80px; height: 25px " >
                                    <input type="hidden"  name="xrow" id="" value="{{rand(4, 9999)}}"
                                           style="width: 80px; height: 25px "> </li>
 
@@ -538,7 +544,7 @@
             $('#vatAmount').text('VAT Amount: ' + vatAmount.toFixed(2));
             $('#shippingAmount').text('Shipping Amount: ' + shippingAmount.toFixed(2));
             $('#discountAmount').text('Discount Amount: ' + discountAmount.toFixed(2));
-            $('#totalAmount').text('Total : ' + totalAmount.toFixed(2));
+            $('#totalAmount').text(' All included Amount : ' + totalAmount.toFixed(2));
             console.log({totalAmount})
             $('.total_amount_input').val(totalAmount);
 

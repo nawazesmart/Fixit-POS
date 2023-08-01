@@ -239,8 +239,8 @@
 <div class="no-print">
     <a href="javascript:void(0)" onclick="window.print()" class="btn btn-print"> Print</a>
     <a href="{{ route('sale-details.index') }}" class="btn btn-back">Back</a>
-{{--    <a {{ route('sale-details.index') }}"--}}
-{{--       style=" background-color: red; border: none;color: white; padding: 6px 12px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;cursor: pointer; border-radius: 5px;">Close</a>--}}
+    {{--    <a {{ route('sale-details.index') }}"--}}
+    {{--       style=" background-color: red; border: none;color: white; padding: 6px 12px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;cursor: pointer; border-radius: 5px;">Close</a>--}}
 </div>
 <?php //$dokan_user = \App\Models\User::query()->where('id', dokanId())->first() ?>
 
@@ -250,11 +250,12 @@
         </div>
         <div class="company-info">
             <p style="font-size: 16px"><b><u>FIXIT GULSHAN</u></b></p>
+            <br>
             <p>101,Gulshan Avenue RM Center,Dhaka</p>
             <p>Hotline:-8801755648290</p>
             <p>VAT REG No:000424596-0101</p>
-{{--            <p style="font-size: 11px">Branch ID:10001</p>--}}
-            <p style="font-size: 11px">Branch ID:{{$sale->zid}} </p>
+            <hr>
+            <hr>
             <p style="font-size: 11px"></p>
         </div>
 
@@ -262,16 +263,19 @@
             <div class="row">
                 <div class="col-12 invoice-no text-center">
 
-                    Order No:{{$sale->xordernum}}<br>
-{{--                    Order No:23211133<br>--}}
+
+                    {{--                    Order No:23211133<br>--}}
 
                 </div>
             </div>
-            <p style="margin-top: 10px;">
-                Date: {{ \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A') }}</p>
-{{--            <p>Customer: Arafat Sorkar</p>--}}
-            <p>Cashier:{{$sale->xsp}} </p>
-            <p>Sale By:{{$sale->xsp}} </p>
+            <p style="margin-top: 10px;" class="text-muted">
+                Date : {{ $sale->xdatecon}}</p>
+            <p> Order No:{{$sale->xordernum}}</p>
+            <p> Mobile :</p>
+            <p> Name :</p>
+            {{--            <p>Customer: Arafat Sorkar</p>--}}
+            {{--            <p>Cashier:{{$sale->xsp}} </p>--}}
+            {{--            <p>Sale By:{{$sale->xsp}} </p>--}}
 
         </div>
 
@@ -281,11 +285,12 @@
 
                 <thead>
                 <tr>
-                    <th>SL</th>
-                    <th class="text-left">Item</th>
-                    <th>Price</th>
+
+                    <th class="text-left">Item Desc</th>
                     <th>Qty</th>
-                    <th>Amount</th>
+                    <th>Rate</th>
+
+                    <th>Amt</th>
                 </tr>
                 </thead>
 
@@ -298,14 +303,16 @@
                 @endphp
                 @foreach ($details as $data)
                     <tr>
-                        <td class="text-center">{{ $loop->iteration }}</td>
+
                         <td>
                             {{ $data->xdesc }} <br>
                         </td>
-                        <td class="text-center">{{ $data->xrate ,2}}</td>
-                        <td class="text-center">{{ $data->xqtyord ,2}}</td>
-                        <td class="text-right">{{round($data->xrate * $data->xqtyord),2}}</td>
+                        <td class="text-center text-muted">{{round( $data->xqtyord ),2}}</td>
+                        <td class="text-center text-muted">{{ round($data->xrate ),2}}</td>
+                        <td class="text-right text-muted">{{round($data->xrate * $data->xqtyord),2}}</td>
+
                     </tr>
+
                     @php
                         $totalPrice +=  round($data->xrate * $data->xqtyord)
                     @endphp
@@ -316,37 +323,38 @@
 
 
             <div class="invoice-price">
-                <div class="row">
+                <div class="row text-left">
                     <div class="col-8">
-                        <p>Subtotal: </p>
-                        <p>VAT(%)</p>
+                        <p><b>Total:</b></p>
+                        <p class="text-muted">VAT(%)</p>
                         <p>Disc(%)</p>
-                        <p>Fixed Discount </p>
+                        <p>Special Discount </p>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 text-right">
                         @php $price = $totalPrice; @endphp
-                        <p>{{ $price }}</p>
-                        <p><span
-                                style="font-size: 7px">({{ $sale->xdttax ,2}}%)</span>{{round(( $sale->xdttax * $price)/100,2)}}
+                        <p><b>{{ $price }}</b></p>
+                        <p class="text-muted"><span
+                                style="font-size: 7px">({{ $sale->xstr01 ,2}}%)</span> <span
+                                class="text-muted">{{round(( $sale->xstr01 * $price)/100,2)}}</span>
                         </p>
-
-                        <p><span
+{{--                        xstr01== tex--}}
+                        <p class="text-muted"><span
                                 style="font-size: 7px">({{ $sale->xdisc ,2}}%)</span>{{round(( $sale->xdisc * $price)/100,2)}}
                         </p>
 
-                        <p><span
+                        <p class="text-muted"><span
                                 style="font-size: 7px"></span>{{ $sale->xdiscf ,2}}
                         </p>
                     </div>
                 </div>
-                ------------
-                <div class="row">
+                <hr>
+                <div class="row text-left">
                     <div class="col-8">
-                        <p>Total Payable:</p><br>
+                        <p><b>Net Pay :</b></p><br>
 
-                        <p>Pay:(৳)</p>
+                        <p>Paid :(৳)</p>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 text-right">
                         @php
                             $all =  round($price+(($sale->xdttax  * $price)/100)+0 -$sale->xdiscf - (($sale->xdisc * $price)/100),2 )
 
@@ -368,51 +376,59 @@
 
 
                     @if(floatval($pay) > floatval($all))
-                        <div class="row">
+                        <div class="row text-left">
                             <div class="col-8">
                                 <p> Change: </p><br>
                             </div>
-                            <div class="col-4">
+                            <div class="col-4 text-right">
                                 <p><span style="font-size: 7px">(+/-)</span> {{floatval($pay) - floatval($all)}}</p><br>
                             </div>
                         </div>
                     @else
-                        <div class="row">
+                        <div class="row text-left">
                             <div class="col-8">
                                 <p> Due: </p><br>
                             </div>
-                            <div class="col-4">
+                            <div class="col-4 text-right">
                                 <p><span style="font-size: 7px"></span>{{floatval($all) - floatval($pay)}}</p>
                             </div>
                         </div>
                     @endif
 
-
                 </div>
-                @php
-                    $test = round($price+(($sale->xdttax  * $price)/100)+0 -$sale->xdiscf - (($sale->xdisc * $price)/100),2 );
+                <div class="row">
+                    <div class="col-md-12">
 
-                    $f = new \NumberFormatter( locale_get_default(), \NumberFormatter::SPELLOUT );
+                        @php
+                            $test = round($price+(($sale->xdttax  * $price)/100)+0 -$sale->xdiscf - (($sale->xdisc * $price)/100),2 );
 
-                    $word = $f->format($test);
-                @endphp
-                <p class="col-6" style="text-align-last: center">Total Payable:{{$word}} </p>
+                            $f = new \NumberFormatter( locale_get_default(), \NumberFormatter::SPELLOUT );
+
+                            $word = $f->format($test);
+                        @endphp
+                        <p class="col-md-12 text-left" style="font-size: 12px; word-spacing: 1px ">Taka:<i>{{$word}}
+                                Only</i></p>
+
+                    </div>
+                </div>
+
                 <br>
-                ------------------------------------------
+                <hr>
+                <div class="text-left">Payment Mode:</div>
                 <div class="container">
                     <div class="col-12">
                         <div class="row">
 
                             <div class="col-6" style="text-align-last: center">Cash:{{$sale->xmember}}</div>
                             <div class="col-6" style="text-align-last: center">Card:{{$sale->xdtcomm}}</div>
-{{--                            <div class="col-6" style="text-align-last: center">Card:{{$word}}</div>--}}
-{{--                            <div class="col-6" style="text-align-last: center">Card:{{ ucwords(optional($sale->xdtcomm)) }}</div>--}}
+                            {{--                            <div class="col-6" style="text-align-last: center">Card:{{$word}}</div>--}}
+                            {{--                            <div class="col-6" style="text-align-last: center">Card:{{ ucwords(optional($sale->xdtcomm)) }}</div>--}}
                         </div>
                     </div>
                 </div>
 
                 <hr>
-                <p style="font-size: 11px " >The goods can be exchange within next 7 dyas .</p>
+                <p style="font-size: 11px ">Items sold can be exchanged within 7 days, with this receipt</p>
                 <br>
                 <br>
                 <div class="container">
@@ -437,7 +453,7 @@
     </div>
     <div class="footer">
         <h5 style="margin-bottom: 10px">Paid </h5>
-{{--        <p>The goods can be exchange within next 7 dyas .</p>--}}
+        {{--        <p>The goods can be exchange within next 7 dyas .</p>--}}
         <p>Thanks For Purchase with Fix IT</p>
         <p>For any queries complaints or feedback.</p>
         <p>Please inform {{ $sale->zemail }}</p>

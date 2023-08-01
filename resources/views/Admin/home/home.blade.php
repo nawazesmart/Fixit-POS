@@ -62,57 +62,57 @@
             </div>
         </div>
     </div>
-    @php
+{{--    @php--}}
 
-        $today = now()->format('Y-m-d');
-        $firstDayOfMonth = now()->firstOfMonth()->format('Y-m-d');
-        $sales = \App\Models\SaleOrder::where('xdatecuspo', '>=', $firstDayOfMonth)->get();
-        $today = now()->format('Y-m-d');
-        $firstDayOfMonth = now()->firstOfMonth()->format('Y-m-d');
-        $totalSaleAmount = \App\Models\SaleOrder::where('xdatecuspo', '>=', $firstDayOfMonth)->sum('xtotamt');
-
-
-    @endphp
-
-    <div class="col-md-6 col-lg-3" style="background-color: palevioletred; margin-top: 30px; margin-left: 50px ;border-radius: 5px ;  ">
-        <div class="widget-small primary coloured-icon">
-            <i class="icon fa fa-shopping-cart fa-2x"></i>
-            <div class="info" style="padding-top: 5px !important; padding-left: 5px !important;">
-                <h4 style="margin-top: 0 !important; padding-top: 0!important;">MONTH</h4>
-                <p style="padding-top: 0 !important; font-size: 13px !important;">
-                    <b>Sale:{{ $totalSaleAmount}} TK</b>
-                </p>
-                <p style="padding-top: 0 !important; margin-top: -5px !important; font-size: 13px !important;"><b>Purchase:
-                        0 TK</b></p>
-            </div>
-        </div>
-    </div>
+{{--        $today = now()->format('Y-m-d');--}}
+{{--        $firstDayOfMonth = now()->firstOfMonth()->format('Y-m-d');--}}
+{{--        $sales = \App\Models\SaleOrder::where('xdatecuspo', '>=', $firstDayOfMonth)->get();--}}
+{{--        $today = now()->format('Y-m-d');--}}
+{{--        $firstDayOfMonth = now()->firstOfMonth()->format('Y-m-d');--}}
+{{--        $totalSaleAmount = \App\Models\SaleOrder::where('xdatecuspo', '>=', $firstDayOfMonth)->sum('xtotamt');--}}
 
 
- @php
-     $today = now()->format('Y-m-d');
-    $firstDayOfYear = now()->firstOfYear()->format('Y-m-d');
+{{--    @endphp--}}
+
+{{--    <div class="col-md-6 col-lg-3" style="background-color: palevioletred; margin-top: 30px; margin-left: 50px ;border-radius: 5px ;  ">--}}
+{{--        <div class="widget-small primary coloured-icon">--}}
+{{--            <i class="icon fa fa-shopping-cart fa-2x"></i>--}}
+{{--            <div class="info" style="padding-top: 5px !important; padding-left: 5px !important;">--}}
+{{--                <h4 style="margin-top: 0 !important; padding-top: 0!important;">MONTH</h4>--}}
+{{--                <p style="padding-top: 0 !important; font-size: 13px !important;">--}}
+{{--                    <b>Sale:{{ $totalSaleAmount}} TK</b>--}}
+{{--                </p>--}}
+{{--                <p style="padding-top: 0 !important; margin-top: -5px !important; font-size: 13px !important;"><b>Purchase:--}}
+{{--                        0 TK</b></p>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 
-    $salesYearly = \App\Models\SaleOrder::where('xdatecuspo', '>=', $firstDayOfYear)->get();
+{{-- @php--}}
+{{--     $today = now()->format('Y-m-d');--}}
+{{--    $firstDayOfYear = now()->firstOfYear()->format('Y-m-d');--}}
 
-    $totalSaleAmountYearly = \App\Models\SaleOrder::where('xdatecuspo', '>=', $firstDayOfYear)->sum('xtotamt');
 
- @endphp
+{{--    $salesYearly = \App\Models\SaleOrder::where('xdatecuspo', '>=', $firstDayOfYear)->get();--}}
 
-    <div class="col-md-6 col-lg-3" style="background-color: #EB5406; margin-top: 30px; margin-left: 50px ; border-radius: 5px ; box-shadow: grey  ">
-        <div class="widget-small primary coloured-icon">
-            <i class="icon fa fa-shopping-cart fa-2x"></i>
-            <div class="info" style="padding-top: 5px !important; padding-left: 5px !important;">
-                <h4 style="margin-top: 0 !important; padding-top: 0!important;">YEAR</h4>
-                <p style="padding-top: 0 !important; font-size: 13px !important;">
-                    <b>Sale:{{ $totalSaleAmountYearly}} TK</b>
-                </p>
-                <p style="padding-top: 0 !important; margin-top: -5px !important; font-size: 13px !important;"><b>Purchase:
-                        0 TK</b></p>
-            </div>
-        </div>
-    </div>
+{{--    $totalSaleAmountYearly = \App\Models\SaleOrder::where('xdatecuspo', '>=', $firstDayOfYear)->sum('xtotamt');--}}
+
+{{-- @endphp--}}
+
+{{--    <div class="col-md-6 col-lg-3" style="background-color: #EB5406; margin-top: 30px; margin-left: 50px ; border-radius: 5px ; box-shadow: grey  ">--}}
+{{--        <div class="widget-small primary coloured-icon">--}}
+{{--            <i class="icon fa fa-shopping-cart fa-2x"></i>--}}
+{{--            <div class="info" style="padding-top: 5px !important; padding-left: 5px !important;">--}}
+{{--                <h4 style="margin-top: 0 !important; padding-top: 0!important;">YEAR</h4>--}}
+{{--                <p style="padding-top: 0 !important; font-size: 13px !important;">--}}
+{{--                    <b>Sale:{{ $totalSaleAmountYearly}} TK</b>--}}
+{{--                </p>--}}
+{{--                <p style="padding-top: 0 !important; margin-top: -5px !important; font-size: 13px !important;"><b>Purchase:--}}
+{{--                        0 TK</b></p>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 
 
