@@ -222,10 +222,11 @@
             <div class="col-md-12 bg-success ">
                 <div class="col-md-6">
                     <div style="  position: static; float: left; color: red" class="total-price">Total: BDT 0</div>
+
                     <div style="  position: static; float: right;color: red"   id="totalAmount">
 
 
-                        All included Amount :BDT 0
+                      (With 5% vat*)  All included Amount :BDT 0
 
                     </div>
                 </div>
@@ -360,18 +361,18 @@
                             </div>
                             <div class="col-md-2 ">
                                 <ul class="list-unstyled">
-                                    <li>Discount:<input type="number" name="xdiscamt" id="shippingCost"
-                                                        style="width: 77px; height: 25px " step="any" >
+                                    <li><span style="float: left">Discount:</span><input type="number" name="xdiscamt" id="shippingCost"
+                                                        style="width: 110px; height: 25px " step="any" >
                                     </li>
 {{--                                    <li>Shipping:<input type="number" name="shipping" id="shippingCost"--}}
 {{--                                                        style="width: 77px; height: 25px ">--}}
 {{--                                    </li>--}}
-                                    <li>Method:
-                                        <select name="xsltype" id="xsltype" style="height: 25px" onchange="showFields()" required>
+                                    <li><span style="float: left">Method:</span>
+                                        <select name="xsltype" id="xsltype" style="height: 25px ; width: 110px;" onchange="showFields()" required>
                                             <option value="">select</option>
-                                            <option value="Cash Sale">cash_</option>
-                                            <option value="Card Sale">Card</option>
-                                            <option value="Both Sale">Both</option>
+                                            <option value="Cash Sale" selected>cash_</option>
+                                            <option value="Card Sale">Card & Both</option>
+
 
 
 
@@ -379,8 +380,8 @@
 
                                         </select>
                                     </li>
-                                    <li><span style="position: center">Bank:</span>
-                                        <select name="xsalescat" id="bankSystem" style="height: 25px">
+                                    <li ><span style="position: center">Bank:</span>
+                                        <select name="xsalescat"  id="xsalescat" style="height: 25px; width: 110px;">
                                             <option value="">select</option>
                                             <option value="CBL">CBL</option>
                                             <option value="DBBL">DBBL</option>
@@ -388,6 +389,7 @@
                                             <option value="PBL">PBL</option>
                                             <option value="UCB">UCB</option>
                                         </select>
+{{--                                        <input type="hidden" class="xsalescat" id="xsalescat" value="{{'xsalescat'}}">--}}
                                     </li>
                                 </ul>
                                 {{--                                <i class="ace-icon fa "></i>--}}
@@ -405,9 +407,13 @@
                                     <li><span style="float: left">CashAmount:</span><input type="number" name="xmember" id="cashAmount"
                                                                                            style="width: 80px; height: 25px "   step="any" >
                                     </li>
+
                                     <li><span style="float: left">CardAmount:</span><input type="number" name="xdtcomm" id="cardAmount"
                                                                                            style="width: 80px; height: 25px "  step="any">
+                                        <input type="hidden" class="xsalescat" id="xsalescat" value="{{'xsalescat'}}">
+
                                     </li>
+
                                     <li><span style="float: left">Last Number:</span><input type="number" name="xdocnum" id="xdocnum"  style="width: 80px; height: 25px " >
                                         <input type="hidden"  name="xrow" id="" value="{{rand(4, 9999)}}"
                                                style="width: 80px; height: 25px "> </li>
@@ -582,7 +588,7 @@
             $('#vatAmount').text('VAT Amount: ' + vatAmount.toFixed(2));
             $('#shippingAmount').text('Shipping Amount: ' + shippingAmount.toFixed(2));
             $('#discountAmount').text('Discount Amount: ' + discountAmount.toFixed(2));
-            $('#totalAmount').text(' All included Amount : ' + totalAmount.toFixed(2));
+            $('#totalAmount').text(' (With 5% vat*) All included Amount : ' + totalAmount.toFixed(2));
             console.log({totalAmount})
             $('.total_amount_input').val(totalAmount);
 
@@ -1061,16 +1067,19 @@
         // var xsalescatInput = document.getElementById("xsalescat");
         var docNumInput = document.getElementById("xdocnum");
         var xsalescatInput = document.getElementById("xsalescat");
+        // var xsalescatInput  = $('#xsalescat').val();
+
         if (selectElement.value === "Cash Sale") {
 
 
             cashAmountInput.required =true ;
             cardAmountInput.required = false;
+            // cardAmountInput.readOnly = true;
             docNumInput.required = false;
             xsalescatInput.required = false;
-            cashAmountInput.style.display = "none";
-            cardAmountInput.style.display = "block";
-            docNumInput.style.display = "block";
+            // cashAmountInput.style.display = "none";
+            // cardAmountInput.style.visibility = "block";
+            // docNumInput.style.display = "block";
         } else if (selectElement.value === "Card Sale") {
 
 
@@ -1078,28 +1087,30 @@
             cardAmountInput.required = true;
             docNumInput.required = true;
             xsalescatInput.required = true;
-            cashAmountInput.style.display = "none";
-            cardAmountInput.style.display = "block";
-            docNumInput.style.display = "block";
-        } else if (selectElement.value === "Both Sale") {
-            // document.getElementById('methodProperties').innerHTML = '     <li><span style="float: left">CashAmount:</span><input type="number" class="cashAmount" name="xmember" id="cashAmount"\n' +
-            //     '                                                                                           style="width: 80px; height: 25px "   step="any" required>\n' +
-            //     '                                    </li>\n' +
-            //     '                                    <li><span style="float: left">CardAmount:</span><input type="number" class="cardAmount" name="xdtcomm" id="cardAmount"\n' +
-            //     '                                                                                           style="width: 80px; height: 25px "  step="any" required>\n' +
-            //     '                                    </li>\n' +
-            //     '                                    <li><span style="float: left">Last Number:</span><input type="number" name="xdocnum" id="xdocnum"  style="width: 80px; height: 25px " required>\n' +
-            //     '                                    </li>';
-
-            cashAmountInput.required = true;
-            cardAmountInput.required = true;
-            docNumInput.required = true;
-            xsalescatInput.required = true;
-            cashAmountInput.style.display = "none";
-            cardAmountInput.style.display = "block";
-            docNumInput.style.display = "block";
-        }
+            // cashAmountInput.style.display = "none";
+            // cardAmountInput.style.display = "block";
+            // docNumInput.style.display = "block";
+         }
+        //else if (selectElement.value === "Both Sale") {
+        //     // document.getElementById('methodProperties').innerHTML = '     <li><span style="float: left">CashAmount:</span><input type="number" class="cashAmount" name="xmember" id="cashAmount"\n' +
+        //     //     '                                                                                           style="width: 80px; height: 25px "   step="any" required>\n' +
+        //     //     '                                    </li>\n' +
+        //     //     '                                    <li><span style="float: left">CardAmount:</span><input type="number" class="cardAmount" name="xdtcomm" id="cardAmount"\n' +
+        //     //     '                                                                                           style="width: 80px; height: 25px "  step="any" required>\n' +
+        //     //     '                                    </li>\n' +
+        //     //     '                                    <li><span style="float: left">Last Number:</span><input type="number" name="xdocnum" id="xdocnum"  style="width: 80px; height: 25px " required>\n' +
+        //     //     '                                    </li>';
+        //
+        //     cashAmountInput.required = true;
+        //     cardAmountInput.required = true;
+        //     docNumInput.required = true;
+        //     xsalescatInput.required = true;
+        //     cashAmountInput.style.display = "none";
+        //     cardAmountInput.style.display = "block";
+        //     docNumInput.style.display = "block";
+        // }
     }
+    showFields();
 
 
 </script>
