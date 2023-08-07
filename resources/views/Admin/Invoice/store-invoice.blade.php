@@ -356,7 +356,7 @@
                     </div>
                     <div class="col-4 text-right">
                         @php
-                            $all =  round($price+(($sale->xdttax  * $price)/100)+0 -$sale->xdiscf - (($sale->xdisc * $price)/100),2 )
+                            $all =  round($price+(($sale->xstr01  * $price)/100)+0 -$sale->xdiscf - (($sale->xdisc * $price)/100),2 )
 
                         @endphp
                         <p>

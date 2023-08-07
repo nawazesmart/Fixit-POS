@@ -12,7 +12,7 @@
     <style>
 
         .box {
-            height: 470px;
+            height: 430px;
         }
 
         .line {
@@ -68,6 +68,21 @@
             });
         });
     </script>
+
+{{--@else--}}
+
+{{--    <script>--}}
+{{--        document.addEventListener('DOMContentLoaded', function () {--}}
+{{--            Swal.fire({--}}
+{{--                position: 'center',--}}
+{{--                icon: 'error',--}}
+{{--                title: 'Pleace select Product...',--}}
+{{--                --}}{{--title: '{{ session('error') }}',--}}
+{{--                showConfirmButton: false,--}}
+{{--                timer: 1500--}}
+{{--            });--}}
+{{--        });--}}
+{{--    </script>--}}
 @endif
 @if(session()->has('message'))
 
@@ -204,7 +219,18 @@
 
     <div class="">
         <div class="row">
-            <div class="col-md-12 line"></div>
+            <div class="col-md-12 bg-success ">
+                <div class="col-md-6">
+                    <div style="  position: static; float: left; color: red" class="total-price">Total: BDT 0</div>
+                    <div style="  position: static; float: right;color: red"   id="totalAmount">
+
+
+                        All included Amount :BDT 0
+
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+            </div>
         </div>
     </div>
 
@@ -214,7 +240,8 @@
             <div class="col-md-12  page-content">
                 <div class=" m-1">
                     <div class="ui ui-widget ui-widget-content">
-                        <div class=" " style="width: 1507px">
+                        <div class=" " style="width: 1385px">
+
                             <div class="col-md-5 ml-3 box mb-2 overflow-scroll">
                                 <div class="table-responsive mt-1 p-0">
                                     <div class="search-any-product d-flex">
@@ -260,18 +287,23 @@
                                             </td>
                                         </tr>
                                         </tbody>
+
                                     </table>
 
-                                    <div class="total-price">Total: BDT 0</div>
-                                    <div  id="totalAmount">
+{{--                                    <div style="  position: static;" class="total-price">Total: BDT 0</div>--}}
+{{--                                    <div style="  position: static;"   id="totalAmount">--}}
 
 
-                                        All included Amount :BDT 0
+{{--                                        All included Amount :BDT 0--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
                                 </div>
+
                             </div>
+
+
+
 
 
                             <div class="col-md-6 ml-3 box mb-2  overflow-scroll" style="background-color: #F6F0F7 ">
@@ -307,13 +339,13 @@
                         <div class="row mt-2">
                             <div class="col-md-2 ">
                                 <ul class="right-0 list-unstyled">
-                                    <li class="total-price" id="totalAmount">
+                                    <li class="total-price" >
 
 
                                         Subtotal:BDT 0
 
                                     </li>
-                                    <input type="hidden" name="xtotamt" class="total_amount_input">
+                                    <input type="hidden" name="xtotamt"   class="total_amount_input">
                                     <li>
                                         Vat: <input type="number" id="vatRate" name="xdttax"
                                                     style="width: 50px; height: 25px" placeholder="%"  value="5"   step="any" >
@@ -335,14 +367,20 @@
 {{--                                                        style="width: 77px; height: 25px ">--}}
 {{--                                    </li>--}}
                                     <li>Method:
-                                        <select name="xsltype" id="" style="height: 25px">
+                                        <select name="xsltype" id="xsltype" style="height: 25px" onchange="showFields()" required>
+                                            <option value="">select</option>
                                             <option value="Cash Sale">cash_</option>
                                             <option value="Card Sale">Card</option>
                                             <option value="Both Sale">Both</option>
+
+
+
+
+
                                         </select>
                                     </li>
-                                    <li>Bank:
-                                        <select name="xsalescat" id="" style="height: 25px">
+                                    <li><span style="position: center">Bank:</span>
+                                        <select name="xsalescat" id="bankSystem" style="height: 25px">
                                             <option value="">select</option>
                                             <option value="CBL">CBL</option>
                                             <option value="DBBL">DBBL</option>
@@ -363,22 +401,21 @@
                                 {{--                                <i class="ace-icon glyphicon glyphicon-tags"></i>--}}
                             </div>
                             <div class="col-md-2 ">
-                                <ul class="list-unstyled">
-                                    <li >CashAmount:<input type="number" name="xmember" id="cashAmount"
-                                                           style="width: 80px; height: 25px "   step="any">
+                                <ul class="list-unstyled" id="methodProperties">
+                                    <li><span style="float: left">CashAmount:</span><input type="number" name="xmember" id="cashAmount"
+                                                                                           style="width: 80px; height: 25px "   step="any" >
                                     </li>
-                                    <li >CardAmount:<input type="number" name="xdtcomm" id="cardAmount"
-                                                           style="width: 80px; height: 25px "  step="any">
+                                    <li><span style="float: left">CardAmount:</span><input type="number" name="xdtcomm" id="cardAmount"
+                                                                                           style="width: 80px; height: 25px "  step="any">
                                     </li>
-                                    <li>Last Number:<input type="number" name="xdocnum" id=""  style="width: 80px; height: 25px " >
-                                   <input type="hidden"  name="xrow" id="" value="{{rand(4, 9999)}}"
-                                          style="width: 80px; height: 25px "> </li>
-
+                                    <li><span style="float: left">Last Number:</span><input type="number" name="xdocnum" id="xdocnum"  style="width: 80px; height: 25px " >
+                                        <input type="hidden"  name="xrow" id="" value="{{rand(4, 9999)}}"
+                                               style="width: 80px; height: 25px "> </li>
                                 </ul>
                             </div>
                             <div class="col-md-2">
                                 <ul class="text-decoration-none list-unstyled">
-
+{{--                                    <li id="totalAmount">Total:0</li>--}}
 
                                     <li id="result" >Pay:0</li>
                                     <input type="hidden" name="xteam" class="pay_amount_input" required id="result">
@@ -517,9 +554,10 @@
             totalAmountResult.textContent = "Total Amount: " + totalAmount.toFixed(2);
         }
 
-        // vat end
-
-        //shippingCost vatRate extraDiscount
+                       // with all
+                      //--------------------------------------------------//
+                     //------shippingCost vatRate extraDiscount----------//
+                    //--------------------------------------------------//
         $('#vatRate, #shippingCost, #extraDiscount').on('keyup', calculateTotal);
 
         function calculateTotal() {
@@ -550,18 +588,24 @@
 
             calculateSum()
         }
+          //----------------------------------------------------//
+         //-------shippingCost vatRate extraDiscount end-------//
+        //----------------------------------------------------//
 
 
-        //shippingCost vatRate extraDiscount end
 
 
-        //amount sum
+           //amount sum
+          //----------------------------------------------------//
+         //-------Function to calculate the sum----------------//
+        //----------------------------------------------------//
 
-        // Function to calculate the sum
         function calculateSum() {
 
             var cardAmount = parseFloat($('#cardAmount').val() || 0);
             var cashAmount = parseFloat($('#cashAmount').val() || 0);
+            // var cashAmount = productItem.find(".cashAmount").val() || 0;
+            // var cardAmount = productItem.find(".cashAmount").val() || 0;
             var sum = cardAmount + cashAmount;
             $("#result").text("Pay: " + sum);
             $(".pay_amount_input").val(sum);
@@ -594,10 +638,16 @@
             }
 
         }
+          //--------------------------------------------------//
+         //-------Function to calculate the sum end----------//
+        //--------------------------------------------------//
+       //pay change due end
 
-        //amount sum end
-//pay change due end
 
+
+           //------------------------------------------------//
+          //------Function button action section------------//
+         //------------------------------------------------//
         // button config
         $('#btn').click(function () {
             // Perform action for Button 1
@@ -643,11 +693,18 @@
         // });
 
 
-
-
+           //----------------------------------------------------//
+          //------Function button action section end------------//
+         //----------------------------------------------------//
         // button config end
 
 
+
+
+            //--------------------------------------------------------//
+           //------This branch section This section all branch-------//
+          //--------show dropdown system now this system hide-------//
+         //--------------------------------------------------------//
         // This branch section
 
         $('#branch_select').on('change', function (e) {
@@ -670,9 +727,22 @@
                 }
             })
         });
+
+            //-----------------------------------------------------------//
+           //------This branch section end, ajax route controller-------//
+          //--------------option  check this and show------------------//
+         //-----------------------------------------------------------//
         // This branch section end
 
 
+
+
+              //-----------------------------------------------------------//
+             //------This Section is product show when user search--------//
+            //----------branch wise select then show this group----------//
+           //-------------product , ajax route controller---------------//
+          //--------------option  check this and show------------------//
+         //-----------------------------------------------------------//
         // This product show section
         $('#category_select').change(function () {
             var category_id = $(this).val();
@@ -693,7 +763,7 @@
                             <div class="search-thumbnail">
                                 <div class="pl-3 thumbnail search-thumbnail">
                                     <div class="card gradient-1 product-item" style="background-color:#D2D881" id="product-item-${product.xitem}" data-product-id="${product.xitem}">
-                                    <h5 class="card-header " style="padding: 5px; margin-top:0px" id="heading"data-milliseconds="">${product.xdesc.substring(1, 17)}..</h5>
+                                    <h5 class="card-header " style="padding: 5px; margin-top:0px" id="heading"data-milliseconds="">${product.xdesc.substring(0, 17)}..</h5>
                                     <h5 class="card-header name-product" style="padding: 5px; margin-top:0px ;display:none" id="heading"data-milliseconds="">${product.xdesc}</h5>
                                         <span><div class="sku" style="display:none">${product.xcitem}</div></span>
                                         <span><div class="xitem" style="display:none">${product.xitem}</div></span>
@@ -718,13 +788,22 @@
                 }
             })
         });
-
+              //-----------------------------------------------------------------//
+             //------This product show section end, ajax route controller-------//
+            //--------option  check this and show,Useing js with append--------//
+           //-------------this html code when use this section then-----------//
+          //---------------------call this call show section-----------------//
+         //-----------------------------------------------------------------//
         // This product show section end
 
 
-        // this main option This working
-        // in cart system all work it
-
+              // this main option This working
+             // in cart system all work it
+            //---------------------------------------------------------------//
+           //------This Card section , this section work product------------//
+          //-----------seal product code product quantity------------------//
+         //----------------controll price controll------------------------//
+        //---------------------------------------------------------------//
         var cartItems = [];
         var total = 0;
         $(document).on("click", ".product-item", function () {
@@ -831,6 +910,7 @@
 
 
 
+
                     <td>${currentItem.item}</td>
                     <td>${currentItem.xitem}</td>
                     <td>${currentItem.unit}</td>
@@ -866,13 +946,20 @@
             $(this).remove();
             $(".total-price").text("Total: BDT " + total);
         })
+            //------------------------------------------------//
+           //------Cart  section end-------------------------//
+          //------------------------------------------------//
+         //----card section end This cart section end------//
+        //--------in cart system all work it--------------//
 
 
-// card section end
-        // This cart section end
-        // in cart system all work it
 
 
+
+            //------------------------------------------------//
+           //-----This section product search section--------//
+          //-------use ajax or apend this html code---------//
+         //------------------------------------------------//
         // search optinon
         $('#searchInput').keyup(function () {
             var searchInput = $(this).val();
@@ -907,7 +994,7 @@
                 <div class="search-thumbnail">
                     <div>
                         <div class="card gradient-1 product-item" style="background-color: #d3eaf1; border: none; border-radius: 10px;" id="product-item-${product.xitem}" data-product-id="${product.xitem}">
-                           <h5 class="card-header " style="padding: 5px; margin-top: 0px; background-color: #1f2937; color: #fff; border-radius: 10px 10px 0 0;" id="heading"data-milliseconds="">${product.xdesc.substring(1, 17)}..</h5>
+                           <h5 class="card-header " style="padding: 5px; margin-top: 0px; background-color: #1f2937; color: #fff; border-radius: 10px 10px 0 0;" id="heading"data-milliseconds="">${product.xdesc.substring(0, 17)}..</h5>
                                     <h5 class="card-header name-product" style="padding: 5px; margin-top:0px ;display:none" id="heading"data-milliseconds="">${product.xdesc}</h5>
                             <span><div class="sku" style="display:none">${product.xcitem}</div></span>
                             <span><h6 class="pull-right xitem"  >${product.xitem}</h6></span>
@@ -932,38 +1019,87 @@
             }
         }
 
-
-
-
-
-
     });
-
+       //------------------------------------------------//
+      //-----This section product search section End----//
+     //------------------------------------------------//
     // search optinon end
 
-
+       //---------------------------------------------------//
+      //-----Table search section this section-------------//
+     //--------search and show table data-----------------//
+    //---------------------------------------------------//
     $(document).ready(function () {
-        // Get the product items container
         var productItemsContainer = $(".product-items");
 
-        // Search input keyup event handler
         $("#search-input").on("keyup", function () {
             var searchTerm = $(this).val().toLowerCase();
 
-            // Filter the product items based on the search term
             var filteredItems = productItemsContainer.find(".product-item").filter(function () {
                 var itemText = $(this).text().toLowerCase();
                 return itemText.indexOf(searchTerm) !== -1;
             });
 
-            // Show/hide the filtered items
             productItemsContainer.find(".product-item").hide();
             filteredItems.show();
         });
+
+
+
+
     });
 
 
+       //-----------------------------------------------------//
+      //-------This is seal controller when pay cash---------//
+     //---------then cash pay requerd this like all---------//
+    //-----------------------------------------------------//
+    function showFields() {
+        var selectElement = document.getElementById("xsltype");
+        var cashAmountInput = document.getElementById("cashAmount");
+        var cardAmountInput = document.getElementById("cardAmount");
+        // var xsalescatInput = document.getElementById("xsalescat");
+        var docNumInput = document.getElementById("xdocnum");
+        var xsalescatInput = document.getElementById("xsalescat");
+        if (selectElement.value === "Cash Sale") {
 
+
+            cashAmountInput.required =true ;
+            cardAmountInput.required = false;
+            docNumInput.required = false;
+            xsalescatInput.required = false;
+            cashAmountInput.style.display = "none";
+            cardAmountInput.style.display = "block";
+            docNumInput.style.display = "block";
+        } else if (selectElement.value === "Card Sale") {
+
+
+            cashAmountInput.required = false;
+            cardAmountInput.required = true;
+            docNumInput.required = true;
+            xsalescatInput.required = true;
+            cashAmountInput.style.display = "none";
+            cardAmountInput.style.display = "block";
+            docNumInput.style.display = "block";
+        } else if (selectElement.value === "Both Sale") {
+            // document.getElementById('methodProperties').innerHTML = '     <li><span style="float: left">CashAmount:</span><input type="number" class="cashAmount" name="xmember" id="cashAmount"\n' +
+            //     '                                                                                           style="width: 80px; height: 25px "   step="any" required>\n' +
+            //     '                                    </li>\n' +
+            //     '                                    <li><span style="float: left">CardAmount:</span><input type="number" class="cardAmount" name="xdtcomm" id="cardAmount"\n' +
+            //     '                                                                                           style="width: 80px; height: 25px "  step="any" required>\n' +
+            //     '                                    </li>\n' +
+            //     '                                    <li><span style="float: left">Last Number:</span><input type="number" name="xdocnum" id="xdocnum"  style="width: 80px; height: 25px " required>\n' +
+            //     '                                    </li>';
+
+            cashAmountInput.required = true;
+            cardAmountInput.required = true;
+            docNumInput.required = true;
+            xsalescatInput.required = true;
+            cashAmountInput.style.display = "none";
+            cardAmountInput.style.display = "block";
+            docNumInput.style.display = "block";
+        }
+    }
 
 
 </script>
@@ -992,6 +1128,38 @@
 {{--</script>--}}
 
 {{--main rnd--}}
+{{--<script>--}}
+{{--    function showFields() {--}}
+{{--        var selectElement = document.getElementById("xsltype");--}}
+{{--        var cashAmountInput = document.getElementById("cashAmount");--}}
+{{--        var cardAmountInput = document.getElementById("cardAmount");--}}
+{{--        var docNumInput = document.getElementById("xdocnum");--}}
+
+{{--        if (selectElement.value === "Cash Sale") {--}}
+{{--            cashAmountInput.required = true;--}}
+{{--            cardAmountInput.required = false;--}}
+{{--            docNumInput.required = false;--}}
+{{--            cardAmountInput.style.display = "none";--}}
+{{--            docNumInput.style.display = "none";--}}
+{{--        } else if (selectElement.value === "Card Sale") {--}}
+{{--            cashAmountInput.required = false;--}}
+{{--            cardAmountInput.required = true;--}}
+{{--            docNumInput.required = true;--}}
+{{--            cashAmountInput.style.display = "none";--}}
+{{--            cardAmountInput.style.display = "block";--}}
+{{--            docNumInput.style.display = "block";--}}
+{{--        } else if (selectElement.value === "Both Sale") {--}}
+{{--            cashAmountInput.required = true;--}}
+{{--            cardAmountInput.required = true;--}}
+{{--            docNumInput.required = true;--}}
+{{--            cashAmountInput.style.display = "block";--}}
+{{--            cardAmountInput.style.display = "block";--}}
+{{--            docNumInput.style.display = "block";--}}
+{{--        }--}}
+{{--    }--}}
+
+{{--    showFields();--}}
+{{--</script>--}}
 
 </body>
 </html>

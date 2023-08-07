@@ -64,10 +64,8 @@ class SaleAddController extends Controller
         $qtyArray = $request->input('qty');
         $subtotalArray = $request->input('subtotal');
 
-        $currentRow = 1;
-
-
-
+        $currentRow = 0;
+//        try {
         $saleOrder = SaleOrder::create([
             'zid' => $zidArray[0],
             'xemp' => auth()->user()->email,
@@ -86,7 +84,7 @@ class SaleAddController extends Controller
             'xsltype' => $xsltypeArray,
             'xsalescat' => $xsalescatArray,
             'xdtcomm' => $xdtcommArray,
-            'xtotamt' => $xtotamtArray,
+            'xtotamt' =>$xtotamtArray,
             'xdocnum' => $xdocnumArray,
             'xteam' => $xteamArray,
             'xmember' => $xmemberArray,
@@ -108,18 +106,13 @@ class SaleAddController extends Controller
         foreach ($xitemArray as $index => $xitem) {
             // table = opodt
 
-//            if (
-//                isset($xlineamtArray[$index]) &&
-//                isset($xdtwotaxArray[$index]) &&
-//                is_numeric($xlineamtArray[$index]) &&
-//                is_numeric($xdtwotaxArray[$index])
-//            ) {
+
             $productDetails = ProductDetails::create([
                 'xordernum' => $request->input('xordernum') ?? '',
                 'zid' => $zidArray[$index] ?? '',
                 'xrate' => $xrateArray[$index] ?? '',
 //                'xrow' => '' . rand(4, 9999) ?? '',
-                'xrow' => $currentRow++,
+                'xrow' => ++$currentRow ?? '',
                 'xdesc' => $xdescArray[$index] ?? '',
                 'xcost' => $xcostArray[$index] ?? '',
                 'xitem' => $xitem ?? '',
@@ -131,6 +124,9 @@ class SaleAddController extends Controller
                 'xwh' => $request->input('xwh') ?? '',
                 'xcur' => value('BDT'),
                 'xtrnim' => value('IS--'),
+                'xstype' => value('Stock-N-Sell'),
+                'xcfsel' => value('0.000000'),
+                'xexch' => value('1.0000000000'),
 //                'xdttax' => $request->input('xdttax') ,
                 'xdttax' => $xlineamtArray[$index] * $xdtwotaxArray /100 ,
                 'zemail' => auth()->user()->email,
@@ -146,13 +142,15 @@ class SaleAddController extends Controller
                 'xitem' => $xitem,
                 'xitemrow' => $request->input('xsltype'),
                 'xwh' => $request->input('xwh') ?? ''  ,
-                'xdate' => date('Y-m-d', strtotime($xdateArray[$index])),
+                'xdate' => \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A'),
+//                'ztime' => \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A'),
+//                'zutime' => \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A'),
                 'xyear' => date('Y'),
                 'xper' => date('m'),
                 'xqty' => $xqtyordArray[$index] ?? '',
-                'xdocrow' =>$currentRow++ ?? '',
-                'xval' => 1,
-                'xvalpost' => 1,
+                'xdocrow' =>+$currentRow ?? '',
+                'xval' => $xcostArray[$index]* $xqtyordArray[$index],
+                'xvalpost' => $xcostArray[$index]* $xqtyordArray[$index],
                 'xdoctyp' => value('IS--'),
                 'xdocnum' => $request->input('xordernum') ?? '',
                 'xdateexp' => date('Y-m-d'),
@@ -162,6 +160,9 @@ class SaleAddController extends Controller
                 'xtime' => \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A'),
                 'zemail' => auth()->user()->email,
                 'xstdprice' => $xrateArray[$index] ?? '',
+                'xdoctype' => value('IS--'),
+                'xtrnim' => value('IS--'),
+                'xcus' => value('CUS-000001'),
             ]);
             $previewData[] = [
                 'saleOrder' => $saleOrder,
@@ -170,7 +171,9 @@ class SaleAddController extends Controller
         }
 
         return view('Admin.Invoice.posinvoice', compact('previewData', 'productDetails', 'saleOrder'));
-
+//        } catch (\Exception $ex) {
+//            return redirect()->back()->with('error', $ex);
+//        }
 
     }
 
