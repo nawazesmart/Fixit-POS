@@ -87,6 +87,15 @@
                 <b class="arrow"></b>
             </li>
 
+            <li class="">
+                <a href="{{route('return.create')}}">
+                    <i class="menu-icon fa fa-caret-right"></i>
+                    Sales Return
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
 
         </ul>
     </li>

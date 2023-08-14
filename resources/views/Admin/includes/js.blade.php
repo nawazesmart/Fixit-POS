@@ -12,9 +12,12 @@
     if('ontouchstart' in document.documentElement) document.write("<script src='{{asset('/')}}assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 </script>
 <script src="{{asset('/')}}assets/js/bootstrap.min.js"></script>
+<script src="{{asset('/')}}assets/js/jquery.maskedinput.min.js"></script>
+<script src="{{asset('/')}}assets/js/chosen.jquery.min.js"></script>
 
 
 <script src="{{asset('/')}}assets/js/excanvas.min.js"></script>
+<script src="{{asset('/')}}assets/js/bootstrap-datepicker.min.js"></script>
 
 <script src="{{asset('/')}}assets/js/jquery-ui.custom.min.js"></script>
 <script src="{{asset('/')}}assets/js/jquery.ui.touch-punch.min.js"></script>

@@ -12,6 +12,7 @@
 
 <link rel="stylesheet" href="{{asset('/')}}assets/css/ace-skins.min.css"/>
 <link rel="stylesheet" href="{{asset('/')}}assets/css/ace-rtl.min.css"/>
+<link rel="stylesheet" href="{{asset('/')}}assets/css/chosen.min.css"/>
 
 
 <link rel="stylesheet" href="{{asset('/')}}assets/css/ace-ie.min.css"/>
