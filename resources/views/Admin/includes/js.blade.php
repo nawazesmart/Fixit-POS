@@ -14,6 +14,7 @@
 <script src="{{asset('/')}}assets/js/bootstrap.min.js"></script>
 <script src="{{asset('/')}}assets/js/jquery.maskedinput.min.js"></script>
 <script src="{{asset('/')}}assets/js/chosen.jquery.min.js"></script>
+<script src="{{asset('/')}}assets/js/axios.min.js"></script>
 
 
 <script src="{{asset('/')}}assets/js/excanvas.min.js"></script>

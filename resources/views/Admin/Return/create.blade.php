@@ -128,7 +128,7 @@
                                         </div>
                                     </div>
 
-                                    <input type="hidden" name="zid" value="100001">
+                                    <input type="hidden" name="zid[]" value="100001">
 
 
                                     <div class="row">
@@ -294,7 +294,7 @@
 
 {{--                                                            <input type="text" id="productSearch" class="form-control" placeholder="Search Product">--}}
 
-                                                            <select class="form-control select-product select2 mr-0" style="width: 100%">
+                                                            <select class="form-control select-product select2 mr-0" style="width: 100%" id="name-append">
                                                                 <option value="">Select</option>
 
                                                                 @if($products)
@@ -439,13 +439,35 @@
 
             productSearch.addEventListener('input', function () {
                 const searchValue = this.value.toLowerCase();
-                Array.from(selectProduct.options).forEach(option => {
-                    if (option.value.toLowerCase().includes(searchValue)) {
-                        option.style.display = 'block';
-                    } else {
-                        option.style.display = 'none';
-                    }
-                });
+                let url = '/searchXitem';
+                let allData = {SearchValue: searchValue};
+                axios.post(url, allData).then(function (response) {
+                    var productsSelect = document.getElementById('name-append');
+                    var selectOptions = '<select class="form-control select-product select2 mr-0" style="width: 100%">' +
+                        '    <option value="">Select</option>';
+
+                    response.data.forEach(function(product) {
+                        selectOptions += '<option value="' + product.xitem + '" ' +
+                            '    data-product-code="' + product.xitem + '"' +
+                            '    data-product-name="' + product.xdesc + '"' +
+                            '    data-product-price="' + product.xstdprice + '"' +
+                            '>' + product.xitem + '</option>';
+                    });
+
+                    selectOptions += '</select>';
+
+                    productsSelect.innerHTML = selectOptions;
+                }).catch(function (error) {
+                    alert('Error...')
+                })
+                // Array.from(selectProduct.options).forEach(option => {
+                //     console.log(searchValue);
+                //     if (option.value.toLowerCase().includes(searchValue)) {
+                //         option.style.display = 'block';
+                //     } else {
+                //         option.style.display = 'none';
+                //     }
+                // });
             });
 
 
@@ -461,19 +483,6 @@
                 $productInfoPrice.text('Product Price: ' + productPrice);
             });
 
-
-            // $('table tr:has(td):not(:last)').each(function() {
-            //     let totalprice = 0
-            //     let subscriptionfee = $(this).find('.select-quantity').val()
-            //     let billing_type = $(this).find('.select-price').val()
-            //     console.log(subscriptionfee)
-            //     console.log(billing_type)
-            //
-            //
-            //     totalprice = subscriptionfee * billing_type
-            //
-            //     $(this).find('.totalprice').val(totalprice);
-            // });
 
             $('.quantity, .price').on('input', function() {
                 calculateTotalPrice($(this).closest('tr'));
@@ -516,7 +525,9 @@
             let productId = selected_item.val()
             let productName = selected_item.data('product-name')
             let productCode = selected_item.data('product-code')
-            let productBarcodes = selected_bercode.data('product-barcode')
+            let productBarcodes = selected_bercode.data('product-price')
+
+            console.log(productBarcodes)
 
             let productCost = $('.price').val()
             let producSelectCode = $('.select-unit-code').val()
@@ -531,9 +542,9 @@
 
                     '<tr>' +
                     '<td class="item-serial"></td>' +
-                    '<td>' + productName  + '<input type="hidden" name="product_ids[]" class="product-id" value=""></td>' +
+                    '<td>' + productName  + '<input type="hidden" name="product_ids[]" class="product-id" value="'+productName+'"></td>' +
                     '<td>' + productCode  + '<input type="hidden" name="xitem[]" value="' + productId + '"></td>' +
-                    // '<td>' +  productBarcodeSelected + '<input type="hidden" name="Ber_code_ids[]" value=""></td>' +
+                    // '<td>' +  productBarcodes + '<input type="hidden" name="xstdprice[]" value="'+productBarcodes+'"></td>' +
                     '<td><input type="text" readonly name="xqtyord[]" class="product-quantity form-control text-center" value="' + quantity + '"></td>' +
                     '<td><input type="text" readonly name="xrate[]" class="product-price form-control text-center" value="' + productCost + '"></td>' +
 
@@ -553,7 +564,7 @@
                 $('.select-product option[value=' + productId + ']').prop("disabled", true);
                 $('.quantity').val('');
                 $('.select-product').val('');
-                $('.select-product').select2('focus');
+                // $('.select-product').select2('focus');
                 $('.select-product').select2();
             } else {
                 alert('Select product and fill quantity')
@@ -576,72 +587,13 @@
             setItemSerial();
         }
 
-        // function removeRow(object) {
-        //     let productId = $(object).closest('tr').find('.product-id').val()
-        //     $('.select-product option[value=' + productId + ']').prop("disabled", false);
-        //     $('.product-name').val('');
-        //     $('.product-name').select2('focus');
-        //     $('.product-name').select2();
-        //     $(object).closest('tr').remove()
-        //     setItemSerial()
-        // }
-        ///////////////////////////////////////////////////
-
-        const rowItem = ` <tr>
-                                                    <td class="count"></td>
-                                                    <td>
-                                                        <div class="">
-                                                            <input type="text" name="xdate[]" id="current_date"
-                                                                   class="form-control " placeholder=""/>
-
-
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="">
-                                                            <input type="number" name="billing_type[]"
-                                                                   class="form-control billing_type" placeholder=""/>
-                                                        </div>
-
-                                                        <br>
-
-
-                                                    </td>
-                                                    <td>
-                                                        <input required name="subscriptionfee[]" type="number"
-                                                               class="form-control input-sm text-right calculate-billing subscriptionfee"/>
-
-                                                    </td>
-                                                    <td>
-                                                        <input required readonly name="price[]" type="text"
-                                                               class="form-control totalprice input-sm text-right"/>
-
-                                                    </td>
-                                                    <td class="text-center"><a class="btn btn-sm btn-danger ibtnDel"
-                                                                               disabled="disabled"><i
-                                                                class="fa fa-trash"></i></a></td>
-                                                </tr>`
 
 
 
-        $(document).ready(function() {
-            var i = 0;
-            $("#addrow").on("click", function() {
-                $("table.order-list").append(rowItem)
-                chosenSelectInit()
-                i++;
-            });
 
-            $("table.order-list").on("click", ".ibtnDel", function(event) {
-                $(this).closest("tr").remove();
-                i -= 1
-                calculateAmount()
-            });
-        });
 
-        $('.display_show').change(function() {
-            $('.show-div').show();
-        })
+
+
 
         // $('table tr:has(td):not(:last)').each(function() {
         //     $('.show-div').show();
@@ -669,214 +621,7 @@
 
 
         }
-        // 1 , 12 ,3 ,6
 
-        // function calculateAmount() {
-        //     // Sum all Sub-total
-        //     var grandtotal = 0;
-        //     $(".totalprice").each(function() {
-        //         grandtotal += Number($(this).val());
-        //     });
-        //     $(".grandtotal").val(grandtotal);
-        // }
-
-
-
-        // Drag And Drop
-        // jQuery(function($) {
-        //     $('#id-input-file-3').ace_file_input({
-        //         style: 'well',
-        //         btn_choose: 'Drop files here or click to choose',
-        //         btn_change: null,
-        //         no_icon: 'ace-icon fa fa-cloud-upload',
-        //         droppable: true,
-        //         thumbnail: 'small' //large | fit
-        //
-        //     }).on('change', function() {
-        //         //console.log($(this).data('ace_input_files'));
-        //         //console.log($(this).data('ace_input_method'));
-        //     });
-        //
-        //     if (!ace.vars['touch']) {
-        //         $('#project_id').chosen({
-        //             allow_single_deselect: true
-        //         });
-        //         //resize the chosen on window resize
-        //         $(window)
-        //             .off('resize.chosen')
-        //             .on('resize.chosen', function() {
-        //                 $('#project_id').each(function() {
-        //                     var $this = $(this);
-        //                     $this.next().css({
-        //                         'width': $this.parent().width()
-        //                     });
-        //                 })
-        //             }).trigger('resize.chosen');
-        //         //resize chosen on sidebar collapse/expand
-        //         $(document).on('settings.ace.chosen', function(e, event_name, event_val) {
-        //             if (event_name != 'sidebar_collapsed') return;
-        //             $('#project_id').each(function() {
-        //                 var $this = $(this);
-        //                 $this.next().css({
-        //                     'width': $this.parent().width()
-        //                 });
-        //             })
-        //         });
-        //
-        //         $('#chosen-multiple-style .btn').on('click', function(e) {
-        //             var target = $(this).find('input[type=radio]');
-        //             var which = parseInt(target.val());
-        //             if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
-        //             else $('#form-field-select-4').removeClass('tag-input-style');
-        //         });
-        //     }
-        //
-        //     if (!ace.vars['touch']) {
-        //         $('#billing_type').chosen({
-        //             allow_single_deselect: true
-        //         });
-        //         //resize the chosen on window resize
-        //
-        //         $(window)
-        //             .off('resize.chosen')
-        //             .on('resize.chosen', function() {
-        //                 $('#billing_type').each(function() {
-        //                     var $this = $(this);
-        //                     $this.next().css({
-        //                         'width': $this.parent().width()
-        //                     });
-        //                 })
-        //             }).trigger('resize.chosen');
-        //         //resize chosen on sidebar collapse/expand
-        //         $(document).on('settings.ace.chosen', function(e, event_name, event_val) {
-        //             if (event_name != 'sidebar_collapsed') return;
-        //             $('#billing_type').each(function() {
-        //                 var $this = $(this);
-        //                 $this.next().css({
-        //                     'width': $this.parent().width()
-        //                 });
-        //             })
-        //         });
-        //
-        //
-        //         $('#chosen-multiple-style .btn').on('click', function(e) {
-        //             var target = $(this).find('input[type=radio]');
-        //             var which = parseInt(target.val());
-        //             if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
-        //             else $('#form-field-select-4').removeClass('tag-input-style');
-        //         });
-        //     }
-        //
-        //     if (!ace.vars['touch']) {
-        //         $('#user_id').chosen({
-        //             allow_single_deselect: true
-        //         });
-        //         //resize the chosen on window resize
-        //
-        //         $(window)
-        //             .off('resize.chosen')
-        //             .on('resize.chosen', function() {
-        //                 $('#user_id').each(function() {
-        //                     var $this = $(this);
-        //                     $this.next().css({
-        //                         'width': $this.parent().width()
-        //                     });
-        //                 })
-        //             }).trigger('resize.chosen');
-        //         //resize chosen on sidebar collapse/expand
-        //         $(document).on('settings.ace.chosen', function(e, event_name, event_val) {
-        //             if (event_name != 'sidebar_collapsed') return;
-        //             $('#user_id').each(function() {
-        //                 var $this = $(this);
-        //                 $this.next().css({
-        //                     'width': $this.parent().width()
-        //                 });
-        //             })
-        //         });
-        //
-        //
-        //         $('#chosen-multiple-style .btn').on('click', function(e) {
-        //             var target = $(this).find('input[type=radio]');
-        //             var which = parseInt(target.val());
-        //             if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
-        //             else $('#form-field-select-4').removeClass('tag-input-style');
-        //         });
-        //     }
-        //
-        //     if (!ace.vars['touch']) {
-        //         $('#customer_id').chosen({
-        //             allow_single_deselect: true
-        //         });
-        //         //resize the chosen on window resize
-        //
-        //         $(window)
-        //             .off('resize.chosen')
-        //             .on('resize.chosen', function() {
-        //                 $('#customer_id').each(function() {
-        //                     var $this = $(this);
-        //                     $this.next().css({
-        //                         'width': $this.parent().width()
-        //                     });
-        //                 })
-        //             }).trigger('resize.chosen');
-        //         //resize chosen on sidebar collapse/expand
-        //         $(document).on('settings.ace.chosen', function(e, event_name, event_val) {
-        //             if (event_name != 'sidebar_collapsed') return;
-        //             $('#customer_id').each(function() {
-        //                 var $this = $(this);
-        //                 $this.next().css({
-        //                     'width': $this.parent().width()
-        //                 });
-        //             })
-        //         });
-        //
-        //
-        //         $('#chosen-multiple-style .btn').on('click', function(e) {
-        //             var target = $(this).find('input[type=radio]');
-        //             var which = parseInt(target.val());
-        //             if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
-        //             else $('#form-field-select-4').removeClass('tag-input-style');
-        //         });
-        //     }
-        //
-        //
-        // });
-
-
-        //////////////////////////////////
-
-
-
-        // $(document).ready(function() {
-        //     $('.select-product').select2();
-        //
-        //     $('#productSearch').on('input', function() {
-        //         var searchText = $(this).val().toLowerCase();
-        //         $('.select-product option').each(function() {
-        //             var optionText = $(this).text().toLowerCase();
-        //             var optionValue = $(this).val();
-        //             var optionCode = $(this).data('product-code');
-        //
-        //             if (optionText.includes(searchText)) {
-        //                 $(this).show();
-        //             } else {
-        //                 $(this).hide();
-        //             }
-        //         });
-        //
-        //         // Trigger a change event on the select element to update Select2
-        //         $('.select-product').trigger('change');
-        //     });
-        //
-        //     $('.select-product').on('select2:select', function (e) {
-        //         var selectedOption = e.params.data;
-        //         var productName = selectedOption['element']['dataset']['productDesc'];
-        //         var productPrice = selectedOption['element']['dataset']['productPrice'];
-        //
-        //         $('#productName').text('Product Name: ' + productName);
-        //         $('#productPrice').text('Product Price: ' + productPrice);
-        //     });
-        // });
 
 
     </script>

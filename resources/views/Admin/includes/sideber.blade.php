@@ -96,6 +96,15 @@
                 <b class="arrow"></b>
             </li>
 
+            <li class="">
+                <a href="{{route('return-details.index')}}">
+                    <i class="menu-icon fa fa-caret-right"></i>
+                   Return Details
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
 
         </ul>
     </li>
