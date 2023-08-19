@@ -63,21 +63,29 @@ class SaleReturnController extends Controller
         $xglrefNumber = str_pad($productXglref, 6, '0', STR_PAD_LEFT);
 
 
-        $xordernumrDetailsequest = ProductReturnDetails::where('zid', '100001')
-            ->whereRaw("ximtrnnum ~ '[0-9]'")
-            ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtrnnum, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
-            ->first()
-            ->max_number;
-        $formattedxordernumrNumber = str_pad($xordernumrDetailsequest, 6, '0', STR_PAD_LEFT);
-        $srexordernumrDetailProductReturn = ++$formattedxordernumrNumber;
+//        $xordernumrDetailsequest = ProductReturnDetails::where('zid', '100001')
+//            ->whereRaw("ximtrnnum ~ '[0-9]'")
+//            ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtrnnum, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
+//            ->first()
+//            ->max_number;
+//        $formattedxordernumrNumber = str_pad($xordernumrDetailsequest, 6, '0', STR_PAD_LEFT);
+//        $srexordernumrDetailProductReturn = ++$formattedxordernumrNumber;
 
+            $xordernumrDetailsequest = ProductReturnDetails::where('zid', '100001')
+                ->whereRaw("ximtrnnum ~ '[0-9]'")
+                ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtrnnum, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
+                ->first()
+                ->max_number;
+
+            $formattedxordernumrNumber = str_pad($xordernumrDetailsequest + 1, 6, '0', STR_PAD_LEFT);
+            $srexordernumrDetailProductReturn = $formattedxordernumrNumber;
 
 
 
 //        $productReturn = $formattedNumber +1 ;
 //        $productXglref = $xglrefNumber +1 ;
 
-//        return  $formattedxordernumrNumber;
+//        return  $srexordernumrDetailProductReturn;
 
         $xdatecomArray = $request->input('xdatecom');
         $xwhArray = $request->input('xwh');
@@ -130,7 +138,7 @@ class SaleReturnController extends Controller
                     'xtorlno' => ++$currentRow ?? '',
                     'xitem'=> $xitemArray[$index] ?? '',
                     'xqtyord' => $xqtyordArray[$index] ?? '',
-                    'ximtrnnum' =>'SRE-'.$srexordernumrDetailProductReturn++ ?? '',
+                    'ximtrnnum' =>'SRE-'.$formattedxordernumrNumber++ ?? '',
                     'xrate'=> $xstdcostArray[$index] ?? '',
                     'xstdprice'=> $xrateArray[$index] ?? '',
                     'xunit'=> $xunitArray[$index] ?? '',

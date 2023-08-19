@@ -185,7 +185,7 @@
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-addon"><i
                                                                 class="ace-icon glyphicon glyphicon-plus"></i></span>
-                                                        <textarea name="xrem" class="form-control" required></textarea>
+                                                        <textarea name="xrem" class="form-control" ></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -349,11 +349,11 @@
                                                         <div class="price-append" data-info-type="name"></div>
                                                     </td>
                                                     <td>
-                                                        <input  class="quantity form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="text" value="" required>
+                                                        <input  class="quantity form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="text" value="" >
                                                     </td>
 
                                                     <td>
-                                                        <input  class="price form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="text" value="" required>
+                                                        <input  class="price form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="text" value="" >
                                                     </td>
                                                     <td class="total-price" >
                                                         <input type="text"  class="total-price  form-control"   value="">
@@ -413,7 +413,7 @@
                                                 </div>
                                             </div>
 
-                                            
+
                                         </div>
                                     </div>
 
@@ -464,7 +464,9 @@
     <script type="text/javascript">
 
 
-
+                            //---------------------------------//
+                           //-------ajax search section-------//
+                          //---------------------------------//
         document.addEventListener('DOMContentLoaded', function () {
             const selectProduct = document.querySelector('.select-product');
             const productSearch = document.getElementById('productSearch');
@@ -499,9 +501,15 @@
                 // });
             });
 
+              //---------------------------------//
+             //-----ajax search section End-----//
+            //---------------------------------//
 
 
 
+              //-------------------------------------------------------//
+             //-----Product price and name show but it was hidden-----//
+            //-------------------------------------------------------//
             $('.select-product').on('select2:select', function (e) {
                 var selectedOption = e.params.data;
                 var productName = selectedOption['element']['dataset']['productName'];
@@ -521,7 +529,9 @@
         });
 
 
-
+                              //-------------------------------------------------------//
+                             //-----Product name show barcode search------------------//
+                            //-------------------------------------------------------//
         $('.select-product').change(function () {
             let productCost = $(this).find('option:selected').data('product-price')
             let barcodeIn = $(this).find('option:selected').data('product-name')
@@ -538,6 +548,9 @@
 
 
 
+                              //--------------------------------------------------------//
+                             //-----Product price show barcode search------------------//
+                            // -------------------------------------------------------//
 
         $('.select-product').change(function () {
             let productCost = $(this).find('option:selected').data('product-price')
@@ -560,6 +573,9 @@
 
 
 
+                              //-------------------------------------------------------//
+                             //----------------Product  show   search-----------------//
+                            //-------------------------------------------------------//
         function calculateTotalPrice(row) {
             var quantity = parseFloat(row.find('.quantity').val()) || 0;
             var price = parseFloat(row.find('.price').val()) || 0;
