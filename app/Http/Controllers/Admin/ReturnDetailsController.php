@@ -61,16 +61,17 @@ class ReturnDetailsController extends Controller
     public function search(Request $request){
         $searchVale = $request->input('SearchValue');
         $zid = '100001';
-        $products = Product::select('xitem', 'xdesc')->groupBy('xdesc', 'xitem')->where('zid',$zid )->where('xitem', $searchVale)->get();
+        $products = Product::select('xitem', 'xdesc','xstdcost','xunitiss')->groupBy('xdesc', 'xitem','xstdcost','xunitiss')->where('zid',$zid )->where('xitem', $searchVale)->get();
         if ($request->scan) {
             $products->where(function ($scan) use ($request) {
                 $scan->where('xdesc', 'LIKE', $request->scan . '%');
                 $scan->orWhere('xitem', 'LIKE', $request->scan . '%');
                 $scan->orWhere('xcitem', 'LIKE', $request->scan . '%');
-                $scan->orWhere('xstdprice', 'LIKE', $request->scan . '%');
+                $scan->orWhere('xstdcost', 'LIKE', $request->scan . '%');
+                $scan->orWhere('xunitiss', 'LIKE', $request->scan . '%');
             });
         }
-        //$products = $products->get();
+
         return response()->json($products);
     }
 }

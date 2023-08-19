@@ -284,7 +284,7 @@
             <p> Transaction No:{{ $saleReturn->ximtmptrn }} </p>
                     <p> Warehouse :{{ $saleReturn->xwh }}</p>
                 </div>
-                <div class="col-4 text-left">
+                <div class="col-6 text-left">
                     <p> GI Voucher    :{{ $saleReturn->xglref }}</p>
                    <p> Date: {{ \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A') }}</p>
 {{--            <p> Warehouse :{{ $saleReturn->xwh }}</p>--}}
@@ -301,6 +301,7 @@
                 <tr>
 
                     <th class="text-left">Item Desc</th>
+                    <th>Unit</th>
                     <th>Qty</th>
                     <th>Rate</th>
                     <th>Amt</th>
@@ -320,13 +321,16 @@
                         <td>
                             {{ $data['saleReturnDetails']->xbin }} <br>
                         </td>
+                        <td>
+                            {{ $data['saleReturnDetails']->xunit }} <br>
+                        </td>
                         <td class="text-center">{{ $data['saleReturnDetails']->xqtyreq ,2}}</td>
 
-                        <td class="text-center">{{ $data['saleReturnDetails']->xrate ,2}}</td>
-                        <td class="text-right">{{round($data['saleReturnDetails']->xrate * $data['saleReturnDetails']->xqtyreq),2}}</td>
+                        <td class="text-center">{{ $data['saleReturnDetails']->xstdprice ,2}}</td>
+                        <td class="text-right">{{round($data['saleReturnDetails']->xstdprice * $data['saleReturnDetails']->xqtyreq),2}}</td>
                     </tr>
                     @php
-                        $totalPrice +=  round($data['saleReturnDetails']->xrate * $data['saleReturnDetails']->xqtyreq)
+                        $totalPrice +=  round($data['saleReturnDetails']->xstdprice * $data['saleReturnDetails']->xqtyreq)
                     @endphp
 
                 @endforeach

@@ -22,32 +22,18 @@ class SaleReturnController extends Controller
     {
 //        return $request->all();
         $zid = '100001';
-//        $zid = $request->input('zid');
         $products = Product::select('xitem', 'xdesc')->groupBy('xdesc', 'xitem')->where('zid',$zid )->take(500);
-
-//        $products = Product::select('xdesc')
-//            ->where('zid', $zid)
-//            ->groupBy('xdesc')
-//            ->take(500);
-//        $zid = $request->input('zid');
-//        $products = Product::select('xdesc')
-//            ->groupBy('xdesc')
-//            ->where('zid', $zid)
-//            ->get();
         if ($request->scan) {
             $products->where(function ($scan) use ($request) {
                 $scan->where('xdesc', 'LIKE', $request->scan . '%');
                 $scan->orWhere('xitem', 'LIKE', $request->scan . '%');
                 $scan->orWhere('xcitem', 'LIKE', $request->scan . '%');
-                $scan->orWhere('xstdprice', 'LIKE', $request->scan . '%');
+                $scan->orWhere('xstdcost', 'LIKE', $request->scan . '%');
             });
         }
-
-
-
         $products = $products->get();
         return view('Admin.Return.create', compact('products'));
-
+//main search use ajax so it is mane query use ReturnDetailsController in last search function
 //        return  view('Admin.Return.create', compact('products'));
     }
 
@@ -73,49 +59,13 @@ class SaleReturnController extends Controller
         $productXglref = $xglrefrequest +1 ;
         $xglrefNumber = str_pad($productXglref, 6, '0', STR_PAD_LEFT);
 
-//        $xordernumrDetailsequest = ProductReturnDetails::where('zid', '100001')
-//        ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtrnnum, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
-//            ->first()
-//            ->max_number;
-//        $formattedxordernumrNumber = str_pad($xordernumrDetailsequest, 6, '0', STR_PAD_LEFT);
-//        $srexordernumrDetailProductReturn= ++$formattedxordernumrNumber ;
-
-
-//        $xordernumrDetailsequest = ProductReturnDetails::where('zid', '100001')
-//            ->whereRaw("ximtrnnum ~ '^\d+$' AND ximtrnnum != ''") // Exclude non-numeric and empty values
-//            ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtrnnum, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
-//            ->first()
-//            ->max_number;
-
-
-
-//        $xordernumrDetailsequest = ProductReturnDetails::where('zid', '100001')
-//            ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtrnnum, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
-//            ->first()
-//            ->max_number;
-
-//
-//        $xordernumrDetailsequest = ProductReturnDetails::where('zid', '100001')
-//            ->whereRaw("ximtrnnum ~ '[0-9]'")
-//            ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtrnnum, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
-//            ->first()
-//            ->max_number;
-//        $formattedxordernumrNumber = str_pad($xordernumrDetailsequest, 6, '0', STR_PAD_LEFT);
-//        $srexordernumrDetailProductReturn = ++$formattedxordernumrNumber;
 
         $xordernumrDetailsequest = ProductReturnDetails::where('zid', '100001')
             ->whereRaw("ximtrnnum ~ '[0-9]'")
             ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtrnnum, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
             ->first()
             ->max_number;
-
-
-//        echo "Original value: $xordernumrDetailsequest<br>";
-
         $formattedxordernumrNumber = str_pad($xordernumrDetailsequest, 6, '0', STR_PAD_LEFT);
-
-//        echo "Formatted value: $formattedxordernumrNumber<br>";
-
         $srexordernumrDetailProductReturn = ++$formattedxordernumrNumber;
 
 
@@ -138,6 +88,8 @@ class SaleReturnController extends Controller
         $xitemArray = $request->input('xitem');
         $xqtyordArray = $request->input('xqtyord');
         $xrateArray = $request->input('xrate');
+        $xstdcostArray = $request->input('xstdcost');
+        $xunitArray = $request->input('xunit');
         $xlineamtArray = $request->input('xlineamt');
         $product_idsArray = $request->input('product_ids');
         $currentRow = 0;
@@ -168,16 +120,6 @@ class SaleReturnController extends Controller
         $previewData = [];
         foreach ($xitemArray as $index => $xitem)
         {
-//            $zid = $zidArray[$index] ?? '';
-//            $sreValue = $sreProductReturn[$index] ?? '';
-//
-//            $ximtmptrn = 'SRE-' . $sreValue;
-
-
-//            $relatedRecordExists = ProductReturn::where('zid', $zid)
-//                ->where('ximtmptrn', $ximtmptrn)
-//                ->exists();
-
 
                 $saleReturnDetails = ProductReturnDetails::create([
                     'zid' => $saleReturn->zid ?? '',
@@ -186,9 +128,11 @@ class SaleReturnController extends Controller
                     'xitem'=> $xitemArray[$index] ?? '',
                     'xqtyord' => $xqtyordArray[$index] ?? '',
                     'ximtrnnum' =>'SRE-'.$srexordernumrDetailProductReturn++ ?? '',
-                    'xrate'=> $xrateArray[$index] ?? '',
+                    'xrate'=> $xstdcostArray[$index] ?? '',
+                    'xstdprice'=> $xrateArray[$index] ?? '',
+                    'xunit'=> $xunitArray[$index] ?? '',
                     'xbin'=> $product_idsArray[$index] ?? '',
-                    'xval'=>$xqtyordArray[$index] * $xrateArray[$index] ?? '',
+                    'xval'=>$xqtyordArray[$index] * $xstdcostArray[$index] ?? '',
                     'zemail'=>auth()->user()->email ,
                     'xemail'=>auth()->user()->email ,
                     'xqtyreq' => $xqtyordArray[$index] ?? '',

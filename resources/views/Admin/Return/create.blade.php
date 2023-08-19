@@ -141,7 +141,7 @@
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-addon"><i
                                                                 class="ace-icon glyphicon glyphicon-plus"></i></span>
-                                                        <textarea name="xrem" class="form-control"></textarea>
+                                                        <textarea name="xrem" class="form-control" required></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -268,7 +268,7 @@
                                                 <tr>
                                                     <th width="20%">Product Code</th>
                                                     <th width="20%">Product Name</th>
-{{--                                                    <th width="20%">Product Price</th>--}}
+                                                    <th width="20%">Product Price</th>
                                                     <th width="15%">Quantity</th>
                                                     <th width="15%">Market Price</th>
                                                     <th width="15%">Unit Cost</th>
@@ -280,32 +280,16 @@
                                                 <tr>
                                                     <td>
                                                         <div class="name-append">
-{{--                                                            <select class="form-control select-product  select2 mr-0" style="width: 100%">--}}
-{{--                                                                <option value="">Select</option>--}}
-{{--                                                                @if($products)--}}
-{{--                                                                    @foreach($products as $key => $product)--}}
-{{--                                                                        <option value=""--}}
-{{--                                                                                data-product-code="{{ $product->xitem }}">--}}
-{{--                                                                            {{ $product->xitem }}--}}
-{{--                                                                        </option>--}}
-{{--                                                                    @endforeach--}}
-{{--                                                                @endif--}}
-{{--                                                            </select>--}}
-
-{{--                                                            <input type="text" id="productSearch" class="form-control" placeholder="Search Product">--}}
-
                                                             <select class="form-control select-product select2 mr-0" style="width: 100%" id="name-append">
                                                                 <option value="">Select</option>
-
                                                                 @if($products)
                                                                     @foreach($products as $key => $product)
 
                                                                         <option value="{{ $product->xitem }}"
-
                                                                                 data-product-code="{{ $product->xitem }}"
                                                                                 data-product-name="{{$product->xdesc}}"
-                                                                                data-product-price="{{$product->xstdprice}}"
-
+                                                                                data-product-price="{{$product->xstdcost}}"
+                                                                                data-product-unite="{{$product->xunitiss}}"
                                                                         >
                                                                             {{ $product->xitem }}
                                                                         </option>
@@ -316,23 +300,16 @@
                                                     </td>
                                                     <td>
                                                         <div class="barcode-append" data-info-type="name"></div>
-{{--                                                        <select class="barcode-append form-control select2 mr-0" style="width: 100%">--}}
-{{--                                                            <option value="">Select</option>--}}
-{{--                                                            </option>--}}
-{{--                                                        </select>--}}
                                                     </td>
-{{--                                                    <td>--}}
-{{--                                                        <div class="barcode-append" data-info-type="name"></div>--}}
-
-
-{{--                                                    </td>--}}
-
                                                     <td>
-                                                        <input  class="quantity form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="text" value="">
+                                                        <div class="price-append" data-info-type="name"></div>
+                                                    </td>
+                                                    <td>
+                                                        <input  class="quantity form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="text" value="" required>
                                                     </td>
 
                                                     <td>
-                                                        <input  class="price form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="text" value="">
+                                                        <input  class="price form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="text" value="" required>
                                                     </td>
                                                     <td class="total-price" >
                                                         <input type="text"  class="total-price  form-control"   value="">
@@ -359,7 +336,9 @@
 
                                                     <th>Product Name</th>
                                                     <th>Product Code</th>
-{{--                                                    <th></th>--}}
+                                                    <th>Product price</th>
+                                                    <th>Value</th>
+                                                    <th> unite</th>
                                                     <th width="">Product Qty</th>
                                                     <th width="">Market Price</th>
                                                     <th width="">Subtotal</th>
@@ -373,7 +352,7 @@
 
                                                 <tfoot>
                                                 <tr>
-                                                    <th colspan="5"><strong>Total: </strong></th>
+                                                    <th colspan="8"><strong>Total: </strong></th>
                                                     <th class="grand-total text-center"></th>
                                                     <th></th>
                                                 </tr>
@@ -402,9 +381,6 @@
                                             <button class="btn btn-xs btn-success" type="submit"><i
                                                     class="ace-icon glyphicon glyphicon-repeat"></i> Return
                                             </button>
-{{--                                            <button class="btn btn-xs btn-gray" type="Reset"><i--}}
-{{--                                                    class="fa fa-refresh"></i> Reset--}}
-{{--                                            </button>--}}
                                         </div>
                                     </div>
                                 </form>
@@ -436,7 +412,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             const selectProduct = document.querySelector('.select-product');
             const productSearch = document.getElementById('productSearch');
-
             productSearch.addEventListener('input', function () {
                 const searchValue = this.value.toLowerCase();
                 let url = '/searchXitem';
@@ -445,17 +420,15 @@
                     var productsSelect = document.getElementById('name-append');
                     var selectOptions = '<select class="form-control select-product select2 mr-0" style="width: 100%">' +
                         '    <option value="">Select</option>';
-
                     response.data.forEach(function(product) {
                         selectOptions += '<option value="' + product.xitem + '" ' +
                             '    data-product-code="' + product.xitem + '"' +
                             '    data-product-name="' + product.xdesc + '"' +
-                            '    data-product-price="' + product.xstdprice + '"' +
+                            '    data-product-price="' + product.xstdcost + '"' +
+                            '    data-product-unite="' + product.xunitiss + '"' +
                             '>' + product.xitem + '</option>';
                     });
-
                     selectOptions += '</select>';
-
                     productsSelect.innerHTML = selectOptions;
                 }).catch(function (error) {
                     alert('Error...')
@@ -497,17 +470,39 @@
             let productCost = $(this).find('option:selected').data('product-price')
             let barcodeIn = $(this).find('option:selected').data('product-name')
             console.log(productCost)
-
             $('.select-unit-price').val(productCost)
             let barcodeAppend = "\n" +
                 "    <input class=\"select-name product-name-selected form-control\" type=\"text\" value=\"" + barcodeIn + "\">\n" +
                 "";
             $('.barcode-append').html(barcodeAppend);
+            $('.select-unit-barcodeIn').val(barcodeIn)
+            $('.select-quantity').val(1).focus()
+            // $('.select-product').select2()
+        })
+
+
+
+
+        $('.select-product').change(function () {
+            let productCost = $(this).find('option:selected').data('product-price')
+            let barcodeIn = $(this).find('option:selected').data('product-price')
+            console.log(productCost)
+
+            $('.select-unit-price').val(productCost)
+            let priceAppend = "\n" +
+                "    <input class=\"select-name product-price-selected form-control\" type=\"text\" value=\"" + barcodeIn + "\">\n" +
+                "";
+            $('.price-append').html(priceAppend);
 
             $('.select-unit-barcodeIn').val(barcodeIn)
             $('.select-quantity').val(1).focus()
             // $('.select-product').select2()
         })
+
+
+
+
+
 
         function calculateTotalPrice(row) {
             var quantity = parseFloat(row.find('.quantity').val()) || 0;
@@ -525,7 +520,8 @@
             let productId = selected_item.val()
             let productName = selected_item.data('product-name')
             let productCode = selected_item.data('product-code')
-            let productBarcodes = selected_bercode.data('product-price')
+            let productBarcodes = selected_item.data('product-price')
+            let productunite = selected_item.data('product-unite')
 
             console.log(productBarcodes)
 
@@ -544,7 +540,10 @@
                     '<td class="item-serial"></td>' +
                     '<td>' + productName  + '<input type="hidden" name="product_ids[]" class="product-id" value="'+productName+'"></td>' +
                     '<td>' + productCode  + '<input type="hidden" name="xitem[]" value="' + productId + '"></td>' +
-                    // '<td>' +  productBarcodes + '<input type="hidden" name="xstdprice[]" value="'+productBarcodes+'"></td>' +
+                    '<td>' +  productBarcodes + '<input type="hidden" name="xstdcost[]" value="'+productBarcodes+'"></td>' +
+                    '<td><input type="text" readonly name="xlin[]" class="product-row-subtotal form-control text-center" value="' + (productBarcodes * quantity) + '"></td>' +
+
+                    '<td>' +  productunite + '<input type="hidden"  name="xunit[]" value="'+productunite+'"></td>' +
                     '<td><input type="text" readonly name="xqtyord[]" class="product-quantity form-control text-center" value="' + quantity + '"></td>' +
                     '<td><input type="text" readonly name="xrate[]" class="product-price form-control text-center" value="' + productCost + '"></td>' +
 
@@ -589,15 +588,6 @@
 
 
 
-
-
-
-
-
-
-        // $('table tr:has(td):not(:last)').each(function() {
-        //     $('.show-div').show();
-        // });
 
 
         $(document).on("keyup", ".calculate-billing", function() {

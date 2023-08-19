@@ -264,7 +264,7 @@
                     <p> Transaction No:{{ $return->ximtmptrn }} </p>
                     <p> Warehouse :{{ $return->xwh }}</p>
                 </div>
-                <div class="col-4 text-left">
+                <div class="col-6 text-left">
                     <p> GI Voucher    :{{ $return->xglref }}</p>
                     <p>  Date: {{ \Carbon\Carbon::now()->timezone('Asia/Dhaka')->format('d M, Y, g:i A') }}</p>
 
@@ -277,6 +277,7 @@
                 <tr>
 
                     <th class="text-left">Item Desc</th>
+                    <th>Unit</th>
                     <th>Qty</th>
                     <th>Rate</th>
                     <th>Amt</th>
@@ -289,12 +290,14 @@
                 @foreach ($returnDetails as $data)
                     <tr>
                         <td>{{ $data->xbin }} <br></td>
+                        <td class="text-center text-muted">{{ $data->xunit}}</td>
                         <td class="text-center text-muted">{{round( $data->xqtyreq ),2}}</td>
-                        <td class="text-center text-muted">{{ round($data->xrate ),2}}</td>
-                        <td class="text-right text-muted">{{round($data->xrate * $data->xqtyreq),2}}</td>
+
+                        <td class="text-center text-muted">{{ round($data->xstdprice ),2}}</td>
+                        <td class="text-right text-muted">{{round($data->xstdprice * $data->xqtyreq),2}}</td>
                     </tr>
                     @php
-                        $totalPrice +=  round($data->xrate * $data->xqtyreq)
+                        $totalPrice +=  round($data->xstdprice * $data->xqtyreq)
                     @endphp
                 @endforeach
                 </tbody>

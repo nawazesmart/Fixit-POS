@@ -31,16 +31,22 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 //    product control
     Route::resource('products', ProductCOntroller::class);
 //    product control end
+
 //    customer control
     Route::resource('customers', CustomerController::class);
 //    customer control end
+
+
 //    Product searc
     Route::get('productsSearch', [SearsController::class, 'search'])->name('productsSearch');
 //    Product searc end
+
 //    invoice control
     Route::resource('invoices', InvoicePrintCOntroller::class);
 //    invoice control end
 
+
+//    return section
     Route::resource('return', SaleReturnController::class);
 
     Route::resource('return-details', ReturnDetailsController::class);
