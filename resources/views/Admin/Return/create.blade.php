@@ -31,6 +31,50 @@
     </style>
 @endsection
 @section('body')
+
+
+    @if ($errors->any())
+        <div class="alert alert-danger error">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if (session()->get('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Product return can not successfully !',
+                    text: 'please add return product!',
+                    // footer: '<a href="">Why do I have this issue?</a>'
+                })
+            });
+        </script>
+
+
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+            <strong>
+                <i class="ace-icon fa fa-times"></i>
+                Error!
+            </strong>
+            {{ "Product return can not successfully ! " . session()->get('not Success!') }}
+        </div>
+    @endif
+
+
+
+
     <section class="py-5">
         <div class="container">
 
@@ -358,6 +402,18 @@
                                                 </tr>
                                                 </tfoot>
                                             </table>
+
+                                            <div class="form-group" style="float: right; margin-top: 30px">
+                                                <label for="inputError"
+                                                       class="col-xs-12 col-sm-3 col-md-3 control-label"></label>
+                                                <div class="col-xs-12 col-sm-12 float-right">
+                                                    <button class="btn btn-xs btn-success" type="submit"><i
+                                                            class="ace-icon glyphicon glyphicon-repeat"></i> Return
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            
                                         </div>
                                     </div>
 
@@ -374,15 +430,15 @@
 
 {{--                                    ///////////////////////////////////////////////--}}
 
-                                    <div class="form-group" style="float: right; margin-top: 30px">
-                                        <label for="inputError"
-                                               class="col-xs-12 col-sm-3 col-md-3 control-label"></label>
-                                        <div class="col-xs-12 col-sm-12 float-right">
-                                            <button class="btn btn-xs btn-success" type="submit"><i
-                                                    class="ace-icon glyphicon glyphicon-repeat"></i> Return
-                                            </button>
-                                        </div>
-                                    </div>
+{{--                                    <div class="form-group" style="float: right; margin-top: 30px">--}}
+{{--                                        <label for="inputError"--}}
+{{--                                               class="col-xs-12 col-sm-3 col-md-3 control-label"></label>--}}
+{{--                                        <div class="col-xs-12 col-sm-12 float-right">--}}
+{{--                                            <button class="btn btn-xs btn-success" type="submit"><i--}}
+{{--                                                    class="ace-icon glyphicon glyphicon-repeat"></i> Return--}}
+{{--                                            </button>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 </form>
                             </div>
                         </div>

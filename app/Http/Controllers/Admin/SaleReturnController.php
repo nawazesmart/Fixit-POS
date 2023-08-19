@@ -22,7 +22,7 @@ class SaleReturnController extends Controller
     {
 //        return $request->all();
         $zid = '100001';
-        $products = Product::select('xitem', 'xdesc')->groupBy('xdesc', 'xitem')->where('zid',$zid )->take(500);
+        $products = Product::select('xitem', 'xdesc')->groupBy('xdesc', 'xitem')->where('zid',$zid )->take(5);
         if ($request->scan) {
             $products->where(function ($scan) use ($request) {
                 $scan->where('xdesc', 'LIKE', $request->scan . '%');
@@ -40,7 +40,10 @@ class SaleReturnController extends Controller
 
     public function store(Request $request)
     {
+
 //        return request()->all();
+
+        try {
 
         $xordernumrequest = ProductReturn::where('zid', '100001')
         ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtmptrn, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
@@ -172,7 +175,9 @@ class SaleReturnController extends Controller
         }
 //        return redirect()->back();
         return view('Admin.Invoice.returnInvoice', compact('previewData', 'saleReturn', 'saleReturnDetails'));
-
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
     }
 
 
