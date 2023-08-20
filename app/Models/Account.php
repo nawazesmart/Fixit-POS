@@ -5,24 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductReturnDetails extends BaseModel
+class Account extends BaseModel
 {
-    use HasFactory;
-    protected $table = 'imtemptdt';
-    protected $guarded=['id'];
     protected $primaryKey = 'zid';
-
+    use HasFactory;
+    protected $table='glheader';
+    protected $guarded =['id'];
 
     public function productReturn()
     {
-        return $this->hasMany(ProductReturn::class);
+        return $this->belongsTo(ProductReturnDetails::class);
     }
     public  function quantitys()
     {
         return $this->hasMany(Quantity::class);
     }
-    public  function productsa()
+    public  function productRetaurndetails()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(ProductReturnDetails::class);
     }
 }

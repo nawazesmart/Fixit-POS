@@ -290,6 +290,7 @@
                 @foreach ($returnDetails as $data)
                     <tr>
                         <td>{{ $data->xbin }} <br></td>
+{{--                        <td>{{ $data->productsa->xdesc }} <br></td>--}}
                         <td class="text-center text-muted">{{ $data->xunit}}</td>
                         <td class="text-center text-muted">{{round( $data->xqtyreq ),2}}</td>
 

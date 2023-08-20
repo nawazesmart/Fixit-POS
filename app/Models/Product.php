@@ -24,6 +24,10 @@ class Product extends Model
     {
         return $this->hasMany(ProductDetails::class);
     }
+    public  function returns()
+    {
+        return $this->hasMany(ProductReturnDetails::class);
+    }
 
 //    public  function quantity($request)
 //    {

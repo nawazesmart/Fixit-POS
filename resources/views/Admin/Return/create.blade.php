@@ -52,8 +52,8 @@
             document.addEventListener('DOMContentLoaded', function () {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Product return can not successfully !',
-                    text: 'please add return product!',
+                    title: 'Billing has been already generated !',
+                    text: 'please another try !',
                     // footer: '<a href="">Why do I have this issue?</a>'
                 })
             });
@@ -185,7 +185,7 @@
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-addon"><i
                                                                 class="ace-icon glyphicon glyphicon-plus"></i></span>
-                                                        <textarea name="xrem" class="form-control" ></textarea>
+                                                        <textarea name="xrem" class="form-control" required ></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -234,77 +234,6 @@
                                         </div>
                                     </div>
 
-
-{{--                                    <div class="row">--}}
-{{--                                        <div class="col-sm-12 col-sm-offset-0">--}}
-{{--                                            <h3 class="header smaller lighter blue">Return Selection</h3>--}}
-{{--                                            <table id="myTable" class="table table-bordered order-list">--}}
-{{--                                                <thead>--}}
-{{--                                                <tr>--}}
-{{--                                                    <td width="40px;">SL.</td>--}}
-{{--                                                    <td width="45%">product code<span class="text-danger">*</span></td>--}}
-{{--                                                    <td class="text-left" width="25%">Quantity</td>--}}
-{{--                                                    <td class="text-right" width="15%">Market Price</td>--}}
-{{--                                                    <td class="text-right" width="15%">Price</td>--}}
-{{--                                                    <td class="text-right"></td>--}}
-{{--                                                </tr>--}}
-{{--                                                </thead>--}}
-{{--                                                <tbody>--}}
-{{--                                                <tr>--}}
-{{--                                                    <td class="count"></td>--}}
-{{--                                                    <td>--}}
-{{--                                                        <div class="">--}}
-{{--                                                            <input type="text" name="xdate[]" id="current_date"--}}
-{{--                                                                   class="form-control " placeholder=""/>--}}
-
-
-{{--                                                        </div>--}}
-{{--                                                    </td>--}}
-{{--                                                    <td>--}}
-{{--                                                        <div class="">--}}
-{{--                                                            <input type="number" name="billing_type[]"--}}
-{{--                                                                   class="form-control billing_type" placeholder=""/>--}}
-{{--                                                        </div>--}}
-
-{{--                                                        <br>--}}
-
-
-{{--                                                    </td>--}}
-{{--                                                    <td>--}}
-{{--                                                        <input required name="subscriptionfee[]" type="number"--}}
-{{--                                                               class="form-control input-sm text-right calculate-billing subscriptionfee"/>--}}
-
-{{--                                                    </td>--}}
-{{--                                                    <td>--}}
-{{--                                                        <input required readonly name="price[]" type="text"--}}
-{{--                                                               class="form-control totalprice input-sm text-right"/>--}}
-
-{{--                                                    </td>--}}
-{{--                                                    <td class="text-center"><a class="btn btn-sm btn-danger"--}}
-{{--                                                                               disabled="disabled"><i--}}
-{{--                                                                class="fa fa-trash"></i></a></td>--}}
-{{--                                                </tr>--}}
-{{--                                                </tbody>--}}
-{{--                                                <tfoot>--}}
-{{--                                                <tr>--}}
-{{--                                                    <td colspan="4"></td>--}}
-{{--                                                    <td><input name="total_amount"--}}
-{{--                                                               class="form-control grandtotal text-right" readonly></td>--}}
-{{--                                                    <td>--}}
-{{--                                                        <button type="button"--}}
-{{--                                                                class="btn btn-minier btn-success pull-right"--}}
-{{--                                                                id="addrow">--}}
-{{--                                                            + Add More--}}
-{{--                                                        </button>--}}
-{{--                                                    </td>--}}
-{{--                                                </tr>--}}
-{{--                                                </tfoot>--}}
-{{--                                            </table>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-
-
-
                                     <div class="row">
                                         <div class="col-md-12">
                                             <table class="table table-bordered">
@@ -345,11 +274,14 @@
                                                     <td>
                                                         <div class="barcode-append" data-info-type="name"></div>
                                                     </td>
+{{--                                                    <td>--}}
+{{--                                                        <div class="sub-row-total" data-info-type="name"></div>--}}
+{{--                                                    </td>--}}
                                                     <td>
                                                         <div class="price-append" data-info-type="name"></div>
                                                     </td>
                                                     <td>
-                                                        <input  class="quantity form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="text" value="" >
+                                                        <input  class="quantity form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="text" value=""  >
                                                     </td>
 
                                                     <td>
@@ -366,7 +298,8 @@
                                             </table>
                                         </div>
                                     </div>
-
+                                    <input type="hidden" class="sub-row-total" name="totalval">
+                                    <input type="hidden" class="lime-total" name="totaalime">
                                     <hr>
                                     <!-- product display section -->
                                     <div class="row">
@@ -613,7 +546,7 @@
                     '<td>' + productName  + '<input type="hidden" name="product_ids[]" class="product-id" value="'+productName+'"></td>' +
                     '<td>' + productCode  + '<input type="hidden" name="xitem[]" value="' + productId + '"></td>' +
                     '<td>' +  productBarcodes + '<input type="hidden" name="xstdcost[]" value="'+productBarcodes+'"></td>' +
-                    '<td><input type="text" readonly name="xlin[]" class="product-row-subtotal form-control text-center" value="' + (productBarcodes * quantity) + '"></td>' +
+                    '<td><input type="text" readonly name="xlin[]" class="product-row-sub form-control text-center" value="' + (productBarcodes * quantity) + '"></td>' +
 
                     '<td>' +  productunite + '<input type="hidden"  name="xunit[]" value="'+productunite+'"></td>' +
                     '<td><input type="text" readonly name="xqtyord[]" class="product-quantity form-control text-center" value="' + quantity + '"></td>' +
@@ -631,6 +564,10 @@
 
                 setItemSerial()
 
+                setItemSeri()
+
+                setItemSeriaal()
+
                 // disable selected option
                 $('.select-product option[value=' + productId + ']').prop("disabled", true);
                 $('.quantity').val('');
@@ -638,7 +575,15 @@
                 // $('.select-product').select2('focus');
                 $('.select-product').select2();
             } else {
-                alert('Select product and fill quantity')
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Select product and fill quantity!',
+                    // text: 'Please select a product and fill in the quantity.',
+                    // footer: '<a href="">Why do I have this issue?</a>'
+                });
+                // You can also keep the original alert message if desired
+                // alert('Select product and fill quantity');
+
             }
         }
 
@@ -649,7 +594,34 @@
                 total += parseFloat($(this).closest('tr').find('.product-row-subtotal').val())
             })
             $('.grand-total').text(total)
+
+
         }
+
+                            function setItemSeriaal() {
+                                let total = 0
+                                $('.item-serial').each(function (index) {
+                                    $(this).text(index + 1)
+                                    total += parseFloat($(this).closest('tr').find('.product-row-subtotal').val())
+                                })
+                                $('.lime-total').val(total)
+
+
+                            }
+
+
+
+                            function setItemSeri() {
+                                let total = 0
+                                $('.item-serial').each(function (index) {
+                                    $(this).text(index + 1)
+                                    total += parseFloat($(this).closest('tr').find('.product-row-sub').val())
+                                })
+                                $('.sub-row-total').val(total)
+                            }
+
+
+
 
         function removeRow(object) {
             let productId = $(object).closest('tr').find('.product-id').val();

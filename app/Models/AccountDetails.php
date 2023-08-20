@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductReturn extends BaseModel
+class AccountDetails extends BaseModel
 {
-    use HasFactory;
-    protected $table = 'imtemptrn';
-    protected $guarded=['id'];
+
     protected $primaryKey = 'zid';
+    use HasFactory;
+    protected $table='gldetail';
+    protected $guarded =['id'];
 
     public function productReturn()
     {
@@ -20,10 +21,8 @@ class ProductReturn extends BaseModel
     {
         return $this->hasMany(Quantity::class);
     }
-    public  function accounts()
+    public  function productRetaurndetails()
     {
-        return $this->hasMany(Account::class);
+        return $this->hasMany(ProductReturnDetails::class);
     }
-
-
 }

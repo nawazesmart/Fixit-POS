@@ -5,8 +5,9 @@
 {{--    <input type="text" id="searchInput" placeholder="Search...">--}}
     <section class="py-3">
         <div class="container">
+
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-10">
                     <!-- PAGE CONTENT BEGINS -->
                     <div class="row">
                         <div class="col-xs-12">
@@ -74,6 +75,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 

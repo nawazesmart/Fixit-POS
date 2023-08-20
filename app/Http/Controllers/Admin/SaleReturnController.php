@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
+use App\Models\AccountDetails;
 use App\Models\Product;
 use App\Models\ProductReturn;
 use App\Models\ProductReturnDetails;
@@ -22,7 +24,7 @@ class SaleReturnController extends Controller
     {
 //        return $request->all();
         $zid = '100001';
-        $products = Product::select('xitem', 'xdesc')->groupBy('xdesc', 'xitem')->where('zid',$zid )->take(5);
+        $products = Product::select('xitem', 'xdesc')->groupBy('xdesc', 'xitem')->where('zid',$zid )->take(0);
         if ($request->scan) {
             $products->where(function ($scan) use ($request) {
                 $scan->where('xdesc', 'LIKE', $request->scan . '%');
@@ -43,7 +45,7 @@ class SaleReturnController extends Controller
 
 //        return request()->all();
 
-        try {
+//        try {
 
         $xordernumrequest = ProductReturn::where('zid', '100001')
         ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtmptrn, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
@@ -71,14 +73,14 @@ class SaleReturnController extends Controller
 //        $formattedxordernumrNumber = str_pad($xordernumrDetailsequest, 6, '0', STR_PAD_LEFT);
 //        $srexordernumrDetailProductReturn = ++$formattedxordernumrNumber;
 
-            $xordernumrDetailsequest = ProductReturnDetails::where('zid', '100001')
-                ->whereRaw("ximtrnnum ~ '[0-9]'")
-                ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtrnnum, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
-                ->first()
-                ->max_number;
-
-            $formattedxordernumrNumber = str_pad($xordernumrDetailsequest + 1, 6, '0', STR_PAD_LEFT);
-            $srexordernumrDetailProductReturn = $formattedxordernumrNumber;
+//            $xordernumrDetailsequest = ProductReturnDetails::where('zid', '100001')
+//                ->whereRaw("ximtrnnum ~ '[0-9]'")
+//                ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtrnnum, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
+//                ->first()
+//                ->max_number;
+//
+//            $formattedxordernumrNumber = str_pad($xordernumrDetailsequest + 1, 6, '0', STR_PAD_LEFT);
+//            $srexordernumrDetailProductReturn = $formattedxordernumrNumber;
 
 
 
@@ -94,6 +96,11 @@ class SaleReturnController extends Controller
         $xremArray = $request->input('xrem');
         $xtrnimfArray = $request->input('xtrnimf');
         $xstatustrnArray = $request->input('xstatustrn');
+
+
+
+        $totalvalArray = $request->input('totaalime');
+        $totalalimevalArray = $request->input('totalval');
 
 
         $xitemArray = $request->input('xitem');
@@ -128,11 +135,22 @@ class SaleReturnController extends Controller
             'xstatustrn'=> value('5-Confirmed')
 
         ]);
+
+
         $previewData = [];
         foreach ($xitemArray as $index => $xitem)
         {
+            $xordernumrDetailsequest = ProductReturnDetails::where('zid', '100001')
+                ->whereRaw("ximtrnnum ~ '[0-9]'")
+                ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtrnnum, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
+                ->first()
+                ->max_number;
 
-                $saleReturnDetails = ProductReturnDetails::create([
+            $incrementedNumber = $xordernumrDetailsequest + 1;
+            $formattedxordernumrNumber = str_pad($incrementedNumber, 6, '0', STR_PAD_LEFT);
+
+
+            $saleReturnDetails = ProductReturnDetails::create([
                     'zid' => $saleReturn->zid ?? '',
                     'ximtmptrn'=> $saleReturn->ximtmptrn ?? '',
                     'xtorlno' => ++$currentRow ?? '',
@@ -175,17 +193,103 @@ class SaleReturnController extends Controller
                     'xsign' => value('1'),
                     'xmember'=> auth()->user()->email ,
                 ]);
+
             $previewData[] = [
                 'saleReturn' => $saleReturn,
                 'saleReturnDetails' => $saleReturnDetails,
             ];
 
         }
+        $Acconts = Account::create([
+            'zid' => $zidArray[0] ?? '',
+            'xvoucher'=>'SRET'. $xglrefNumber ??'',
+            'xref' =>'SRE-'.$sreProductReturn ?? '',
+            'xdate'=> date('Y,m,d') ??'',
+            'xyear' => date('Y') ??'',
+            'xper'=> date('m')  ??'',
+            'xstatusjv'=> value('Balanced') ??'',
+            'xdatedue'=>date('Y,m,d') ??'',
+            'dumzid'=>value('0') ??'',
+            'zemail'=> auth()->user()->email ?? '',
+            'xnumofper'=>value('0') ??'',
+            'xnote'=> value('***System Generated voucher from IM***') ??'',
+            'xmember'=>auth()->user()->email ??'',
+            'xaction'=>value('journal') ??'',
+
+        ]);
+        $accountDetails = AccountDetails::create([
+            'zid'=>$zidArray[0] ?? '' ,
+            'xvoucher'=>'SRET'. $xglrefNumber ??'',
+            'xrow'=> value('1'),
+            'xacc' => value('08010001'),
+            'xaccusage'=>value('Ledger'),
+            'xaccsource'=> value('None'),
+            'xproj'=> $xprojArray ,
+            'xcur' => value('BDT'),
+            'xexch'=>value('1.0000000000'),
+            'xprime'=>$totalvalArray  ?? '',
+            'xbase'=>$totalvalArray  ?? '',
+            'xacctype' => value('Income'),
+            'zemail' => auth()->user()->email  ?? '',
+            'xamount' => $totalvalArray  ?? '',
+            'xallocation'=> value('0.00'),
+        ]);
+        $accountDetailsTwo = AccountDetails::create([
+            'zid'=>$zidArray[0] ?? '' ,
+            'xvoucher'=>'SRET'. $xglrefNumber ??'',
+            'xrow'=> value('2'),
+            'xacc' => value('01010001'),
+            'xaccusage'=>value('Cash'),
+            'xaccsource'=> value('None'),
+            'xproj'=> $xprojArray ,
+            'xcur' => value('BDT'),
+            'xexch'=>value('1.0000000000'),
+            'xprime'=> -$totalvalArray  ?? '',
+            'xbase'=> -$totalvalArray  ?? '',
+            'xacctype' => value('Asset'),
+            'zemail' => auth()->user()->email  ?? '',
+            'xamount' => $totalvalArray  ?? '',
+            'xallocation'=> value('0.00'),
+        ]);
+        $accountDetailsThree = AccountDetails::create([
+            'zid'=>$zidArray[0] ?? '' ,
+            'xvoucher'=>'SRET'. $xglrefNumber ??'',
+            'xrow'=> value('3'),
+            'xacc' => value('01060003'),
+            'xaccusage'=>value('Ledger'),
+            'xaccsource'=> value('None'),
+            'xproj'=> $xprojArray ,
+            'xcur' => value('BDT'),
+            'xexch'=>value('1.0000000000'),
+            'xprime'=> $totalalimevalArray  ?? '',
+            'xbase'=> $totalalimevalArray  ?? '',
+            'xacctype' => value('Asset'),
+            'zemail' => auth()->user()->email  ?? '',
+            'xamount' => $totalalimevalArray  ?? '',
+            'xallocation'=> value('0.00'),
+        ]);
+        $accountDetailsFore = AccountDetails::create([
+            'zid'=>$zidArray[0] ?? '' ,
+            'xvoucher'=>'SRET'. $xglrefNumber ??'',
+            'xrow'=> value('4'),
+            'xacc' => value('04010020'),
+            'xaccusage'=>value('Ledger'),
+            'xaccsource'=> value('None'),
+            'xproj'=> $xprojArray ,
+            'xcur' => value('BDT'),
+            'xexch'=>value('1.0000000000'),
+            'xprime'=> -$totalalimevalArray  ?? '',
+            'xbase'=> -$totalalimevalArray  ?? '',
+            'xacctype' => value('Expenditure'),
+            'zemail' => auth()->user()->email  ?? '',
+            'xamount' => $totalalimevalArray  ?? '',
+            'xallocation'=> value('0.00'),
+        ]);
 //        return redirect()->back();
         return view('Admin.Invoice.returnInvoice', compact('previewData', 'saleReturn', 'saleReturnDetails'));
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
-        }
+//        } catch (\Exception $e) {
+//            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+//        }
     }
 
 
