@@ -53,6 +53,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     Route::post('/searchXitem', [ReturnDetailsController::class, 'search']);
 
+    Route::get('/detailsSearch',[ReturnDetailsController::class,'searchSystem'])->name('DetailsSearch');
+
 });
 
 

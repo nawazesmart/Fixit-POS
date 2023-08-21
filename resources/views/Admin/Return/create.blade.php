@@ -4,6 +4,21 @@
     <link rel="stylesheet" href="{{ asset('assets/css/chosen.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker3.min.css') }}"/>
     <style>
+        #searchResults {
+            border: 1px solid #ccc;
+            max-height: 200px;
+            overflow-y: auto;
+            position: absolute;
+            width: 50%;
+            background-color: white;
+            z-index: 1;margin-top: 20px;
+        }
+
+        .resultItem {
+            padding: 8px;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+        }
         .table {
             margin-bottom: 0 !important;
         }
@@ -211,14 +226,20 @@
                                         <div class="col-md-6">
                                             <div class="col-sm-8 mt-5">
                                                      <div class="form-group">
-                                                             <label class="col-sm-6 control-label align-right" for="form-field-1">Product code: </label>
-                                                                 <div class="input-group input-group-sm">
-                                                                 <span class="input-group-addon"><i class="ace-icon glyphicon glyphicon-plus"></i></span>
-                                                          <input type="text" id="productSearch" class="form-control" placeholder="Search Product">
+
+                                                                <label class="col-sm-6 control-label align-right" for="form-field-1">Product code: </label>
+                                                                <div class="input-group input-group-sm">
+                                                                    <span class="input-group-addon"><i class="ace-icon glyphicon glyphicon-plus"></i></span>
+                                                                    <input type="text" id="productSearch" class="form-control" placeholder="Search Product">
+
+{{--                                                                    <div id="searchResults"></div>--}}
                                                       </div>
+
                                                  </div>
                                             </div>
                                         </div>
+
+
 
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -228,6 +249,7 @@
                                                         {{--                                                <span class="input-group-addon"><i class="ace-icon glyphicon glyphicon-backward"></i></span>--}}
                                                         <input type="text" name="xstatustrn" id="current_date"
                                                                class="form-control " value="1-Open" readonly/>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -250,6 +272,7 @@
                                                 </thead>
 
                                                 <tbody>
+
                                                 <tr>
                                                     <td>
                                                         <div class="name-append">
@@ -383,6 +406,9 @@
         </div>
     </section>
 @endsection
+
+
+
 @section('js')
 
     <script src="{{ asset('assets/js/jquery.maskedinput.min.js') }}"></script>
@@ -396,6 +422,45 @@
     <!--Drag and drop-->
     <script type="text/javascript">
 
+
+        // const productSearchInput = document.getElementById('productSearch');
+        // const searchResultsDiv = document.getElementById('searchResults');
+        //
+        // productSearchInput.addEventListener('input', function() {
+        //     const searchTerm = productSearchInput.value.trim();
+        //     searchResultsDiv.innerHTML = ''; // Clear existing results
+        //
+        //     if (searchTerm.length > 0) {
+        //         // Simulated data, replace with your actual data source
+        //         const fakeData = [
+        //             'Product 1',
+        //             'Product 2',
+        //             'Product 3'
+        //         ];
+        //
+        //         const filteredData = fakeData.filter(product => product.toLowerCase().includes(searchTerm.toLowerCase()));
+        //
+        //         filteredData.forEach(product => {
+        //             const resultItem = document.createElement('div');
+        //             resultItem.textContent = product;
+        //             resultItem.classList.add('resultItem');
+        //
+        //             resultItem.addEventListener('click', function() {
+        //                 productSearchInput.value = product;
+        //                 searchResultsDiv.innerHTML = ''; // Clear the results after selection
+        //             });
+        //
+        //             searchResultsDiv.appendChild(resultItem);
+        //         });
+        //     }
+        // });
+        //
+        // // Close the search results when clicking outside
+        // document.addEventListener('click', function(event) {
+        //     if (!searchResultsDiv.contains(event.target) && event.target !== productSearchInput) {
+        //         searchResultsDiv.innerHTML = '';
+        //     }
+        // });
 
                             //---------------------------------//
                            //-------ajax search section-------//
@@ -421,6 +486,51 @@
                     });
                     selectOptions += '</select>';
                     productsSelect.innerHTML = selectOptions;
+
+
+                    const productSearchInput = document.getElementById('productSearch');
+                    const searchResultsDiv = document.getElementById('searchResults');
+
+                    productSearchInput.addEventListener('input', function() {
+                        const searchTerm = productSearchInput.value.trim();
+                        searchResultsDiv.innerHTML = ''; // Clear existing results
+
+                        if (searchTerm.length > 0) {
+                            let fakeData = [
+                                'Product 1',
+                                'Product 2',
+                                'Product 3'
+                            ]; fakeData.push('Pro $');
+
+                            for (let i=0; response.data.length; i++){
+                                fakeData.push(response.data)
+                            }
+
+
+                            const filteredData = fakeData.filter(product => product.toLowerCase().includes(searchTerm.toLowerCase()));
+
+                            filteredData.forEach(product => {
+                                const resultItem = document.createElement('div');
+                                resultItem.textContent = product;
+                                resultItem.classList.add('resultItem');
+
+                                resultItem.addEventListener('click', function() {
+                                    productSearchInput.value = product;
+                                    searchResultsDiv.innerHTML = ''; // Clear the results after selection
+                                });
+
+                                searchResultsDiv.appendChild(resultItem);
+                            });
+                        }
+                    });
+
+                    // Close the search results when clicking outside
+                    document.addEventListener('click', function(event) {
+                        if (!searchResultsDiv.contains(event.target) && event.target !== productSearchInput) {
+                            searchResultsDiv.innerHTML = '';
+                        }
+                    });
+
                 }).catch(function (error) {
                     alert('Error...')
                 })
@@ -432,6 +542,7 @@
                 //         option.style.display = 'none';
                 //     }
                 // });
+                $('.select-product').select2()
             });
 
               //---------------------------------//

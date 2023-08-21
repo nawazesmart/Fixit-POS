@@ -24,7 +24,7 @@ class SearsController extends Controller
             $query->where('xitem', 'LIKE', '%' . $request->search . '%')
                 ->where('zid', $zid);
         }])
-            ->take(10)
+            ->take(9)
             ->get();
 
         foreach ($products as $item) {

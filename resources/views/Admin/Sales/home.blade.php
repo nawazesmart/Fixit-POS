@@ -414,7 +414,7 @@
 
                                     </li>
 
-                                    <li><span style="float: left">Last Number:</span><input type="number" name="xdocnum" id="xdocnum"  style="width: 80px; height: 25px " >
+                                    <li><span style="float: left">Last Number: </span><input type="number" name="xdocnum" id="xdocnum"  style="width: 80px; height: 25px " >
                                         <input type="hidden"  name="xrow" id="" value="{{rand(4, 9999)}}"
                                                style="width: 80px; height: 25px "> </li>
                                 </ul>
@@ -1072,24 +1072,24 @@
         if (selectElement.value === "Cash Sale") {
 
 
-            cashAmountInput.required =true ;
+            cashAmountInput.required = true ;
             cardAmountInput.required = false;
-            // cardAmountInput.readOnly = true;
-            docNumInput.required = false;
+            docNumInput.readOnly = true;
+            // xsalescatInput.readOnly = true;
+            cardAmountInput.readOnly = true;
             xsalescatInput.required = false;
-            // cashAmountInput.style.display = "none";
-            // cardAmountInput.style.visibility = "block";
-            // docNumInput.style.display = "block";
+            cardAmountInput.style.visibility = "block";
+            docNumInput.style.display = "block";
         } else if (selectElement.value === "Card Sale") {
 
 
             cashAmountInput.required = false;
             cardAmountInput.required = true;
+            cardAmountInput.readOnly = false;
+            // xsalescatInput.readOnly = false;
+            docNumInput.readOnly = false;
             docNumInput.required = true;
             xsalescatInput.required = true;
-            // cashAmountInput.style.display = "none";
-            // cardAmountInput.style.display = "block";
-            // docNumInput.style.display = "block";
          }
         //else if (selectElement.value === "Both Sale") {
         //     // document.getElementById('methodProperties').innerHTML = '     <li><span style="float: left">CashAmount:</span><input type="number" class="cashAmount" name="xmember" id="cashAmount"\n' +

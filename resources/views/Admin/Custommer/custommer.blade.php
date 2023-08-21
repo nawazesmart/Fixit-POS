@@ -41,7 +41,7 @@
 
 
                 <div class="">
-                    <div class="col-xs-12 ">
+                    <div class="col-xs-10 ">
 
 
                         <div class="header smaller lighter blue">

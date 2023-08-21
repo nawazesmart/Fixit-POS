@@ -17,7 +17,22 @@
                             <div class="clearfix">
                                 <div class="pull-right tableTools-container"></div>
                             </div>
-                            <table class="table  table-bordered table-hover" id="list">
+                            <div class="input-group input-group-sm"
+                                 style="border: 0px ; border-bottom: floralwhite;width: 300px " !importan>
+                                            <span class="input-group-addon">CO Number</span>
+                                <input type="text" class="form-control rounded-0 search-input" name="search"
+                                       value=""
+                                       id="searchInput" placeholder="Search Your CO Number"
+                                       autocomplete="off">
+                            </div>
+                            <br>
+                            <div class="clearfix">
+                                <div class="pull-right tableTools-container"></div>
+                            </div>
+                            <div class="table-header">
+                                Results for "Latest Sale list"
+                            </div>
+                            <table class="table table-bordered table-hover" id="list">
                                 <thead>
                                 <tr>
                                     <td>Co ID</td>
@@ -27,47 +42,24 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
                                 @foreach($products as $product)
-
                                     <tr>
                                         <td>{{$product->xordernum}}</td>
                                         <td>{{$product->xsp}}</td>
                                         <td>
-
                                             <a href="{{route('sale-details.show', $product->xordernum)}}" class="btn btn-warning btn-sm">
-
                                                 <button class="btn btn-xs btn-warning">
                                                     <i class="ace-icon fa fa-flag bigger-20"></i>
                                                 </button>
                                             </a>
-
                                           </td>
                                         <td>
                                             <div class="hidden-sm hidden-xs btn-group">
-
                                                 <i class="ace-icon fa fa-trash-o bigger-20"></i>
-{{--                                                <a href="javascript:void(0);" class="btn btn-danger btn-sm text-white" onclick="deleteType({{$product->id}})"></a>--}}
-{{--                                                <form id="deleteForm{{$product->id}}" action="{{ route('sale-details.destroy',$product->id) }}" method="post">--}}
-{{--                                                    @csrf--}}
-{{--                                                    @method('DELETE')--}}
-{{--                                                </form>--}}
-
-
-
-
-
                                             </div>
-
-
                                         </td>
                                     </tr>
-
-
-
                                 @endforeach
-
-
                                 </tbody>
                             </table>
 
@@ -77,25 +69,25 @@
             </div>
 
         </div>
+
+
+
+
+
     </section>
 
+
+
+
+
     <script>
-        const searchInput = document.getElementById('searchInput');
-        const list = document.getElementById('list').getElementsByTagName('li');
 
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
+        $(document).ready(function() {
+            var dataTable = $('#list').DataTable();
 
-            for (let i = 0; i < list.length; i++) {
-                const listItemText = list[i].textContent.toLowerCase();
-                const listItem = list[i];
-
-                if (listItemText.includes(searchTerm)) {
-                    listItem.style.display = 'block';
-                } else {
-                    listItem.style.display = 'none';
-                }
-            }
+            $('#searchInput').on('keyup', function() {
+                dataTable.search(this.value).draw();
+            });
         });
     </script>
 

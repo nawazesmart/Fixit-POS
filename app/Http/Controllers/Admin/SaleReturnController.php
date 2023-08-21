@@ -31,7 +31,9 @@ class SaleReturnController extends Controller
                 $scan->orWhere('xitem', 'LIKE', $request->scan . '%');
                 $scan->orWhere('xcitem', 'LIKE', $request->scan . '%');
                 $scan->orWhere('xstdcost', 'LIKE', $request->scan . '%');
-            });
+            })
+            ->take(9)
+                ->get();
         }
         $products = $products->get();
         return view('Admin.Return.create', compact('products'));
@@ -45,7 +47,7 @@ class SaleReturnController extends Controller
 
 //        return request()->all();
 
-//        try {
+        try {
 
         $xordernumrequest = ProductReturn::where('zid', '100001')
         ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtmptrn, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
@@ -287,9 +289,9 @@ class SaleReturnController extends Controller
         ]);
 //        return redirect()->back();
         return view('Admin.Invoice.returnInvoice', compact('previewData', 'saleReturn', 'saleReturnDetails'));
-//        } catch (\Exception $e) {
-//            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
-//        }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
     }
 
 
