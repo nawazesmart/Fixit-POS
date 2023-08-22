@@ -30,7 +30,8 @@
                                 <h3> Customer add Form</h3>
                             </div>
                         </div>
-
+                        <div class="align-right" style="margin-right: 20px"><a href="{{route('customers.index')}}" class="btn btn-outline-warning"
+                                                                               id="bootbox-options">Customer List</a></div>
 
                         <form action="{{ route('customers.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf

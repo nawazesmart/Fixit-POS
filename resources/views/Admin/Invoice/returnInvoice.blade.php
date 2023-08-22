@@ -300,7 +300,8 @@
                 <thead>
                 <tr>
 
-                    <th class="text-left">Item Desc</th>
+                    <th class="text-left">Item Code</th>
+                    <th class="">Item Desc</th>
                     <th>Unit</th>
                     <th>Qty</th>
                     <th>Rate</th>
@@ -318,6 +319,9 @@
                 @foreach ($previewData as $data)
                     <tr>
                         {{--                        <td class="text-center">{{ $loop->iteration }}</td>--}}
+                        <td>
+                            {{ $data['saleReturnDetails']->xitem }} <br>
+                        </td>
                         <td>
                             {{ $data['saleReturnDetails']->xbin }} <br>
                         </td>

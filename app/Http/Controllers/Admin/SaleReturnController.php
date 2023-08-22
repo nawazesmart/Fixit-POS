@@ -216,7 +216,7 @@ class SaleReturnController extends Controller
             'xnumofper'=>value('0') ??'',
             'xnote'=> value('***System Generated voucher from IM***') ??'',
             'xmember'=>auth()->user()->email ??'',
-            'xaction'=>value('journal') ??'',
+            'xaction'=>value('Journal') ??'',
 
         ]);
         $accountDetails = AccountDetails::create([

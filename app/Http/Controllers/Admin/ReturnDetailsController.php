@@ -15,7 +15,7 @@ class ReturnDetailsController extends Controller
     {
 
     return view('Admin.Return.Return-details',[
-        'return'=>ProductReturn::latest()->take(150)->get(),
+        'return'=>ProductReturn::latest()->paginate(250),
     ]);
 
 

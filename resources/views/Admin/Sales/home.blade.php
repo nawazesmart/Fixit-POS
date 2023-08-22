@@ -12,7 +12,7 @@
     <style>
 
         .box {
-            height: 430px;
+            height: 450px;
         }
 
         .line {
@@ -243,7 +243,7 @@
                     <div class="ui ui-widget ui-widget-content">
                         <div class=" " style="width: 1385px">
 
-                            <div class="col-md-5 ml-3 box mb-2 overflow-scroll">
+                            <div class="col-md-6 ml-3 box mb-2 overflow-scroll">
                                 <div class="table-responsive mt-1 p-0">
                                     <div class="search-any-product d-flex">
                                         <div class="input-group input-group-sm"
@@ -380,7 +380,7 @@
 
                                         </select>
                                     </li>
-                                    <li ><span style="position: center">Bank:</span>
+                                    <li ><span style="float: left">Bank:</span>
                                         <select name="xsalescat"  id="xsalescat" style="height: 25px; width: 110px;">
                                             <option value="">select</option>
                                             <option value="CBL">CBL</option>
@@ -404,17 +404,17 @@
                             </div>
                             <div class="col-md-2 ">
                                 <ul class="list-unstyled" id="methodProperties">
-                                    <li><span style="float: left">CashAmount:</span><input type="number" name="xmember" id="cashAmount"
+                                    <li><span style="float: left">Cash Amount:</span><input type="number" name="xmember" id="cashAmount"
                                                                                            style="width: 80px; height: 25px "   step="any" >
                                     </li>
 
-                                    <li><span style="float: left">CardAmount:</span><input type="number" name="xdtcomm" id="cardAmount"
+                                    <li><span style="float: left">Card Amount:</span><input type="number" name="xdtcomm" id="cardAmount"
                                                                                            style="width: 80px; height: 25px "  step="any">
                                         <input type="hidden" class="xsalescat" id="xsalescat" value="{{'xsalescat'}}">
 
                                     </li>
 
-                                    <li><span style="float: left">Last Number: </span><input type="number" name="xdocnum" id="xdocnum"  style="width: 80px; height: 25px " >
+                                    <li><span style="float: left">Last Number :    :</span><input type="number" name="xdocnum" id="xdocnum"  style="width: 80px; height: 25px " >
                                         <input type="hidden"  name="xrow" id="" value="{{rand(4, 9999)}}"
                                                style="width: 80px; height: 25px "> </li>
                                 </ul>

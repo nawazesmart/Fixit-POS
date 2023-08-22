@@ -276,7 +276,8 @@
                 <thead>
                 <tr>
 
-                    <th class="text-left">Item Desc</th>
+                    <th class="text-left">Item code</th>
+                    <th class="">Item Desc</th>
                     <th>Unit</th>
                     <th>Qty</th>
                     <th>Rate</th>
@@ -289,7 +290,9 @@
                 @endphp
                 @foreach ($returnDetails as $data)
                     <tr>
+                        <td>{{ $data->xitem }} <br></td>
                         <td>{{ $data->xbin }} <br></td>
+
 {{--                        <td>{{ $data->productsa->xdesc }} <br></td>--}}
                         <td class="text-center text-muted">{{ $data->xunit}}</td>
                         <td class="text-center text-muted">{{round( $data->xqtyreq ),2}}</td>

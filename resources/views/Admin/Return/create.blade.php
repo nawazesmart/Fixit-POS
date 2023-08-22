@@ -67,7 +67,7 @@
             document.addEventListener('DOMContentLoaded', function () {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Billing has been already generated !',
+                    title: 'return will work only if any product added!',
                     text: 'please another try !',
                     // footer: '<a href="">Why do I have this issue?</a>'
                 })
@@ -96,15 +96,15 @@
 
             <div class="row">
 
-                <div class="col-sm-10">
-                    <div class="widget-box">
+                <div class="col-sm-10" >
+                    <div class="widget-box" >
                         <div class="widget-header">
-                            {{--                    <h4 class="widget-title"> @yield('page-header')</h4>--}}
+                                                <h4 class="widget-title"></h4>
 
 
-                            <span class="widget-toolbar">
-                    <a href="">
-                        <i class="ace-icon fa fa-list-alt"></i> Project List
+                            <span class="widget-toolbar" >
+                    <a href="{{route('return-details.index')}}">
+                        <i class="ace-icon fa fa-list-alt"></i> Return List
                     </a>
                 </span>
 
@@ -232,7 +232,7 @@
                                                                     <span class="input-group-addon"><i class="ace-icon glyphicon glyphicon-plus"></i></span>
                                                                     <input type="text" id="productSearch" class="form-control" placeholder="Search Product">
 
-{{--                                                                    <div id="searchResults"></div>--}}
+                                                                    <div id="searchResults"></div>
                                                       </div>
 
                                                  </div>
@@ -304,14 +304,14 @@
                                                         <div class="price-append" data-info-type="name"></div>
                                                     </td>
                                                     <td>
-                                                        <input  class="quantity form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="text" value=""  >
+                                                        <input  class="quantity form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="number" value=""  step="any" >
                                                     </td>
 
                                                     <td>
-                                                        <input  class="price form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="text" value="" >
+                                                        <input  class="price form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="number" value="" step="any" >
                                                     </td>
                                                     <td class="total-price" >
-                                                        <input type="text"  class="total-price  form-control"   value="">
+                                                        <input type="number"  class="total-price  form-control"   value="" >
                                                     </td>
                                                     <td>
                                                         <button type="button" class="btn btn-sm btn-primary" onclick="insertNewItem()"><i class="fa fa-plus"></i> Add</button>
@@ -476,7 +476,9 @@
                     var productsSelect = document.getElementById('name-append');
                     var selectOptions = '<select class="form-control select-product select2 mr-0" style="width: 100%">' +
                         '    <option value="">Select</option>';
+                    let dataitem = [];
                     response.data.forEach(function(product) {
+                        dataitem.push(product.xitem);
                         selectOptions += '<option value="' + product.xitem + '" ' +
                             '    data-product-code="' + product.xitem + '"' +
                             '    data-product-name="' + product.xdesc + '"' +
@@ -486,6 +488,9 @@
                     });
                     selectOptions += '</select>';
                     productsSelect.innerHTML = selectOptions;
+                    // console.log(dataitem)
+
+
 
 
                     const productSearchInput = document.getElementById('productSearch');
@@ -497,14 +502,9 @@
 
                         if (searchTerm.length > 0) {
                             let fakeData = [
-                                'Product 1',
-                                'Product 2',
-                                'Product 3'
-                            ]; fakeData.push('Pro $');
+                                dataitem
+                            ];
 
-                            for (let i=0; response.data.length; i++){
-                                fakeData.push(response.data)
-                            }
 
 
                             const filteredData = fakeData.filter(product => product.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -647,8 +647,9 @@
             let productNameSelected = $('.product-name-selected').val()
 
             let quantity = $('.quantity').val()
+            // let price = $('.price').val()
 
-            if (productId != '' && quantity != '') {
+            if (productId !== '' && quantity !== ''  && quantity !== '0' && productCost !== ''  && productCost !== '0' ) {
                 let tr =
 
 
@@ -682,13 +683,14 @@
                 // disable selected option
                 $('.select-product option[value=' + productId + ']').prop("disabled", true);
                 $('.quantity').val('');
+                $('.price').val('');
                 $('.select-product').val('');
                 // $('.select-product').select2('focus');
                 $('.select-product').select2();
             } else {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Select product and fill quantity!',
+                    title: 'Select product and fill Input field!',
                     // text: 'Please select a product and fill in the quantity.',
                     // footer: '<a href="">Why do I have this issue?</a>'
                 });

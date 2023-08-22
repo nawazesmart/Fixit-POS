@@ -69,14 +69,7 @@
                 <b class="arrow"></b>
             </li>
 
-            <li class="">
-                <a href="{{route('sale-details.index')}}">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Sale Details
-                </a>
 
-                <b class="arrow"></b>
-            </li>
 
             <li class="">
                 <a href="{{route('sales.index')}}">
@@ -86,6 +79,41 @@
 
                 <b class="arrow"></b>
             </li>
+
+            <li class="">
+                <a href="{{route('sale-details.index')}}">
+                    <i class="menu-icon fa fa-caret-right"></i>
+                    Sale Details
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+
+        </ul>
+    </li>
+    <li class="">
+        <a href="#" class="dropdown-toggle">
+            <i class="ace-icon fa fa-refresh bigger-160">_</i>
+            <span class="menu-text">
+								Product &amp; Return
+							</span>
+
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+
+        <b class="arrow"></b>
+
+        <ul class="submenu">
+            {{--            <li class="">--}}
+            {{--                <a href="{{route('products.index')}}">--}}
+            {{--                    <i class="menu-icon fa fa-caret-right"></i>--}}
+            {{--                    Products--}}
+            {{--                </a>--}}
+
+            {{--                <b class="arrow"></b>--}}
+            {{--            </li>--}}
+
 
             <li class="">
                 <a href="{{route('return.create')}}">
@@ -99,7 +127,7 @@
             <li class="">
                 <a href="{{route('return-details.index')}}">
                     <i class="menu-icon fa fa-caret-right"></i>
-                   Return Details
+                    Return Details
                 </a>
 
                 <b class="arrow"></b>

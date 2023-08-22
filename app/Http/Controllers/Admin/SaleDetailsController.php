@@ -14,7 +14,7 @@ class SaleDetailsController extends Controller
     public function index()
     {
         return view('Admin.Sales.sale-details',[
-            'products' => SaleOrder::latest()->take(150)->get(),
+            'products' => SaleOrder::latest()->paginate(250),
 
         ]);
     }
