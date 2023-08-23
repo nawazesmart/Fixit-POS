@@ -15,7 +15,7 @@ class ReturnDetailsController extends Controller
     {
 
     return view('Admin.Return.Return-details',[
-        'return'=>ProductReturn::latest()->paginate(250),
+        'return'=>ProductReturn::latest()->paginate(350),
     ]);
 
 
@@ -35,8 +35,8 @@ class ReturnDetailsController extends Controller
 
     public function show($ximtmptrn)
     {
-        $return = ProductReturn::where('ximtmptrn', $ximtmptrn)->first();
-        $returnDetails = ProductReturnDetails::where('ximtmptrn', $ximtmptrn)->get();
+        $return = ProductReturn::where('zid', 100001)->where('ximtmptrn', $ximtmptrn)->first();
+        $returnDetails = ProductReturnDetails::where('zid', 100001)->where('ximtmptrn', $ximtmptrn)->get();
         return view('Admin.Invoice.return-store-invoice',compact('return', 'returnDetails'));
     }
 

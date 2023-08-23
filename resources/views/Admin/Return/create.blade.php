@@ -9,9 +9,9 @@
             max-height: 200px;
             overflow-y: auto;
             position: absolute;
-            width: 50%;
+            width: 76%;
             background-color: white;
-            z-index: 1;margin-top: 20px;
+            z-index: 1;margin-top: 27px;
         }
 
         .resultItem {
@@ -492,7 +492,9 @@
 
 
 
-
+                      //--------------------------------------------//
+                     //-------ajax search suggestion section-------//
+                    //--------------------------------------------//
                     const productSearchInput = document.getElementById('productSearch');
                     const searchResultsDiv = document.getElementById('searchResults');
 
@@ -501,13 +503,7 @@
                         searchResultsDiv.innerHTML = ''; // Clear existing results
 
                         if (searchTerm.length > 0) {
-                            let fakeData = [
-                                dataitem
-                            ];
-
-
-
-                            const filteredData = fakeData.filter(product => product.toLowerCase().includes(searchTerm.toLowerCase()));
+                            const filteredData = dataitem.filter(product => product.toLowerCase().includes(searchTerm.toLowerCase()));
 
                             filteredData.forEach(product => {
                                 const resultItem = document.createElement('div');
@@ -516,7 +512,7 @@
 
                                 resultItem.addEventListener('click', function() {
                                     productSearchInput.value = product;
-                                    searchResultsDiv.innerHTML = ''; // Clear the results after selection
+                                    searchResultsDiv.innerHTML = '';
                                 });
 
                                 searchResultsDiv.appendChild(resultItem);
@@ -530,6 +526,9 @@
                             searchResultsDiv.innerHTML = '';
                         }
                     });
+                      //-------------------------------------------------//
+                     //-------ajax search suggestion section end--------//
+                    //-------------------------------------------------//
 
                 }).catch(function (error) {
                     alert('Error...')
@@ -639,7 +638,7 @@
             let productBarcodes = selected_item.data('product-price')
             let productunite = selected_item.data('product-unite')
 
-            console.log(productBarcodes)
+            // console.log(productBarcodes)
 
             let productCost = $('.price').val()
             let producSelectCode = $('.select-unit-code').val()
