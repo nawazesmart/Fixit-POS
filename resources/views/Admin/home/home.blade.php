@@ -46,7 +46,9 @@
         </div>
 
     </div>
-
+@php
+$sale =  \App\Models\SaleOrder::whereDate('xdatecuspo', \Carbon\Carbon::today())->sum('xtotamt')
+@endphp
 
 
     <div class="col-md-6 col-lg-3" style=" background: linear-gradient(to bottom, #ccccff 0%, #99ffcc 100%); margin-top: 30px; margin-left: 50px ;border-radius: 5px ; ">
@@ -76,6 +78,7 @@
             </div>
         </div>
     </div>
+
 {{--    @php--}}
 
 {{--        $today = now()->format('Y-m-d');--}}
@@ -131,3 +134,4 @@
 
 
 @endsection
+

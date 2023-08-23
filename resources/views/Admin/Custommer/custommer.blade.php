@@ -8,7 +8,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
-    <title>Tables - Ace Admin</title>
+    <title>Tables - Customers</title>
     <meta name="description" content="Static &amp; Dynamic Tables" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <link rel="stylesheet" href="{{asset('/')}}assets/css/bootstrap.min.css" />
@@ -203,8 +203,8 @@
             </li>
             <li class="">
                 <a href="#" class="dropdown-toggle">
-                    <i class="ace-icon fa fa-refresh bigger-160">_</i>
-                    <span class="menu-text">
+                    <i class="ace-icon fa fa-refresh bigger-160" style="margin-left: 2px"></i>
+                    <span class="menu-text" style="margin-left: 10px">
 								Product &amp; Return
 							</span>
 

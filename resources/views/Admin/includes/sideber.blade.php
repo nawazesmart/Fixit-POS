@@ -94,8 +94,8 @@
     </li>
     <li class="">
         <a href="#" class="dropdown-toggle">
-            <i class="ace-icon fa fa-refresh bigger-160">_</i>
-            <span class="menu-text">
+            <i class="ace-icon fa fa-refresh bigger-160" style="margin-left: 2px"></i>
+            <span class="menu-text" style="margin-left: 10px">
 								Product &amp; Return
 							</span>
 

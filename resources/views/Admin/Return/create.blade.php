@@ -9,9 +9,23 @@
             max-height: 200px;
             overflow-y: auto;
             position: absolute;
-            width: 76%;
-            background-color: white;
-            z-index: 1;margin-top: 27px;
+            width: 78%;
+            background-color: #E5E4E2;
+            z-index: 1;
+            margin-top: 27px;
+            border-radius: 5px;
+
+        }
+        #searchResults::-webkit-scrollbar {
+            width: 0.5em;
+        }
+
+        #searchResults::-webkit-scrollbar-thumb {
+            background-color: transparent;
+        }
+
+        #searchResults::-webkit-scrollbar-track {
+            background-color: transparent;
         }
 
         .resultItem {
@@ -230,7 +244,7 @@
                                                                 <label class="col-sm-6 control-label align-right" for="form-field-1">Product code: </label>
                                                                 <div class="input-group input-group-sm">
                                                                     <span class="input-group-addon"><i class="ace-icon glyphicon glyphicon-plus"></i></span>
-                                                                    <input type="text" id="productSearch" class="form-control" placeholder="Search Product">
+                                                                    <input type="text" id="productSearch"  class="form-control" placeholder="Search Product" autocomplete="off">
 
                                                                     <div id="searchResults"></div>
                                                       </div>
@@ -523,7 +537,7 @@
                                         newOption.dataset.productPrice = selectedProductDetails.xstdcost;
                                         newOption.dataset.productUnite = selectedProductDetails.xunitiss;
                                         newOption.textContent = selectedProductDetails.xitem;
-                                        
+
                                         productsSelect.innerHTML = '<option value="">Select</option>';
                                         productsSelect.appendChild(newOption);
 

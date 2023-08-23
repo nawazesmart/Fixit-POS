@@ -8,7 +8,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
-    <title>Tables - Ace Admin</title>
+    <title>Tables - Sale detais</title>
     <meta name="description" content="Static &amp; Dynamic Tables" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <link rel="stylesheet" href="{{asset('/')}}assets/css/bootstrap.min.css" />
@@ -201,8 +201,8 @@
             </li>
             <li class="">
                 <a href="#" class="dropdown-toggle">
-                    <i class="ace-icon fa fa-refresh bigger-160">_</i>
-                    <span class="menu-text">
+                    <i class="ace-icon fa fa-refresh bigger-160" style="margin-left: 2px"></i>
+                    <span class="menu-text" style="margin-left: 10px">
 								Product &amp; Return
 							</span>
 
@@ -344,7 +344,7 @@
                                                 </td>
 
                                                 <td>
-                                                    <a href="{{route('sale-details.show', $product->xordernum)}}" class="btn btn-warning btn-sm">
+                                                    <a href="{{route('sale-details.show', $product->xordernum)}}" class="">
                                                         <button class="btn btn-xs btn-warning">
                                                             <i class="ace-icon fa fa-flag bigger-20"></i>
                                                         </button>
@@ -403,7 +403,9 @@
 <!-- ace scripts -->
 <script src="{{asset('/')}}assets/js/ace-elements.min.js"></script>
 <script src="{{asset('/')}}assets/js/ace.min.js"></script>
-
+{{--<script>--}}
+{{--    window.print()--}}
+{{--</script>--}}
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
     jQuery(function($) {
@@ -461,11 +463,13 @@
                 },
                 {
                     "extend": "print",
-                    "text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>Print</span>",
+                    "text": "<i class='fa fa-print bigger-110 grey'></i> <span   class=''>Print</span>",
                     "className": "btn btn-white btn-primary btn-bold",
-                    autoPrint: false,
+                    autoPrint: true,
                     message: 'This print was produced using the Print button for DataTables'
+
                 }
+
             ]
         } );
         myTable.buttons().container().appendTo( $('.tableTools-container') );
