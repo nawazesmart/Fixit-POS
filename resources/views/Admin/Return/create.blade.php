@@ -510,12 +510,28 @@
                                 resultItem.textContent = product;
                                 resultItem.classList.add('resultItem');
 
-                                // resultItem.addEventListener('click', function() {
-                                //     productSearchInput.value = product;
-                                //
-                                //     productsSelect.innerHTML = `<option value="${product}" selected>${product}</option>`;
-                                //     searchResultsDiv.innerHTML = '';
-                                // });
+                                resultItem.addEventListener('click', function() {
+                                    const selectedProduct = product;
+
+                                    const selectedProductDetails = response.data.find(product => product.xitem === selectedProduct);
+
+                                    if (selectedProductDetails) {
+                                        const newOption = document.createElement('option');
+                                        newOption.value = selectedProductDetails.xitem;
+                                        newOption.dataset.productCode = selectedProductDetails.xitem;
+                                        newOption.dataset.productName = selectedProductDetails.xdesc;
+                                        newOption.dataset.productPrice = selectedProductDetails.xstdcost;
+                                        newOption.dataset.productUnite = selectedProductDetails.xunitiss;
+                                        newOption.textContent = selectedProductDetails.xitem;
+                                        
+                                        productsSelect.innerHTML = '<option value="">Select</option>';
+                                        productsSelect.appendChild(newOption);
+
+                                        productSearchInput.value = selectedProduct;
+                                        searchResultsDiv.innerHTML = '';
+                                    }
+                                });
+
 
                                 searchResultsDiv.appendChild(resultItem);
                             });
