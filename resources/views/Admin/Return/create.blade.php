@@ -500,7 +500,7 @@
 
                     productSearchInput.addEventListener('input', function() {
                         const searchTerm = productSearchInput.value.trim();
-                        searchResultsDiv.innerHTML = ''; // Clear existing results
+                        searchResultsDiv.innerHTML = '';
 
                         if (searchTerm.length > 0) {
                             const filteredData = dataitem.filter(product => product.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -510,10 +510,12 @@
                                 resultItem.textContent = product;
                                 resultItem.classList.add('resultItem');
 
-                                resultItem.addEventListener('click', function() {
-                                    productSearchInput.value = product;
-                                    searchResultsDiv.innerHTML = '';
-                                });
+                                // resultItem.addEventListener('click', function() {
+                                //     productSearchInput.value = product;
+                                //
+                                //     productsSelect.innerHTML = `<option value="${product}" selected>${product}</option>`;
+                                //     searchResultsDiv.innerHTML = '';
+                                // });
 
                                 searchResultsDiv.appendChild(resultItem);
                             });
