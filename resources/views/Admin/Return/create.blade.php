@@ -16,6 +16,7 @@
             border-radius: 5px;
 
         }
+
         #searchResults::-webkit-scrollbar {
             width: 0.5em;
         }
@@ -33,6 +34,7 @@
             border-bottom: 1px solid #ccc;
             cursor: pointer;
         }
+
         .table {
             margin-bottom: 0 !important;
         }
@@ -110,13 +112,13 @@
 
             <div class="row">
 
-                <div class="col-sm-10" >
-                    <div class="widget-box" >
+                <div class="col-sm-10">
+                    <div class="widget-box">
                         <div class="widget-header">
-                                                <h4 class="widget-title"></h4>
+                            <h4 class="widget-title"></h4>
 
 
-                            <span class="widget-toolbar" >
+                            <span class="widget-toolbar">
                     <a href="{{route('return-details.index')}}">
                         <i class="ace-icon fa fa-list-alt"></i> Return List
                     </a>
@@ -127,11 +129,45 @@
 
                         <div class="widget-body">
                             <div class="widget-main">
-                                <form class="form-horizontal" action="{{route('return.store')}}" method="post" enctype="multipart/form-data">
+                                <form class="form-horizontal" action="{{route('return.store')}}" method="post"
+                                      enctype="multipart/form-data">
                                     @csrf
 
-
                                     <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="col-sm-10 mt-5">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 control-label align-right"
+                                                           for="form-field-1"> Sales Return Voucher Number </label>
+
+                                                    <div class="input-group input-group-sm">
+
+
+                                                    </div>
+                                                    @php
+                                                        $productReturn = $xordernumrequest +1 ;
+                                                        $formattedNumber = str_pad($productReturn, 6, '0', STR_PAD_LEFT);
+
+                                                         $productR = $xordernumrequest ;
+                                                         $formattedNu = str_pad($productR, 6, '0', STR_PAD_LEFT);
+
+                                                    @endphp
+
+                                                    <div class=" ">
+                                                        <div class="input-group input-group-sm">
+                                                            <span class="input-group-addon"><i class="ace-icon glyphicon glyphicon-th"></i></span>
+                                                            <span class="input-group-addon">SRE-{{$formattedNu}}</span>
+                                                            <span class="input-group-addon"><i class="ace-icon glyphicon glyphicon-play"></i></span>
+                                                            <div class=" input-group input-group-sm">
+                                                                <span class="input-group-addon">{{'SRE-'.$formattedNumber}}</span>
+                                                                <span class="input-group-addon"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-md-6">
                                             <div class="col-sm-8 mt-5">
                                                 <div class="form-group">
@@ -151,13 +187,15 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-sm-3 control-label" style="color: red">WareHouse:<sup>*</sup> </label>
+                                                <label class="col-sm-3 control-label" style="color: red">WareHouse:<sup>*</sup>
+                                                </label>
                                                 <div class="col-sm-8 mt-5">
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-addon"><i
                                                                 class="ace-icon glyphicon glyphicon-home"></i></span>
                                                         <select class="form-control rounded-0" name="xwh">
-                                                            <option value="Fixit Gulshan" selected="">Fixit Gulshan</option>
+                                                            <option value="Fixit Gulshan" selected="">Fixit Gulshan
+                                                            </option>
                                                             <option value="Damage Warehouse">Damage Warehouse</option>
                                                         </select>
                                                     </div>
@@ -186,13 +224,16 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-sm-3 control-label" style="color: red">Project:<sup>*</sup> </label>
+                                                <label class="col-sm-3 control-label"
+                                                       style="color: red">Project:<sup>*</sup> </label>
                                                 <div class="col-sm-8 mt-5">
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-addon"><i
                                                                 class="ace-icon fa fa-cogs"></i></span>
                                                         <select class="form-control rounded-0" name="xproj" required>
-                                                            <option value="HMBR FIXIT GULSHAN" selected="">HMBR FIXIT GULSHAN</option>
+                                                            <option value="HMBR FIXIT GULSHAN" selected="">HMBR FIXIT
+                                                                GULSHAN
+                                                            </option>
                                                             <option value=""></option>
                                                         </select>
                                                     </div>
@@ -214,7 +255,7 @@
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-addon"><i
                                                                 class="ace-icon glyphicon glyphicon-plus"></i></span>
-                                                        <textarea name="xrem" class="form-control" required ></textarea>
+                                                        <textarea name="xrem" class="form-control" required></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -239,20 +280,22 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="col-sm-8 mt-5">
-                                                     <div class="form-group">
+                                                <div class="form-group">
 
-                                                                <label class="col-sm-6 control-label align-right" for="form-field-1">Product code: </label>
-                                                                <div class="input-group input-group-sm">
-                                                                    <span class="input-group-addon"><i class="ace-icon glyphicon glyphicon-plus"></i></span>
-                                                                    <input type="text" id="productSearch"  class="form-control" placeholder="Search Product" autocomplete="off">
+                                                    <label class="col-sm-6 control-label align-right"
+                                                           for="form-field-1">Product code: </label>
+                                                    <div class="input-group input-group-sm">
+                                                        <span class="input-group-addon"><i
+                                                                class="ace-icon glyphicon glyphicon-search"></i></span>
+                                                        <input type="text" id="productSearch" class="form-control"
+                                                               placeholder="Search Product" autocomplete="off">
 
-                                                                    <div id="searchResults"></div>
-                                                      </div>
+                                                        <div id="searchResults"></div>
+                                                    </div>
 
-                                                 </div>
+                                                </div>
                                             </div>
                                         </div>
-
 
 
                                         <div class="col-md-6">
@@ -290,7 +333,8 @@
                                                 <tr>
                                                     <td>
                                                         <div class="name-append">
-                                                            <select class="form-control select-product select2 mr-0" style="width: 100%" id="name-append">
+                                                            <select class="form-control select-product select2 mr-0"
+                                                                    style="width: 100%" id="name-append">
                                                                 <option value="">Select</option>
                                                                 @if($products)
                                                                     @foreach($products as $key => $product)
@@ -311,24 +355,30 @@
                                                     <td>
                                                         <div class="barcode-append" data-info-type="name"></div>
                                                     </td>
-{{--                                                    <td>--}}
-{{--                                                        <div class="sub-row-total" data-info-type="name"></div>--}}
-{{--                                                    </td>--}}
+                                                    {{--                                                    <td>--}}
+                                                    {{--                                                        <div class="sub-row-total" data-info-type="name"></div>--}}
+                                                    {{--                                                    </td>--}}
                                                     <td>
                                                         <div class="price-append" data-info-type="name"></div>
                                                     </td>
                                                     <td>
-                                                        <input  class="quantity form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="number" value=""  step="any" >
+                                                        <input class="quantity form-control"
+                                                               onkeypress="event.charCode >= 46 && event.charCode <= 57"
+                                                               type="number" value="" step="any">
                                                     </td>
 
                                                     <td>
-                                                        <input  class="price form-control" onkeypress="event.charCode >= 46 && event.charCode <= 57" type="number" value="" step="any" >
+                                                        <input class="price form-control"
+                                                               onkeypress="event.charCode >= 46 && event.charCode <= 57"
+                                                               type="number" value="" step="any">
                                                     </td>
-                                                    <td class="total-price" >
-                                                        <input type="number"  class="total-price  form-control"   value="" >
+                                                    <td class="total-price">
+                                                        <input type="number" class="total-price  form-control" value="">
                                                     </td>
                                                     <td>
-                                                        <button type="button" class="btn btn-sm btn-primary" onclick="insertNewItem()"><i class="fa fa-plus"></i> Add</button>
+                                                        <button type="button" class="btn btn-sm btn-primary"
+                                                                onclick="insertNewItem()"><i class="fa fa-plus"></i> Add
+                                                        </button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -388,27 +438,17 @@
                                     </div>
 
 
+                                    {{--                                    ///////////////////////////////////////////////--}}
 
-
-
-
-
-
-
-
-
-
-{{--                                    ///////////////////////////////////////////////--}}
-
-{{--                                    <div class="form-group" style="float: right; margin-top: 30px">--}}
-{{--                                        <label for="inputError"--}}
-{{--                                               class="col-xs-12 col-sm-3 col-md-3 control-label"></label>--}}
-{{--                                        <div class="col-xs-12 col-sm-12 float-right">--}}
-{{--                                            <button class="btn btn-xs btn-success" type="submit"><i--}}
-{{--                                                    class="ace-icon glyphicon glyphicon-repeat"></i> Return--}}
-{{--                                            </button>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
+                                    {{--                                    <div class="form-group" style="float: right; margin-top: 30px">--}}
+                                    {{--                                        <label for="inputError"--}}
+                                    {{--                                               class="col-xs-12 col-sm-3 col-md-3 control-label"></label>--}}
+                                    {{--                                        <div class="col-xs-12 col-sm-12 float-right">--}}
+                                    {{--                                            <button class="btn btn-xs btn-success" type="submit"><i--}}
+                                    {{--                                                    class="ace-icon glyphicon glyphicon-repeat"></i> Return--}}
+                                    {{--                                            </button>--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                    </div>--}}
                                 </form>
                             </div>
                         </div>
@@ -476,9 +516,9 @@
         //     }
         // });
 
-                            //---------------------------------//
-                           //-------ajax search section-------//
-                          //---------------------------------//
+        //---------------------------------//
+        //-------ajax search section-------//
+        //---------------------------------//
         document.addEventListener('DOMContentLoaded', function () {
             const selectProduct = document.querySelector('.select-product');
             const productSearch = document.getElementById('productSearch');
@@ -491,7 +531,7 @@
                     var selectOptions = '<select class="form-control select-product select2 mr-0" style="width: 100%">' +
                         '    <option value="">Select</option>';
                     let dataitem = [];
-                    response.data.forEach(function(product) {
+                    response.data.forEach(function (product) {
                         dataitem.push(product.xitem);
                         selectOptions += '<option value="' + product.xitem + '" ' +
                             '    data-product-code="' + product.xitem + '"' +
@@ -505,14 +545,13 @@
                     // console.log(dataitem)
 
 
-
-                      //--------------------------------------------//
-                     //-------ajax search suggestion section-------//
+                    //--------------------------------------------//
+                    //-------ajax search suggestion section-------//
                     //--------------------------------------------//
                     const productSearchInput = document.getElementById('productSearch');
                     const searchResultsDiv = document.getElementById('searchResults');
 
-                    productSearchInput.addEventListener('input', function() {
+                    productSearchInput.addEventListener('input', function () {
                         const searchTerm = productSearchInput.value.trim();
                         searchResultsDiv.innerHTML = '';
 
@@ -524,7 +563,7 @@
                                 resultItem.textContent = product;
                                 resultItem.classList.add('resultItem');
 
-                                resultItem.addEventListener('click', function() {
+                                resultItem.addEventListener('click', function () {
                                     const selectedProduct = product;
 
                                     const selectedProductDetails = response.data.find(product => product.xitem === selectedProduct);
@@ -553,13 +592,13 @@
                     });
 
                     // Close the search results when clicking outside
-                    document.addEventListener('click', function(event) {
+                    document.addEventListener('click', function (event) {
                         if (!searchResultsDiv.contains(event.target) && event.target !== productSearchInput) {
                             searchResultsDiv.innerHTML = '';
                         }
                     });
-                      //-------------------------------------------------//
-                     //-------ajax search suggestion section end--------//
+                    //-------------------------------------------------//
+                    //-------ajax search suggestion section end--------//
                     //-------------------------------------------------//
 
                 }).catch(function (error) {
@@ -576,14 +615,13 @@
                 $('.select-product').select2()
             });
 
-              //---------------------------------//
-             //-----ajax search section End-----//
+            //---------------------------------//
+            //-----ajax search section End-----//
             //---------------------------------//
 
 
-
-              //-------------------------------------------------------//
-             //-----Product price and name show but it was hidden-----//
+            //-------------------------------------------------------//
+            //-----Product price and name show but it was hidden-----//
             //-------------------------------------------------------//
             $('.select-product').on('select2:select', function (e) {
                 var selectedOption = e.params.data;
@@ -596,7 +634,7 @@
             });
 
 
-            $('.quantity, .price').on('input', function() {
+            $('.quantity, .price').on('input', function () {
                 calculateTotalPrice($(this).closest('tr'));
             });
 
@@ -604,9 +642,9 @@
         });
 
 
-                              //-------------------------------------------------------//
-                             //-----Product name show barcode search------------------//
-                            //-------------------------------------------------------//
+        //-------------------------------------------------------//
+        //-----Product name show barcode search------------------//
+        //-------------------------------------------------------//
         $('.select-product').change(function () {
             let productCost = $(this).find('option:selected').data('product-price')
             let barcodeIn = $(this).find('option:selected').data('product-name')
@@ -622,10 +660,9 @@
         })
 
 
-
-                              //--------------------------------------------------------//
-                             //-----Product price show barcode search------------------//
-                            // -------------------------------------------------------//
+        //--------------------------------------------------------//
+        //-----Product price show barcode search------------------//
+        // -------------------------------------------------------//
 
         $('.select-product').change(function () {
             let productCost = $(this).find('option:selected').data('product-price')
@@ -644,20 +681,16 @@
         })
 
 
-
-
-
-
-                              //-------------------------------------------------------//
-                             //----------------Product  show   search-----------------//
-                            //-------------------------------------------------------//
+        //-------------------------------------------------------//
+        //----------------Product  show   search-----------------//
+        //-------------------------------------------------------//
         function calculateTotalPrice(row) {
             var quantity = parseFloat(row.find('.quantity').val()) || 0;
             var price = parseFloat(row.find('.price').val()) || 0;
 
             var totalPrice = quantity * price;
             console.log(totalPrice)
-            row.find('.total-price').text( totalPrice.toFixed(2));
+            row.find('.total-price').text(totalPrice.toFixed(2));
         }
 
 
@@ -680,18 +713,18 @@
             let quantity = $('.quantity').val()
             // let price = $('.price').val()
 
-            if (productId !== '' && quantity !== ''  && quantity !== '0' && productCost !== ''  && productCost !== '0' ) {
+            if (productId !== '' && quantity !== '' && quantity !== '0' && productCost !== '' && productCost !== '0') {
                 let tr =
 
 
                     '<tr>' +
                     '<td class="item-serial"></td>' +
-                    '<td>' + productName  + '<input type="hidden" name="product_ids[]" class="product-id" value="'+productName+'"></td>' +
-                    '<td>' + productCode  + '<input type="hidden" name="xitem[]" value="' + productId + '"></td>' +
-                    '<td>' +  productBarcodes + '<input type="hidden" name="xstdcost[]" value="'+productBarcodes+'"></td>' +
+                    '<td>' + productName + '<input type="hidden" name="product_ids[]" class="product-id" value="' + productName + '"></td>' +
+                    '<td>' + productCode + '<input type="hidden" name="xitem[]" value="' + productId + '"></td>' +
+                    '<td>' + productBarcodes + '<input type="hidden" name="xstdcost[]" value="' + productBarcodes + '"></td>' +
                     '<td><input type="text" readonly name="xlin[]" class="product-row-sub form-control text-center" value="' + (productBarcodes * quantity) + '"></td>' +
 
-                    '<td>' +  productunite + '<input type="hidden"  name="xunit[]" value="'+productunite+'"></td>' +
+                    '<td>' + productunite + '<input type="hidden"  name="xunit[]" value="' + productunite + '"></td>' +
                     '<td><input type="text" readonly name="xqtyord[]" class="product-quantity form-control text-center" value="' + quantity + '"></td>' +
                     '<td><input type="text" readonly name="xrate[]" class="product-price form-control text-center" value="' + productCost + '"></td>' +
 
@@ -742,29 +775,26 @@
 
         }
 
-                            function setItemSeriaal() {
-                                let total = 0
-                                $('.item-serial').each(function (index) {
-                                    $(this).text(index + 1)
-                                    total += parseFloat($(this).closest('tr').find('.product-row-subtotal').val())
-                                })
-                                $('.lime-total').val(total)
+        function setItemSeriaal() {
+            let total = 0
+            $('.item-serial').each(function (index) {
+                $(this).text(index + 1)
+                total += parseFloat($(this).closest('tr').find('.product-row-subtotal').val())
+            })
+            $('.lime-total').val(total)
 
 
-                            }
+        }
 
 
-
-                            function setItemSeri() {
-                                let total = 0
-                                $('.item-serial').each(function (index) {
-                                    $(this).text(index + 1)
-                                    total += parseFloat($(this).closest('tr').find('.product-row-sub').val())
-                                })
-                                $('.sub-row-total').val(total)
-                            }
-
-
+        function setItemSeri() {
+            let total = 0
+            $('.item-serial').each(function (index) {
+                $(this).text(index + 1)
+                total += parseFloat($(this).closest('tr').find('.product-row-sub').val())
+            })
+            $('.sub-row-total').val(total)
+        }
 
 
         function removeRow(object) {
@@ -775,16 +805,13 @@
         }
 
 
-
-
-
-        $(document).on("keyup", ".calculate-billing", function() {
+        $(document).on("keyup", ".calculate-billing", function () {
             calculateRowMultiply()
             calculateAmount()
         });
 
         function calculateRowMultiply() {
-            $('table tr:has(td):not(:last)').each(function() {
+            $('table tr:has(td):not(:last)').each(function () {
                 let totalprice = 0
                 let subscriptionfee = $(this).find('.subscriptionfee').val()
                 let billing_type = $(this).find('.billing_type').val()
@@ -792,14 +819,13 @@
                 console.log(billing_type)
 
 
-                    totalprice = subscriptionfee * billing_type
+                totalprice = subscriptionfee * billing_type
 
                 $(this).find('.totalprice').val(totalprice);
             });
 
 
         }
-
 
 
     </script>

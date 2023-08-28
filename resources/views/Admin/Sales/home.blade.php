@@ -247,18 +247,6 @@
                                 <span class="input-group-addon"></span>
                                 {{--                                 xordernum: <span id="ordernum"></span>--}}
                             </div>
-
-                            {{--                            <select class="form-control select2 rounded-0 select2-hidden-accessible" name="category"--}}
-                            {{--                                    id="category_select" tabindex="-1" aria-hidden="true">--}}
-                            {{--                                <option value="" selected="" data-select2-id="select2-data-11-aomr">All Category--}}
-                            {{--                                </option>--}}
-                            {{--                                @foreach($category as  $item)--}}
-                            {{--                                    <option value="{{ $item->xgitem }}" class="category"--}}
-                            {{--                                            onclick="categoryProducts(this)">{{$item->xgitem}}</option>--}}
-
-
-                            {{--                                @endforeach--}}
-                            {{--                            </select>--}}
                             <span class="select2 select2-container select2-container--bootstrap-5" dir="ltr"
                                   data-select2-id="select2-data-10-68ob" style="width: 159.484px;">
                                 <span class="selection">
@@ -274,6 +262,8 @@
                                     class="dropdown-wrapper" aria-hidden="true"></span></span>
                         </div>
                     </div>
+
+
                     <div class="col-md-6 m-2">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon"><i class="ace-icon glyphicon glyphicon-home"></i></span>

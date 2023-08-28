@@ -22,6 +22,14 @@ class SaleReturnController extends Controller
 
     public function create(Request $request)
     {
+
+        $xordernumrequest = ProductReturn::where('zid', '100001')
+            ->selectRaw('MAX(CAST(REGEXP_REPLACE(ximtmptrn, \'[^\d]*\', \'\', \'g\') AS INTEGER)) as max_number')
+            ->first()
+            ->max_number;
+//        $productReturn = $xordernumrequest +1 ;
+//        $formattedNumber = str_pad($productReturn, 6, '0', STR_PAD_LEFT);
+
 //        return $request->all();
         $zid = '100001';
         $products = Product::select('xitem', 'xdesc')->groupBy('xdesc', 'xitem')->where('zid',$zid )->take(0);
@@ -36,7 +44,7 @@ class SaleReturnController extends Controller
                 ->get();
         }
         $products = $products->get();
-        return view('Admin.Return.create', compact('products'));
+        return view('Admin.Return.create', compact('products','xordernumrequest'));
 //main search use ajax so it is mane query use ReturnDetailsController in last search function
 //        return  view('Admin.Return.create', compact('products'));
     }
