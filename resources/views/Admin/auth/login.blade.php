@@ -73,9 +73,16 @@
                                                         <x-checkbox id="remember_me" name="remember" />
                                                         <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                                                     </label>
+
+{{--                                                        <x-button class="ml-4 width-35 pull-right btn btn-sm btn-primary">--}}
+{{--                                                            {{ __('Log in') }}--}}
+{{--                                                        </x-button>--}}
+
                                                         <x-button class="ml-4 width-35 pull-right btn btn-sm btn-primary">
                                                             {{ __('Log in') }}
                                                         </x-button>
+
+
                                                 </div>
                                             </div>
                                             <div class="space-4"></div>

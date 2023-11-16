@@ -1,10 +1,14 @@
 
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
-    <title>Tables - Return Details</title>
+    <title>bar codes</title>
     <meta name="description" content="Static &amp; Dynamic Tables" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <link rel="stylesheet" href="{{asset('/')}}assets/css/bootstrap.min.css" />
@@ -141,7 +145,6 @@
                 <b class="arrow"></b>
             </li>
 
-
             <li class="">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-desktop"></i>
@@ -193,7 +196,9 @@
                         <b class="arrow"></b>
                     </li>
 
-                     <li class="">
+
+
+                    <li class="">
                 <a href="{{route('barcode')}}">
                     <i class="menu-icon fa fa-caret-right"></i>
                    Product BarCode
@@ -249,33 +254,7 @@
 
                 </ul>
             </li>
-            <li class="">
-                <a href="#" class="dropdown-toggle">
-                    <i class="ace-icon fa fa-user bigger-160" style="margin-left: 2px"></i>
-                    <span class="menu-text" style="margin-left: 10px">
-								Users
-							</span>
 
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-
-                <b class="arrow"></b>
-
-                <ul class="submenu">
-                    <li class="">
-                        <a href="{{route('users.index')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            User Create
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-
-
-
-                </ul>
-            </li>
 
         </ul><!-- /.nav-list -->
 
@@ -290,20 +269,14 @@
         <div class="main-content-inner">
 
 
-            <div class="page-content">
-                <div class="ace-settings-container" id="ace-settings-container">
-                    <div class="align-right" style="margin-right: 20px"><a href="{{route('return.create')}}" class="btn btn-success"
-                                                                           id="bootbox-options">Create Return</a></div>
-
-
-                </div><!-- /.ace-settings-container -->
+          <!-- /.ace-settings-container -->
 
                 <div class="page-header">
                     <h1>
-                        Return
+                        Bar  Code
                         <small>
                             <i class="ace-icon fa fa-angle-double-right"></i>
-                             &amp; Return Details
+                             &amp;   details
                         </small>
                     </h1>
                 </div><!-- /.page-header -->
@@ -322,7 +295,7 @@
                                     <div class="pull-right tableTools-container"></div>
                                 </div>
                                 <div class="table-header">
-                                    Results for "Latest Sale Return"
+                                    Results for "Bar Codes"
                                 </div>
 
                                 <!-- div.table-responsive -->
@@ -338,54 +311,73 @@
                                                     <span class="lbl"></span>
                                                 </label>
                                             </th>
-                                            <th>SRE ID	</th>
+                                            <th>Product Code</th>
+                                            <th>Product Name</th>
 
-                                            <th class="hidden-480">Warehouse</th>
 
                                             <th>
                                                 <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
                                                 Update
                                             </th>
-                                            <th class="hidden-480">Status</th>
-                                            <th>details</th>
-                                            <th></th>
+                                            <th class="hidden-480 ">Status</th>
+
+                                            <th class="hidden-480">Bar Code</th>
                                         </tr>
                                         </thead>
 
                                         <tbody>
-                                        @foreach($return as $product)
-                                        <tr>
-                                            <td class="center">
-                                                <label class="pos-rel">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
-                                            </td>
-
-                                            <td>
-                                                {{$product->ximtmptrn}}
-                                            </td>
-
-                                            <td class="hidden-480">{{$product->xwh}}</td>
-                                            <td>{{$product->xdate}}</td>
+                                   
 
 
 
-                                            <td class="hidden-480">
-                                                <span class="label label-sm label-warning">{{$product->xstatustrn}}</span>
-                                            </td>
-                                            <td>
-                                                <a href="{{route('return-details.show', $product->ximtmptrn)}}"
-                                                   class="">
-                                                    <button class="btn btn-xs btn-warning">
-                                                        <i class="ace-icon fa fa-flag bigger-10"></i>
-                                                    </button>
-                                                </a>
-                                            </td>
-                                          <td></td>
-                                        </tr>
 
-                                        @endforeach
+
+
+       
+                                       @foreach($products as $product)
+
+                                            <tr>
+                                                <td class="center">
+                                                    <label class="pos-rel">
+                                                        <input type="checkbox" class="ace" />
+                                                        <span class="lbl"></span>
+                                                    </label>
+                                                </td>
+
+                                                <td>
+                                               {{$product->xitem}}
+                                                </td>
+                                                <td>
+                                                    {{$product->xdesc}}
+                                                </td>
+
+                                                <td>    {{$product->zutime}} </td>
+
+                                                <td class="hidden-480">
+                                                    <span class="label label-sm label-warning">{{$product->quantity_total}} </span>
+                                                </td>
+
+                                                <td>
+                                                    <a href="{{route('code',$product->xitem)}}" class="">
+                                                        <button class="btn btn-xs btn-warning">
+                                                            <i class="ace-icon fa fa-flag bigger-20"></i>
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+
+                                     
+
+                                         @endforeach
+
+
+
+
+
+
+
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -435,7 +427,9 @@
 <!-- ace scripts -->
 <script src="{{asset('/')}}assets/js/ace-elements.min.js"></script>
 <script src="{{asset('/')}}assets/js/ace.min.js"></script>
-
+{{--<script>--}}
+{{--    window.print()--}}
+{{--</script>--}}
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
     jQuery(function($) {
@@ -493,11 +487,13 @@
                 },
                 {
                     "extend": "print",
-                    "text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>Print</span>",
+                    "text": "<i class='fa fa-print bigger-110 grey'></i> <span   class=''>Print</span>",
                     "className": "btn btn-white btn-primary btn-bold",
                     autoPrint: true,
                     message: 'This print was produced using the Print button for DataTables'
+
                 }
+
             ]
         } );
         myTable.buttons().container().appendTo( $('.tableTools-container') );

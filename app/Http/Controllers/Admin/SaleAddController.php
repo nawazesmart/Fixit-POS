@@ -12,7 +12,7 @@ use App\Models\SaleOrder;
 use Dotenv\Parser\Value;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Validator;
 class SaleAddController extends Controller
 {
 
@@ -37,10 +37,37 @@ class SaleAddController extends Controller
             ->first()
             ->max_number;
 
+//        $rules = [
+//            'xrate' => 'required',
+//            'xqtyord' => 'required',
+//            'xitem'=> 'required',
+//        ];
+//        $messages = [
+//
+//            'required' => 'The Product field must be a add.',
+//
+//
+//        ];
+//        $validator = Validator::make($request->all(), $rules, $messages);
+//
+//
+//        if ($validator->fails()) {
+//            return response()->json(['errors' => $validator->errors()], 422);
+//        }
 
+        $validator = Validator::make($request->all(), [
+            'xrate' => 'required',
+            'xqtyord' => 'required',
+            'xitem' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $xorderNumber = ++$xordernumrequest;
         $xwhArray = $request->input('xwh');
+        $xspArray = $request->input('xsp');
         $xdateArray = $request->input('xdate');
         $zidArray = $request->input('zid');
         $xcostArray = $request->input('xcost');
@@ -71,7 +98,7 @@ class SaleAddController extends Controller
             'xemp' => auth()->user()->email,
             'zemail' => auth()->user()->email,
             'xemail' => auth()->user()->email,
-            'xsp' => auth()->user()->name,
+            'xsp' => $xspArray,
             'xordernum' => $xordernumArray,
 //                'xrow' => '' . rand(4, 9999),
             'xdate' => $xdateArray,

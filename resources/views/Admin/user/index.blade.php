@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
-    <title>Tables - Return Details</title>
+    <title>Tables - users</title>
     <meta name="description" content="Static &amp; Dynamic Tables" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <link rel="stylesheet" href="{{asset('/')}}assets/css/bootstrap.min.css" />
@@ -193,14 +193,14 @@
                         <b class="arrow"></b>
                     </li>
 
-                     <li class="">
-                <a href="{{route('barcode')}}">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                   Product BarCode
-                </a>
+                    <li class="">
+                        <a href="{{route('barcode')}}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            Product BarCode
+                        </a>
 
-                <b class="arrow"></b>
-            </li>
+                        <b class="arrow"></b>
+                    </li>
 
 
                 </ul>
@@ -277,6 +277,7 @@
                 </ul>
             </li>
 
+
         </ul><!-- /.nav-list -->
 
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -292,18 +293,18 @@
 
             <div class="page-content">
                 <div class="ace-settings-container" id="ace-settings-container">
-                    <div class="align-right" style="margin-right: 20px"><a href="{{route('return.create')}}" class="btn btn-success"
-                                                                           id="bootbox-options">Create Return</a></div>
+                    <div class="align-right" style="margin-right: 20px"><a href="{{route('users.create')}}" class="btn btn-success"
+                                                                           id="bootbox-options">Create User</a></div>
 
 
                 </div><!-- /.ace-settings-container -->
 
                 <div class="page-header">
                     <h1>
-                        Return
+                        User
                         <small>
                             <i class="ace-icon fa fa-angle-double-right"></i>
-                             &amp; Return Details
+                            &amp; Users Details
                         </small>
                     </h1>
                 </div><!-- /.page-header -->
@@ -322,7 +323,7 @@
                                     <div class="pull-right tableTools-container"></div>
                                 </div>
                                 <div class="table-header">
-                                    Results for "Latest Sale Return"
+                                    Results for "Latest User"
                                 </div>
 
                                 <!-- div.table-responsive -->
@@ -340,50 +341,61 @@
                                             </th>
                                             <th>SRE ID	</th>
 
-                                            <th class="hidden-480">Warehouse</th>
+                                            <th class="hidden-480">User Name</th>
 
                                             <th>
                                                 <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-                                                Update
+                                                Email
                                             </th>
                                             <th class="hidden-480">Status</th>
                                             <th>details</th>
                                             <th></th>
+
                                         </tr>
                                         </thead>
 
                                         <tbody>
-                                        @foreach($return as $product)
-                                        <tr>
-                                            <td class="center">
-                                                <label class="pos-rel">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
-                                            </td>
-
-                                            <td>
-                                                {{$product->ximtmptrn}}
-                                            </td>
-
-                                            <td class="hidden-480">{{$product->xwh}}</td>
-                                            <td>{{$product->xdate}}</td>
+                                        @foreach($users as $user)
+                                            <tr>
+                                                <td class="center">
+                                                    <label class="pos-rel">
+                                                        <input type="checkbox" class="ace" />
+                                                        <span class="lbl"></span>
+                                                    </label>
+                                                </td>
+                                                <td>{{ $loop->iteration }}</td>
 
 
+                                                <td>
+                                                    {{$user->name}}
+                                                </td>
 
-                                            <td class="hidden-480">
-                                                <span class="label label-sm label-warning">{{$product->xstatustrn}}</span>
-                                            </td>
-                                            <td>
-                                                <a href="{{route('return-details.show', $product->ximtmptrn)}}"
-                                                   class="">
-                                                    <button class="btn btn-xs btn-warning">
-                                                        <i class="ace-icon fa fa-flag bigger-10"></i>
-                                                    </button>
-                                                </a>
-                                            </td>
-                                          <td></td>
-                                        </tr>
+                                                <td class="hidden-480">{{$user->email}}</td>
+
+
+
+
+                                                <td class="hidden-480">
+                                                    <span class="label label-sm label-warning">
+                                                     Editor
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <a href="{{route('users.edit', $user->id)}}" class="btn btn-primary btn-sm ">
+                                                        <i class="ace-icon fa fa-edit "></i>
+                                                    </a>
+
+
+                                                    <a href="javascript:void(0)" onclick="confirmDelete({{$user->id}})" class="btn btn-danger btn-sm">
+                                                        <i class="ace-icon fa fa-trash"></i>
+                                                    </a>
+                                                    <form id="confirmDelete{{$user->id}}" action="{{ route('users.destroy', $user->id) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                    </form>
+                                                </td>
+                                                <td></td>
+                                            </tr>
 
                                         @endforeach
                                         </tbody>
@@ -435,7 +447,14 @@
 <!-- ace scripts -->
 <script src="{{asset('/')}}assets/js/ace-elements.min.js"></script>
 <script src="{{asset('/')}}assets/js/ace.min.js"></script>
-
+<script>
+    function confirmDelete(userId) {
+        var confirmDelete = confirm("Are you sure you want to delete this user?");
+        if (confirmDelete) {
+            document.getElementById('confirmDelete' + userId).submit();
+        }
+    }
+</script>
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
     jQuery(function($) {

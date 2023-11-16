@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sale\StoreSaleRequest;
+use App\Models\Admin\Zuser;
 use App\Models\Member;
 use App\Models\Product;
 use App\Models\SaleOrder;
@@ -52,11 +53,13 @@ class SalesController extends Controller
             ->groupBy('xgitem')
             ->where('zid','100001')
             ->get();
+        $users=Zuser::where('zid','100001')->get();
 
 //        return  $products;
-        return view('Admin.Sales.home', compact('products', 'category', 'zidCode','lastInput'), [
+        return view('Admin.Sales.home', compact('products', 'category', 'zidCode','lastInput','users'), [
 
             'customer' => Member::all(),
+
 
         ]);
     }
@@ -144,5 +147,7 @@ class SalesController extends Controller
 //        // Return the updated product listing view
 //        return response()->json($products);
     }
+
+
 
 }

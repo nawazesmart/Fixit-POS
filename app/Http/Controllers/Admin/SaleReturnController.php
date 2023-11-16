@@ -99,6 +99,7 @@ class SaleReturnController extends Controller
 
 //        return  $srexordernumrDetailProductReturn;
 
+
         $xdatecomArray = $request->input('xdatecom');
         $xwhArray = $request->input('xwh');
         $xprojArray = $request->input('xproj');

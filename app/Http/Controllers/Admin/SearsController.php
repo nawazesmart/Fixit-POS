@@ -24,7 +24,7 @@ class SearsController extends Controller
             $query->where('xitem', 'LIKE', '%' . $request->search . '%')
                 ->where('zid', $zid);
         }])
-            ->take(9)
+            ->take(15)
             ->get();
 
         foreach ($products as $item) {
@@ -37,6 +37,26 @@ class SearsController extends Controller
 
         return response()->json($products);
 
+    }
+
+
+
+
+
+    public function barcode()
+    {
+
+        $products = Product::select('xdesc' ,'xitem','zutime')
+            ->groupBy('xdesc','xitem','zutime')
+            ->where('zid','100001' )
+            ->get();
+        return view('Admin.BarCode.barCode' , compact('products'));
+    }
+
+    public function code($xitem)
+    {
+        $barCods = Product::where('xitem', $xitem)->first();
+        return view('Admin.BarCode.codePage', compact('barCods'));
     }
 
 }

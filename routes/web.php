@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\SearsController;
 use App\Http\Controllers\Admin\InvoicePrintCOntroller;
 use App\Http\Controllers\Admin\SaleReturnController;
 use App\Http\Controllers\Admin\ReturnDetailsController;
-
+use  App\Http\Controllers\Admin\CreateUserController;
 
 Route::get('/', [LoginControler::class, 'loginView'])->name('loginView');
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
@@ -22,12 +22,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     Route::get('/dashboard', [DashboardControler::class, 'dashboard'])->name('dashboard');
 //    sale control
+
     Route::resource('sales', SalesController::class);
     Route::get('fetchCategory/{id}', [SalesController::class, 'fetchCategory'])->name('fetchCategory');
     Route::get('fetchProducts-details/{category_id}/{branch_id}', [SalesController::class, 'fetchProductsDetails'])->name('fetchProductsDetails');
     Route::resource('sale-details', SaleDetailsController::class);
     Route::resource('sale-store', SaleAddController::class);
 //    sale control end
+    Route::resource('users',CreateUserController::class);
 //    product control
     Route::resource('products', ProductCOntroller::class);
 //    product control end
@@ -39,6 +41,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 //    Product searc
     Route::get('productsSearch', [SearsController::class, 'search'])->name('productsSearch');
+    Route::get('productsBarcode', [SearsController::class, 'barcode'])->name('barcode');
+    Route::get('productscode/{xitem}', [SearsController::class, 'code'])->name('code');
+    Route::get('SearchBarcode', [SearsController::class, 'quantity'])->name('SearchBarcode');
 //    Product searc end
 
 //    invoice control

@@ -397,19 +397,8 @@
 
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
 
-                        @php
-                            $test = round($price+(($sale->xdttax  * $price)/100)+0 -$sale->xdiscf - (($sale->xdisc * $price)/100),2 );
 
-                            $f = new \NumberFormatter( locale_get_default(), \NumberFormatter::SPELLOUT );
-
-                            $word = $f->format($test);
-                        @endphp
-                        <p class="col-md-12 text-left" style="font-size: 12px; word-spacing: 1px ">Taka:<i>{{$word}}
-                                Only</i></p>
-
-                    </div>
                 </div>
 
                 <br>

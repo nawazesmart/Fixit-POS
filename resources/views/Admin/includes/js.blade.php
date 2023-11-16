@@ -54,11 +54,22 @@
 
 
 @yield('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
 
 
 <script>
-    $(document).ready(function() {
+
+    // function confirmDelete(userId) {
+    //     var confirmation = confirm("Are you sure you want to delete this user?");
+    //
+    //     if (confirmation) {
+    //         document.getElementById('confirmDelete' + userId).submit();
+    //     } else {
+    //
+    //     }
+    // }
+
+            $(document).ready(function() {
         $("#searchInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
             $("#productTable tbody tr").filter(function() {

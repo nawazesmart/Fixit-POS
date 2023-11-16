@@ -401,21 +401,7 @@
                         </div>
                     @endif
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
 
-                        @php
-                            $test = round($price+(($data['saleOrder']->xdttax  * $price)/100)+0 - $data['saleOrder']->xdiscf - (($data['saleOrder']->xdisc * $price)/100),2 );
-
-                            $f = new \NumberFormatter( locale_get_default(), \NumberFormatter::SPELLOUT );
-
-                            $word = $f->format($test);
-                        @endphp
-                        <p class="col-md-12 text-left" style="font-size: 12px; word-spacing: 1px ">Taka:<i>{{$word}}  Only</i>  </p>
-
-
-                    </div>
-                </div>
 
                 <br>
                 <hr>
@@ -444,7 +430,7 @@
                                 <p> Signature</p>
                             </div>
                             <div class="col-6" style="text-align-last: center">
-                                <p>{{auth()->user()->name}}</p>
+                                <p>{{$saleOrder->xsp}}</p>
                                 -----------
                                 <p> Service</p>
                             </div>
