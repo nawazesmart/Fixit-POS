@@ -64,6 +64,11 @@
 @section('body')
 
 
+    @php
+        $roles = \App\Models\User::find(auth()->user()->id);
+    @endphp
+    @if($roles->return_option == 1 )
+
     @if ($errors->any())
         <div class="alert alert-danger error">
             <button type="button" class="close" data-dismiss="alert">
@@ -102,8 +107,6 @@
             {{ "Product return can not successfully ! " . session()->get('not Success!') }}
         </div>
     @endif
-
-
 
 
     <section class="py-5">
@@ -459,6 +462,9 @@
             </div>
         </div>
     </section>
+    @else
+        @include('errors.404')
+    @endif
 @endsection
 
 

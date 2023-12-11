@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\InvoicePrintCOntroller;
 use App\Http\Controllers\Admin\SaleReturnController;
 use App\Http\Controllers\Admin\ReturnDetailsController;
 use  App\Http\Controllers\Admin\CreateUserController;
-
+use App\Http\Controllers\UserrollActionController;
 Route::get('/', [LoginControler::class, 'loginView'])->name('loginView');
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
 
@@ -30,6 +30,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::resource('sale-store', SaleAddController::class);
 //    sale control end
     Route::resource('users',CreateUserController::class);
+    Route::resource('user-rolls',UserrollActionController::class);
 //    product control
     Route::resource('products', ProductCOntroller::class);
 //    product control end

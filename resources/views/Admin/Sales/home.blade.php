@@ -177,6 +177,11 @@
 
 @include('Admin.Sales.include.alart')
 
+@php
+    $roles = \App\Models\User::find(auth()->user()->id);
+@endphp
+
+@if($roles->sale_option == 1 )
 
 <form action="{{route('sale-store.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
@@ -578,7 +583,9 @@
     </div>
 
 </form>
-
+@else
+    @include('errors.404')
+@endif
 @include('Admin.includes.js')
 
 

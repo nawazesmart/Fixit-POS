@@ -31,9 +31,9 @@
     }
 
 
-  
+
   }
-         
+
     </style>
 
 @endsection
@@ -42,7 +42,11 @@
 
     <!-- {{$barCods->xitem}} -->
 
+    @php
+        $roles = \App\Models\User::find(auth()->user()->id);
+    @endphp
 
+    @if($roles->barcode_option == 1 )
     <section class="py-5">
         <div class="container">
 
@@ -56,7 +60,7 @@
 
                             </h4>
 
-                            <span class="widget-toolbar">  
+                            <span class="widget-toolbar">
                                       <span class="no-print">
     <a href="javascript:void(0)" onclick="window.print()" class="btn btn-print"> Print</a>
     <a href="{{route('barcode')}}" class="btn btn-back">Back</a>
@@ -67,26 +71,26 @@
                         </div>
 
                         <div class="widget-body">
-                            <div class="widget-main">    
+                            <div class="widget-main">
                                 <div class="box-main" style="display:flex; flex-wrap: wrap;">
                                     @for($i = 0; $i < 40; $i++)
                                         <div class="box-item {{ $i > 34 ? 'border-bottom' : '' }}" style="width: 20%; border: 1px solid #28282B; border-bottom: 0;">
                                             <div class="name" style=" font-size:12px; font-family: sans-serif;">
                                                  {{$barCods->xdesc}}
-                                            </div> 
+                                            </div>
                                             <div class="qr">
 
                                                 <div style="margin-left:12px">
 
                                              <!--  @php
-                                              $barcodeData = preg_replace('/[^0-9]/', '', $barCods->xitem); 
+                                              $barcodeData = preg_replace('/[^0-9]/', '', $barCods->xitem);
 
                                               echo DNS1D::getBarcodeSVG($barcodeData, 'MSI');
 
                                                @endphp -->
 
                                                @php
-$barcodeData = preg_replace('/[^0-9]/', '', $barCods->xitem); 
+$barcodeData = preg_replace('/[^0-9]/', '', $barCods->xitem);
 $barcodeHTML = DNS1D::getBarcodeHTML($barcodeData, 'MSI');
 
 
@@ -100,10 +104,10 @@ $dataURL = 'data:image/png;base64,' . $barcodeImageBase64;
         <img src="{{ asset('barcode.jpg')}}" alt="Barcode Image" width="150" height="auto">
     </div>
 </div>
-                                            
-                                              
+
+
                                                 </div>
-                                            </div>    
+                                            </div>
                                             <div class="code" style=" font-size:10px; font-family: sans-serif;">
                                                     {{$barCods->xitem}}
                                             </div>
@@ -114,7 +118,7 @@ $dataURL = 'data:image/png;base64,' . $barcodeImageBase64;
                                     @endfor
                                 </div>
 
-                       
+
                             </div>
                         </div>
                     </div>
@@ -124,7 +128,9 @@ $dataURL = 'data:image/png;base64,' . $barcodeImageBase64;
 
         </div>
     </section>
-
+    @else
+        @include('errors.404')
+    @endif
 <script>
     window.print()
 </script>

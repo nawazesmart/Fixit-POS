@@ -80,8 +80,6 @@
                             </form>
                         </li>
 
-
-
                     </ul>
                 </li>
             </ul>
@@ -95,197 +93,26 @@
     </script>
 
 
+
+
     <!-- side ber -->
     <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
         <script type="text/javascript">
             try{ace.settings.loadState('sidebar')}catch(e){}
         </script>
 
-        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-            {{--    <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">--}}
-            {{--        <button class="btn btn-success">--}}
-            {{--            <i class="ace-icon fa fa-signal"></i>--}}
-            {{--        </button>--}}
-
-            {{--        <button class="btn btn-info">--}}
-            {{--            <i class="ace-icon fa fa-pencil"></i>--}}
-            {{--        </button>--}}
-
-            {{--        <button class="btn btn-warning">--}}
-            {{--            <i class="ace-icon fa fa-users"></i>--}}
-            {{--        </button>--}}
-
-            {{--        <button class="btn btn-danger">--}}
-            {{--            <i class="ace-icon fa fa-cogs"></i>--}}
-            {{--        </button>--}}
-            {{--    </div>--}}
-
-            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-                <span class="btn btn-success"></span>
-
-                <span class="btn btn-info"></span>
-
-                <span class="btn btn-warning"></span>
-
-                <span class="btn btn-danger"></span>
-            </div>
-        </div><!-- /.sidebar-shortcuts -->
-
-        <ul class="nav nav-list">
-            <li class="active">
-                <a href="{{route('dashboard')}}">
-                    <i class="menu-icon fa fa-tachometer"></i>
-                    <span class="menu-text"> Dashboard </span>
-                </a>
-
-                <b class="arrow"></b>
-            </li>
 
 
-            <li class="">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-desktop"></i>
-                    <span class="menu-text">
-								Product &amp; Sales
-							</span>
-
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-
-                <b class="arrow"></b>
-
-                <ul class="submenu">
-                    {{--            <li class="">--}}
-                    {{--                <a href="{{route('products.index')}}">--}}
-                    {{--                    <i class="menu-icon fa fa-caret-right"></i>--}}
-                    {{--                    Products--}}
-                    {{--                </a>--}}
-
-                    {{--                <b class="arrow"></b>--}}
-                    {{--            </li>--}}
-
-                    <li class="">
-                        <a href="{{route('customers.index')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Customer
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
+        @include('Admin.includes.sideber')
 
 
-
-                    <li class="">
-                        <a href="{{route('sales.index')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Sales
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-                    <li class="">
-                        <a href="{{route('sale-details.index')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Sale Details
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-                    <li class="">
-                        <a href="{{route('barcode')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Product BarCode
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-
-                </ul>
-            </li>
-            <li class="">
-                <a href="#" class="dropdown-toggle">
-                    <i class="ace-icon fa fa-refresh bigger-160" style="margin-left: 2px"></i>
-                    <span class="menu-text" style="margin-left: 10px">
-								Product &amp; Return
-							</span>
-
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-
-                <b class="arrow"></b>
-
-                <ul class="submenu">
-                    {{--            <li class="">--}}
-                    {{--                <a href="{{route('products.index')}}">--}}
-                    {{--                    <i class="menu-icon fa fa-caret-right"></i>--}}
-                    {{--                    Products--}}
-                    {{--                </a>--}}
-
-                    {{--                <b class="arrow"></b>--}}
-                    {{--            </li>--}}
-
-
-                    <li class="">
-                        <a href="{{route('return.create')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Sales Return
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-                    <li class="">
-                        <a href="{{route('return-details.index')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Return Details
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-
-                </ul>
-            </li>
-            <li class="">
-                <a href="#" class="dropdown-toggle">
-                    <i class="ace-icon fa fa-user bigger-160" style="margin-left: 2px"></i>
-                    <span class="menu-text" style="margin-left: 10px">
-								Users
-							</span>
-
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-
-                <b class="arrow"></b>
-
-                <ul class="submenu">
-                    <li class="">
-                        <a href="{{route('users.index')}}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            User Create
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-
-
-
-                </ul>
-            </li>
-
-
-        </ul><!-- /.nav-list -->
-
-        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
-        </div>
     </div>
     <!-- side ber end -->
+    @php
+        $roles = \App\Models\User::find(auth()->user()->id);
+    @endphp
 
+    @if($roles->user_roll == 1 )
 
     <div class="main-content">
         <div class="main-content-inner">
@@ -348,7 +175,7 @@
                                                 Email
                                             </th>
                                             <th class="hidden-480">Status</th>
-                                            <th>details</th>
+                                            <th>Action</th>
                                             <th></th>
 
                                         </tr>
@@ -356,6 +183,56 @@
 
                                         <tbody>
                                         @foreach($users as $user)
+
+                                            @if(auth()->user()->id == 1)
+                                                <tr>
+                                                    <td class="center">
+                                                        <label class="pos-rel">
+                                                            <input type="checkbox" class="ace" />
+                                                            <span class="lbl"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td>{{ $loop->iteration }}</td>
+
+
+                                                    <td>
+                                                        {{$user->name}}
+                                                    </td>
+
+                                                    <td class="hidden-480">{{$user->email}}</td>
+
+
+
+
+                                                    <td class="hidden-480">
+                                                    <span class="label label-sm label-warning">
+                                                     Editor
+                                                    </span>
+                                                    </td>
+                                                    <td>
+                                                        @if($user->id != 1)
+                                                        <a href="{{route('users.edit', $user->id)}}" class="btn btn-primary btn-sm ">
+                                                            <i class="ace-icon fa fa-edit "></i>
+                                                        </a>
+                                                        @endif
+                                                        <a href="{{route('user-rolls.edit', $user->id)}}" class="btn btn-primary btn-sm ">
+                                                            <i class="menu-icon fa fa-key"></i>
+                                                        </a>
+
+                                                            @if($user->id != 1)
+                                                        <a href="javascript:void(0)" onclick="confirmDelete({{$user->id}})" class="btn btn-danger btn-sm">
+                                                            <i class="ace-icon fa fa-trash"></i>
+                                                        </a>
+                                                        <form id="confirmDelete{{$user->id}}" action="{{ route('users.destroy', $user->id) }}" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                        </form>
+                                                            @endif
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                            @elseif( $user->id != 1)
+
                                             <tr>
                                                 <td class="center">
                                                     <label class="pos-rel">
@@ -381,11 +258,18 @@
                                                     </span>
                                                 </td>
                                                 <td>
+                                                    @if($roles->user_edit ==1 )
                                                     <a href="{{route('users.edit', $user->id)}}" class="btn btn-primary btn-sm ">
                                                         <i class="ace-icon fa fa-edit "></i>
                                                     </a>
+                                                    @endif
 
-
+                                                        @if($roles->user_v ==1 )
+                                                    <a href="{{route('user-rolls.edit', $user->id)}}" class="btn btn-primary btn-sm ">
+                                                        <i class="menu-icon fa fa-key"></i>
+                                                    </a>
+                                                        @endif
+                                                            @if($roles->user_delete ==1 )
                                                     <a href="javascript:void(0)" onclick="confirmDelete({{$user->id}})" class="btn btn-danger btn-sm">
                                                         <i class="ace-icon fa fa-trash"></i>
                                                     </a>
@@ -393,10 +277,11 @@
                                                         @csrf
                                                         @method('delete')
                                                     </form>
+                                                        @endif
                                                 </td>
                                                 <td></td>
                                             </tr>
-
+                                            @endif
                                         @endforeach
                                         </tbody>
                                     </table>
@@ -411,9 +296,148 @@
                 </div><!-- /.row -->
             </div><!-- /.page-content -->
         </div>
-    </div><!-- /.main-content -->
+    </div>
+
+    @elseif(auth()->user()->id == 1 )
+
+        <div class="main-content">
+            <div class="main-content-inner">
 
 
+                <div class="page-content">
+                    <div class="ace-settings-container" id="ace-settings-container">
+                        <div class="align-right" style="margin-right: 20px"><a href="{{route('users.create')}}" class="btn btn-success"
+                                                                               id="bootbox-options">Create User</a></div>
+
+
+                    </div><!-- /.ace-settings-container -->
+
+                    <div class="page-header">
+                        <h1>
+                            User
+                            <small>
+                                <i class="ace-icon fa fa-angle-double-right"></i>
+                                &amp; Users Details
+                            </small>
+                        </h1>
+                    </div><!-- /.page-header -->
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- PAGE CONTENT BEGINS -->
+
+
+
+                            <div class="row">
+                                <div class="col-xs-12">
+
+
+                                    <div class="clearfix">
+                                        <div class="pull-right tableTools-container"></div>
+                                    </div>
+                                    <div class="table-header">
+                                        Results for "Latest User"
+                                    </div>
+
+                                    <!-- div.table-responsive -->
+
+                                    <!-- div.dataTables_borderWrap -->
+                                    <div>
+                                        <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th class="center">
+                                                    <label class="pos-rel">
+                                                        <input type="checkbox" class="ace" />
+                                                        <span class="lbl"></span>
+                                                    </label>
+                                                </th>
+                                                <th>SRE ID	</th>
+
+                                                <th class="hidden-480">User Name</th>
+
+                                                <th>
+                                                    <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                                                    Email
+                                                </th>
+                                                <th class="hidden-480">Status</th>
+                                                <th>details</th>
+                                                <th></th>
+
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            @foreach($users as $user)
+                                                <tr>
+                                                    <td class="center">
+                                                        <label class="pos-rel">
+                                                            <input type="checkbox" class="ace" />
+                                                            <span class="lbl"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td>{{ $loop->iteration }}</td>
+
+
+                                                    <td>
+                                                        {{$user->name}}
+                                                    </td>
+
+                                                    <td class="hidden-480">{{$user->email}}</td>
+
+
+
+
+                                                    <td class="hidden-480">
+                                                    <span class="label label-sm label-warning">
+                                                     Editor
+                                                    </span>
+                                                    </td>
+                                                    <td>
+                                                        @if($user->id != 1)
+                                                        <a href="{{route('users.edit', $user->id)}}" class="btn btn-primary btn-sm ">
+                                                            <i class="ace-icon fa fa-edit "></i>
+                                                        </a>
+                                                        @endif
+                                                        <a href="{{route('user-rolls.edit', $user->id)}}" class="btn btn-primary btn-sm ">
+                                                            <i class="menu-icon fa fa-key"></i>
+                                                        </a>
+
+                                                            @if($user->id != 1)
+                                                        <a href="javascript:void(0)" onclick="confirmDelete({{$user->id}})" class="btn btn-danger btn-sm">
+                                                            <i class="ace-icon fa fa-trash"></i>
+                                                        </a>
+                                                        <form id="confirmDelete{{$user->id}}" action="{{ route('users.destroy', $user->id) }}" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                        </form>
+                                                            @endif
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!-- PAGE CONTENT ENDS -->
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.page-content -->
+            </div>
+        </div>
+
+     @else
+
+     @include('errors.404')
+
+    @endif
+<!-- /.main-content -->
     <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
         <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
     </a>

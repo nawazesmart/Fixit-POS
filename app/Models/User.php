@@ -28,6 +28,17 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'sale_roll',
+        'return_roll',
+        'user_roll',
+        'sale_option',
+        'sale_details',
+        'barcode_option',
+        'return_option',
+        'return_details',
+        'user_delete',
+        'user_edit',
+        'user_v',
     ];
 
     /**
