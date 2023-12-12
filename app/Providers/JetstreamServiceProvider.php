@@ -30,6 +30,7 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Jetstream::deleteUsersUsing(DeleteUser::class);
         Fortify::registerView('Admin.auth.login');
+        Fortify::loginView('Admin.auth.login');
     }
 
     /**

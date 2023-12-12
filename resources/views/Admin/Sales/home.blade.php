@@ -353,7 +353,7 @@
                                         </div>
                                     </div>
                                     <table class="table table-hover item-table card card-table"
-                                           id="myTable searchInput">
+                                           id="myTable">
                                         <thead style="background-color: aliceblue; border-bottom: 2px solid;">
                                         <tr>
                                             <th width="25%">Item</th>
@@ -595,12 +595,56 @@
 
 <script>
 
-    $(document).ready(function () {
-        $('#paymentButton').on('click', function () {
-            $('#loaderContainer').show();
 
+
+
+
+
+    document.getElementById("cashAmount").addEventListener("input", function(event) {
+        let inputValue = event.target.value;
+        if (inputValue.includes('-')) {
+            event.target.value = inputValue.replace('-', ''); // Remove minus sign
+        }
+    });
+    document.getElementById("cardAmount").addEventListener("input", function(event) {
+        let inputValue = event.target.value;
+        if (inputValue.includes('-')) {
+            event.target.value = inputValue.replace('-', ''); // Remove minus sign
+        }
+    });
+
+
+    $(document).ready(function () {
+        $('#paymentButton').prop('disabled', $('.due_amount').text() > 0);
+
+        $('.due_amount').on('DOMSubtreeModified', function () {
+            if (parseInt($('.due_amount').text()) > 0) {
+                $('#paymentButton').prop('disabled', true);
+            } else {
+                $('#paymentButton').prop('disabled', false);
+            }
         });
     });
+
+
+    //    $(document).ready(function () {
+//        $('#paymentButton').on('click', function () {
+//            $('#loaderContainer').show();
+//
+//        });
+//    });
+$(document).ready(function () {
+    $('#paymentButton').on('click', function () {
+        $('#loaderContainer').show();
+
+
+        setTimeout(function () {
+
+            $('#loaderContainer').hide();
+        }, 2000);
+    });
+});
+
 
 
     function addItem() {
@@ -882,7 +926,7 @@
                                     ${currentItem.price}
                                 </td>
                                 <td class="quantity">
-                                <input type="number" name="xqtyord[]" value="${currentItem.quantity}" class="quantity-input" onKeyup="updateItemQuantity(this)"/>
+                                <input type="text" name="xqtyord[]" value="${currentItem.quantity}" class="quantity-input" onKeyup="updateItemQuantity(this)"/>
                                 </td>
                                 <td class="show-total-price">${currentItem.total}</td>
 
@@ -1035,13 +1079,23 @@
         })
     });
 
+    window.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            console.log('Prevent Default on Enter')
+        }
+    });
+
+    $(document).ready(function(){
+        $('#searchInput').focus();
+    })
 
     //------------------------------------------------//
     //-----This section product search section--------//
     //-------use ajax or apend this html code---------//
     //------------------------------------------------//
     // search optinon
-    $('#searchInput').keyup(function () {
+    $('#searchInput').keyup(function (e) {
         var searchInput = $(this).val();
 
         $.ajax({
@@ -1050,7 +1104,13 @@
             data: {search: searchInput},
             dataType: "json",
             success: function (response) {
+                if(response?.length === 1 && e.keyCode === 13){
+                    displaySearchResults(response);
+                    $('.product-item').trigger('click')
 
+                    $('#searchInput').val('')
+                    return ;
+                }
                 displaySearchResults(response);
             },
             error: function (xhr, textStatus, errorThrown) {
